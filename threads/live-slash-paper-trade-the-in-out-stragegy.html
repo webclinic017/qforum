@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Live/Paper Trade the In_Out Stragegy
+</title>
+<meta content='This thread is about implementing the strategy  In &amp; Out  for paper/live trading. Ideally we will work together on this and will end up with a mix between a tutorial and a discussion where the In &amp; Out algo is an example for any algo one wants to trade live. My plan is to share what I&#39;ve learned about porting a strategy from Quantopian to live paper trading. And of course you are welcome to share your experience with this as well! A while ago I met someone with whom I considered founding...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="12jQQhEuEMPSS6Z2whN7/2ewaPXS6Nebi0v2oZ8oIhirDqYPs9jCIGtW/0eN/NOLXz5LnKgkwoAJRC3LNW1Aow==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/live-slash-paper-trade-the-in-out-stragegy' property='og:url'>
+<meta content='Live/Paper Trade the In_Out Stragegy' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/live-slash-paper-trade-the-in-out-stragegy' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Live/Paper Trade the In_Out Stragegy' property='og:title'>
+<meta content='This thread is about implementing the strategy  In &amp; Out  for paper/live trading. Ideally we will work together on this and will end up with a mix between a tutorial and a discussion where the In &amp; Out algo is an example for any algo one wants to trade live. My plan is to share what I&#39;ve learned about porting a strategy from Quantopian to live paper trading. And of course you are welcome to share your experience with this as well! A while ago I met someone with whom I considered founding...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/live-slash-paper-trade-the-in-out-stragegy">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5f9a327b42f496000f99e65d'>
+<div class='post-container' data-post-id='5f9a327b42f496000f99e65d' id='5f9a327b42f496000f99e65d'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Live/Paper Trade the In_Out Stragegy</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb05c81a1c4ac0040c7ae0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2c03d939c8c879cddb1c770fadd01841?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb05c81a1c4ac0040c7ae0c'>Tentor Testivis</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1603940987000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Live/Paper Trade the In_Out Stragegy&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Flive-slash-paper-trade-the-in-out-stragegy%3Futm_source%3Dwebsite_share%26utm_campaign%3Dlive-slash-paper-trade-the-in-out-stragegy%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Flive-slash-paper-trade-the-in-out-stragegy%3Futm_source%3Dwebsite_share%26utm_campaign%3Dlive-slash-paper-trade-the-in-out-stragegy%26utm_medium%3Dlinkedin&amp;title=Live%2FPaper+Trade+the+In_Out+Stragegy+%28Tentor+Testivis%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/live-slash-paper-trade-the-in-out-stragegy?utm_source=website_share&amp;utm_campaign=live-slash-paper-trade-the-in-out-stragegy&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tentor Testivis" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>This thread is about implementing the strategy <a href="https://www.quantopian.com/posts/new-strategy-in-and-out" rel="nofollow">In &amp; Out</a> for paper/live trading. Ideally we will work together on this and will end up with a mix between a tutorial and a discussion where the In &amp; Out algo is an example for any algo one wants to trade live. My plan is to share what I&#39;ve learned about porting a strategy from Quantopian to live paper trading.<br>
+And of course you are welcome to share your experience with this as well!</p>
+
+<p>A while ago I met someone with whom I considered founding something like a small hedge fund. Part of this was to look for the best way to run algorithms that execute actual trades. As it is best practice, the first stage was to paper trade the algorithm for a while before we start investing in it. Long story short, our algorithm dind&#39;t make it beyond the paper stage and we abandoned the project, no one lost money but we gained valuable experience which I&#39;m willing to share.</p>
+
+<p>In order to automatially trade a strategy you generally need </p>
+
+<ul>
+<li>a computer where the algorithm can run and<br></li>
+<li>a broker where the algo can send the orders to.</li>
+</ul>
+
+<p>I&#39;ve tried some different roads which would probably lead to the same goal but naturally chose the one that was easiest for me.<br>
+Among the roads I started but didn&#39;t follow are:</p>
+
+<ul>
+<li>implementing the algo on QuantConnect to trade it from there --&gt; would have cost money just to try it<br></li>
+<li>using IBridgePy --&gt; wasn&#39;t possible on Linux<br></li>
+<li>using Zipline-live --&gt; was a bit of a hassle to set up with data<br></li>
+<li>using Alpaca with Blueshift integration --&gt; Blushift didn&#39;t have the symbols I needed<br></li>
+<li>and probably some I don&#39;t remember...</li>
+</ul>
+
+<p>I ended up using Alpaca as a broker. They have no costs for orders and a very nice python library. I also belive it was the only no (or &#39;low&#39;) cost broker I could find that has an API and a paper account where you can use the API without having to put in funds first.<br>
+For instance, allthough Thinkorswimm has a paper account, you couldn&#39;t use the TD-Ameritrade API with it. Perhaps this has changed by now, but back then you only could use the API for live trading with real money.<br>
+There may be brokers better suited for your needs, so feel free to use them instead!</p>
+
+<p>For the computer there are many choices, from your own computer over cloud servers, to a dedicated VPS. I even could have used the host of my website - if they had python 3 instead of 2 (and no, they still haven&#39;t upgraded).<br>
+In the end I decided to use PythonAnywhere. Like the name hints it has already python on it with the most common libraries. With their free plan you get everything you need to run a trading script once a day (or continuously, but I wouldn&#39;t do that).</p>
+
+<p>So, what I can show here is to use Alpaca + PA in order to run a live paper test. It&#39;s probably just one or two steps from there to trading with real money, but I haven&#39;t done that yet and also have no plans to do so just to show how it works ;)</p>
+
+<p>Setting everything up will take some work/time and I can&#39;t post everything at once, so I will post it bit by bit. Also, I&#39;ll start with a simpler algo first, from there we can expand it further until we have the In &amp; Out strategy &#39;up and running&#39;.</p>
+
+<p>If you have some experience with this, feel free to join!<br>
+It would probably be beneficial to see how different people tackle this task.<br>
+In the meantime I&#39;ll prepare a notebook with some simple code using the alpaca library.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>32 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5f9acef372eb140010a64d81' id='5f9acef372eb140010a64d81'>
+<a href='#5f9acef372eb140010a64d81'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f04b41a544aa8c34000289'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5a98c6e18424e6ac38702c35d5152669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f04b41a544aa8c34000289'>Chris Liu</a>
+</div>
+<a UTCms='1603981043000' class='quanto-date posted-at response-posted-at' href='#5f9acef372eb140010a64d81'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great job,<br>
+If the algo had extensive trading/rebalancing intraday, a full automated solution on the cloud would be very necessary.</p>
+
+<p>If there are only a few rebalancing daily/weekly, a local PC would be good enough.</p>
+
+<p>Eighter on local or remote server, we<br>
+1. get data<br>
+2. generate signal<br>
+3. execute </p>
+
+<p><strong>So let&#39;s narrow down: We are discussing an algo based on EOD(End of Day) data.</strong> </p>
+
+<p>We need a script that can:<br>
+1. get data: Yahoo has good EOD data<br>
+2. run algo to generate signal: once a day after market close<br>
+3. execute: send a limit order to the broker after market close and the broker would execute the orders the next day.</p>
+
+<p>So, we <strong>do it once a day after the market close</strong>.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9ad5f4293797000f220429' id='5f9ad5f4293797000f220429'>
+<a href='#5f9ad5f4293797000f220429'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eac3453cd810d150986e5ea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3f67eec5f3d899b7024f67c6ac2bc6dd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eac3453cd810d150986e5ea'>Aleksei Dremov</a>
+</div>
+<a UTCms='1603982836000' class='quanto-date posted-at response-posted-at' href='#5f9ad5f4293797000f220429'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Just wondering - is the forum going to stay alive after Nov-14?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9ad85e1e18df000d39da36' id='5f9ad85e1e18df000d39da36'>
+<a href='#5f9ad85e1e18df000d39da36'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1603983454000' class='quanto-date posted-at response-posted-at' href='#5f9ad85e1e18df000d39da36'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>has someone used the portfoliovisualizer?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9ae54ee8d38a000a7920a8' id='5f9ae54ee8d38a000a7920a8'>
+<a href='#5f9ae54ee8d38a000a7920a8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb05c81a1c4ac0040c7ae0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2c03d939c8c879cddb1c770fadd01841?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb05c81a1c4ac0040c7ae0c'>Tentor Testivis</a>
+</div>
+<a UTCms='1603986766000' class='quanto-date posted-at response-posted-at' href='#5f9ae54ee8d38a000a7920a8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;m a bit shocked about the Q shutdown. Now I can&#39;t post notebooks any more... </p>
+
+<p>You can retrieve Yahoo data with <a href="https://pypi.org/project/pandas-datareader/" rel="nofollow">pandas_datareader</a> which can be installed using</p>
+
+<pre><code>pip install pandas_datareader  
+</code></pre>
+
+<p>A history request might look like this:</p>
+
+<pre><code>import pandas_datareader as web
+
+start_date=&#39;2014-01-01&#39;  
+end_date=&#39;2015-01-01&#39;  
+hist = web.DataReader(&#39;SPY&#39;, &#39;yahoo&#39;, start_date, end_date)  
+</code></pre>
+
+<p>You can also pass a list of symbol to get prices for all of them at once. The end_date is optional, if you leave it out you get prices up to the most recent.</p>
+
+<p>Another library I know of is <a href="https://pypi.org/project/yfinance/" rel="nofollow">yfinance</a>, also installable with pip.<br>
+And brokers with an API usually also offer price data.</p>
+
+<p>So where will we go now? What platforms do you know?<br>
+I&#39;m already on QuantConnect but haven&#39;t been very active there.</p>
+
+<p>@Aleksei<br>
+I think with community platform they mean the whole website, so the forum will be gone too.<br>
+What a shame, this forum is full of gemstones...</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9aed0ad46cba000c56922b' id='5f9aed0ad46cba000c56922b'>
+<a href='#5f9aed0ad46cba000c56922b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5f96e868fd8c020013df2dae'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ff50637ed5e20d076961b611a25623b2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5f96e868fd8c020013df2dae'>Deleted User</a>
+</div>
+<a UTCms='1603988746000' class='quanto-date posted-at response-posted-at' href='#5f9aed0ad46cba000c56922b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Does anyone have a good alternative for backtesting strategies? I loved the ease of use of Q.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9af43671f2ee000c173c0f' id='5f9af43671f2ee000c173c0f'>
+<a href='#5f9af43671f2ee000c173c0f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb05c81a1c4ac0040c7ae0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2c03d939c8c879cddb1c770fadd01841?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb05c81a1c4ac0040c7ae0c'>Tentor Testivis</a>
+</div>
+<a UTCms='1603990582000' class='quanto-date posted-at response-posted-at' href='#5f9af43671f2ee000c173c0f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Charlie<br>
+I guess <a href="https://www.quantconnect.com/" rel="nofollow">QuantConnect</a> could be an alternative. But there are many differences, one of them being that you can only run one backtest at a time with a free account. And of course it takes a bit of research, time and work to get your Quantopian strategies working with QC code. But I think this will be the case with any alternative.</p>
+
+<p>If any one knows other platforms please post them.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9af52771fa4e000bf9f8bf' id='5f9af52771fa4e000bf9f8bf'>
+<a href='#5f9af52771fa4e000bf9f8bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f04b41a544aa8c34000289'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5a98c6e18424e6ac38702c35d5152669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f04b41a544aa8c34000289'>Chris Liu</a>
+</div>
+<a UTCms='1603990823000' class='quanto-date posted-at response-posted-at' href='#5f9af52771fa4e000bf9f8bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello everybody, I created a slack for discussion this strategy:<br>
+here is the link: <a href="https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA" rel="nofollow">https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9af62471f2ee000b173c18' id='5f9af62471f2ee000b173c18'>
+<a href='#5f9af62471f2ee000b173c18'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb05c81a1c4ac0040c7ae0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2c03d939c8c879cddb1c770fadd01841?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb05c81a1c4ac0040c7ae0c'>Tentor Testivis</a>
+</div>
+<a UTCms='1603991076000' class='quanto-date posted-at response-posted-at' href='#5f9af62471f2ee000b173c18'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Another way to backtest trading Ideas would be <a href="https://quantiacs.com" rel="nofollow">Quantiacs</a>.</p>
+
+<p>Pros:</p>
+
+<ul>
+<li>You can install their toolbox locally (I think you don&#39;t even need to sign up for that).<br></li>
+<li>There&#39;s a competition going on right now where you can win an allocation</li>
+</ul>
+
+<p>Cons:</p>
+
+<ul>
+<li>It is meant for trading futures, so the universe is limited to 70 something futures + around 500 stocks<br></li>
+<li>They used to have a forum some time ago where I could find answers to a lot of my questions but that&#39;s gone now</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b0158595e57000a19d400' id='5f9b0158595e57000a19d400'>
+<a href='#5f9b0158595e57000a19d400'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eac3453cd810d150986e5ea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3f67eec5f3d899b7024f67c6ac2bc6dd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eac3453cd810d150986e5ea'>Aleksei Dremov</a>
+</div>
+<a UTCms='1603993944000' class='quanto-date posted-at response-posted-at' href='#5f9b0158595e57000a19d400'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can anyone please explain this piece of the code that @Vladimir kindly shared with us?</p>
+
+<pre><code>    if exit: BULL = 0; OUT_DAY = COUNT;  
+    elif (COUNT &gt;= OUT_DAY + WAIT_DAYS): BULL = 1  
+    COUNT += 1       
+
+</code></pre>
+
+<p>I am a bad coder, trying to re-run his strategy in Excel, but it&#39;s clearly not working as intended without this piece.</p>
+
+<p>This is the entire code if anyone is interested:</p>
+
+<pre><code># Price relative ratios (intersection) with wait days  
+import numpy as np  
+# -----------------------------------------------------------------------------------------------  
+STOCKS = symbols(&#39;QQQ&#39;); BONDS = symbols(&#39;TLT&#39;,&#39;IEF&#39;); LEV = 1.00; wt = {};  
+A = symbol(&#39;SLV&#39;); B = symbol(&#39;GLD&#39;); C = symbol(&#39;XLI&#39;); D = symbol(&#39;XLU&#39;);  
+MKT = symbol(&#39;QQQ&#39;); VOLA = 126; LB = 1.00; BULL = 1; COUNT = 0; OUT_DAY = 0; RET_INITIAL = 80;  
+# -----------------------------------------------------------------------------------------------  
+def initialize(context):  
+    schedule_function(daily_check, date_rules.every_day(), time_rules.market_open(minutes = 140))  
+    schedule_function(record_vars, date_rules.every_day(), time_rules.market_close())  
+def daily_check(context,data):  
+    global BULL, COUNT, OUT_DAY  
+    vola = data.history(MKT, &#39;price&#39;,  VOLA + 1, &#39;1d&#39;).pct_change().std() * np.sqrt(252)  
+    WAIT_DAYS = int(vola * RET_INITIAL)  
+    RET = int((1.0 - vola) * RET_INITIAL)  
+    P = data.history([A,B,C,D], &#39;price&#39;,  RET + 2, &#39;1d&#39;).iloc[:-1].dropna()  
+    ratio_ab = (P[A].iloc[-1] / P[A].iloc[0]) / (P[B].iloc[-1] / P[B].iloc[0])  
+    ratio_cd = (P[C].iloc[-1] / P[C].iloc[0]) / (P[D].iloc[-1] / P[D].iloc[0])  
+    exit = ratio_ab &lt; LB and ratio_cd &lt; LB  
+    if exit: BULL = 0; OUT_DAY = COUNT;  
+    elif (COUNT &gt;= OUT_DAY + WAIT_DAYS): BULL = 1  
+    COUNT += 1  
+    wt_stk = LEV if BULL else 0;  
+    wt_bnd = 0 if BULL else LEV;  
+    for sec in STOCKS: wt[sec] = wt_stk / len(STOCKS);  
+    for sec in BONDS: wt[sec] = wt_bnd / len(BONDS)         
+
+    for sec, weight in wt.items():  
+        order_target_percent(sec, weight)  
+    record( wt_bnd = wt_bnd, wt_stk = wt_stk )  
+
+def record_vars(context, data):  
+    record(leverage = context.account.leverage)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b02b5eae527000f5bf864' id='5f9b02b5eae527000f5bf864'>
+<a href='#5f9b02b5eae527000f5bf864'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ffffbd027294dc1300016d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4865118f6f164b9d1c4f79146d6fad7d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ffffbd027294dc1300016d'>Kyle Oates</a>
+</div>
+<a UTCms='1603994293000' class='quanto-date posted-at response-posted-at' href='#5f9b02b5eae527000f5bf864'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Just a thought, if QuantConnect has the slightest chance of rising to the top maybe one of the contributors or OP of In_Out can get something started on QC soon so you capture the main thread for it, even if its a wip share as porting issues are worked out.  Since In_Out became quite a popular algo the move of it to somewhere else will give the Q community a good indication where to go next.</p>
+
+<p>I&#39;m in the middle of playing around with a port on QC now but personally Id rather see the owner or one of the other main contributors be OP for on it QC.  I&#39;ll help with porting and DM the owner or any of the main contributors my progress if you want it (send me a DM on Q).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b051e7c9e80000e12894b' id='5f9b051e7c9e80000e12894b'>
+<a href='#5f9b051e7c9e80000e12894b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eac3453cd810d150986e5ea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3f67eec5f3d899b7024f67c6ac2bc6dd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eac3453cd810d150986e5ea'>Aleksei Dremov</a>
+</div>
+<a UTCms='1603994910000' class='quanto-date posted-at response-posted-at' href='#5f9b051e7c9e80000e12894b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My fear is that with things like QuantConnect or Quanticas we become too much dependant on external infrastructure which can be shut down any day. I was hoping there are some tools that allow to leverage broker&#39;s infrastructure for algo trading. I know people are running backtests and trade algos using Interactive Brokers&#39; not exactly sure how they get there though.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b0c8e595e57001019d43f' id='5f9b0c8e595e57001019d43f'>
+<a href='#5f9b0c8e595e57001019d43f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5db0c113e20c9153fc74621e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1039ed111bc94a10e52abca3eb22dc89?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5db0c113e20c9153fc74621e'>Lee YOyo</a>
+</div>
+<a UTCms='1603996814000' class='quanto-date posted-at response-posted-at' href='#5f9b0c8e595e57001019d43f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Please migrate to QuantConnect. It is very reliable and many are live trading on it for years!!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b0cc57c9e8000091289b5' id='5f9b0cc57c9e8000091289b5'>
+<a href='#5f9b0cc57c9e8000091289b5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5db0c113e20c9153fc74621e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1039ed111bc94a10e52abca3eb22dc89?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5db0c113e20c9153fc74621e'>Lee YOyo</a>
+</div>
+<a UTCms='1603996869000' class='quanto-date posted-at response-posted-at' href='#5f9b0cc57c9e8000091289b5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quantconnect is the best option. Please do this amaizing strategy on it. QC also has a very vibrant community forum. Plus their staff is actively helping people.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b1ba971f2ee0009173d8f' id='5f9b1ba971f2ee0009173d8f'>
+<a href='#5f9b1ba971f2ee0009173d8f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eac3453cd810d150986e5ea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3f67eec5f3d899b7024f67c6ac2bc6dd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eac3453cd810d150986e5ea'>Aleksei Dremov</a>
+</div>
+<a UTCms='1604000681000' class='quanto-date posted-at response-posted-at' href='#5f9b1ba971f2ee0009173d8f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What about IBridgePy.com - did anyone try?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b1e897c9e800009128a40' id='5f9b1e897c9e800009128a40'>
+<a href='#5f9b1e897c9e800009128a40'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1604001417000' class='quanto-date posted-at response-posted-at' href='#5f9b1e897c9e800009128a40'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I use the IbridgePy since months. The problem is tutorial is quite simple. And it seems not so easy to do the backtesting. If you need more you have to pay.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b1f0c7c9e800008128a0b' id='5f9b1f0c7c9e800008128a0b'>
+<a href='#5f9b1f0c7c9e800008128a0b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1604001548000' class='quanto-date posted-at response-posted-at' href='#5f9b1f0c7c9e800008128a0b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I see this in the post of closing community:</p>
+
+<p>Erol Aspromatis 2 hours ago<br>
+Very sad to see this happen. Guess I&#39;m lucky as I&#39;ve already transitioned to my own server and data using Zipline and Pyfolio for backtesting. If anyone needs help, feel free to reach out to me. I&#39;ve also recently created a few videos on my YouTube channel on how to set up and run Zipline and Pyfolio locally if it helps anyone:<br>
+<a href="https://www.youtube.com/c/ErolAspromatis" rel="nofollow">https://www.youtube.com/c/ErolAspromatis</a></p>
+
+<p>This sounds interessting for backtesting.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b1f60595e57001119d4f3' id='5f9b1f60595e57001119d4f3'>
+<a href='#5f9b1f60595e57001119d4f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1604001632000' class='quanto-date posted-at response-posted-at' href='#5f9b1f60595e57001119d4f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Has someone seen this?</p>
+
+<p><a href="https://www.quantopian.com/live-portfolios" rel="nofollow">https://www.quantopian.com/live-portfolios</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b1f719e58440009abe444' id='5f9b1f719e58440009abe444'>
+<a href='#5f9b1f719e58440009abe444'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eac3453cd810d150986e5ea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3f67eec5f3d899b7024f67c6ac2bc6dd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eac3453cd810d150986e5ea'>Aleksei Dremov</a>
+</div>
+<a UTCms='1604001649000' class='quanto-date posted-at response-posted-at' href='#5f9b1f719e58440009abe444'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Thomas Chang, understood, thank you!</p>
+
+<p>Any chance someone could help with the code above please? The strategy seems too good to be true, so I am recalculating it in Excel to manually check. So far I am getting results inferior to Quantopian test, but I don&#39;t understand the piece of code highlighted. I am willing to share the results, but want to finalize the test first.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b3426595e57001119d587' id='5f9b3426595e57001119d587'>
+<a href='#5f9b3426595e57001119d587'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f04b41a544aa8c34000289'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5a98c6e18424e6ac38702c35d5152669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f04b41a544aa8c34000289'>Chris Liu</a>
+</div>
+<a UTCms='1604006950000' class='quanto-date posted-at response-posted-at' href='#5f9b3426595e57001119d587'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello everybody, I created a slack for discussion this strategy:<br>
+here is the link: <a href="https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA" rel="nofollow">https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b351071fa4e000bf9fb2e' id='5f9b351071fa4e000bf9fb2e'>
+<a href='#5f9b351071fa4e000bf9fb2e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5c75809278851462eaed6d62'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e1e3c1ca8eac60c3668ca5f36a200b2f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5c75809278851462eaed6d62'>Norman Chong</a>
+</div>
+<a UTCms='1604007184000' class='quanto-date posted-at response-posted-at' href='#5f9b351071fa4e000bf9fb2e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Backtrader is also another platform I&#39;ve used before. It purely offline so it doesn&#39;t require a subscription to use.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9b9513595e57000919d880' id='5f9b9513595e57000919d880'>
+<a href='#5f9b9513595e57000919d880'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/584e59bb1fc8d50015000b71'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a0cc979b8c55db1137f8f8447f72e3d6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/584e59bb1fc8d50015000b71'>John Harmon</a>
+</div>
+<a UTCms='1604031763000' class='quanto-date posted-at response-posted-at' href='#5f9b9513595e57000919d880'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Since Quantopian is based on Zipline, I tried out Norgate Data for my backtesting futures and stocks.  It works well (only on a daily timeframe though) and easy to port any price-based filters across.  Has some nice features for historical index constituent universes/delisted stocks and futures rolls.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9bc052595e57000e19d9c6' id='5f9bc052595e57000e19d9c6'>
+<a href='#5f9bc052595e57000e19d9c6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5d18994eac0382004088e932'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/afe78924e1c851d1e2d149a56b70e0f0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5d18994eac0382004088e932'>Alexander Rehf</a>
+</div>
+<a UTCms='1604042834000' class='quanto-date posted-at response-posted-at' href='#5f9bc052595e57000e19d9c6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi,</p>
+
+<p>just a quick idea: i started to implement this strategy with a python script and yahoo finance. as this strategy trades on a monthly basis, i dont think, that there is a need to automate the trading. i plan to implement a telegram bot, which sends notifications.</p>
+
+<p>Alex  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9bd52171fa4e0013f9ffa8' id='5f9bd52171fa4e0013f9ffa8'>
+<a href='#5f9bd52171fa4e0013f9ffa8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1604048161000' class='quanto-date posted-at response-posted-at' href='#5f9bd52171fa4e0013f9ffa8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For what it’s worth I’ve traded $200K live through QC and IB. It’s well worth the $20/mo which includes a machine to run your algo on... it’s basically the price of a VPS. </p>
+
+<p>Even getting something to run locally you’ll need a dedicated machine to rune your code on.</p>
+
+<p>I don’t think there is anything that can be beat at its current price point. I was honestly still surprised people were still on Quantopian after they shut down live paper trading. </p>
+
+<p>A lot of the guys from here moved over to QC. I actually suggested the “In and out” strategy over there in a thread.</p>
+
+<p>I’ll make a new thread there and people can hop over if they’ll like.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9bda3aeae527000e5bfe8d' id='5f9bda3aeae527000e5bfe8d'>
+<a href='#5f9bda3aeae527000e5bfe8d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1604049466000' class='quanto-date posted-at response-posted-at' href='#5f9bda3aeae527000e5bfe8d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Done: <a href="https://www.quantconnect.com/forum/discussion/9592/in-and-out-strategy-migration/p1" rel="nofollow">https://www.quantconnect.com/forum/discussion/9592/in-and-out-strategy-migration/p1</a></p>
+
+<p>Quantconnect support will even help in migrating the strategy fully over, what else can you ask for?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9bdd1a595e57001119da41' id='5f9bdd1a595e57001119da41'>
+<a href='#5f9bdd1a595e57001119da41'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1604050202000' class='quanto-date posted-at response-posted-at' href='#5f9bdd1a595e57001119da41'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You have to be logged into Quantconnect to see the thread for some reason FYI.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c08ce1fcb3500080b2f1f' id='5f9c08ce1fcb3500080b2f1f'>
+<a href='#5f9c08ce1fcb3500080b2f1f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1604061390000' class='quanto-date posted-at response-posted-at' href='#5f9c08ce1fcb3500080b2f1f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I get 404 error.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c0960595e57000e19dca6' id='5f9c0960595e57000e19dca6'>
+<a href='#5f9c0960595e57000e19dca6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56406b03491ea6ba6400026e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/feb4cbf34749af2eb518ca1110c1a4e3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56406b03491ea6ba6400026e'>Thomas Chang</a>
+</div>
+<a UTCms='1604061536000' class='quanto-date posted-at response-posted-at' href='#5f9c0960595e57000e19dca6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I like Quantopian like platform such as zipline.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c2515595e57000819ddfb' id='5f9c2515595e57000819ddfb'>
+<a href='#5f9c2515595e57000819ddfb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f04b41a544aa8c34000289'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5a98c6e18424e6ac38702c35d5152669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f04b41a544aa8c34000289'>Chris Liu</a>
+</div>
+<a UTCms='1604068629000' class='quanto-date posted-at response-posted-at' href='#5f9c2515595e57000819ddfb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>have you guys tried backtrader?</p>
+
+<p>Slack group link for discussing the algo:  <a href="https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA" rel="nofollow">https://join.slack.com/t/quantopian-workspace/shared_invite/zt-imkqihmt-IkFhFhc6tEAGrc4mQjlgUA</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c44f17c9e8000101294cb' id='5f9c44f17c9e8000101294cb'>
+<a href='#5f9c44f17c9e8000101294cb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb05c81a1c4ac0040c7ae0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2c03d939c8c879cddb1c770fadd01841?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb05c81a1c4ac0040c7ae0c'>Tentor Testivis</a>
+</div>
+<a UTCms='1604076785000' class='quanto-date posted-at response-posted-at' href='#5f9c44f17c9e8000101294cb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Elsid:<br>
+I also get a 404 error even when logged in...</p>
+
+<p>@all:<br>
+I&#39;ve decided to start a thread with the original idea of this one on QuantConnect.<br>
+But I guess it will be next week since I&#39;m otherwise engaged over the weekend, I&#39;ll send a link here once it started.<br>
+Hope to see you all there!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c4c8deae52700095c0491' id='5f9c4c8deae52700095c0491'>
+<a href='#5f9c4c8deae52700095c0491'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52f72b61fa97e9e2c900018a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/251febbc40d819ced3c4c7a831e84b7a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52f72b61fa97e9e2c900018a'>Hui Liu</a>
+</div>
+<a UTCms='1604078733000' class='quanto-date posted-at response-posted-at' href='#5f9c4c8deae52700095c0491'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For anyone who are interested in running Quantopian code for live trading on your local machine, you may consider IBridgePy <a href="http://www.IBridgePy.com" rel="nofollow">www.IBridgePy.com</a>, a python platform to backtest and live trade with Interactive Broker, TD Ameritrade and Robinhood.<br>
+We have a tutorial about migrating from Quantopian to IBridgePy and you may run your Quantopian codes even without any changes.<br>
+<a href="https://ibridgepy.com/tutorial-migrating-from-quantopian-to-ibridgepy/" rel="nofollow">https://ibridgepy.com/tutorial-migrating-from-quantopian-to-ibridgepy/</a> Also, we have many tutorials on YouTube about algorithmic trading. For example,</p>
+
+<p>&quot;Algorithmic Trading Python From Idea to Back test to Live Markets Interactive Brokers TD Robinhood&quot; by Dr. Hui Liu <a href="https://youtu.be/LBfHeixw6rA" rel="nofollow">https://youtu.be/LBfHeixw6rA</a>
+&quot;Overview of IBridgePy: backtest and live trading&quot; by Dr. Hui Liu <a href="https://youtu.be/xWMzTgGWv48" rel="nofollow">https://youtu.be/xWMzTgGWv48</a>
+If you need any help on coding, please check out our well known Rent-a-Coder service.</p>
+
+<p>Disclaimer: This is Dr. Hui Liu, who created IBridgePy.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9c4d8e2bd2560009f476ec' id='5f9c4d8e2bd2560009f476ec'>
+<a href='#5f9c4d8e2bd2560009f476ec'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52f72b61fa97e9e2c900018a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/251febbc40d819ced3c4c7a831e84b7a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52f72b61fa97e9e2c900018a'>Hui Liu</a>
+</div>
+<a UTCms='1604078990000' class='quanto-date posted-at response-posted-at' href='#5f9c4d8e2bd2560009f476ec'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I want to point out that<br>
+1. IBridgePy supports Ubuntu Linux, Windows and Mac.<br>
+2. IBridgePy can be setup on cloud, for example EC2 <a href="https://ibridgepy.com/set-virtual-server-ibridgepy-amazon-ec2/" rel="nofollow">https://ibridgepy.com/set-virtual-server-ibridgepy-amazon-ec2/</a><br>
+3. Users can use any data source to backtest on IBridgePy&#39;s backtest system.<br>
+4. Most of features in IBridgePy are free but we need to make paid features for long term growth.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f9cddf6e2b8150008285c30' id='5f9cddf6e2b8150008285c30'>
+<a href='#5f9cddf6e2b8150008285c30'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51d125a71144e60865000044'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7dd86784deedc047d5ad0fb30378bdd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51d125a71144e60865000044'>Peter Bakker</a>
+</div>
+<a UTCms='1604115958000' class='quanto-date posted-at response-posted-at' href='#5f9cddf6e2b8150008285c30'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For what it is worth: I started live trading with Quantopian, I traded for years with zipline-live and later with zipline-trader but after a few years, I decided to split the research and the execution. So currently I use Alpaca on a bastardized Pylivetrader (with data redundancy functions) but I&#39;m changing it to lambda functions running on Alpaca as an execution venue (and IB as a backup venue). This way I can reuse the controlling functions (stop-loss, deviation from risk parameters) I&#39;ll migrate my research to Quant Connect and my own installed zipline on my own servers for the AI/ML research. </p>
+
+<p>Twice now Quantopian has ripped the carpet under us... I&#39;ll be more independent from now on: more tedious but being dependent on flaky companies is not cool  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/live-slash-paper-trade-the-in-out-stragegy'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/live-slash-paper-trade-the-in-out-stragegy'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#d1b7b4b4b5b3b0b2ba91a0a4b0bfa5bea1b8b0bfffb2bebc">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

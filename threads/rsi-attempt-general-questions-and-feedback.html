@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+RSI attempt, general questions and feedback
+</title>
+<meta content='Hi all,Below is my first coded backtest using Quantopian*; it&#39;s an implementation of the Relative Strength Index (RSI definition), which should be familiar to most who&#39;ve scratched the surface  of first-level technical trading and is often cited as a useful overbought/oversold momentum oscillator.  My adoption of this indicator as my first backtest is by no means an endorsement of it usefulness, it was simply a way for me to get used to the IDE with something easy as a subject.  (The backtest...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="bvv9FrwTtjvC97PfhINhYvNIBcJlO4bh48PaNllZzyASnYtbHuVk2Hvq6u7LbMkWy8Ymqx/3k/phzAFc8xytmw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/rsi-attempt-general-questions-and-feedback' property='og:url'>
+<meta content='RSI attempt, general questions and feedback' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/rsi-attempt-general-questions-and-feedback' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='RSI attempt, general questions and feedback' property='og:title'>
+<meta content='Hi all,Below is my first coded backtest using Quantopian*; it&#39;s an implementation of the Relative Strength Index (RSI definition), which should be familiar to most who&#39;ve scratched the surface  of first-level technical trading and is often cited as a useful overbought/oversold momentum oscillator.  My adoption of this indicator as my first backtest is by no means an endorsement of it usefulness, it was simply a way for me to get used to the IDE with something easy as a subject.  (The backtest...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/rsi-attempt-general-questions-and-feedback">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='508435e065344f0200000009'>
+<div class='post-container' data-post-id='508435e065344f0200000009' id='508435e065344f0200000009'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>RSI attempt, general questions and feedback</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/506d4461bdf2aa0200000057'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4d5e1f6f952f91c911e285bb756e8750?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/506d4461bdf2aa0200000057'>Tim Meggs</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1350841824000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=RSI attempt, general questions and feedback&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Frsi-attempt-general-questions-and-feedback%3Futm_source%3Dwebsite_share%26utm_campaign%3Drsi-attempt-general-questions-and-feedback%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Frsi-attempt-general-questions-and-feedback%3Futm_source%3Dwebsite_share%26utm_campaign%3Drsi-attempt-general-questions-and-feedback%26utm_medium%3Dlinkedin&amp;title=RSI+attempt%2C+general+questions+and+feedback+%28Tim+Meggs%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/rsi-attempt-general-questions-and-feedback?utm_source=website_share&amp;utm_campaign=rsi-attempt-general-questions-and-feedback&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tim Meggs" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hi all,</p>
+
+<p>Below is my first coded backtest using Quantopian*; it&#39;s an implementation of the Relative Strength Index <a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:relative_strength_index_rsi">(RSI definition)</a>, which should be familiar to most who&#39;ve scratched the surface  of first-level technical trading and is often cited as a useful overbought/oversold momentum oscillator.  My adoption of this indicator as my first backtest is by no means an endorsement of it usefulness, it was simply a way for me to get used to the IDE with something easy as a subject.  (The backtest timeframe below was crudely chosen to show good results and nothing more!)</p>
+
+<p>Thoughts and feedback on the process (apologies in advance if any of this has arisen due to my lack of understanding of the system…still learning!):</p>
+
+<p><strong>The IDE</strong></p>
+
+<p>In general, I think this is excellent.  The area for building up one&#39;s backtest is clean and relatively simply to use.  (I do worry that for someone who has no, or little coding experience, the thought of having to actually write code to get a backtest to work, as opposed to being able to, say, drag and drop in the way that <a href="http://quantblocks2.herokuapp.com">Quant Blocks</a> works, might actually be a barrier to them using the tool at all…but more on that below**).  </p>
+
+<p>My biggest request for improving the IDE would be around being able to step through a program as it executes on real data.  Be able to do so, and concurrently seeing the state and value of local variables, would be massively helpful in debugging and understanding, for example, why a particular order is triggered, or not triggered (etc.), at a certain point in time.  Without being able to step through the program on real data, I found that debugging my code was a painful process of having the fill the script with LOADS of log.debug stuff, then run a full backtest and try to match up the Transaction Details to the Log Output in order to work out what was going with the strategy, at what point in time, and why.  Step-through functionality - even if just on a static dummy set of data - would be huge. </p>
+
+<p><strong>The Backtest process</strong></p>
+
+<p>The disparity between running a backest in the IDE on <em>daily</em> data, and the full backest that runs against <em>minute</em> bars is clunky.  Given the full backtest can only be run against minute bars (is this right?), then it is best to code in preparation for this, which means the &quot;daily&quot; backtest in the IDE becomes a bit redundant; I ended up using it purely as a way to ensure the program I was writing had no build errors (is that what it was intended for?).</p>
+
+<p>The availability of more options around &quot;frequency&quot; in general would be a great improvement in my opinion: more options around the frequency at which the strategy is evaluated (i.e. I might like my strategy to be an hourly, or 3-hourly, or monthly strategy - as opposed to the default minute bars - and I cant be bothered (read: I don&#39;t know how) to ensure my code does this for me) and more options around the frequency of the various available transforms would be good (i.e. the mavg is currently a daily moving average, but given we&#39;re executing against minute data, it might be nice for such transforms to be of the form mavg(input_range,input_freq) with input_freq having options such as minute, hour, day, month etc. such that mavg(5,hour) would give you the 5-hour-moving average).  In general, maintaining complete disconnection between the frequency at which the transforms are calculated and the frequency of the strategy evaluation would be desirable.</p>
+
+<p>Which brings me onto the transforms and the bigger question alluded to **above.  (I&#39;ve tried to write the following sentence a few different ways, but none of them sound right, so I&#39;m just going to straight ask it as a question instead) </p>
+
+<p>Is the plan for Quantopian to be the &#39;custodians&#39; of the transforms that are available to a user as defaults, and increase the suite of transforms as the platform grows?  Or is this responsibility to fall to the community in general?  </p>
+
+<p>I ask because one of the prime attractions to new users (new users == community good) will be the variety and ease with which they can implement a large suite of (rigorously tested) time series calculations into their various strategies.  If there are going to be a wide selection of them available as defaults from Quantopian, then great, but then the current selection needs to widen <em>rapidly</em> beyond the few simple ones currently available, for the platform  to be attractive to those users who aren&#39;t prepared to code them up themselves.  </p>
+
+<p>If, alternatively, the community is to provide functions for such analysis, then the <em>ease</em> with which a new user can implement them is key.  (from my experience with R, tricky package downloads and incomplete documentation are a massive turnoff for new users and you might hear them screaming &quot;I don&#39;t want to learn computer science, I want the system to do all that for me!&quot; before you know it!)</p>
+
+<p><strong>Overall</strong></p>
+
+<p>The above is my two cents, I hope that they are a positive contribution.  Please let me know if any of them are borne out of misunderstanding.  I think the system is great, has huge potential and I&#39;ve found coding in Python a dream (as opposed to C++)!</p>
+
+<p>*caveat: I&#39;m not a good Python programmer so apologies if some of the twists and turns I make in my code could be completed a lot more elegantly using the various modules available had I known about them.  Please highlight anything I&#39;ve done that is bad/could be better.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>14 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='50843f9ea73d4d0200000018' id='50843f9ea73d4d0200000018'>
+<a href='#50843f9ea73d4d0200000018'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4e2887701c8cf8364f000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f0da8e39938dae306beaf315b3cb0156?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4e2887701c8cf8364f000001'>John Fawcett</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1350844318000' class='quanto-date posted-at response-posted-at' href='#50843f9ea73d4d0200000018'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Tim, great idea for an algorithm, and thank you for the incredibly helpful feedback! You sparked many new ideas for me, thank you. Here are some of my thoughts:</p>
+
+<ul>
+<li>I love your question about transforms because it goes to the heart of our approach. We want to provide a broad and common library, while also helping you build your own. We are looking at <a href="http://www.ta-lib.org/">ta-lib</a> as a way to rapidly accelerate the expansion of our transform library. To let you build your own transforms, we are working on an extension to the execution environment that makes it easy to work with a window of trade data. Lastly, we have opensourced our entire backtest library <a href="https://github.com/quantopian/zipline">zipline</a>. The spirit is to help without forcing you to use our kit only.<br></li>
+<li>We have heard the same complaint about differing frequency between the IDE backtest and &quot;full&quot;. We plan to update the UI so you can control bar length in both places.<br>
+
+<ul>
+<li>Our new transform api will let you specify the refresh frequency for your transforms. This will enable you to divorce transforms and other logic from the underlying trade bar length, just as you&#39;ve proposed. I&#39;ve written a bit about the forthcoming batch transforms in the end of this thread: <a href="https://www.quantopian.com/posts/universe-selection">https://www.quantopian.com/posts/universe-selection</a><br></li>
+<li>+1 for debugging and step-through. I have been dreaming of adding that kind of functionality to the IDE since the very first prototype. We haven&#39;t yet put this into our delivery plan though.<br></li>
+<li>I can imagine a drag and drop UI that emits python code compatible with our API, but in my own experience, I&#39;ve always found that graphical programming languages tend to be too rigid compared to just coding. However, reading our notes it occurred to me that a simple GUI could be a great onramp for a full programming interface - GUI generates python code. New programmers could use it like scaffolding to learn some python and our API, and then hand edit the generated code to get started. Just an idea, what do you think?</li>
+</ul></li>
+</ul>
+
+<p>again, thank you so much for taking the time to share your algo and your ideas. Both are really interesting and helpful!</p>
+
+<p>thanks,<br>
+fawce</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='50854b06a73d4d02000000d1' id='50854b06a73d4d02000000d1'>
+<a href='#50854b06a73d4d02000000d1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1350912774000' class='quanto-date posted-at response-posted-at' href='#50854b06a73d4d02000000d1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>As Fawce said, thanks for the thoughtful ideas here.</p>
+
+<p>On your &quot;bigger question&quot;:  I think you&#39;re asking, are we going to provide a library and let people clone and edit?  Or are we going to make a toolset where anyone can quickly implement and test an idea?  </p>
+
+<p>I&#39;d like to provide both - I don&#39;t see a conflict between the two ideas.  They are both a fair amount of work, but they work hand-in-hand.  If we can provide a good library and the tools to manipulate code easily, that will unlock a lot of creativity from our members.</p>
+
+<p>Did I understand the question correctly?</p>
+
+<p>Thanks</p>
+
+<p>Dan</p>
+
+<p>For now at least  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5086ef270da2a10200000002' id='5086ef270da2a10200000002'>
+<a href='#5086ef270da2a10200000002'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/506d4461bdf2aa0200000057'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4d5e1f6f952f91c911e285bb756e8750?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/506d4461bdf2aa0200000057'>Tim Meggs</a>
+</div>
+<a UTCms='1351020327000' class='quanto-date posted-at response-posted-at' href='#5086ef270da2a10200000002'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@fawce, @Dan, it was a pleasure, I enjoy coding algos and giving feedback: a perfect combo</p>
+
+<p>@fawce - providing a broad common library whilst also allowing users to code their own transforms makes perfect sense. One the one hand, using the provided library would allow those who don&#39;t want to code transforms for whatever reason (time, knowledge etc.) to get as deep into building their strategies as possible.  And on the other, the ability to customise, tinker, and create your own transforms is maintained.  </p>
+
+<p>If you&#39;re definitely going to expand the &#39;default&#39; transforms library, I guess, to some extent, the question becomes one of how that library gets populated.  I had a quick look at ta-lib and it looks reasonably deep in terms of technical indicators.  I&#39;m not sure how nicely Quantopian plays with R, but you might also want to look at Joshua Ulrich&#39;s <a href="http://cran.r-project.org/web/packages/TTR/TTR.pdf">TTR</a> as a candidate suite of indicators.  </p>
+
+<p>(It also occurred to me that if there users out there busying themselves creating their own cool custom transforms, should they wish, you might be want to accept these into the default library - subject to relevant tests around robustness of code etc. -  maybe in return for some sort of enhanced standing in the community (or more t-shirts!)… By being arbiter of the &#39;default&#39; library Quantopian can help with things like argument-naming-consistency (i.e. years == yrs == y).)</p>
+
+<p>I agree wholeheartedly that the drag &amp; drop kind of functionality would be a great helping-held for those new to strategy writing, but it&#39;s completely not a method for those more advanced quants who wish to see (&amp; write) what goes on under the hood. In the end, getting such functionality up and running might cost more dev time that it&#39;s worth.</p>
+
+<p>I also, read through your post about the batch transforms - sounds like a great step in the right direction.</p>
+
+<p>@Dan - you understood my question exactly, and I think both yours and fawce&#39;s reply definitely outline the best approach: provide as many good tools as possible, but also allow users to create their own as freely as they wish.  (my only request - as a user - is maybe to think about some very broad <em>optional</em> &#39;best practice&#39; guidelines (not very open-source, I know - sorry!) for those of us that might seek to develop <em>production-level</em> transforms for use by the community around naming conventions for function args etc, so that reading one user&#39;s code is as easy as reading the next user&#39;s code…) </p>
+
+<p>Really enjoying using this platform - keep up the great work!</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5087055be0326c0200000016' id='5087055be0326c0200000016'>
+<a href='#5087055be0326c0200000016'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5019a7055f23060002000002'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8c909680c18a7ce44f242e6923776110?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5019a7055f23060002000002'>Eddie Hebert</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1351026011000' class='quanto-date posted-at response-posted-at' href='#5087055be0326c0200000016'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Tim a small, but hopefully helpful, note, but you can use Python&#39;s collections module&#39;s deque, <a href="http://docs.python.org/library/collections.html#collections.deque">http://docs.python.org/library/collections.html#collections.deque</a>, to implement the rolling tick history window that you use in your algorithm.</p>
+
+<p>e.g. </p>
+
+<pre><code>    from collections import deque  
+    num_ticks = 6  
+    context.tick_history = deque([0] * num_ticks, num_ticks)  
+</code></pre>
+
+<p>To add a new value all you would need to do is:</p>
+
+<pre><code>    context.tick_history.appendleft(price)  
+</code></pre>
+
+<p>You might find it a nice little way to remove an extra line of juggling list positions.<br>
+It also provides the benefit of better memory performance, etc.</p>
+
+<p>Hope that helps!  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='50899f337372580200000054' id='50899f337372580200000054'>
+<a href='#50899f337372580200000054'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/506d4461bdf2aa0200000057'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4d5e1f6f952f91c911e285bb756e8750?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/506d4461bdf2aa0200000057'>Tim Meggs</a>
+</div>
+<a UTCms='1351196467000' class='quanto-date posted-at response-posted-at' href='#50899f337372580200000054'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Eddie - that&#39;s great, thanks very much.  Think I&#39;ll be using that a lot.  Really appreciate the feedback.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508a6eb573725802000000a0' id='508a6eb573725802000000a0'>
+<a href='#508a6eb573725802000000a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1351249589000' class='quanto-date posted-at response-posted-at' href='#508a6eb573725802000000a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Tim &amp; all,</p>
+
+<p>As I see it, a big advantage of Quantopian is that they have licensed a historical market dataset and are offering it free.  Unfortunately, since they cannot distribute the data, they are constrained to offer limited access to it through their browser-based backtest application.  To me, a better approach would be to offer users a flexible virtual/remote desktop environment with full access to view (but not download) the data.  Users could then pick their analysis tools (one of which could still be the Quantopian browser-based backtest application).  Quantopian folks, would this approach work technically and legally?  If so, would it make business sense?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508aa01e18894d0200000015' id='508aa01e18894d0200000015'>
+<a href='#508aa01e18894d0200000015'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4e2887701c8cf8364f000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f0da8e39938dae306beaf315b3cb0156?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4e2887701c8cf8364f000001'>John Fawcett</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1351262238000' class='quanto-date posted-at response-posted-at' href='#508aa01e18894d0200000015'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Grant,</p>
+
+<p>We hear you loud and clear. My perspective is that there are three essential activities for quants:</p>
+
+<ol>
+<li>Research and exploration of source data<br></li>
+<li>Algorithm development, testing, and simulation<br></li>
+<li>Real trading </li>
+</ol>
+
+<p>We started with #2, and we remain focused there. I believe it is critical to reach a minimum level of competency before taking on the next challenge.</p>
+
+<p>I totally agree with the spirit of your idea, and I associate it with #1 above. What I hear you saying is: Give Quantopian users a more flexible environment to do research! That resonates very deeply, and it will be our goal when we turn our focus to #1.</p>
+
+<p>We believe the time for data science tools in the browser has arrived. I wouldn&#39;t claim that we have given you the total freedom of analysis you want - but I think web delivery is the best way for us to do it. </p>
+
+<p>Please keep sharing your thoughts and advice, it is helping and inspiring us immensely. </p>
+
+<p>thanks,<br>
+fawce  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508bb97a18894d02000000a7' id='508bb97a18894d02000000a7'>
+<a href='#508bb97a18894d02000000a7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1351334266000' class='quanto-date posted-at response-posted-at' href='#508bb97a18894d02000000a7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Fawce,</p>
+
+<p>In my opinion, there is not such a clear distinction between &quot;1. Research and exploration of source data&quot; and &quot;2. Algorithm development, testing, and simulation.&quot;  I&#39;m not sure what you mean by &quot;web delivery&quot; but from my perspective, flexible virtual/remote desktop access to the data would be preferred over having fixed input/output GUI&#39;s in multiple browser tabs.  I poked around the web and came across <a href="http://guac-dev.org/">http://guac-dev.org</a>/, which claims to allow &quot;access to multiple desktops through a web browser.&quot;</p>
+
+<p>It&#39;d be better to start a separate discussion, but I think this gets back to <a href="https://www.quantopian.com/posts/quantopian-goals-slash-direction">Lou Belle&#39;s questions</a> regarding the business thrust of Quantopian.  I imagine that you need to get to &quot;3. Real trading&quot; ASAP so you can make some profits off of fees/commissions, right?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508eddf0fc14340200000027' id='508eddf0fc14340200000027'>
+<a href='#508eddf0fc14340200000027'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1351540209000' class='quanto-date posted-at response-posted-at' href='#508eddf0fc14340200000027'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant - </p>
+
+<p>I am sure @fawce agrees there is no bright line between #1 and #2.  As we talk to people who trade (here, in person, at PyData, through our investors, etc.) we listen to quants talk about their creative process.  They start with general ideas, do some whittling down, figure out roughly where their ideas are bearing fruit, and then drill deeply and test exhaustively.  We&#39;ve spent a lot more calories so far on the bottom end of that process, the exhaustive testing.  We&#39;re spending more calories now on the higher part, the earlier research.  We absolutely want it to be an integrated process.</p>
+
+<p>Can you explain to me more about the remote desktop idea?  If you remoted to our desktop, it would still be our IDE.  How does that work for you?  I&#39;m missing something on that one.</p>
+
+<p>Real trading is high on our list, but it&#39;s not the be-all end-all. We have enough money in the bank; we&#39;re not in a race against the clock.  Like any startup, we&#39;re doing the dance of limited resources and near-unlimited ideas.  We want live trading, better backtester, better IDE, better community, more data sources, open-sourced data sources, more data transforms, open-sourced data transforms, and more.  We&#39;re listening to our members and our market, prioritizing as best we can, and getting it done as fast as we can.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508ef1364c4dce0200000047' id='508ef1364c4dce0200000047'>
+<a href='#508ef1364c4dce0200000047'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1351545142000' class='quanto-date posted-at response-posted-at' href='#508ef1364c4dce0200000047'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Dan,</p>
+
+<p>The remote desktop idea is to give users the experience that they have the data you have licensed at their disposal and could analyze it as they wish (including but not limited to using the Quantopian IDE).  Imagine a Linux remote desktop environment, for example, with a suite of programming and analysis tools.  You&#39;d need to block the means to transfer data (at least big chunks of it) from the remote desktop, to preclude the licensing issue of enabling re-distribution of the data.  Each user would have some disk space on the remote system, as well.  So, to the user, the experience would be as if he had purchased the historical database and loaded it onto his hard drive.  In this way, very flexible screening, statistical analysis, plotting, visualization, etc. could be performed.  Hope this helps...let me know if more clarification is needed.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='508f09224c4dce0200000059' id='508f09224c4dce0200000059'>
+<a href='#508f09224c4dce0200000059'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1351551266000' class='quanto-date posted-at response-posted-at' href='#508f09224c4dce0200000059'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That definitely makes sense.  I think we can deliver all of that in the browser. </p>
+
+<p>For the remote desktop you described, we&#39;d have to examine and modify and whitelist and install each app in that suite of programming tools.  We can deliver the same functionality, but faster, by doing it in the browser.  We can install all sorts of Python libraries and make them run in the browser, from pandas to matplotlib.  So I think we&#39;ve got a similar vision - the question is if we can do it in the browser like we think we can.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5371db07592b16528e000120' id='5371db07592b16528e000120'>
+<a href='#5371db07592b16528e000120'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1399970569000' class='quanto-date posted-at response-posted-at' href='#5371db07592b16528e000120'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>[jumping ahead 1.5 years or so] I&#39;m not spotting anything wrong in the code (aside from my usual pet-peeve against use of pronouns like &quot;we&quot; in comments) and yet those RSI values don&#39;t appear to be in the same ballpark with charting sites out there.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='53722d631613553884000203' id='53722d631613553884000203'>
+<a href='#53722d631613553884000203'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/534d3f366de23bfe6c000004'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8c28c855eab0dcf2addd99bde466fc6e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/534d3f366de23bfe6c000004'>Brandon Goyette</a>
+</div>
+<a UTCms='1399991653000' class='quanto-date posted-at response-posted-at' href='#53722d631613553884000203'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>RSI calculations in Quantopian do not appear correct  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='537545ef4b4d6b751a00008a' id='537545ef4b4d6b751a00008a'>
+<a href='#537545ef4b4d6b751a00008a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1400194545000' class='quanto-date posted-at response-posted-at' href='#537545ef4b4d6b751a00008a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Ok here are a couple of ways to obtain RSI values on Quantopian pretty close to charting sites, TradingView, Google, et al...  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/rsi-attempt-general-questions-and-feedback'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/rsi-attempt-general-questions-and-feedback'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#4e282b2b2a2c2f2d250e3f3b2f203a213e272f20602d2123">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

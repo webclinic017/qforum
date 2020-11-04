@@ -1,0 +1,2583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+multi-factor Alphalens example
+</title>
+<meta content='Here&#39;s a notebook I&#39;ve been working on.  Questions, comments, improvements welcome. I&#39;d like to add more factors, so please provide suggestions, if you are willing. References and notes: Just watched and recommend  Factor Modeling  on YouTube (while exercising, which I also recommend and so does your doctor and mother).  It&#39;s a decent, qualitative high-level introduction to factors in the context of Quantopian. Aside from Alphalens, Delaney posted a supplementary tool here: ...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="3f0sHvVwL4sswQvQE7v5Ky+RDOLdDdVR9IMjZYSrPuihm1pTV4b9aJXcUuFcVFFfFx8vi6fBwEp2jPgPLu5cUw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/multi-factor-alphalens-example-1' property='og:url'>
+<meta content='multi-factor Alphalens example' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/multi-factor-alphalens-example-1' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='multi-factor Alphalens example' property='og:title'>
+<meta content='Here&#39;s a notebook I&#39;ve been working on.  Questions, comments, improvements welcome. I&#39;d like to add more factors, so please provide suggestions, if you are willing. References and notes: Just watched and recommend  Factor Modeling  on YouTube (while exercising, which I also recommend and so does your doctor and mother).  It&#39;s a decent, qualitative high-level introduction to factors in the context of Quantopian. Aside from Alphalens, Delaney posted a supplementary tool here: ...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/multi-factor-alphalens-example-1">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5baaa406093820003db0c980'>
+<div class='post-container' data-post-id='5baaa406093820003db0c980' id='5baaa406093820003db0c980'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>multi-factor Alphalens example</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1541500286000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=multi-factor Alphalens example&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fmulti-factor-alphalens-example-1%3Futm_source%3Dwebsite_share%26utm_campaign%3Dmulti-factor-alphalens-example-1%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fmulti-factor-alphalens-example-1%3Futm_source%3Dwebsite_share%26utm_campaign%3Dmulti-factor-alphalens-example-1%26utm_medium%3Dlinkedin&amp;title=multi-factor+Alphalens+example+%28Grant+Kiehne%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='API' data-tag-id='55c50e7d8d4710ec6e000001' href='/posts/tag/API/newest'>API</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Collaboration Request' data-tag-id='55c50e7d8d4710ec6e000016' href='/posts/tag/Collaboration-Request/newest'>Collaboration Request</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Alphalens' data-tag-id='5b61da7da902a275124a9372' href='/posts/tag/Alphalens/newest'>Alphalens</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/multi-factor-alphalens-example-1?utm_source=website_share&amp;utm_campaign=multi-factor-alphalens-example-1&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Grant Kiehne" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Here&#39;s a notebook I&#39;ve been working on.  Questions, comments, improvements welcome.</p>
+
+<p>I&#39;d like to add more factors, so please provide suggestions, if you are willing.</p>
+
+<p>References and notes:</p>
+
+<ol>
+<li>Just watched and recommend <a href="https://youtu.be/Yp7oJgY82cY" rel="nofollow">Factor Modeling</a> on YouTube (while exercising, which I also recommend and so does your doctor and mother).  It&#39;s a decent, qualitative high-level introduction to factors in the context of Quantopian.<br></li>
+<li>Aside from Alphalens, Delaney posted a supplementary tool here: <a href="https://www.quantopian.com/posts/checking-correlation-and-risk-exposure-of-alpha-factors" rel="nofollow">https://www.quantopian.com/posts/checking-correlation-and-risk-exposure-of-alpha-factors</a>.  I don&#39;t think it as been formerly released, as Alphalens is; nevertheless, some folks might find it useful.<br></li>
+<li>I started an exploration of the means to do alpha combination in <code>before_trading_start</code> (see <a href="https://www.quantopian.com/posts/alpha-factor-combination-in-pipeline-how-to-fancify-it" rel="nofollow">https://www.quantopian.com/posts/alpha-factor-combination-in-pipeline-how-to-fancify-it</a>).  Once I settle on N &gt;= 10 factors, I think this is my next task, so that I have an architecture for doing more sophisticated alpha combination.<br></li>
+<li>Discussion of fundamental factors: <a href="https://www.quantopian.com/posts/relevant-fundamental-factors" rel="nofollow">https://www.quantopian.com/posts/relevant-fundamental-factors</a>.<br></li>
+<li>Discussion of &quot;strategic intent&quot; requirement: <a href="https://www.quantopian.com/posts/update-to-requirements-to-get-funded-strategic-intent" rel="nofollow">https://www.quantopian.com/posts/update-to-requirements-to-get-funded-strategic-intent</a>.<br></li>
+<li>The 101 Aphas Project: <a href="https://www.quantopian.com/posts/the-101-alphas-project" rel="nofollow">https://www.quantopian.com/posts/the-101-alphas-project</a>.<br></li>
+<li>Discussion of the risk-free rate and its relevance to Q: <a href="https://www.quantopian.com/posts/risk-free-rate-on-quantopian" rel="nofollow">https://www.quantopian.com/posts/risk-free-rate-on-quantopian</a>.  It would seem to have bearing on the minimum return required for an &quot;all-weather&quot; algo.  Presumably a kind of forward-looking risk-free rate is implicit in evaluating algos for the Q fund.<br></li>
+<li>Q post on a fundamental factor and literature reference: <a href="https://www.quantopian.com/posts/capital-expenditure-volatility-capex-vol-template-fundamental-algo" rel="nofollow">https://www.quantopian.com/posts/capital-expenditure-volatility-capex-vol-template-fundamental-algo</a>.<br></li>
+<li><a href="https://www.quantopian.com/posts/free-cash-flow-to-enterprise-value-template-fundamental-algo" rel="nofollow">https://www.quantopian.com/posts/free-cash-flow-to-enterprise-value-template-fundamental-algo</a><br></li>
+<li><a href="https://www.quantopian.com/posts/debt-to-total-assets-template-fundamental-algo" rel="nofollow">https://www.quantopian.com/posts/debt-to-total-assets-template-fundamental-algo</a><br></li>
+<li><a href="https://www.quantopian.com/posts/quantopians-fundamental-factor-library" rel="nofollow">https://www.quantopian.com/posts/quantopians-fundamental-factor-library</a><br></li>
+<li>Peter Harrington blog, including some references: <a href="http://alphacompiler.com/blog/" rel="nofollow">http://alphacompiler.com/blog/</a><br></li>
+<li>Piotroski&#39;s F-Score algo example: <a href="https://www.quantopian.com/posts/piotroskis-f-score-algorithm" rel="nofollow">https://www.quantopian.com/posts/piotroskis-f-score-algorithm</a><br></li>
+<li>On-Balance Volume technical indicator: <a href="https://www.investopedia.com/terms/o/onbalancevolume.asp" rel="nofollow">https://www.investopedia.com/terms/o/onbalancevolume.asp</a><br></li>
+<li>Alphalens tutorial: <a href="https://www.quantopian.com/tutorials/alphalens" rel="nofollow">https://www.quantopian.com/tutorials/alphalens</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>58 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5baad5eabacda10040325152' id='5baad5eabacda10040325152'>
+<a href='#5baad5eabacda10040325152'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1537922538000' class='quanto-date posted-at response-posted-at' href='#5baad5eabacda10040325152'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>hey grant, a very well put together notebook. I&#39;ve been toying around with two separate algos using multiple factors (25+) trading between 500 or 1,000 L/S daily . However, the roadblock for me right now is being able to utilize alpha lens in assessing them and understanding the charts. If you&#39;d like to collaborate on either (or both) let&#39;s take a look.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bab443ff6cb2b4c46262a98' id='5bab443ff6cb2b4c46262a98'>
+<a href='#5bab443ff6cb2b4c46262a98'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1537950783000' class='quanto-date posted-at response-posted-at' href='#5bab443ff6cb2b4c46262a98'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Daniel -</p>
+
+<p>I had been posting to a couple related threads that Delaney had been managing:</p>
+
+<p><a href="https://www.quantopian.com/posts/alphalens-questions-thread" rel="nofollow">https://www.quantopian.com/posts/alphalens-questions-thread</a><br>
+<a href="https://www.quantopian.com/posts/checking-correlation-and-risk-exposure-of-alpha-factors" rel="nofollow">https://www.quantopian.com/posts/checking-correlation-and-risk-exposure-of-alpha-factors</a></p>
+
+<p>I had been participating in these threads (and others), but recently I was asked by Q support not to post to other threads not initiated by me for awhile, since presumably I have been violating their terms of use in some way not so clear to me.  So, I started this thread.</p>
+
+<p>I&#39;ve been holding off doing back testing (although it is very tempting), in the hope that I could get a more fundamental handle on things.  I&#39;m thinking there should be some definite rules-of-thumb go/no-go criteria that one could establish regarding individual factors and their combination.</p>
+
+<p>One thing I&#39;m wondering about is the mean IC relative to its standard deviation.  It would seem that a cut could be made at this level (e.g. the ratio of the mean IC to its standard deviation should be at least 1.0).  No matter how large the IC is, if its standard deviation is even larger, then it would seem to suggest that there will be a lot of volatility (or at least periods of decent returns, interspersed with periods of flat returns).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bab5239d221a20046fbc257' id='5bab5239d221a20046fbc257'>
+<a href='#5bab5239d221a20046fbc257'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a83f1a729805d5e28b7bcde'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1c0b71970e360b2b1d1944a861bca6bb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a83f1a729805d5e28b7bcde'>Nick Walczak</a>
+</div>
+<a UTCms='1537954361000' class='quanto-date posted-at response-posted-at' href='#5bab5239d221a20046fbc257'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Nice performance.</p>
+
+<p>Do you have any theories on why there is a big spike on the &quot;Misc&quot; market sector?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bab54c5bacda100493253f5' id='5bab54c5bacda100493253f5'>
+<a href='#5bab54c5bacda100493253f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1537955013000' class='quanto-date posted-at response-posted-at' href='#5bab54c5bacda100493253f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>No.  I noticed that.  You could post a question to <a href="https://www.quantopian.com/posts/alphalens-questions-thread" rel="nofollow">Delaney&#39;s thread</a> (I can&#39;t, at least until November 1).  I let Delaney know about this thread, so perhaps he&#39;ll pick up questions here, too.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bab596b14cc02529eed6ca0' id='5bab596b14cc02529eed6ca0'>
+<a href='#5bab596b14cc02529eed6ca0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1537956203000' class='quanto-date posted-at response-posted-at' href='#5bab596b14cc02529eed6ca0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>On <a href="https://www.quantopian.com/papers/risk" rel="nofollow">https://www.quantopian.com/papers/risk</a> there is no &quot;Misc&quot; market sector included in the risk model, so there would seem to be a disconnect between what (I think) is a standard Alphalens configuration, and the risk factors.  Hmm?  Seems like they should be 1:1.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bacf286b1dbdc003ef386c4' id='5bacf286b1dbdc003ef386c4'>
+<a href='#5bacf286b1dbdc003ef386c4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52670e6a2763c5cfb70002c7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/da33ec858011a8fad211c7e0ae68160c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52670e6a2763c5cfb70002c7'>Alan Coppola</a>
+</div>
+<a UTCms='1538060934000' class='quanto-date posted-at response-posted-at' href='#5bacf286b1dbdc003ef386c4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,<br>
+The MIsc asset is PHYS - physical gold...and it&#39;s not very active...281 rows out of ~78k rows  of results...go figure!<br>
+I don&#39;t even know where that comes from.<br>
+alan  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5badfc062b5091004d97ecd6' id='5badfc062b5091004d97ecd6'>
+<a href='#5badfc062b5091004d97ecd6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538128902000' class='quanto-date posted-at response-posted-at' href='#5badfc062b5091004d97ecd6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a trial backtest, with the factors from Alphalens.  Note that I am not using the risk model constraint in the optimize API, and slippage and trading costs are disabled.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bae4afaba54096e8b422fe5' id='5bae4afaba54096e8b422fe5'>
+<a href='#5bae4afaba54096e8b422fe5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1538149114000' class='quanto-date posted-at response-posted-at' href='#5bae4afaba54096e8b422fe5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>I noticed you used peg_ratio as one of your factors. I discussed an issue with that factor  <a href="https://www.quantopian.com/posts/important-news-for-our-community#5b9b827f4ca0a100424acb72" rel="nofollow">here</a>  Morningstar only started provided data on peg_ratio sometime in 2014 and you are backtesting starting on 2007.  While your backtest looks great frictionless and may confirm what your alphalens analysis is telling you, I worry that it may backfire going forward.  I haven&#39;t checked on the start/availability dates of growth_score and psychsignal/ stocktwits data but I suspect the same issue. </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baeb6873264f500441cfec3' id='5baeb6873264f500441cfec3'>
+<a href='#5baeb6873264f500441cfec3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538176647000' class='quanto-date posted-at response-posted-at' href='#5baeb6873264f500441cfec3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks James -</p>
+
+<p>I&#39;ll have to look into it.  If you have any other suggestions, just let me know.</p>
+
+<p>Regarding your post on <a href="https://www.quantopian.com/posts/tearsheet-feedback-thread" rel="nofollow">https://www.quantopian.com/posts/tearsheet-feedback-thread</a>, I&#39;m wondering it the 3% per year return is really enough.  Under normal circumstances, this would be largely consumed by the risk-free rate, and the algo would be silliness.  As soon as the risk-free rate goes up, then I would think your algo would be worthless, unless the return goes up (e.g. to 6%).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baec62475af290049ee9daa' id='5baec62475af290049ee9daa'>
+<a href='#5baec62475af290049ee9daa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1538180644000' class='quanto-date posted-at response-posted-at' href='#5baec62475af290049ee9daa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yes, Grant for the most part I agree with you that as the risk free rates go up, this low returns, low volatility strategy that will be levered up 3-8 times will fall apart. I have previously argued vigorously about the logic of this strategy and the non inclusion of the risk free rate in their computation of the Sharpe ratio. The strategy though is the trading style of Steve Cohen and Point72, the investor of the fund and so far, it has worked for them in a low interest and highly bullish market conditions.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baeed5a8792e60040ba5cfc' id='5baeed5a8792e60040ba5cfc'>
+<a href='#5baeed5a8792e60040ba5cfc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1538190682000' class='quanto-date posted-at response-posted-at' href='#5baeed5a8792e60040ba5cfc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In a portfolio of uncorrellated strategies, it may still have value.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baf35a257b71d0042f460a0' id='5baf35a257b71d0042f460a0'>
+<a href='#5baf35a257b71d0042f460a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538209186000' class='quanto-date posted-at response-posted-at' href='#5baf35a257b71d0042f460a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Alan - I&#39;m confused.  I wouldn&#39;t think that Sprott Physical Gold Trust (PHYS) would be included in the <code>QTradableStocksUS</code>?  Are you saying that it is showing up in my Alphalens analysis?</p>
+
+<p>@ James - Thanks for the tip on the <code>peg_ratio</code>.  I see now that if I try to run my Alphalens tear sheet or the algo on the peg_ratio factor only starting in 2007, there is a problem.  Looking at <a href="https://www.quantopian.com/help/fundamentals#valuation-ratios" rel="nofollow">https://www.quantopian.com/help/fundamentals#valuation-ratios</a>, there is no note stating that it starts later than other fundamentals, and so I agree that this is a potential pitfall.  There&#39;s probably some way to add a guard for this sort of thing in my code.  The other consideration is if I should always limit analysis to the &quot;youngest&quot; data set, or just let the factors fold in as they become available?</p>
+
+<p>Regarding your comments on the potential risk to the Q fund of factors unknowingly kicking in (and potentially out) without anyone knowing, my approach has been that I&#39;ll just let Q review my code, if it turns out that their interest is piqued by its &quot;exhaust.&quot;  My hope would be that they&#39;d catch problems like this (and the &quot;strategic intent&quot; requirement should be easier to meet, by referring to the code directly).</p>
+
+<p>Also, I&#39;m thinking that for a truly all-weather, long-term long-short strategy, there is some minimum return that gets one beyond the anomalously low risk-free rate regime of recent times.  Your posted algo tear sheet has something like SR ~ 1.0 (no risk-free rate included), and returns of ~ 3% per year.  If I had money burning a whole in my pocket, I&#39;m not sure I would fund you; I&#39;d shop around for an alternative at the same or better return at the same level of risk.  You might see if you can get an answer out of Jess, since there must be some minimum return needed.  Years ago, when they kicked off the fund concept, I recall a number like ~7% being thrown out, which sounds more realistic.</p>
+
+<p>@ Joakim - A portfolio of lots of uncorrelated strategies that each return ~0% will return ~0%.  Maybe Q is selecting algos partly based on diversification of the Q fund, but there needs to be some level of return (above the anticipated risk-free rate going forward, not backward).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baf3a3557b71d34bcf45ed0' id='5baf3a3557b71d34bcf45ed0'>
+<a href='#5baf3a3557b71d34bcf45ed0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538210357000' class='quanto-date posted-at response-posted-at' href='#5baf3a3557b71d34bcf45ed0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>If I add the risk model constraint to my backtest above, I get an error:</p>
+
+<p>Something went wrong. Sorry for the inconvenience. Try using the built-in debugger to analyze your code. If you would like help, send us an email.<br>
+ValueError: NaN or Inf values provided to FactorExposure for argument &#39;loadings&#39;.<br>
+Rows/Columns with NaNs:<br>
+  row=Equity(32620 [PFF]) col=&#39;momentum&#39;<br>
+  row=Equity(32620 [PFF]) col=&#39;short_term_reversal&#39;<br>
+  row=Equity(32620 [PFF]) col=&#39;size&#39;<br>
+  row=Equity(32620 [PFF]) col=&#39;value&#39;<br>
+  row=Equity(32620 [PFF]) col=&#39;volatility&#39;<br>
+Rows/Columns with Infs:<br>
+  None<br>
+There was a runtime error on line 163.</p>
+
+<p>This would appear to be a data integrity issue, since the back test starts fine, and runs for ~ 6 months and then crashes.  Is there a standard bad data guard I need to add to use the risk model constraint?</p>
+
+<p>I also sent a request in to Q support.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baf3d003c307c004f9b5e19' id='5baf3d003c307c004f9b5e19'>
+<a href='#5baf3d003c307c004f9b5e19'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1538211072000' class='quanto-date posted-at response-posted-at' href='#5baf3d003c307c004f9b5e19'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,</p>
+
+<p>Try adding dropna() in risk model constraint like this:  </p>
+
+<pre><code>context.risk_loading_pipeline.dropna(),
+
+</code></pre>
+
+<p>See if it will work  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5baf454d75af290049eea0e1' id='5baf454d75af290049eea0e1'>
+<a href='#5baf454d75af290049eea0e1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538213197000' class='quanto-date posted-at response-posted-at' href='#5baf454d75af290049eea0e1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thank James -</p>
+
+<p>This works:</p>
+
+<pre><code>risk_model_exposure = opt.experimental.RiskModelExposure(  
+        context.risk_loading_pipeline.dropna(),  
+        version=opt.Newest,  
+    )  
+</code></pre>
+
+<p>However, there is great irony in needing to hack risk management code with a <code>dropna()</code>.  Kinda like putting duct tape on a life jacket, hoping it holds.  It is still imported like this:</p>
+
+<pre><code>from quantopian.pipeline.experimental import risk_loading_pipeline  
+</code></pre>
+
+<p>So I guess we&#39;re still experimenting.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bafca8157b71d0045f464de' id='5bafca8157b71d0045f464de'>
+<a href='#5bafca8157b71d0045f464de'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1538247297000' class='quanto-date posted-at response-posted-at' href='#5bafca8157b71d0045f464de'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>hey grant, i&#39;ve witnessed the same issue with one of my factors for the same equity.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb018d9ef3d08004394e7ac' id='5bb018d9ef3d08004394e7ac'>
+<a href='#5bb018d9ef3d08004394e7ac'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52670e6a2763c5cfb70002c7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/da33ec858011a8fad211c7e0ae68160c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52670e6a2763c5cfb70002c7'>Alan Coppola</a>
+</div>
+<a UTCms='1538267353000' class='quanto-date posted-at response-posted-at' href='#5bb018d9ef3d08004394e7ac'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant-- Yes PHYS is showing up in your pipeline output of your research pipeline...somehow it&#39;s intermittently in QTU...I agree shouldn&#39;t be...</p>
+
+<p>I think your algo looks good!...amazing what you can do with seemingly simple stuff and fundamentals !</p>
+
+<p>I included some minor changes to your Backtest code to get it &quot;contest &quot; ready:</p>
+
+<p>-Only used last two years, as that is what contest sees.<br>
+-Commented out the slippage and commission...my understanding is that  Q then applies their defaults.<br>
+-Added a snippet from others to make sure that any positions not in current QTU get liquidated.<br>
+-Added risk constraints to meet contest criteria...probably too many.</p>
+
+<p>I played with removing factors from the combined factor list, yet nothing was better than you had.<br>
+One &quot;problem&quot; is the ranges of your component factors...the way you have it, they may  vary widely, so I tried a zscore on each pipeline factor, yet that didn&#39;t work, so I left it commented out.  I can only assume that you have adjusted the weights of the factors properly inside the factors, as anytime I change something, I get worse results.</p>
+
+<p>All for now...keep up the good work!<br>
+alan  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb09fcaef3d08003d94eaae' id='5bb09fcaef3d08003d94eaae'>
+<a href='#5bb09fcaef3d08003d94eaae'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538301899000' class='quanto-date posted-at response-posted-at' href='#5bb09fcaef3d08003d94eaae'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Alan -</p>
+
+<p>I&#39;m curious about the need for your &quot;QTU adjustment&quot; code.  I suppose it won&#39;t do any harm, but is it necessary when using the <code>MaximizeAlpha</code> constraint?  I was aware of an issue with the <code>TargetWeights</code> constraint (which presumably Q has on an internal list to eventually fix?), and a work-around was published, but was unaware that we need to patch the optimize API in this case?</p>
+
+<p>On a similar note, you explicitly set the risk model constraint limits in the code, but I thought that using <code>version=opt.Newest</code> would be in sync with the latest contest/fund limits?  Also, you use a minimum limit for the momentum of -0.2, but a maximum of 0.3 for momentum.  Intentional?</p>
+
+<p>Regarding PHYS in the QTU, I suppose I should add code to remove it?  If anyone knows how to do this in Pipeline, please let me know.  Also, I&#39;m curious why it is slipping through the cracks, based on the <a href="https://www.quantopian.com/help#built-in-filters" rel="nofollow">QTU specification</a>.  I&#39;ll have to sort out how to spit out its Morningstar attributes.</p>
+
+<p>My goal is to add three more factors, for a total of 10.  So if you have suggestions you are willing to share, please provide them.</p>
+
+<pre><code>    ####------ Start: QTU adjustment -----------------  
+    # Prevents low-leverage, due to non-execution of orders, which are cancelled at the end-of-day  
+    # Sell any positions in assets that are no longer in QTU list.  
+    for security in context.portfolio.positions:  
+        if data.can_trade(security):  # Work around inability to close de-listed stocks for QTU.  
+            if security not in context.stocks:  
+                to_close = [security]   # securities to be changed  
+                log.info(&quot;ClosingOut:{}&quot;.format(to_close))  
+                ids = order_optimal_portfolio(  
+                    objective   = opt.TargetWeights(  
+                    pd.Series(0, index = to_close)  # the 0 means close them  
+                ),  
+                constraints = [  
+                    opt.Frozen(  
+                        set(context.portfolio.positions.keys()) - set(to_close)  
+                    )  
+                ]  
+                )  
+    ####------ End: QTU adjustment -----------------  
+</code></pre>
+
+<pre><code>    constraints.append(  
+       opt.experimental.RiskModelExposure(  
+           context.risk_loading_pipeline,  
+           version=opt.Newest,  
+          min_momentum=-0.2,  
+          max_momentum=0.3,  
+          min_size=-0.3,  
+          max_size=0.3,  
+          min_value=-0.3,  
+          max_value=0.3,  
+          min_short_term_reversal=-0.2,  
+          max_short_term_reversal=0.2,  
+          min_volatility=-0.2,  
+          max_volatility=0.2,  
+       ))  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb5eadbf906a900431bb77c' id='5bb5eadbf906a900431bb77c'>
+<a href='#5bb5eadbf906a900431bb77c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538648795000' class='quanto-date posted-at response-posted-at' href='#5bb5eadbf906a900431bb77c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Added a few factors (up to 9 now!).  Just kinda dinking around, but looks like this could be entered into the contest with a few clicks.  Go for it!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb629a9f906a97b6e1bb2bf' id='5bb629a9f906a97b6e1bb2bf'>
+<a href='#5bb629a9f906a97b6e1bb2bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1538664873000' class='quanto-date posted-at response-posted-at' href='#5bb629a9f906a97b6e1bb2bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant, not sure if you&#39;re still looking for 1 more factor but here are three which may fit into what you have already. </p>
+
+<p>class Revenue(CustomFactor):<br>
+    inputs = [Fundamentals.total_revenue]<br>
+    window_length = 252<br>
+    def compute(self, today, assets, out, revenue):<br>
+        out[:] = revenue[-1] &gt; revenue[0]  </p>
+
+<p>class GrossMarginChange(CustomFactor):<br>
+    window_length = 126<br>
+    inputs = [Fundamentals.gross_margin]<br>
+    def compute(self, today, assets, out, gross_margin):<br>
+        out[:] = (gross_margin[-1] &gt; gross_margin[0]).astype(int)</p>
+
+<p>class Gross_Income_Margin(CustomFactor):<br>
+        #Gross Income Margin:<br>
+        #Gross Profit divided by Net Sales<br>
+        #Notes:<br>
+        #High value suggests that the company is generating large profits<br>
+    inputs = [Fundamentals.gross_profit, Fundamentals.total_revenue]<br>
+    window_length = 1<br>
+    def compute(self, today, assets, out, gp, sales):<br>
+        out[:] = (gp[-1] * 4) / (sales[-1] * 4)  </p>
+
+<p>class MaxGap(CustomFactor): # the biggest absolute overnight gap in the previous 90 sessions<br>
+    inputs = [USEquityPricing.close] ; window_length = 90<br>
+    def compute(self, today, assets, out, close):<br>
+        abs_log_rets = np.abs(np.diff(np.log(close),axis=0))<br>
+        max_gap = np.max(abs_log_rets, axis=0)<br>
+        out[:] = max_gap  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb688f70657480048a9b3d0' id='5bb688f70657480048a9b3d0'>
+<a href='#5bb688f70657480048a9b3d0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538689271000' class='quanto-date posted-at response-posted-at' href='#5bb688f70657480048a9b3d0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Daniel -</p>
+
+<p>I&#39;ll give them a try when I get the chance.   Trying to get &gt;= 10 factors that give some sort of decent SR starting in 2010 to present.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb6c9f548ab38004a2c3c2f' id='5bb6c9f548ab38004a2c3c2f'>
+<a href='#5bb6c9f548ab38004a2c3c2f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1538705909000' class='quanto-date posted-at response-posted-at' href='#5bb6c9f548ab38004a2c3c2f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Daniel,</p>
+
+<p>For your first two CustomFactors (Revenue and GrossMarginChange) do they return a &#39;factor&#39; or a &#39;filter&#39;? As you&#39;re using a comparison operator, wouldn&#39;t they return a boolean (True or False), so a filter rather than a factor? Though for the second one, it looks like you&#39;re turning the boolean into an integer (0 or 1 I guess)?</p>
+
+<p>I&#39;ve attached a notebook with a simple &#39;Rate of Change&#39; CustomFactor, which you can pass through other financial statement / fundamental values at whichever window_length you specify. I&#39;m not expert at this though so can&#39;t really vouch for if this is the right way of doing this... Perhaps one should use the <a href="https://www.quantopian.com/help#ide-fundamentals" rel="nofollow">&#39;as_of_date&#39;</a> when looking back? </p>
+
+<p>@Anyone,</p>
+
+<p>In order to &#39;test&#39; and check the output of a CustomFactor, do I need to reference it from Pipeline, run Pipeline on one day, then print (or head/tail) the output of the pipeline? Or is there an easier/quicker way of viewing the output of a CustomFactor, or a Fundamental data field for that matter?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb7285d48ab3800412c3f0c' id='5bb7285d48ab3800412c3f0c'>
+<a href='#5bb7285d48ab3800412c3f0c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538730077000' class='quanto-date posted-at response-posted-at' href='#5bb7285d48ab3800412c3f0c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a quickie update, with most of Daniel&#39;s factors added (<code>Gross_Income_Margin</code> is commented out, since it causes a crash...still investigating).  The algo now fails the beta-to-SPY constraint, so some work is needed there.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb78c1748ab38003e2c4157' id='5bb78c1748ab38003e2c4157'>
+<a href='#5bb78c1748ab38003e2c4157'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538755607000' class='quanto-date posted-at response-posted-at' href='#5bb78c1748ab38003e2c4157'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s just the &#39;Gross_Income_margin&#39; - sometimes it results in an alpha vector of zeros.  Not sure what&#39;s going on.  If anyone knows how to interrogate these things in a research notebook, I&#39;d be interested.  Or maybe there are certain guards required for fundamentals that I&#39;m not familiar with?</p>
+
+<p>The factor (including the global preprocessing function) is:</p>
+
+<pre><code>class Gross_Income_Margin(CustomFactor):  
+            #Gross Income Margin:  
+            #Gross Profit divided by Net Sales  
+            #Notes:  
+            #High value suggests that the company is generating large profits  
+            inputs = [Fundamentals.gross_profit, Fundamentals.total_revenue]  
+            window_length = 1  
+            def compute(self, today, assets, out, gp, sales):  
+                out[:] = preprocess(gp[-1]/sales[-1])  
+</code></pre>
+
+<pre><code>def preprocess(a):  
+    a = np.nan_to_num(a - np.nanmean(a))  
+    a = winsorize(a, limits=[WIN_LIMIT,WIN_LIMIT])  
+    return preprocessing.scale(a)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb89c291e960a003c1fa868' id='5bb89c291e960a003c1fa868'>
+<a href='#5bb89c291e960a003c1fa868'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538825257000' class='quanto-date posted-at response-posted-at' href='#5bb89c291e960a003c1fa868'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>From <a href="https://www.quantopian.com/help/fundamentals" rel="nofollow">https://www.quantopian.com/help/fundamentals</a> :</p>
+
+<blockquote>
+<p><strong>gross_profit</strong>  </p>
+
+<p>Total revenue less cost of revenue. The number is as reported by the company on the income statement; however, the number will be calculated if it is not reported. This field is null if the cost of revenue is not given. Gross Profit = Total Revenue – Cost of Revenue.  </p>
+
+<p><strong>total_revenue</strong>  </p>
+
+<p>All revenues, sales and income that the company deems as a total sum of all of their income as reported in the company’s income statement. Bank: Total Revenue = Net Interest Income + Non-Interest Income.  </p>
+
+<p><strong>cost_of_revenue</strong>  </p>
+
+<p>The aggregate cost of goods produced and sold and services rendered during the reporting period. It excludes all operating expenses such as depreciation, depletion, amortization, and SG&amp;A. For the must have cost industry, if the number is not reported by the company, it will be calculated based on accounting equation. Cost of Revenue = Revenue – Operating Expenses – Operating Profit.  </p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb8ca99777013004745949c' id='5bb8ca99777013004745949c'>
+<a href='#5bb8ca99777013004745949c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1538837145000' class='quanto-date posted-at response-posted-at' href='#5bb8ca99777013004745949c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Joakim, yes you are correct the first two custom factors would be filters since its returning True or False / 0 or 1.  </p>
+
+<p>Like Grant, I am trying to narrow down to a list of fundamentals (10-20). However, it&#39;s been a real struggle testing individual factors and then combining them all without understanding how the Alpha Lens works, especially how to interpret the results. </p>
+
+<p>Once I have a sold foundation of fundamental custom factors I would like to try and see if I can implement Technical Indicators as custom factors as  well.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb8ec01d79b95004b6ae212' id='5bb8ec01d79b95004b6ae212'>
+<a href='#5bb8ec01d79b95004b6ae212'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538845697000' class='quanto-date posted-at response-posted-at' href='#5bb8ec01d79b95004b6ae212'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Not that I don&#39;t think as they are used, they are Pipeline Filters:</p>
+
+<pre><code>class Revenue(CustomFactor):  
+inputs = [Fundamentals.total_revenue]  
+window_length = 252  
+def compute(self, today, assets, out, revenue):  
+out[:] = (revenue[-1] &gt; revenue[0]).astype(int)
+
+class GrossMarginChange(CustomFactor):  
+window_length = 126  
+inputs = [Fundamentals.gross_margin]  
+def compute(self, today, assets, out, gross_margin):  
+out[:] = (gross_margin[-1] &gt; gross_margin[0]).astype(int)  
+</code></pre>
+
+<p>We just have a comparison of vector values with a Python logical operator.  I don&#39;t think we are creating a Pipeline Filter, as described on the <a href="https://www.quantopian.com/help#quantopian_pipeline_filters_Filter" rel="nofollow">help page</a> (although depending on how things are set up, it might be that any vector of 0s and 1s (or boolean True/False) would be recognized as a Filter, under the duck typing paradigm).</p>
+
+<p>See <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.greater.html#numpy.greater" rel="nofollow">https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.greater.html#numpy.greater</a> .</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb9e666f44feb0044424b04' id='5bb9e666f44feb0044424b04'>
+<a href='#5bb9e666f44feb0044424b04'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538909798000' class='quanto-date posted-at response-posted-at' href='#5bb9e666f44feb0044424b04'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This formulation of the <code>Gross_Income_Margin</code> works:</p>
+
+<pre><code>        class Gross_Income_Margin(CustomFactor):  
+            #Gross Income Margin:  
+            #Gross Profit divided by Net Sales  
+            #Notes:  
+            #High value suggests that the company is generating large profits  
+            inputs = [Fundamentals.cost_of_revenue, Fundamentals.total_revenue]  
+            window_length = 1  
+            def compute(self, today, assets, out, cost_of_revenue, sales):  
+                gross_income_margin = sales[-1]/sales[-1] - cost_of_revenue[-1]/sales[-1]  
+                out[:] = preprocess(gross_income_margin)  
+</code></pre>
+
+<p>This way, one avoids infinite values when sales are zero, but the cost of revenue is not.  Zero sales yields a NaN, which gets converted to a demeaned value of zero in the preprocess function.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bb9ec0ff44feb0041424b42' id='5bb9ec0ff44feb0041424b42'>
+<a href='#5bb9ec0ff44feb0041424b42'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538911247000' class='quanto-date posted-at response-posted-at' href='#5bb9ec0ff44feb0041424b42'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an updated backtest, with all of the candidate factors working (as best I can tell).  It fails the beta-to-SPY constraint, but otherwise it seems to be headed in the right direction.  Kinda surprising that with such low position concentration and the dollar neutral optimize API constraint that beta-to-SPY would be a problem.</p>
+
+<p>I&#39;m reluctant to apply the beta constraint in the optimize API, since prior experience suggested that it was not particularly effective, and might just be creating churn.</p>
+
+<p>If anyone has insight on the beta-to-SPY issue, please share...</p>
+
+<p>Note that I bumped up the turnover to 0.15, just for yucks.  It is one of the &quot;free parameters&quot; and can be explored more systematically at some point.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bba5850c8482a004d3c4d44' id='5bba5850c8482a004d3c4d44'>
+<a href='#5bba5850c8482a004d3c4d44'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538938960000' class='quanto-date posted-at response-posted-at' href='#5bba5850c8482a004d3c4d44'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an updated Alphalens sheet, with all of the factors.  If anyone knows how to read the tea leaves, please share your feedback.</p>
+
+<p>Note that factors can be turned on/off by simply commenting out undesirable ones in this Python dict structure:</p>
+
+<pre><code>return {  
+            &#39;MessageSum&#39;:              MessageSum,  
+            &#39;FCF&#39;:                     fcf,  
+            &#39;Direction&#39;:               Direction,  
+            &#39;mean_rev&#39;:                mean_rev,  
+            &#39;volatility&#39;:              volatility,  
+            &#39;GrowthScore&#39;:             growthscore,  
+            &#39;PegRatio&#39;:                peg_ratio,  
+            &#39;MoneyFlow&#39;:               MoneyflowVolume5d,  
+            &#39;Trendline&#39;:               Trendline,  
+            &#39;Revenue&#39;:                 Revenue,  
+            &#39;GrossMarginChange&#39;:       GrossMarginChange,  
+            &#39;Gross_Income_Margin&#39;:     Gross_Income_Margin,  
+            &#39;MaxGap&#39;:                  MaxGap,  
+        }  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bba5c8d038092003e9318ad' id='5bba5c8d038092003e9318ad'>
+<a href='#5bba5c8d038092003e9318ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1538940045000' class='quanto-date posted-at response-posted-at' href='#5bba5c8d038092003e9318ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Grant  Thanks for taking a look at Gross_Income_Margin and providing an update.  I&#39;d love to hear the feedback of the above notebook as well from those who are able to interpret all of the charts.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bba70eed396f30040757ebe' id='5bba70eed396f30040757ebe'>
+<a href='#5bba70eed396f30040757ebe'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1538945262000' class='quanto-date posted-at response-posted-at' href='#5bba70eed396f30040757ebe'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a version that passes all of the constraints...should be good-to-go for the contest/fund, with a SR ~ 1.0 (risk-free rate not included in computation).</p>
+
+<p>Fix was to add the beta constraint to the optimize API.</p>
+
+<p>Still some work to do, but at least it is now conforming (although I&#39;m not sure what the &quot;strategic intent&quot; statement would be).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bbc1ec10b9cf105d2d720ae' id='5bbc1ec10b9cf105d2d720ae'>
+<a href='#5bbc1ec10b9cf105d2d720ae'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1539055297000' class='quanto-date posted-at response-posted-at' href='#5bbc1ec10b9cf105d2d720ae'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Strategic Intent: Buy low, sell high; sell high, buy low. </p>
+
+<p>;)</p>
+
+<p>Kidding aside, (and I&#39;m guessing here) in a multi-factor strategy such as this one, I think one would need to have a rationale for each individual factor, as there may not be an overarching one for the &#39;combined factor&#39;. </p>
+
+<p>For example, the rationale for the mean_rev factor might be that &#39;the market over-reacts in the short term, so the factor buys stocks that are over-sold, and sells stocks that are over-bought.&#39; This might be similar to &#39;value&#39; factors (though &#39;value&#39; may be over-sold/bought at longer timeframes), but quite different from &#39;trend&#39; &#39;momentum&#39; and &#39;growth&#39; factors (i.e. &#39;what&#39;s trending/moving/growing will continue to trend/move/grow&#39;).</p>
+
+<p>I think it would be great to hear from Q if they would be ok with strategies that don&#39;t necessarily have a unified &#39;strategic intent&#39; (other than the one at the top of this post ;)), but instead for each individual factor there&#39;s a clear &#39;strategic intent?&#39; Or would they prefer strategies with individual factors that all contribute to the same overall strategy&#39;s economic rationale? This way they may be able to better combine different strategies/factors in their portfolio of strategies/factors?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bbc6d4715eec10046e8381b' id='5bbc6d4715eec10046e8381b'>
+<a href='#5bbc6d4715eec10046e8381b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539075399000' class='quanto-date posted-at response-posted-at' href='#5bbc6d4715eec10046e8381b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;d heard from Q that although they have admitted some &quot;idiosyncratic&quot; strategies into the fund, the strong preference is for broad, diversified approaches, that scale to large numbers of stocks (e.g. ~100-1000).  While there may be a handful of golden idiosyncratic market inefficiencies, I&#39;m thinking that the path is more like what is described in the <a href="https://ssrn.com/abstract=2701346" rel="nofollow">101 Formulaic Alphas paper</a> where combination of &quot;faint and ephemeral&quot; alphas is discussed.  The concept of a &quot;strategic intent&quot; changes as one scales up to a large number of alpha factors; certainly, if one has ~100 of them, describing the strategic intent of each in detail may not shed much light on the essence of the strategy.  One has to talk about how the factors are combined, and why the combination technique might work.</p>
+
+<p>Presently, I just use the sum-of-z-scores alpha combination technique, but I&#39;m hoping to set up to do more sophisticated stuff (although not necessarily computationally difficult).</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc1f3e3331bdc0042de8fd7' id='5bc1f3e3331bdc0042de8fd7'>
+<a href='#5bc1f3e3331bdc0042de8fd7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539437539000' class='quanto-date posted-at response-posted-at' href='#5bc1f3e3331bdc0042de8fd7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s another update, if anybody wants to play around with it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc22c1375ed050049442c58' id='5bc22c1375ed050049442c58'>
+<a href='#5bc22c1375ed050049442c58'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1539451923000' class='quanto-date posted-at response-posted-at' href='#5bc22c1375ed050049442c58'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>When are you entering the contest again? Will it be with a version of this strategy?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc231a536aa1d004fe41197' id='5bc231a536aa1d004fe41197'>
+<a href='#5bc231a536aa1d004fe41197'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539453349000' class='quanto-date posted-at response-posted-at' href='#5bc231a536aa1d004fe41197'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Joakim -</p>
+
+<p>I’m in no rush, although it is tempting to enter the contest just for yucks.  I’m still adding factors and probably need to drop some.  I’d also like to try some other alpha combination approaches once the set of factors is decent.</p>
+
+<p>One thing I’ll need to fix is any persistent exposure to the Q risk factors since this is a no-no (although I don’t quite understand if it matters if the return for a persistent risk factor is relatively low).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc2330675ed05125044263d' id='5bc2330675ed05125044263d'>
+<a href='#5bc2330675ed05125044263d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1539453702000' class='quanto-date posted-at response-posted-at' href='#5bc2330675ed05125044263d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Sounds like a solid approach!</p>
+
+<p>Which Q Risk factors does it have consistent over or under exposure to?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc24f5df6b31976bc58eb50' id='5bc24f5df6b31976bc58eb50'>
+<a href='#5bc24f5df6b31976bc58eb50'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539460957000' class='quanto-date posted-at response-posted-at' href='#5bc24f5df6b31976bc58eb50'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Haven&#39;t really looked into it in detail.  I&#39;ve attached so you can have a look for yourself, if you want.  I&#39;m not sure if I should be worried about it, or not.  Seems like a qualitative nice-to-have from Jess that hasn&#39;t been incorporated into go/no-go requirements yet.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc278d4159acc0e7c4d769c' id='5bc278d4159acc0e7c4d769c'>
+<a href='#5bc278d4159acc0e7c4d769c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1539471572000' class='quanto-date posted-at response-posted-at' href='#5bc278d4159acc0e7c4d769c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Grant!</p>
+
+<p>I&#39;m not trying to speak for them, but I don&#39;t think it&#39;s a go/no-go per se, as long as they are within the bounds. I think it&#39;s a good tool for us to look at and be aware of, so we don&#39;t (inadvertently perhaps) develop factors that are just proxies for already known stuff that can be had cheaper. That said, factors that have very little consistent exposure to any of the risk factors are probably more valuable to them.</p>
+
+<p>For this one, it looks like you&#39;re somewhat long momentum and st_reversal (somewhat consistently) and short size and value perhaps? Not really sure what to do about the overly long exposures, maybe adjust or remove factors that contribute most to those exposures? For the short value and size exposure, maybe add a large-cap value factor, e.g. MarketCap() * some_yield_factor (should be predictive on its own first though), to see if that brings up the short size and value exposures a bit (and perhaps neutralizes the long risk exposures as well)? However, I personally try not to use MarketCap() in my factors, hoping that any consistent size exposure will take care of itself if I add other non-correlated and predictive factors, so maybe I&#39;m contradicting myself there a bit. :)</p>
+
+<p>Just some free and unsolicited advice, so please take it at face value... ;)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc3541d1932580046d1fe45' id='5bc3541d1932580046d1fe45'>
+<a href='#5bc3541d1932580046d1fe45'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539527709000' class='quanto-date posted-at response-posted-at' href='#5bc3541d1932580046d1fe45'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Joakim -</p>
+
+<p>From a developer standpoint, at some level, one needs go/no-go requirements.  We have these written down on <a href="https://www.quantopian.com/get-funded#the-constraints" rel="nofollow">https://www.quantopian.com/get-funded#the-constraints</a>, including the qualitative &quot;strategic intent&quot; requirement (which, in my opinion, needs work as a requirement).  Recently, we&#39;ve heard that algos really need to be trading &gt;= 100 stocks (but then I think I heard the guidance more is actually preferred), and that persistent exposure to Q risk factors is bad.  There has also been some qualitative guidance on turnover, basically stating that it is better to meet the turnover requirement by trading a little bit each day, versus in bursts.  And I heard that a return of ~3% per year is o.k...what about 2%...or maybe return doesn&#39;t matter?  Etc.</p>
+
+<p>In the end, as a developer, it should be straightforward to perform a set of go/no-go verification tests, to answer the question &quot;Am I done?&quot; and have some reasonable probability of success in the contest and getting funded (I&#39;m thinking a 50/50 shot at &quot;winning&quot; something).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc379f087ae880049b5f8a2' id='5bc379f087ae880049b5f8a2'>
+<a href='#5bc379f087ae880049b5f8a2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1539537392000' class='quanto-date posted-at response-posted-at' href='#5bc379f087ae880049b5f8a2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I guess we see things a bit differently. The way I see it they already have provided these “hard” go/no-go requirements with the 10 contest requirements. Within these requirements however, they also have “softer” preferences as well. </p>
+
+<p>Take the beta to spy requirement for example. All else being equal, which strategy would you pick first if you had to choose between one with a beta of +0.2 or one with a beta close to 0 (again, all else being equal)? The strategy with a beta  of +0.2 might be ok too eventually, if they can match it with a similar strategy with a beta of -0.2 to “hedge out” the market risk. However, with a 0 beta strategy it’s a lot easier for them to allocate capital sooner as there’s no market risk exposure to hedge out. </p>
+
+<p>Regarding <em>absolute returns,</em> I don’t think they matter too much, as long as they are consistently positive. What does matter though is the <em>risk-adjusted-returns.</em> Also, as it’s still very early days for them, as they are just getting started building up their portfolio, I’d say they have very little appetite for risk at the moment, so “low risk” may be more important to them than “high return.” In other words (again, all else being equal) they might allocate capital sooner to strategies with Returns/Volatility of 4/2 rather than to strategies with 10/5 annualised Return/Volatility, even though the ratio value (2) itself is the same. </p>
+
+<p>In their portfolio of strategies, I believe their aim is to maintain as close to 0 exposure to beta to spy, netdollar, individual sectors, styles, and volatility. Any returns they get is then effectively “risk free” and can be leveraged to the moon. It’s therefore a lot easier for them to pick strategies that individually already have very little exposure to these risk factors. It doesn’t necessarily disqualify strategies that take on specific exposure per se, it just means that it may take a bit longer until they want to allocate capital to them. </p>
+
+<p>Just my 2 bitcoins worth... ;)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bc516972b95fc003ee00b96' id='5bc516972b95fc003ee00b96'>
+<a href='#5bc516972b95fc003ee00b96'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1539643031000' class='quanto-date posted-at response-posted-at' href='#5bc516972b95fc003ee00b96'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an updated Alphalens snapshot with all of the factors I&#39;ve accumulated so far.  I figure it might be worthwhile for someone to noodle on and to play with.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcb15f5beb1c70044d832bc' id='5bcb15f5beb1c70044d832bc'>
+<a href='#5bcb15f5beb1c70044d832bc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540036085000' class='quanto-date posted-at response-posted-at' href='#5bcb15f5beb1c70044d832bc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an update.  Added a few more factors.  Cumulative common returns are quite high.  Not sure why.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcb3df3beb1c70047d83371' id='5bcb3df3beb1c70047d83371'>
+<a href='#5bcb3df3beb1c70047d83371'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b83845c16cd3f004ba47d2c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5efba7ec89e08eda2940979dcb970c4e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b83845c16cd3f004ba47d2c'>Wandering Bot</a>
+</div>
+<a UTCms='1540046323000' class='quanto-date posted-at response-posted-at' href='#5bcb3df3beb1c70047d83371'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Must have taken a lot of effort and time to create this algorithm. Thanks for sharing.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcb567727a5232bc18497fa' id='5bcb567727a5232bc18497fa'>
+<a href='#5bcb567727a5232bc18497fa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540052599000' class='quanto-date posted-at response-posted-at' href='#5bcb567727a5232bc18497fa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Satya -</p>
+
+<p>It&#39;s mostly just hacked together.  I&#39;d encourage you to have a look at the individual factors and pick which ones would be best, and add your own.  I&#39;m keeping a running list of notes and links above, which you might also find useful.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcc02472187cf0049b7b461' id='5bcc02472187cf0049b7b461'>
+<a href='#5bcc02472187cf0049b7b461'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b83845c16cd3f004ba47d2c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5efba7ec89e08eda2940979dcb970c4e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b83845c16cd3f004ba47d2c'>Wandering Bot</a>
+</div>
+<a UTCms='1540096583000' class='quanto-date posted-at response-posted-at' href='#5bcc02472187cf0049b7b461'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Grant. Would it be possible to dynamically select the best performing alpha factors and filter them on a rolling basis?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcc7021d00a98004bd43144' id='5bcc7021d00a98004bd43144'>
+<a href='#5bcc7021d00a98004bd43144'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540124705000' class='quanto-date posted-at response-posted-at' href='#5bcc7021d00a98004bd43144'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Satya -</p>
+
+<p>Yes, at some point, I&#39;d like to figure out how to weight the factors dynamically, for comparison to the present baseline equal weighting.  I started to consider this here:</p>
+
+<p><a href="https://www.quantopian.com/posts/alpha-factor-combination-in-pipeline-how-to-fancify-it" rel="nofollow">https://www.quantopian.com/posts/alpha-factor-combination-in-pipeline-how-to-fancify-it</a></p>
+
+<p>I&#39;m still getting up the learning curve on how best to approach the problem.</p>
+
+<p>For starters, I may just concoct a static, unequal weight scheme.  For fundamental factors, one practically needs the an entire Q-supported backtest anyway for decent statistics, so I might as well compute the weights by hand and hard-code them into the algo.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bcd0789e98c2949e20cb39e' id='5bcd0789e98c2949e20cb39e'>
+<a href='#5bcd0789e98c2949e20cb39e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b83845c16cd3f004ba47d2c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5efba7ec89e08eda2940979dcb970c4e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b83845c16cd3f004ba47d2c'>Wandering Bot</a>
+</div>
+<a UTCms='1540163465000' class='quanto-date posted-at response-posted-at' href='#5bcd0789e98c2949e20cb39e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I know some people compute IC (information coefficient) online (can be done using pipeline) to weight the factors. Just trying to figure out how to do it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be49d1d81933a0049f3aaac' id='5be49d1d81933a0049f3aaac'>
+<a href='#5be49d1d81933a0049f3aaac'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1541709085000' class='quanto-date posted-at response-posted-at' href='#5be49d1d81933a0049f3aaac'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Would it be possible to combined the Factors used in your algo and mask the below &quot;Make_Filters&quot; coding  over them? Basically I would want to use them to filter on the factors which can produce the alpha. </p>
+
+<pre><code>def make_filters():  
+    class STA(CustomFactor):  
+        inputs = [Fundamentals.operating_cash_flow,  
+                  Fundamentals.net_income_continuous_operations,  
+                  Fundamentals.total_assets]  
+        window_length = 1  
+        def compute(self, today, assets, out, ocf, ni, ta):  
+            ta = np.where(np.isnan(ta), 0, ta)  
+            ocf = np.where(np.isnan(ocf), 0, ocf)  
+            ni = np.where(np.isnan(ni), 0, ni)  
+            out[:] = preprocess(abs(ni[-1] - ocf[-1])/ ta[-1])  
+    class SNOA(CustomFactor):  
+        inputs = [Fundamentals.total_assets,  
+                 Fundamentals.cash_and_cash_equivalents,  
+                 Fundamentals.current_debt, # same as short-term debt?  
+                 Fundamentals.minority_interest_balance_sheet,  
+                 Fundamentals.long_term_debt, # check same?  
+                 Fundamentals.preferred_stock] # check same?  
+        window_length = 1  
+        def compute(self, today, assets, out, ta, cace, cd, mi, ltd, ps):  
+            ta = np.where(np.isnan(ta), 0, ta)  
+            cace = np.where(np.isnan(cace), 0, cace)  
+            cd = np.where(np.isnan(cd), 0, cd)  
+            mi = np.where(np.isnan(mi), 0, mi)  
+            ltd = np.where(np.isnan(ltd), 0, ltd)  
+            ps = np.where(np.isnan(ps), 0, ps)  
+            results = ((ta[-1]-cace[-1])-(ta[-1]-cace[-1]-ltd[-1]-cd[-1]-ps[-1]-mi[-1]))/ta[-1]  
+            out[:] = preprocess(np.where(np.isnan(results),0,results))  
+    class ROA(CustomFactor):  
+        inputs = [Fundamentals.roa]  
+        window_length = 1  
+        def compute(self, today, assets, out, roa):  
+            out[:] = preprocess(np.where(roa[-1]&gt;0,1,0))  
+    class FCFTA(CustomFactor):  
+        inputs = [Fundamentals.free_cash_flow,  
+                 Fundamentals.total_assets]  
+        window_length = 1  
+        def compute(self, today, assets, out, fcf, ta):  
+            out[:] = preprocess(np.where(fcf[-1]/ta[-1]&gt;0,1,0))  
+    class ROA_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.roa]  
+        window_length = 252  
+        def compute(self, today, assets, out, roa):  
+            out[:] = np.where(roa[-1]&gt;roa[-252],1,0)  
+    class FCFTA_ROA(CustomFactor):  
+        inputs = [Fundamentals.free_cash_flow,  
+                  Fundamentals.total_assets,  
+                  Fundamentals.roa]  
+        window_length = 1  
+        def compute(self, today, assets, out, fcf, ta, roa):  
+            out[:] = preprocess(np.where(fcf[-1]/ta[-1]&gt;roa[-1],1,0))  
+    class FCFTA_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.free_cash_flow,  
+                  Fundamentals.total_assets]  
+        window_length = 252  
+        def compute(self, today, assets, out, fcf, ta):  
+            out[:] = preprocess(np.where(fcf[-1]/ta[-1]&gt;fcf[-252]/ta[-252],1,0))  
+    class LTD_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.total_assets,  
+                  Fundamentals.long_term_debt]  
+        window_length = 252  
+        def compute(self, today, assets, out, ta, ltd):  
+            out[:] = preprocess(np.where(ltd[-1]/ta[-1]&lt;ltd[-252]/ta[-252],1,0))  
+    class CR_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.current_ratio]  
+        window_length = 252  
+        def compute(self, today, assets, out, cr):  
+            out[:] = preprocess(np.where(cr[-1]&gt;cr[-252],1,0))  
+    class GM_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.gross_margin]  
+        window_length = 252  
+        def compute(self, today, assets, out, gm):  
+            out[:] = preprocess(np.where(gm[-1]&gt;gm[-252],1,0))  
+    class ATR_GROWTH(CustomFactor):  
+        inputs = [Fundamentals.assets_turnover]  
+        window_length = 252  
+        def compute(self, today, assets, out, atr):  
+            out[:] = preprocess(np.where(atr[-1]&gt;atr[-252],1,0))  
+    class NEQISS(CustomFactor):  
+        inputs = [Fundamentals.shares_outstanding]  
+        window_length = 252  
+        def compute(self, today, assets, out, so):  
+            out[:] = preprocess(np.where(so[-1]-so[-252]&lt;1,1,0))  
+    class GM_GROWTH_2YR(CustomFactor):  
+        inputs = [Fundamentals.gross_margin]  
+        window_length = 504  
+        def compute(self, today, assets, out, gm):  
+            out[:] = preprocess(gmean([gm[-1]+1, gm[-252]+1,gm[-504]+1])-1)  
+    class GM_STABILITY_2YR(CustomFactor):  
+        inputs = [Fundamentals.gross_margin]  
+        window_length = 504  
+        def compute(self, today, assets, out, gm):  
+            out[:] = preprocess(np.std([gm[-1]-gm[-252],gm[-252]-gm[-504]],axis=0))  
+    class ROA_GROWTH_2YR(CustomFactor):  
+        inputs = [Fundamentals.roa]  
+        window_length = 504  
+        def compute(self, today, assets, out, roa):  
+            out[:] = preprocess(gmean([roa[-1]+1, roa[-252]+1,roa[-504]+1])-1)  
+    class ROIC_GROWTH_2YR(CustomFactor):  
+        inputs = [Fundamentals.roic]  
+        window_length = 504  
+        def compute(self, today, assets, out, roic):  
+            out[:] = preprocess(gmean([roic[-1]+1, roic[-252]+1,roic[-504]+1])-1)  
+    class GM_GROWTH_8YR(CustomFactor):  
+        inputs = [Fundamentals.gross_margin]  
+        window_length = 8  
+        def compute(self, today, assets, out, gm):  
+            out[:] = preprocess(gmean([gm[-1]+1, gm[-2]+1, gm[-3]+1, gm[-4]+1, gm[-5]+1, gm[-6]+1, gm[-7]+1, gm[-8]+1])-1)  
+    class GM_STABILITY_8YR(CustomFactor):  
+        inputs = [Fundamentals.gross_margin]  
+        window_length = 9  
+        def compute(self, today, assets, out, gm):  
+            out[:] = preprocess(gm[-8])  
+    class ROA_GROWTH_8YR(CustomFactor):  
+        inputs = [Fundamentals.roa]  
+        window_length = 9  
+        def compute(self, today, assets, out, roa):  
+            out[:] = preprocess(gmean([roa[-1]/100+1, roa[-2]/100+1,roa[-3]/100+1,roa[-4]/100+1,roa[-5]/100+1,roa[-6]/100+1,roa[-7]/100+1,roa[-8]/100+1])-1)  
+    class ROIC_GROWTH_8YR(CustomFactor):  
+        inputs = [Fundamentals.roic]  
+        window_length = 9  
+        def compute(self, today, assets, out, roic):  
+            out[:] = preprocess(gmean([roic[-1]/100+1, roic[-2]/100+1,roic[-3]/100+1,roic[-4]/100+1,roic[-5]/100+1,roic[-6]/100+1,roic[-7]/100+1,roic[-8]/100+1])-1)  
+    return {  
+        &#39;STA&#39;:                     STA,  
+        &#39;SNOA&#39;:                    SNOA,  
+        &#39;ROA&#39;:                     ROA,  
+        &#39;FCFTA&#39;:                   FCFTA,  
+        &#39;ROA_GROWTH&#39;:              ROA_GROWTH,  
+        &#39;FCFTA_ROA&#39;:               FCFTA_ROA,  
+        &#39;FCFTA_GROWTH&#39;:            FCFTA_GROWTH,  
+        &#39;LTD_GROWTH&#39;:              LTD_GROWTH,  
+        &#39;CR_GROWTH&#39;:               CR_GROWTH,  
+        &#39;GM_GROWTH&#39;:               GM_GROWTH,  
+        &#39;ATR_GROWTH&#39;:              ATR_GROWTH,  
+        &#39;NEQISS&#39;:                  NEQISS,  
+        &#39;GM_GROWTH_2YR&#39;:           GM_GROWTH_2YR,  
+        &#39;GM_STABILITY_2YR&#39;:        GM_STABILITY_2YR,  
+        &#39;ROA_GROWTH_2YR&#39;:          ROA_GROWTH_2YR,  
+        &#39;ROIC_GROWTH_2YR&#39;:         ROIC_GROWTH_2YR,  
+        &#39;GM_STABILITY_8YR&#39;:        GM_STABILITY_8YR,  
+        &#39;ROA_GROWTH_8YR&#39;:          ROA_GROWTH_8YR,  
+        &#39;ROIC_GROWTH_8YR&#39;:         ROIC_GROWTH_8YR,  
+    }  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be4c95b43d38c00440661ab' id='5be4c95b43d38c00440661ab'>
+<a href='#5be4c95b43d38c00440661ab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541720411000' class='quanto-date posted-at response-posted-at' href='#5be4c95b43d38c00440661ab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Daniel -</p>
+
+<p>I don&#39;t understand what you want to do.  What do you mean &quot;Basically I would want to use them to filter on the factors which can produce the alpha&quot;?</p>
+
+<p>To filter, you&#39;d need to combine the factors you have above (e.g. sum-of-z-scores, or just sum assuming you&#39;re z-scoring in <code>preprocess</code>).  Then, you would need to convert to binary.  One way to do this would be to take the absolute value of the combined alpha, and then set a threshold.  Anything above the threshold is set to True, and anything below, False.</p>
+
+<p>I&#39;m not sure the above prescription makes sense.</p>
+
+<p>I&#39;d consider a couple approaches:</p>
+
+<ol>
+<li>Simply add the new factors to the existing ones (using the same `preprocess&#39; normalization).<br></li>
+<li>Combine the new factors to form alpha_new, and combine the old factors to form alpha_old.  Then sum them like this:</li>
+</ol>
+
+<p>c_new*alpha_new + c_old*alpha_old</p>
+
+<p>c_new &gt; 0, c_old &gt; 0, c_new + c_old = 1</p>
+
+<p>You could try various values for c_new (c_old = 1-c_new) to see if there is an optimum.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be4e710fba49a0048414c1e' id='5be4e710fba49a0048414c1e'>
+<a href='#5be4e710fba49a0048414c1e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541728016000' class='quanto-date posted-at response-posted-at' href='#5be4e710fba49a0048414c1e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well, I tried adding everything together, but I get an error &#39;ValueError: too many inputs`.  Anyone know what the problem is?  Is there a limit on the number of custom factors that can be run?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be4fb6c43d38c00490662fb' id='5be4fb6c43d38c00490662fb'>
+<a href='#5be4fb6c43d38c00490662fb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1541733228000' class='quanto-date posted-at response-posted-at' href='#5be4fb6c43d38c00490662fb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant, I received the same message when I tried to add around 30 or so.  Your 2nd approach was more what I had in mind. At first I thought the below might work .</p>
+
+<pre><code>    universe = QTradableStocksUS()  
+    factors = make_factors()  
+    filters = make_filters()  
+    combined_filters = None  
+    for name, f in filters.iteritems():  
+        if combined_filters == None:  
+            combined_filters = f(mask=universe)  
+        else:  
+            combined_filters += f(mask=universe)  
+    combined_alpha = None  
+    for name, f in factors.iteritems():  
+        if combined_alpha == None:  
+            combined_alpha = f(mask=combined_filters)  
+        else:  
+            combined_alpha += f(mask=combined_filters)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be532c9fba49a003f414e14' id='5be532c9fba49a003f414e14'>
+<a href='#5be532c9fba49a003f414e14'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56c4fb45989a47d1f5000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e509f31af551cfd30e319b03d4c92740?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56c4fb45989a47d1f5000159'>lifan guo</a>
+</div>
+<a UTCms='1541747401000' class='quanto-date posted-at response-posted-at' href='#5be532c9fba49a003f414e14'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>just curious,  how to run this algorithm monthly since some alphas are based on daily calculation.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be6b2db21ccbd0042672582' id='5be6b2db21ccbd0042672582'>
+<a href='#5be6b2db21ccbd0042672582'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541845723000' class='quanto-date posted-at response-posted-at' href='#5be6b2db21ccbd0042672582'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Daniel -</p>
+
+<p>There does seem to be a limit on the number of custom factors supported by Pipeline.  However, I just realized that one can have multiple Pipelines.  I haven&#39;t tried it yet, but maybe this is a work-around?  I think this would mean doing the final combination outside of Pipeline.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be6d1e76fd7660041072fbf' id='5be6d1e76fd7660041072fbf'>
+<a href='#5be6d1e76fd7660041072fbf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541853671000' class='quanto-date posted-at response-posted-at' href='#5be6d1e76fd7660041072fbf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I broke up the 40 factors into two separate pipelines to get the attached algo to run.  Presumably the same trick works in a research notebook.</p>
+
+<p>This would seem to be a silly limitation, but maybe there is a reason for it?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be83bd0f6a295004bae654a' id='5be83bd0f6a295004bae654a'>
+<a href='#5be83bd0f6a295004bae654a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/592daa96cc2622000d5c839c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8b2c58f39b90de3d2c245edf936a90f5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/592daa96cc2622000d5c839c'>Daniel Cascio (Blue Robin)</a>
+</div>
+<a UTCms='1541946320000' class='quanto-date posted-at response-posted-at' href='#5be83bd0f6a295004bae654a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant, thanks for taking a stab at it and bringing up the idea to isolate pipelines for each set. I&#39;m surprised at the cut off number of factors one can use in a single pipeline.    Just two quick questions, does the 21 below represent the 1st set of custom factors and the last 21 factors? Also what does the &quot;rng&quot; mean?</p>
+
+<p>factors = make_factors((0,21))<br>
+factors = make_factors((21,None))</p>
+
+<p>As always I appreciate hearing/reading your work.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be849c7988eed0041b8a72a' id='5be849c7988eed0041b8a72a'>
+<a href='#5be849c7988eed0041b8a72a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541949895000' class='quanto-date posted-at response-posted-at' href='#5be849c7988eed0041b8a72a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;m calling make_factors with the rng tuple so that sub-sets of factors can be returned, rather than the entire set (via return factors[rng[0]:rng[1]]</p>
+
+<p>If I did everything correctly, the code should follow the normal slicing rules for Python lists:</p>
+
+<p><a href="https://www.pythoncentral.io/how-to-slice-listsarrays-and-tuples-in-python/" rel="nofollow">https://www.pythoncentral.io/how-to-slice-listsarrays-and-tuples-in-python/</a></p>
+
+<p>So, factors = make_factors((0,21)) should return up through the element with index 20 (indexing starts at zero, so 21 factors are returned).  Then, factors = make_factors((21,None)) returns the remaining factors, starting with the element with index 21.  The None indicates to go to the end of the list.</p>
+
+<p>There&#39;s probably a more elegant way of doing this; I just provided a first-cut.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/multi-factor-alphalens-example-1'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/multi-factor-alphalens-example-1'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#54323131303635373f142521353a203b243d353a7a373b39">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

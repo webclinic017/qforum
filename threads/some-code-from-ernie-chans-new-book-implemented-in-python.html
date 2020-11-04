@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Some code from Ernie Chan&#39;s new book implemented in Python
+</title>
+<meta content='If you have a copy of Ernie Chan&#39;s new book you might find a bit tricky that all of his code is written in Matlab. I like Matlab but it&#39;s proprietary and some of the tool boxes are actually quite expensive. Octave, is the (even slower) alternative but it does not have all the wonderful stats tools that Ernie uses in the code in his book. In order to do the exercises I started to write out the Python versions of his code. So far I&#39;ve done the Hurst exponent, the variance ratio test, the...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="HH1O2Q7twnfLzXF8JbQDq1kbeU11FckNz4Wzq+1gIMJgGziUrBsQlHLQKE1qW6vfYZVaJA/Z3BZNimjBRyVCeQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python' property='og:url'>
+<meta content='Some code from Ernie Chan&#39;s new book implemented in Python' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Some code from Ernie Chan&#39;s new book implemented in Python' property='og:title'>
+<meta content='If you have a copy of Ernie Chan&#39;s new book you might find a bit tricky that all of his code is written in Matlab. I like Matlab but it&#39;s proprietary and some of the tool boxes are actually quite expensive. Octave, is the (even slower) alternative but it does not have all the wonderful stats tools that Ernie uses in the code in his book. In order to do the exercises I started to write out the Python versions of his code. So far I&#39;ve done the Hurst exponent, the variance ratio test, the...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/some-code-from-ernie-chans-new-book-implemented-in-python">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='520a101a794f852c17000074'>
+<div class='post-container' data-post-id='520a101a794f852c17000074' id='520a101a794f852c17000074'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Some code from Ernie Chan&#39;s new book implemented in Python</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1376391194000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Some code from Ernie Chan&#39;s new book implemented in Python&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsome-code-from-ernie-chans-new-book-implemented-in-python%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsome-code-from-ernie-chans-new-book-implemented-in-python%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsome-code-from-ernie-chans-new-book-implemented-in-python%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsome-code-from-ernie-chans-new-book-implemented-in-python%26utm_medium%3Dlinkedin&amp;title=Some+code+from+Ernie+Chan%27s+new+book+implemented+in+Python+%28Tom+Starke%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Finance Theory' data-tag-id='55c50e7d8d4710ec6e000002' href='/posts/tag/Finance-Theory/newest'>Finance Theory</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Papers' data-tag-id='55c50e7d8d4710ec6e000007' href='/posts/tag/Papers/newest'>Papers</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Show Q' data-tag-id='55c50e7d8d4710ec6e000010' href='/posts/tag/Show-Q/newest'>Show Q</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/some-code-from-ernie-chans-new-book-implemented-in-python?utm_source=website_share&amp;utm_campaign=some-code-from-ernie-chans-new-book-implemented-in-python&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tom Starke" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>If you have a copy of <a href="http://www.amazon.com/gp/product/1118460146/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1118460146&amp;linkCode=as2&amp;tag=quantitativet-20">Ernie Chan&#39;s new book</a> you might find a bit tricky that all of his code is written in Matlab. I like Matlab but it&#39;s proprietary and some of the tool boxes are actually quite expensive. Octave, is the (even slower) alternative but it does not have all the wonderful stats tools that Ernie uses in the code in his book. </p>
+
+<p>In order to do the exercises I started to write out the Python versions of his code. So far I&#39;ve done the <a href="https://www.leinenbock.com/calculation-of-the-hurst-exponent-to-test-for-trend-and-mean-reversion/">Hurst exponent</a>, the <a href="https://www.leinenbock.com/variance-ratio-test/">variance ratio test</a>, the <a href="https://www.leinenbock.com/chan-ewc-ewa-adf-example-in-python/">EWC-EWA example with ADF-test</a>, a <a href="https://www.leinenbock.com/johansen-test-for-cointegration/">neat implementation of the Johansen test</a> (although the backbones of the Johansen code are from another source), <a href="https://www.leinenbock.com/half-life-of-mean-reverting-portfolio/">half life of mean reversion</a>, <a href="https://www.leinenbock.com/mean-reversion-strategy-from-chans-book-in-python/">the EWA-EWC example with Johansen</a>, and the <a href="https://www.leinenbock.com/finding-correlations-between-returns-of-different-time-frames/">self-correlation calculation</a> for his inter-day momentum strategies.</p>
+
+<p>There might still be a bug here and there and the code is not always pretty but I felt that it was worth sharing. If you find some bugs or have any comments or requests please let me know.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>36 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='520a2ff735b0e07a8c00012e' id='520a2ff735b0e07a8c00012e'>
+<a href='#520a2ff735b0e07a8c00012e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1376399351000' class='quanto-date posted-at response-posted-at' href='#520a2ff735b0e07a8c00012e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tom,</p>
+
+<p>I&#39;m interested in the <a href="http://www.bearcave.com/misl/misl_tech/wavelets/hurst/index.html#HurstAndFinance">Hurst Exponent</a> but Firefox gives a warning about the site you are lnking to as follows:</p>
+
+<pre><code>www.leinenbock.com uses an invalid security certificate.  
+The certificate is not trusted because no issuer chain was provided.  
+(Error code: sec_error_unknown_issuer)
+</code></pre>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520a3eb335b0e023d1000144' id='520a3eb335b0e023d1000144'>
+<a href='#520a3eb335b0e023d1000144'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1376403124000' class='quanto-date posted-at response-posted-at' href='#520a3eb335b0e023d1000144'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Peter,</p>
+
+<p>This is the code Tom Starke had posted for the Hurst Exponent in case you are having trouble accessing the site</p>
+
+<blockquote>
+<p>In a nutshell, this nifty little number H tells us if a time series is a random walk (H ~ 0.5), trending (H &gt; 0.5) or mean reverting (H &lt; 0.5).<br>
+I have found a good code example for this in Octave as shown below. Because of the finite sample size we also need to know the<br>
+statistical significance of our calculation. For this we use the vratio test which can be found here.</p>
+</blockquote>
+
+<pre><code>import matplotlib.pyplot as py  
+from numpy import *  
+def hurst(p):  
+    tau = []; lagvec = []  
+    #  Step through the different lags  
+    for lag in range(2,20):  
+        #  produce price difference with lag  
+        pp = subtract(p[lag:],p[:-lag])  
+        #  Write the different lags into a vector  
+        lagvec.append(lag)  
+        #  Calculate the variance of the differnce vector  
+        tau.append(sqrt(std(pp)))  
+    #  linear fit to double-log graph (gives power)  
+    m = polyfit(log10(lagvec),log10(tau),1)  
+    # calculate hurst  
+    hurst = m[0]*2  
+    # plot lag vs variance  
+    #py.plot(lagvec,tau,&#39;o&#39;); show()  
+    return hurst  
+if __name__==&quot;__main__&quot;:  
+    #  Different types of time series for testing  
+    #p = log10(cumsum(random.randn(50000)+1)+1000) # trending, hurst ~ 1  
+    #p = log10((random.randn(50000))+1000)   # mean reverting, hurst ~ 0  
+    p = log10(cumsum(random.randn(50000))+1000) # random walk, hurst ~ 0.5  
+    print hurst(p)  
+</code></pre>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520aa47f8cd7242200000295' id='520aa47f8cd7242200000295'>
+<a href='#520aa47f8cd7242200000295'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1376429184000' class='quanto-date posted-at response-posted-at' href='#520aa47f8cd7242200000295'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>nice!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520b3fc915327c0fca0000b2' id='520b3fc915327c0fca0000b2'>
+<a href='#520b3fc915327c0fca0000b2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1376468938000' class='quanto-date posted-at response-posted-at' href='#520b3fc915327c0fca0000b2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Peter,</p>
+
+<p>I&#39;m not sure why it&#39;s giving you problems. Must have something to do with the SSL certificate. I try to sort it out. </p>
+
+<p>Tom  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520b7e5dc3c84e1ea50001bd' id='520b7e5dc3c84e1ea50001bd'>
+<a href='#520b7e5dc3c84e1ea50001bd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1376484958000' class='quanto-date posted-at response-posted-at' href='#520b7e5dc3c84e1ea50001bd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks, Tom. I ignored Firefox and went to the site anyway!</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520ba17b1144ea555e0001e0' id='520ba17b1144ea555e0001e0'>
+<a href='#520ba17b1144ea555e0001e0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1376493949000' class='quanto-date posted-at response-posted-at' href='#520ba17b1144ea555e0001e0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is pretty nifty Tom!  Do you think you&#39;ll be writing these up in algos here on Quantopian?  Since you&#39;re sharing the code, I&#39;m assuming you don&#39;t mind if we do it, too? </p>
+
+<p>Ernie&#39;s stuff is always interesting, and getting it running in Quantopian has been on my mind for a while.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520c899119df6408a300008f' id='520c899119df6408a300008f'>
+<a href='#520c899119df6408a300008f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1376553363000' class='quanto-date posted-at response-posted-at' href='#520c899119df6408a300008f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Peter: Great that you could sort it out! I&#39;m pretty sure Chrome doesn&#39;t give this error.<br>
+I just read your earlier post on the Hurst exponent. I use it but I recently found a paper that somehow weakens the Hurst a bit (I added a link on my website.)<br>
+Personally, I wouldn&#39;t just use Hurst as a mean reversion indicator and much less so as indicator for trends. I recently set up a neural network with several other indicators that is much more reliable. What it can do is to filter out the clear cases of mean reversion and momentum, which is much harder if you just try linear regression. </p>
+
+<p>@Dan: Personally, I don&#39;t use Quantopian much because I work a lot with Options. I have played a bit with zipline though, it&#39;s really nice. I have recommended Quantopian as a great way to get started in algo trading at my <a href="https://www.leinenbock.com/ohm-algorithmic-trading-presentation-slides/">recent talk and workshop at OHM2013</a>, which was attended by several hundred people. You will probably have noticed a significant spike in sign-ups at July 31. I also ran a brief demo there of a simple backtest. With all the people in the workshop it slowed the website right down (sorry), so I told everyone to stop and just watch the screen :-)<br>
+I don&#39;t mind you sharing the code (wouldn&#39;t have published it otherwise). I like Ernie&#39;s stuff as well but like most people he doesn&#39;t publish anything that hasn&#39;t been out in the public domain before, which is perfectly adequate. Like the first, his second book is great and contains a lot of good ideas explained in a very understandable way. </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520d0446efb94e06fa000256' id='520d0446efb94e06fa000256'>
+<a href='#520d0446efb94e06fa000256'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1376584775000' class='quanto-date posted-at response-posted-at' href='#520d0446efb94e06fa000256'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tom, that explains the mystery.  We definitely did note the burst of people who all showed up and cloned the same algorithm in a 5-minute span.  I was baffled as to the root cause.  Great to know what it was.</p>
+
+<p>FYI, we have an auto-scaling server farm.  When load goes up, servers are automatically spun and up and put into the pool.  Unfortunately, your presentation brought dozens of people in under 5 minutes, and the farm doesn&#39;t spin up that fast!  If they had come in over 15 minutes instead of 5 minutes we would have responded better.  If by chance you give the presentation again, feel free to let us know so we can have some servers warm for you ;)</p>
+
+<p>On the presentation itself: that&#39;s a great one.  That&#39;s great content.  I&#39;m going to forward that around.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520d338fbd493d07de000095' id='520d338fbd493d07de000095'>
+<a href='#520d338fbd493d07de000095'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1376596880000' class='quanto-date posted-at response-posted-at' href='#520d338fbd493d07de000095'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Mystery! :-) So sorry. The story was that I wanted to just present it on the beamer anyway but then the projector did not work and I said to everyone to do it themselves. I was a bit busy with the projector until I realized shortly after that this will probably exceed your capacity. So I told everyone to stop. Next time I will let you know, promise.<br>
+I was going to let you know before but I had a bit of trouble as my computer go hacked, like everyone elses :-)<br>
+Glad you like the presentation. It&#39;s really basic but it was for a non-trading crowd. Having said that, a lot of people there are super-quick in taking things up. It was great and a bit of advertising for you is always a bonus.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='520d344096c2bf4a5e000291' id='520d344096c2bf4a5e000291'>
+<a href='#520d344096c2bf4a5e000291'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1376597057000' class='quanto-date posted-at response-posted-at' href='#520d344096c2bf4a5e000291'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>It was the type of mystery we love to have.  Feel free to create more of them ;)  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='52374b75c59eaeaa790001a0' id='52374b75c59eaeaa790001a0'>
+<a href='#52374b75c59eaeaa790001a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1379355511000' class='quanto-date posted-at response-posted-at' href='#52374b75c59eaeaa790001a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tom,</p>
+
+<p>I&#39;ve implemented your version of the Hurst Exponent to work with Quantopian.<br>
+It&#39;s pretty neat, except I was a bit confused on what values to set for lag; and batch_transform, but for now here it is!</p>
+
+<p>-Seong  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5238d9f5630afdd27a00000f' id='5238d9f5630afdd27a00000f'>
+<a href='#5238d9f5630afdd27a00000f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1379457527000' class='quanto-date posted-at response-posted-at' href='#5238d9f5630afdd27a00000f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The Matlab version of Hurst sets some arbitrary lag value, which I have no idea how it was determined. I guess they just had to fix some number. I played around with it for a while and I&#39;m not sure what a good set of values is either. I think it&#39;s really not straightforward and it has to be used with great care.<br>
+I mentioned it in the <a href="https://www.quantopian.com/posts/hurst-exponent">other post</a> but for completeness I just wanted to point to a <a href="https://www.quantopian.com/posts/hurst-exponent">neural network based domain identifier</a> which I&#39;ve build recently. This seems to do a much better job distinguishing between different types of time series. But have a look yourself. I would be interested in some feedback in how to improve this. </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='53793932eb488e508100006a' id='53793932eb488e508100006a'>
+<a href='#53793932eb488e508100006a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51db4774625e1c63f1000028'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5725efd86682a5c5c01a5d2ddf5a3b09?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51db4774625e1c63f1000028'>Chee Soon Lee</a>
+</div>
+<a UTCms='1400453427000' class='quanto-date posted-at response-posted-at' href='#53793932eb488e508100006a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom, everyone,<br>
+I have been playing around with your cadf function:</p>
+
+<p>def cadf(y, x):<br>
+    result = stat.OLS(y, x).fit()<br>
+    return ts.adfuller(result.resid)</p>
+
+<p>I have two curious observations:</p>
+
+<hr>
+
+<p>1) if y=x, the results do not show they are very cointegrated:</p>
+
+<p>start = dt.datetime(2000, 1, 1)</p>
+
+<p>cadf(web.DataReader(&#39;USO&#39;, &#39;yahoo&#39;, start).Close.tolist(), web.DataReader(&#39;USO&#39;, &#39;yahoo&#39;, start).Close.tolist())<br>
+Out[43]:<br>
+(-1.7968325797070679,
+ 0.38203535993053783,<br>
+ 26,<br>
+ 2013,<br>
+ {&#39;1%&#39;: -3.4336026867364144,<br>
+  &#39;10%&#39;: -2.5675349256978177,<br>
+  &#39;5%&#39;: -2.8629768669694458},<br>
+ -130203.8094987915)</p>
+
+<p>2) Supposedly highly correlated lists are also not very cointegrated:</p>
+
+<p>start = dt.datetime(2012, 1, 1)</p>
+
+<p>cadf(web.DataReader(&#39;IWM&#39;, &#39;yahoo&#39;, start).Close.tolist(), web.DataReader(&#39;VTWO&#39;, &#39;yahoo&#39;, start).Close.tolist())<br>
+Out[48]:<br>
+(-2.4546114609901784,
+ 0.1269119048357274,<br>
+ 5,<br>
+ 590,<br>
+ {&#39;1%&#39;: -3.4414821678603946,<br>
+  &#39;10%&#39;: -2.5693855271473716,<br>
+  &#39;5%&#39;: -2.8664511716874657},<br>
+ -507.45202121209627)</p>
+
+<hr>
+
+<p>Is my understanding of cointegration and cadf totally wrong?</p>
+
+<p>Thank you.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='53f4e6787288385a52000018' id='53f4e6787288385a52000018'>
+<a href='#53f4e6787288385a52000018'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53f34b4e83868c453b000223'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b66b984c4d42e93a6d1ef7ea489202d3?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53f34b4e83868c453b000223'>Victor Daniel Casas Hernandez</a>
+</div>
+<a UTCms='1408558715000' class='quanto-date posted-at response-posted-at' href='#53f4e6787288385a52000018'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Guys, Sorry for asking but I think the code might be wrong as it doesn&#39;t calculates the variance of the lags, and it takes the square root of the std, what is statistically meaningless.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='53f5be659ac51cf508000305' id='53f5be659ac51cf508000305'>
+<a href='#53f5be659ac51cf508000305'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1408613993000' class='quanto-date posted-at response-posted-at' href='#53f5be659ac51cf508000305'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Victor, there were indeed some problems with that code and this has been corrected now including tests. Please have a look at:<br>
+<a href="http://drtomstarke.com/index.php/calculation-of-the-hurst-exponent-to-test-for-trend-and-mean-reversion/">http://drtomstarke.com/index.php/calculation-of-the-hurst-exponent-to-test-for-trend-and-mean-reversion/</a><br>
+Thanks for pointing it out.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='53fcb556230387d32c000379' id='53fcb556230387d32c000379'>
+<a href='#53fcb556230387d32c000379'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5387a014dcb5871711000027'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/819f62924598ed1243122cf073a7d385?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5387a014dcb5871711000027'>Brian Hayden</a>
+</div>
+<a UTCms='1409070428000' class='quanto-date posted-at response-posted-at' href='#53fcb556230387d32c000379'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom,</p>
+
+<p>I am trying to get to your links and I am getting a database error for all of them.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54005e6d7ae01fbafb000296' id='54005e6d7ae01fbafb000296'>
+<a href='#54005e6d7ae01fbafb000296'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1409310319000' class='quanto-date posted-at response-posted-at' href='#54005e6d7ae01fbafb000296'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Sorry Brian, I had so many requests to my site in such a short time that my server collapsed. I host it on EC2 and the Micro-instances are not laid out for all that traffic. Never expected that this stuff would get that much interest, haha. Anyway, it should be back up now. Thanks for letting me know.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='540686d8c9a1a24a3200003e' id='540686d8c9a1a24a3200003e'>
+<a href='#540686d8c9a1a24a3200003e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/536bd2292f19335f9700007c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/dabd6649ea7b7c18416244c60852f63c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/536bd2292f19335f9700007c'>Ceres Browne</a>
+</div>
+<a UTCms='1409713881000' class='quanto-date posted-at response-posted-at' href='#540686d8c9a1a24a3200003e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Just want to say, great site Tom, excellent resource, your work is greatly appreciated.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='546cd3be5cb4f62a1c00041e' id='546cd3be5cb4f62a1c00041e'>
+<a href='#546cd3be5cb4f62a1c00041e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/546ccfabf8dadee0970003dc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1cddd1e9bb4610cc0db65b55f5fdc199?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/546ccfabf8dadee0970003dc'>Alan Wang</a>
+</div>
+<a UTCms='1416418240000' class='quanto-date posted-at response-posted-at' href='#546cd3be5cb4f62a1c00041e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom, I am playing around with your code from your blog where 3 tests were presented. Those tests works fine and make sense to me. However, when I try to apply it against USDCAD price between 20070722 and 20120328 as Ernie did in his book p45. I got 0.9886. Totally different from 0.49 from his book. If I use the code posted by Seong Lee earlier in this thread. It gives me 0.4642. Do I miss something?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='546d11f8be902e54c4000519' id='546d11f8be902e54c4000519'>
+<a href='#546d11f8be902e54c4000519'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1416434170000' class='quanto-date posted-at response-posted-at' href='#546d11f8be902e54c4000519'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Alan,</p>
+
+<p>I think a lot of it may have to do with both the input prices that we use and the implementation system (Python vs. what Ernie uses). Tom may have also implemented Ernie&#39;s code a little differently with his own variations (just a guess, not 100% sure) so that&#39;s where the changes might be off as well. </p>
+
+<p>Thoughts @Tom?</p>
+
+<p>Seong  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='546e9eb7fbaa5b2ec000005b' id='546e9eb7fbaa5b2ec000005b'>
+<a href='#546e9eb7fbaa5b2ec000005b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1416535737000' class='quanto-date posted-at response-posted-at' href='#546e9eb7fbaa5b2ec000005b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Alan, </p>
+
+<p>I&#39;m a bit busy right now to explore that in depth but just one quick comment: the code was adapted from Chu Chen&#39;s work in Matlab Central and he provides a whole number of different ways of calculating the Hurst exponent. The problem with the Hurst and autocorrelation in general is that you need to set a limit on the variability of the seasonality. In plain English, you have to set a limit for the differencing of [t_i - t_{i-n}]. In the code that I posted this is done with the line: &quot;mlarge = floor(N/5.0)&quot;. Notice that 5.0 is arbitrary and could be replaced with anything. This is not really a problem for infinite data sets but in finite datasets the choice of this number may be cruicial. In that sense it would be nice to calibrate that against other Hurst implementations (which I haven&#39;t done). With all these things you have to be a bit careful using out-of-the-box implementations, they may not always be appropriate for your datasets.<br>
+On another note, be aware that Ernie&#39;s Hurst of 0.49 is way too close to 0.5 (considering the limited number of data points) to make clear assumptions on the autocorrelative properties of the data. It&#39;s not incorrect but I wouldn&#39;t bet my life savings on it (but don&#39;t forget to thank Ernie for bringing the Hurst to our attention).<br>
+I hope that makes sense and I will have a further look into that when I find some more time. Let me know if you have any more questions. </p>
+
+<p>Tom  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='547299ec418c60157d021e4d' id='547299ec418c60157d021e4d'>
+<a href='#547299ec418c60157d021e4d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/546ccfabf8dadee0970003dc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1cddd1e9bb4610cc0db65b55f5fdc199?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/546ccfabf8dadee0970003dc'>Alan Wang</a>
+</div>
+<a UTCms='1416796655000' class='quanto-date posted-at response-posted-at' href='#547299ec418c60157d021e4d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong/Tom,<br>
+Thanks for the quick response. It seems I have to debug the code to see what is the difference.<br>
+I don&#39;t think it is the problem of price. I was able to use the price from Yahoo Finance in my python code to to reproduce many example in Ernie&#39;s book, particularly chapter 3. Sometime, I have to debug my python and his MatLab code side by side to resolve the difference. One catch is, most price history he used in the book actually starts from 20060426 rather than what he stated in the book. Mainly because some algorithms require a look back window.<br>
+I may debug this when I have time. But since Hurst Exp is a very weak indicator, I would suggest we don&#39;t spend too much time on it.<br>
+Alan,  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54729ae67f7ed48972006449' id='54729ae67f7ed48972006449'>
+<a href='#54729ae67f7ed48972006449'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/546ccfabf8dadee0970003dc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1cddd1e9bb4610cc0db65b55f5fdc199?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/546ccfabf8dadee0970003dc'>Alan Wang</a>
+</div>
+<a UTCms='1416796904000' class='quanto-date posted-at response-posted-at' href='#54729ae67f7ed48972006449'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>BTW, Tom, I forgot to say thank you very much for your python code. That helps a lot!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5473ae29d4c31d5fa80028e1' id='5473ae29d4c31d5fa80028e1'>
+<a href='#5473ae29d4c31d5fa80028e1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1416867374000' class='quanto-date posted-at response-posted-at' href='#5473ae29d4c31d5fa80028e1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Alan. I agree that Hurst is not a particularly strong indicator and probably performs better in cardiology. As I said, I believe that the number of periods that is taken into account matters significantly. If you have strong auto-regression for t-n but your calculation only takes into account periods from t-1 to t-k with k &lt; n, then Hurst would probably not give a strong signal. From what I can see, some of the Matlab implementations only take a relatively small range of periods into account. That might be worth exploring.</p>
+
+<p>Tom  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54785ff6856a21bdf300009a' id='54785ff6856a21bdf300009a'>
+<a href='#54785ff6856a21bdf300009a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5472d9a27f7ed4e881007299'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b07bb536386753235d29b8cfe264f893?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5472d9a27f7ed4e881007299'>Shel Kong</a>
+</div>
+<a UTCms='1417175032000' class='quanto-date posted-at response-posted-at' href='#54785ff6856a21bdf300009a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi,</p>
+
+<p>I&#39;m working on it too, however, I failed to reach the same result of example2.1(adf test) and example2.4(half-life).<br>
+Rates of USDCAD from July 22 2007 to March 28 2012 are downloaded from Quandl.com,<br>
+and statsmodels is used for adf test and OLS fitting.</p>
+
+<pre><code>import Quandl as qd  
+import statsmodels.api as sm  
+import statsmodels.tsa.stattools as ts
+
+startdate = &#39;2007-07-22&#39;  
+enddate = &#39;2012-03-28&#39;  
+qcode = &#39;CURRFX/USDCAD&#39;
+
+df = qd.get(qcode, trim_start=startdate, trim_end=enddate)  
+usdcad = df.Rate  
+usdcad.plot()
+
+# ADF test  
+adf_test = ts.adfuller(usdcad, maxlag=1, regression=&#39;c&#39;)
+
+# calculate half-life  
+md = sm.OLS(usdcad.diff(), sm.add_constant(usdcad.shift()), missing=&#39;drop&#39;)  
+mdf = md.fit()  
+half_life = -np.log(2)/mdf.params[1]  
+lookback = np.round(half_life)  
+</code></pre>
+
+<p>However, the result is quite different from the book.<br>
+My adf_test result is:<br>
+<code>
+(-2.3466233030145998,
+ 0.15737142688333444,  
+ 1,  
+ 1221,  
+ {&#39;5%&#39;: -2.8639100200710828,  
+  &#39;10%&#39;: -2.568031835031368,  
+  &#39;1%&#39;: -3.435716995109265},  
+ -9562.9337394440736)  
+</code>
+and my half-life is <em>218</em> days.</p>
+
+<p>Any ideas of why is this? Thanks!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='547892fbe0444e81490003f9' id='547892fbe0444e81490003f9'>
+<a href='#547892fbe0444e81490003f9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/546ccfabf8dadee0970003dc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1cddd1e9bb4610cc0db65b55f5fdc199?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/546ccfabf8dadee0970003dc'>Alan Wang</a>
+</div>
+<a UTCms='1417188093000' class='quanto-date posted-at response-posted-at' href='#547892fbe0444e81490003f9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><pre><code>import statsmodels.tsa.stattools as ts  
+import numpy as np  
+import pandas as pd  
+from math import *
+
+
+def adf(x):  
+    &quot;&quot;&quot;  
+    adf(x) - Calculate adf stat, p-value and half-life of the given list. This test will tell us if a  
+             time series is mean reverted.  
+             e.g. adf(prices)  
+    :param x: A pandas.Series of data.  
+    :return: (stat, p_value, half_life)  
+    Reference  
+        http://statsmodels.sourceforge.net/devel/generated/statsmodels.tsa.stattools.adfuller.html  
+        http://en.wikipedia.org/wiki/Augmented_Dickey%E2%80%93Fuller_test  
+    &quot;&quot;&quot;  
+    # Calculate ADF to get ADF stats and p-value  
+    result = ts.adfuller(x)
+
+    # Calculate the half-life of reversion  
+    price = pd.Series(x)  
+    lagged_price = price.shift(1).fillna(method=&quot;bfill&quot;)  
+    delta = price - lagged_price  
+    beta = np.polyfit(lagged_price, delta, 1)[0] #Use price(t-1) to predicate delta.  
+    half_life = (-1*log(2)/beta)  
+    return result[0], result[1], half_life
+
+In [4]: prices = pd.read_csv(&#39;usdcad.csv&#39;)[&#39;PX_LAST&#39;]
+
+In [5]: adf(prices)  
+Out[5]: (-1.6228164049914919, 0.47125307555839901, 115.71732788220135)  
+</code></pre>
+
+<p>The usdcad.csv is from Bloomberg data. 20070723 ~ 20120328. You can switch to your own data and see if it is code problem or data problem.</p>
+
+<h1></h1>
+
+<p>I just tried quandl data for the same range, got<br>
+<code>
+In [59]: adf(y[&#39;USD/CAD&#39;])  
+Out[59]: (-1.851393181282041, 0.35526109673432998, 259.27118869559695)  
+</code>
+It seems data is definitely one of the difference.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54793357b96fb5bbef000083' id='54793357b96fb5bbef000083'>
+<a href='#54793357b96fb5bbef000083'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5472d9a27f7ed4e881007299'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b07bb536386753235d29b8cfe264f893?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5472d9a27f7ed4e881007299'>Shel Kong</a>
+</div>
+<a UTCms='1417229145000' class='quanto-date posted-at response-posted-at' href='#54793357b96fb5bbef000083'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Alan,</p>
+
+<p>Thanks for your reply. I tried your code and it works the same as mine except that I set the lag order to 1 in adf test. There are minor differences implementing an linear fit but the result should be the same, so I think the data is the main reason.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54b839b2f44758bf5c000192' id='54b839b2f44758bf5c000192'>
+<a href='#54b839b2f44758bf5c000192'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/519046b59b512cba8d00006d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/39b7cc2f0af63a95534ddeffc417b427?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/519046b59b512cba8d00006d'>Tom Starke</a>
+</div>
+<a UTCms='1421359544000' class='quanto-date posted-at response-posted-at' href='#54b839b2f44758bf5c000192'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi guys,</p>
+
+<p>I had a closer look at the Hurst again. The inconsistencies we are getting clearly come down to the fact that H explores the variances of seasonal returns. If we have Brownian motion they should increase in a well-behaved manner with an exponent of 0.5 ( sqrt(t) ). If it&#39;s larger, positive autocorrelation forces us into a trending scenario and with H &lt; 0.5 we are forced into a mean-reverting situation. We all know that a price series may be trending in the long range but mean-reverting in short time scales or vice versa. Now, if we look at most implementations of H calculators, we have fixed lags. If we look at SPY for example, a lag range of 2 to 20 will give us H ~ 0.43  but a range of 200 to 600 will give H ~ 0.57. If you look at the graph of log(lag) vs log(standard deviation), these two regimes are very distinct. It shows that we cannot simply throw the Hurst at anything, we really need to look at the scales involved. In simple terms, the lags should be in accordance with your trading signals, so if you trade on a 20-day MA-crossover it makes no sense to have a lag range of 2 to 600 but if you use fundamentals you may be better off neglecting the short lags.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54bcc03b0c6921ffaf000517' id='54bcc03b0c6921ffaf000517'>
+<a href='#54bcc03b0c6921ffaf000517'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5080082c51b60602000000c3'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0620800c28b062db5e42caefc988db17?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5080082c51b60602000000c3'>krisan haria</a>
+</div>
+<a UTCms='1421656126000' class='quanto-date posted-at response-posted-at' href='#54bcc03b0c6921ffaf000517'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom</p>
+
+<p>When I click on the links you provided I&#39;m still getting the security warning</p>
+
+<p><a href="http://www.leinenbock.com">www.leinenbock.com</a> uses an invalid security certificate.<br>
+The certificate is not trusted because no issuer chain was provided.<br>
+(Error code: sec_error_unknown_issuer)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54c25f6f2eb3ab64d70001ad' id='54c25f6f2eb3ab64d70001ad'>
+<a href='#54c25f6f2eb3ab64d70001ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5474500b9bffefa9120045e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b529935d6b67710e0cb96238b91231be?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5474500b9bffefa9120045e9'>Warren O&#39;Neill</a>
+</div>
+<a UTCms='1422024562000' class='quanto-date posted-at response-posted-at' href='#54c25f6f2eb3ab64d70001ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey this link could be of use: <a href="http://www.quantstart.com/articles/Basics-of-Statistical-Mean-Reversion-Testing">http://www.quantstart.com/articles/Basics-of-Statistical-Mean-Reversion-Testing</a><br>
+It comes from a book that is similar to Chan&#39;s but with everything written in Python.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55d732a1c55ef15ee8000682' id='55d732a1c55ef15ee8000682'>
+<a href='#55d732a1c55ef15ee8000682'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/558fef7ea783ae6bc80004e6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/803c09cd89cb05e4c9f7ceb470982c3a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/558fef7ea783ae6bc80004e6'>Cell Money</a>
+</div>
+<a UTCms='1440166568000' class='quanto-date posted-at response-posted-at' href='#55d732a1c55ef15ee8000682'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom,<br>
+Thanks for having sharing your code.<br>
+I&#39;ve tested your implementation of the variance ratio test using rates of USDCAD from July 22 2007 to March 28 2012, however my results diverge from the results of Chan&#39;s book.<br>
+According to Example 2.3 of Chan&#39;s book I should get following results:<br>
+h = 0 and pValue = 0.37<br>
+(h = 0 means it may be a random walk)</p>
+
+<p>But with your code I find :<br>
+h (or vratio in your code) = 1.28 and pvalues = 0.99999<br>
+(According to Chan: h = 1 means rejection of the random walk hypothesis)</p>
+
+<p>Is my assumption:<br>
+<em>h (according to Chan&#39;s book) = vratio (according to your code)</em><br>
+correct?</p>
+
+<p>Did I misunderstood how to use your function <em>vratio</em>? Or how to explain that my results diverge from Chan&#39;s book?</p>
+
+<pre><code>import pandas as pd  
+import numpy as np  
+from pandas import DataFrame  
+import datetime  
+import pandas.io.data  
+import matplotlib.pyplot as plt  
+import statsmodels.tsa.stattools as ts  
+from numpy import cumsum, log, polyfit, sqrt, std, subtract  
+from numpy.random import randn  
+from numpy import random
+
+
+
+pi = 3.141592653589793
+
+def normcdf(X):  
+    (a1,a2,a3,a4,a5) = (0.31938153, -0.356563782, 1.781477937, -1.821255978, 1.330274429)  
+    L = abs(X)  
+    K = 1.0 / (1.0 + 0.2316419 * L)  
+    w = 1.0 - 1.0 / sqrt(2*pi)*np.exp(-L*L/2.) * (a1*K + a2*K*K + a3*pow(K,3) + a4*pow(K,4) + a5*pow(K,5))  
+    if X &lt; 0:  
+        w = 1.0-w  
+    return w
+
+def vratio(a, lag = 2, cor = &#39;hom&#39;):  
+    &quot;&quot;&quot; the implementation found in the blog Leinenbock  
+    http://www.leinenbock.com/variance-ratio-test/  
+    &quot;&quot;&quot;  
+    #t = (std((a[lag:]) - (a[1:-lag+1])))**2;  
+    #b = (std((a[2:]) - (a[1:-1]) ))**2;  
+    n = len(a)  
+    mu  = sum(a[1:n]-a[:n-1])/n;  
+    m=(n-lag+1)*(1-lag/n);  
+    #print( mu, m, lag)  
+    b=sum(np.square(a[1:n]-a[:n-1]-mu))/(n-1)  
+    t=sum(np.square(a[lag:n]-a[:n-lag]-lag*mu))/m  
+    vratio = t/(lag*b);  
+    la = float(lag)  
+    if cor == &#39;hom&#39;:  
+        varvrt=2*(2*la-1)*(la-1)/(3*la*n)  
+    elif cor == &#39;het&#39;:  
+        varvrt=0;  
+        sum2=sum(np.square(a[1:n]-a[:n-1]-mu));  
+        for j in range(lag-1):  
+            sum1a=np.square(a[j+1:n]-a[j:n-1]-mu);  
+            sum1b=np.square(a[1:n-j]-a[0:n-j-1]-mu)  
+            sum1=dot(sum1a,sum1b);  
+            delta=sum1/(sum2**2);  
+            varvrt=varvrt+((2*(la-j)/la)**2)*delta  
+    zscore = (vratio - 1) / sqrt(float(varvrt))  
+    pval = normcdf(zscore);  
+    return  vratio, zscore, pval
+
+
+
+
+if __name__==&quot;__main__&quot;:  
+    df = pd.read_csv(&#39;USDCAD.csv&#39;, index_col=&#39;End Date&#39;, parse_dates=True)  
+    USDCADdf = df[&#39;USD/CAD&#39;]  
+    #Revert indexes, so that indexes are in a chronological order  
+    USDCADdf = USDCADdf.iloc[::-1]  
+    USDCADquotes = np.array(USDCADdf)
+
+    print(vratio(np.log(USDCADquotes)))  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56041f2089b00ca5b5000671' id='56041f2089b00ca5b5000671'>
+<a href='#56041f2089b00ca5b5000671'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53f1360e61407a3fbd000020'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ce4cd804be21eb45e9c67d7e6cda4111?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53f1360e61407a3fbd000020'>Jamie Lunn</a>
+</div>
+<a UTCms='1443110696000' class='quanto-date posted-at response-posted-at' href='#56041f2089b00ca5b5000671'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Has anyone else implemented the variance ratio test? <a href="http://www.leinenbock.com/variance-ratio-test/">http://www.leinenbock.com/variance-ratio-test/</a>  no longer exists, sadly.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56044d3d9aa9c602ef0007e6' id='56044d3d9aa9c602ef0007e6'>
+<a href='#56044d3d9aa9c602ef0007e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5312f7e2efc731bbf20000fe'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/905bb5da397380a6c3fecf3f60c71544?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5312f7e2efc731bbf20000fe'>Paul Perry</a>
+</div>
+<a UTCms='1443122497000' class='quanto-date posted-at response-posted-at' href='#56044d3d9aa9c602ef0007e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie, how about digging it out from the archives?</p>
+
+<p><a href="https://web.archive.org/web/20140612041028/http://drtomstarke.com/index.php/variance-ratio-test/">https://web.archive.org/web/20140612041028/http://drtomstarke.com/index.php/variance-ratio-test/</a><br>
+referenced here: <a href="https://web.archive.org/web/20140612065038/http://www.leinenbock.com/variance-ratio-test/">https://web.archive.org/web/20140612065038/http://www.leinenbock.com/variance-ratio-test/</a> .  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560453295a71a1dec80007c9' id='560453295a71a1dec80007c9'>
+<a href='#560453295a71a1dec80007c9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53f1360e61407a3fbd000020'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ce4cd804be21eb45e9c67d7e6cda4111?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53f1360e61407a3fbd000020'>Jamie Lunn</a>
+</div>
+<a UTCms='1443124013000' class='quanto-date posted-at response-posted-at' href='#560453295a71a1dec80007c9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Genius!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5773fadd7dc76e061f000757' id='5773fadd7dc76e061f000757'>
+<a href='#5773fadd7dc76e061f000757'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5766cb3c60610ca7b80004a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/dbf4c5b6e646fe54d483ced7feae8d29?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5766cb3c60610ca7b80004a9'>Alpha Sqrt</a>
+</div>
+<a UTCms='1467218664000' class='quanto-date posted-at response-posted-at' href='#5773fadd7dc76e061f000757'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>great buddy! I am doing some work on hurst exponent, starting from Chan&#39;s book too.<br>
+Do you still share your code?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b7d9460a2e3ca0047edeb75' id='5b7d9460a2e3ca0047edeb75'>
+<a href='#5b7d9460a2e3ca0047edeb75'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59b834ac30df4255221ef7ed'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/360f7545c66300ea14e0019b24164535?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59b834ac30df4255221ef7ed'>Javier Albert</a>
+</div>
+<a UTCms='1534956640000' class='quanto-date posted-at response-posted-at' href='#5b7d9460a2e3ca0047edeb75'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tom, the website <a href="https://www.leinenbock.com/" rel="nofollow">https://www.leinenbock.com/</a> seems to be down. Did you posted the codes anywhere else??<br>
+Thanks!!  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/some-code-from-ernie-chans-new-book-implemented-in-python'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/some-code-from-ernie-chans-new-book-implemented-in-python'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#3f595a5a5b5d5e5c547f4e4a5e514b504f565e51115c5052">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

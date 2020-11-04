@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Keller/Butler - A Century of Generalized Momentum: Elastic Asset Allocation (EAA)
+</title>
+<meta content='[edit: newer versions at the bottom, with dividend-adjusted prices from Yahoo]Hey everyone,While I&#39;m waiting for QuantCon, I&#39;ve implemented another recent asset allocation algorithm floating around the quant blogosphere. This one is taken from W. Keller and A. Butler&#39;s 2014 paper &quot;A Century of Generalized Momentum - From Flexible Asset Allocations (FAA) to Elastic Asset Allocation (EAA)&quot;.As the name implies, their approach dynamically changes asset classes and allocations, and includes a...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="6lU7tn31f0I3tNkpon5uOLPa+xk3x4ZP2l8FvOra8iuWM0373wOtoY6pgBjtkcZMi1TYcE0Lk1RYUN7WQJ+QkA==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa' property='og:url'>
+<meta content='Keller/Butler - A Century of Generalized Momentum: Elastic Asset Allocation (EAA)' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Keller/Butler - A Century of Generalized Momentum: Elastic Asset Allocation (EAA)' property='og:title'>
+<meta content='[edit: newer versions at the bottom, with dividend-adjusted prices from Yahoo]Hey everyone,While I&#39;m waiting for QuantCon, I&#39;ve implemented another recent asset allocation algorithm floating around the quant blogosphere. This one is taken from W. Keller and A. Butler&#39;s 2014 paper &quot;A Century of Generalized Momentum - From Flexible Asset Allocations (FAA) to Elastic Asset Allocation (EAA)&quot;.As the name implies, their approach dynamically changes asset classes and allocations, and includes a...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='54f98618791632d2ff000052'>
+<div class='post-container' data-post-id='54f98618791632d2ff000052' id='54f98618791632d2ff000052'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Keller/Butler - A Century of Generalized Momentum: Elastic Asset Allocation (EAA)</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1425676032000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Keller/Butler - A Century of Generalized Momentum: Elastic Asset Allocation (EAA)&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fkeller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa%3Futm_source%3Dwebsite_share%26utm_campaign%3Dkeller-slash-butler-elastic-asset-allocation-eaa-1%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fkeller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa%3Futm_source%3Dwebsite_share%26utm_campaign%3Dkeller-slash-butler-elastic-asset-allocation-eaa-1%26utm_medium%3Dlinkedin&amp;title=Keller%2FButler+-+A+Century+of+Generalized+Momentum%3A+Elastic+Asset+Allocation+%28EAA%29+%28Alex%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa?utm_source=website_share&amp;utm_campaign=keller-slash-butler-elastic-asset-allocation-eaa-1&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Alex" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>[edit: newer versions at the bottom, with dividend-adjusted prices from Yahoo]</p>
+
+<p>Hey everyone,</p>
+
+<p>While I&#39;m waiting for QuantCon, I&#39;ve implemented another recent asset allocation algorithm floating around the quant blogosphere. This one is taken from W. Keller and A. Butler&#39;s 2014 paper <a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2543979">&quot;A Century of Generalized Momentum - From Flexible Asset Allocations (FAA) to Elastic Asset Allocation (EAA)&quot;</a>.</p>
+
+<p>As the name implies, their approach dynamically changes asset classes and allocations, and includes a crash-protection mechanism. An asset&#39;s specific allocation is based on a customizable scoring function, they call &quot;generalized momentum&quot;. As a guideline the authors suggest two &quot;golden&quot; weight-settings - offensive and defensive. Both templates are included in the source code and you can change them by commenting them in.</p>
+
+<p>Specifically, the generalized momentum relies on the following factors:<br>
+- <strong>Price-momentum</strong> (wR)<br>
+- <strong>Correlation</strong> (wC)<br>
+- <strong>Volatility</strong> (wV)<br>
+- <strong>Elasticity</strong> (wS)</p>
+
+<p>The approach has been investigated thoroughly and reproduced by different bloggers. Two outstanding posts are on <a href="https://quantstrattrader.wordpress.com/2015/01/03/for-a-new-year-a-new-asset-allocation-system-just-published-in-ssrn/">QuantStrat TradeR</a> and <a href="http://indexswingtrader.blogspot.com/2015/01/a-primer-on-elastic-asset-allocation.html">TrendXplorer</a> - I highly recommend you check them out. My implementation here on Quantopian gets close but still has a number of limitations, as noted in the source code.</p>
+
+<p>EAA clearly has the performance edge over last week&#39;s <a href="https://www.quantopian.com/posts/cssanalytics-a-simple-tactical-asset-allocation-portfolio-with-percentile-channels">&quot;CSSAnalytics - A Simple Tactical Asset Allocation Portfolio with Percentile Channels&quot;</a>, but that comes at the cost of increased volatility and draw-down. (Also, note the shorter backtest window) Nevertheless, given EAA&#39;s generic framework, I expect there to be plenty of room for optimization and exploration with other asset mixes, such as industry sectors or countries. Let me know what you find.</p>
+
+<p>Happy hacking. Cheers!</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>37 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='54f9d7ca791632d2ff000202' id='54f9d7ca791632d2ff000202'>
+<a href='#54f9d7ca791632d2ff000202'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/531a7ad9f7959609d10001a1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9f693e5aa9a2f5b71910425fbf1813e1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/531a7ad9f7959609d10001a1'>Florent Chandelier</a>
+</div>
+<a UTCms='1425659854000' class='quanto-date posted-at response-posted-at' href='#54f9d7ca791632d2ff000202'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for sharing a clean code.<br>
+I think context.leverage is reserved as a variable, better use something different.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54f9e90ec1b6d12df4000731' id='54f9e90ec1b6d12df4000731'>
+<a href='#54f9e90ec1b6d12df4000731'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425664277000' class='quanto-date posted-at response-posted-at' href='#54f9e90ec1b6d12df4000731'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex, I am especially grateful, having asked you personally about this.  And, again, think it&#39;s so generous of you to freely share such valuable work with others.</p>
+
+<p>Bravo!  </p>
+
+<p>On first blush, the algo looks great.  (Going to play with it now!)</p>
+
+<p>Stephen  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fa3f4073ae091084000053' id='54fa3f4073ae091084000053'>
+<a href='#54fa3f4073ae091084000053'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425686338000' class='quanto-date posted-at response-posted-at' href='#54fa3f4073ae091084000053'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex,</p>
+
+<p>I&#39;m told the model works with Total Return instead of Excess Return, effectively setting the risk free rate to zero.  You might consider that implementation:</p>
+
+<pre><code># Scoring  
+#  
+# excess return momentum  
+mom = (hm.ix[-1] / hm.ix[-2]  - hb.ix[-1] / hb.ix[-2] + \  
+       hm.ix[-1] / hm.ix[-4]  - hb.ix[-1] / hb.ix[-4] + \  
+       hm.ix[-1] / hm.ix[-7]  - hb.ix[-1] / hb.ix[-7] + \  
+       hm.ix[-1] / hm.ix[-13] - hb.ix[-1] / hb.ix[-13]) / 22  
+mom[mom &lt; 0] = 0
+</code></pre>
+
+<p>Stephen  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fa492847553767d60000bf' id='54fa492847553767d60000bf'>
+<a href='#54fa492847553767d60000bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1425688874000' class='quanto-date posted-at response-posted-at' href='#54fa492847553767d60000bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Stephen,</p>
+
+<p>You&#39;re right, we&#39;d need a Total Return time series. AFAIK the Q neither provides TR data nor programmatic access to dividend payouts yet. When this becomes available we can back-fit this algorithm.</p>
+
+<p>I think we need the <strong>total <em>excess</em> return</strong> over risk-free for the price momentum score. Using short-term bond momentum is kind of a hack. In the paper, section 4.6 provides a condensed version of the &quot;EAA recipe&quot;:  </p>
+
+<blockquote>
+<p>ri is computed as the average total excess return over the last 1, 3, 6 and 12 months (not 9 months) where excess return is defined relative to the (13 week) TBill yield.</p>
+</blockquote>
+
+<p>Actually, it should be possible to fetch and integrate dividend data from Yahoo. This would be a great improvement over the existing code base. Maybe someone feels adventurous. :-)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fa874b98bbdec36b0002a3' id='54fa874b98bbdec36b0002a3'>
+<a href='#54fa874b98bbdec36b0002a3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e159f70f3369eb9200019b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2a53f34ae7e99886508adf2b4d76bff2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e159f70f3369eb9200019b'>Vladimir</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1425704781000' class='quanto-date posted-at response-posted-at' href='#54fa874b98bbdec36b0002a3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What about using SHV or SHY dividend adjusted price from Yahoo as approximation?</p>
+
+<p>VY  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54faeca0e56dad82a4000484' id='54faeca0e56dad82a4000484'>
+<a href='#54faeca0e56dad82a4000484'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425730722000' class='quanto-date posted-at response-posted-at' href='#54faeca0e56dad82a4000484'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think they&#39;re both good options.  SHV, since its inception in 2007, has certainly lived up to its safe haven status.  Its price has been very stable and SHV should be minimally vulnerable in a rising rate environment.  Either one makes good sense.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fb39ffe2bde763590000cb' id='54fb39ffe2bde763590000cb'>
+<a href='#54fb39ffe2bde763590000cb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5306900f029baa5003000066'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/31823504e43d352d1aa5cb5999973420?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5306900f029baa5003000066'>Ilya Kipnis</a>
+</div>
+<a UTCms='1425750530000' class='quanto-date posted-at response-posted-at' href='#54fb39ffe2bde763590000cb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is interesting--the strategies with the best equity curves are the ones from my blog =P. Thanks for the advertising once again ^_^</p>
+
+<p>-Ilya (author of QuantStrat TradeR)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fb9cfff2611a3e230002c7' id='54fb9cfff2611a3e230002c7'>
+<a href='#54fb9cfff2611a3e230002c7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1425775873000' class='quanto-date posted-at response-posted-at' href='#54fb9cfff2611a3e230002c7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>VY, I&#39;m sure SHY or SHV would work fine. I&#39;ve looked at the <a href="https://www.quantopian.com/help#overview-fetcher">Fetcher docs</a>, but didn&#39;t have the time to dig into them yet. If you have experience getting Yahoo data with the fetcher, I&#39;d appreciate your input.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fc516a927ea405070005c5' id='54fc516a927ea405070005c5'>
+<a href='#54fc516a927ea405070005c5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425822062000' class='quanto-date posted-at response-posted-at' href='#54fc516a927ea405070005c5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex and VY,</p>
+
+<p>I&#39;m more of a database programmer ...a mere fledgling wanna-be in python.  But here&#39;s code I wrote to bring over yahoo data for a database when I wanted to snag a LAST price for a ticker I wrote into a field:</p>
+
+<p>PHP_Execute( &quot;</p>
+
+<p>$getfield = &#39;GetField ( \&quot;Asset Components::Ticker\&quot; )&#39;;
+$ticker = fm_evaluate($getfield);</p>
+
+<p>$link =  \&quot;<a href="http://download.finance.yahoo.com/d/quotes.csv?s=%5C">http://download.finance.yahoo.com/d/quotes.csv?s=\</a>&quot; . $ticker . \&quot;&amp;f=l1gh&amp;e=.csv\&quot;;</p>
+
+<p>$set = ini_set(&#39;memory_limit&#39;, -1);<br>
+   $curl = curl_init();<br>
+   curl_setopt ($curl, CURLOPT_URL, $link);<br>
+   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);<br>
+   $result = curl_exec ($curl);<br>
+   curl_close ($curl);</p>
+
+<p> echo $result;
+&quot; )</p>
+
+<p>You guys might look at that and go, &quot;Ahhh.&quot;  </p>
+
+<p>Hope it helps.</p>
+
+<p>Stephen  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fc682053dc2418a5000014' id='54fc682053dc2418a5000014'>
+<a href='#54fc682053dc2418a5000014'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425827876000' class='quanto-date posted-at response-posted-at' href='#54fc682053dc2418a5000014'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>As many of you know, it’s the ability to adhere to a strategy that counts …in the long run.  And what makes it easier to adhere to a strategy?  Minimizing drawdowns. </p>
+
+<p>Look at the relative performance of EAA from 2008 to early 2009 and the latter half of 2011.  I think this is where the EAA recipe really shines.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fc6aabb1a72bdbb400000e' id='54fc6aabb1a72bdbb400000e'>
+<a href='#54fc6aabb1a72bdbb400000e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/531a7ad9f7959609d10001a1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9f693e5aa9a2f5b71910425fbf1813e1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/531a7ad9f7959609d10001a1'>Florent Chandelier</a>
+</div>
+<a UTCms='1425828525000' class='quanto-date posted-at response-posted-at' href='#54fc6aabb1a72bdbb400000e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I believe this may help:<br>
+<a href="https://www.quantopian.com/posts/yahoo-and-fetch-comparing-q-and-y-for-12-mth-rolling-return">https://www.quantopian.com/posts/yahoo-and-fetch-comparing-q-and-y-for-12-mth-rolling-return</a></p>
+
+<p>and a strategy based on either yahoo or quantpian data: <a href="https://www.quantopian.com/posts/yahoo-slash-quantopian-using-y-adj-as-signal-for-swtich">https://www.quantopian.com/posts/yahoo-slash-quantopian-using-y-adj-as-signal-for-swtich</a></p>
+
+<p>Note that fetcher only allows 5 xls fetch, thus you may need to write an external fetcher consolidator.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fc82addf72822cce00006e' id='54fc82addf72822cce00006e'>
+<a href='#54fc82addf72822cce00006e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1425834672000' class='quanto-date posted-at response-posted-at' href='#54fc82addf72822cce00006e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Florent,</p>
+
+<p>That’s a really useful implementation and a great article on paired-switching.  Now, if we could snag implied volatility data out of yahoo, we might exploit iv’s predictive value.  (…lots of articles supporting this in SSRN eLibrary under the search terms “implied volatility predictive”)</p>
+
+<p>Your algo also has a handsome performance plot.  Do you think this approach could be expanded to three risky assets, drawing from a small universe and rotating around a volatility forecast?</p>
+
+<p>Stephen  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fcca8653dc2418a50001ed' id='54fcca8653dc2418a50001ed'>
+<a href='#54fcca8653dc2418a50001ed'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1425853065000' class='quanto-date posted-at response-posted-at' href='#54fcca8653dc2418a50001ed'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Florent, nice! I&#39;ll incorporate your fetcher code when I have some more time. It might mean cutting down the number of assets to 5 for now, but let&#39;s see.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fe6050d2afa5f69d000433' id='54fe6050d2afa5f69d000433'>
+<a href='#54fe6050d2afa5f69d000433'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f7e278c8e506f2d30000c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4ae9929ab3f99f943385e707e110efe8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f7e278c8e506f2d30000c9'>Corey MacDonald</a>
+</div>
+<a UTCms='1425956946000' class='quanto-date posted-at response-posted-at' href='#54fe6050d2afa5f69d000433'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex,<br>
+Hope you won&#39;t mind the intrusion here, but I read through your scripting, and a few papers you posted on EAA. I must say- what you have here is rather remarkable.<br>
+Though, may I make a suggestion, to introduce slippage into the model. It would more accurately show past performance. I&#39;m working on doing that myself (but I&#39;m rather new to Python).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fe6a430b113c198f00031a' id='54fe6a430b113c198f00031a'>
+<a href='#54fe6a430b113c198f00031a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/537400743fcd41da07000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/566071c42a032f096a4b6925585231da?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/537400743fcd41da07000056'>Matt Clark</a>
+</div>
+<a UTCms='1425959495000' class='quanto-date posted-at response-posted-at' href='#54fe6a430b113c198f00031a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Corey - Quantopian includes a volume-driven slippage model by default unless instructed otherwise.  See <a href="https://www.quantopian.com/help#ide-slippage">https://www.quantopian.com/help#ide-slippage</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54ffb8d17a97056f23000456' id='54ffb8d17a97056f23000456'>
+<a href='#54ffb8d17a97056f23000456'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b8a7b4f44758bf5c000aea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4122a0b664faeb01757f54652164d960?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b8a7b4f44758bf5c000aea'>pangyuteng</a>
+</div>
+<a UTCms='1426045139000' class='quanto-date posted-at response-posted-at' href='#54ffb8d17a97056f23000456'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is a great defensible, robust algorithm. I really like it.  The code is clean and very well documented. Thanks very much for spending the time to do so.</p>
+
+<p>Since Quantopian offered us minute-resolution data, I tried using the same strategy and re-balancing the asset every 30 minutes.  The preliminary result is not at all satisfactory, perhaps the play between momentum/volatility/correlation is a whole different ball game for intraday data.</p>
+
+<hr>
+
+<p>Edit 14MAR2015: the effect of constant negative return is caused by slippage, once slippage and commission are neglected, backtest performance improved.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54ffc65934a2b5e301000493' id='54ffc65934a2b5e301000493'>
+<a href='#54ffc65934a2b5e301000493'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53d46cdb75f57a2832005a6b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/62b39881ee19f936224017339779d9d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53d46cdb75f57a2832005a6b'>Market Tech</a>
+</div>
+<a UTCms='1426048603000' class='quanto-date posted-at response-posted-at' href='#54ffc65934a2b5e301000493'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Yoyo T., you&#39;ll find that commissions are eating into that strategy. Trade too often without much profit and you&#39;ll just piddle your account away. The original poster&#39;s monthly rebalance periodicity reduces these costs to a fraction of your&#39;s.</p>
+
+<p>The strat runs fine on daily data too due to the fact of the EOD rebalance schedule. Try starting the strategy in the early part of March 2009 -- you might get conflicting results.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54ffcc467a97056f2300049e' id='54ffcc467a97056f2300049e'>
+<a href='#54ffcc467a97056f2300049e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b8a7b4f44758bf5c000aea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4122a0b664faeb01757f54652164d960?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b8a7b4f44758bf5c000aea'>pangyuteng</a>
+</div>
+<a UTCms='1426050121000' class='quanto-date posted-at response-posted-at' href='#54ffcc467a97056f2300049e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Market Tech.  Thanks for your insight!  I thought about commission too and had set the commission to zero to in the code I posted earlier.  I was hoping to get results at least as good as yours, however, the return was negative.  I think the framework of the algorithm is really nice, just have to figure out an appropriate definition for z.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55029240b09017a8bf0001e1' id='55029240b09017a8bf0001e1'>
+<a href='#55029240b09017a8bf0001e1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1426231876000' class='quanto-date posted-at response-posted-at' href='#55029240b09017a8bf0001e1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I spent some time experimenting with Florent&#39;s fetcher code and found a way to get up-tp-date adjusted data from Yahoo into the regular history data-frame format. Using adjusted prices makes quite a difference depending on the instruments used, e.g. with REITs. You can switch between Quantopian data and Yahoo data with the &quot;use_adjusted&quot; flag. If you use adjusted data, the fetcher limits you to max 5 different instruments.</p>
+
+<p>(I hope the traffic from repeated back-testing doesn&#39;t get The Q blocked from Yahoo servers)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5502ec4d31eb2853cb000390' id='5502ec4d31eb2853cb000390'>
+<a href='#5502ec4d31eb2853cb000390'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1426254927000' class='quanto-date posted-at response-posted-at' href='#5502ec4d31eb2853cb000390'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex,  They say, “The enemy of good is better.”  Well, you just disproved that aphorism. </p>
+
+<p>Implementing Florent’s lead towards dividend and split adjusted prices, v0.6 shows a substantial reduction in risk without sacrificing returns:  Sharpe improves by 34%, max drawdown decreases 33%, and portfolio level volatility comes in at a very respectable 10%.  This version is also a truer estimate for a real-world application.  Nice work Alex and Florent!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5504d55af0cd4208910000a2' id='5504d55af0cd4208910000a2'>
+<a href='#5504d55af0cd4208910000a2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b8a7b4f44758bf5c000aea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4122a0b664faeb01757f54652164d960?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b8a7b4f44758bf5c000aea'>pangyuteng</a>
+</div>
+<a UTCms='1426380124000' class='quanto-date posted-at response-posted-at' href='#5504d55af0cd4208910000a2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great post Alex.<br>
+I&#39;ve added a new term to the momentum score (z) which tries to capture the intraday volatility (iv),[1] which I will call the Golden Lama EEA:<br>
+w ~ z = ( r^w_r * (1-c)^w_c ) / ( v^w_v * iv ^w_iv)<br>
+where iv is defined as:<br>
+iv = mean(daily_high[-10:]-daily_low[-10:])/mean(daily_high[-280:]-daily_low[-280:])<br>
+The return improved a bit as compared to the Golden Offensive EAA, while volatility and max drawdown remained relatively unchanged.</p>
+
+<p>-- Golden Lama --<br>
+Total Returns: 217.2%<br>
+Sharpe: 1.71<br>
+Volatility: 0.10<br>
+Max Drawdown: 11.9%</p>
+
+<p>-- Golden Offensive EAA --<br>
+Total Returns: 197.5%<br>
+Sharpe: 1.65<br>
+Volatility: 0.10<br>
+Max Drawdown: 11.7%</p>
+
+<p>[1] <a href="https://cssanalytics.wordpress.com/2015/03/13/using-a-self-similarity-metric-with-intraday-data-to-define-market-regimes/">https://cssanalytics.wordpress.com/2015/03/13/using-a-self-similarity-metric-with-intraday-data-to-define-market-regimes/</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='550725201a5d6d8240000053' id='550725201a5d6d8240000053'>
+<a href='#550725201a5d6d8240000053'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1426531619000' class='quanto-date posted-at response-posted-at' href='#550725201a5d6d8240000053'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Ted, nice mod. I looked at replacing daily &quot;vol&quot; with intraday data as well, with mixed results. Your &quot;Golden Lama&quot; score seems to be quite a bit more stable than my initial attempts. Thanks!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55099e015a20e8635b000448' id='55099e015a20e8635b000448'>
+<a href='#55099e015a20e8635b000448'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e3ca9721b31908a5000056'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a839509d8de958403d71c3459198fa2b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e3ca9721b31908a5000056'>Stephen Harlin, MD</a>
+</div>
+<a UTCms='1426693636000' class='quanto-date posted-at response-posted-at' href='#55099e015a20e8635b000448'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alex, the cash proxy is IEF in this implementation.  Last night, ahead of the Fed&#39;s announcement, I noticed that flows into IEI were up 535%.  Recently, it looks like institutions use SHY and IEI as cash equivalents when moving out of equities.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='550e917099338ab7da00001e' id='550e917099338ab7da00001e'>
+<a href='#550e917099338ab7da00001e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/530006e439185472f8000032'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d244c2261df57fa9c6229c306eb91fb7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/530006e439185472f8000032'>Novice TAI</a>
+</div>
+<a UTCms='1427018099000' class='quanto-date posted-at response-posted-at' href='#550e917099338ab7da00001e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>the algorithm seems break after platform upgrade, when backtesting it responsed following:</p>
+
+<p>Something went wrong. Sorry for the inconvenience. Try using the built-in debugger to analyze your code. If you would like help, send us an email.<br>
+ValueError: No axis named 1 for object type<br>
+There was a runtime error on line 143.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='550ee90a047a63843500026a' id='550ee90a047a63843500026a'>
+<a href='#550ee90a047a63843500026a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e39b5ce4f6f7ef56000097'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6c8742787b4e645ef0545a026d180af2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e39b5ce4f6f7ef56000097'>joe lee</a>
+</div>
+<a UTCms='1427040524000' class='quanto-date posted-at response-posted-at' href='#550ee90a047a63843500026a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Did anyone implemented the improvements described here :</p>
+
+<p><a href="http://indexswingtrader.blogspot.co.il/2015/01/a-primer-on-elastic-asset-allocation.html">http://indexswingtrader.blogspot.co.il/2015/01/a-primer-on-elastic-asset-allocation.html</a></p>
+
+<p>its a Hedged, Offensive settings for the keeller algorithem which provides higher returns and more important, none of the years has a loss and the biggest monthly drawdown -%6.5 versus ~-%11 in the offesive EAA.</p>
+
+<p><a href="http://a.disquscdn.com/uploads/mediaembed/images/1618/9084/original.jpg?w=800&amp;h">http://a.disquscdn.com/uploads/mediaembed/images/1618/9084/original.jpg?w=800&amp;h</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='550f14d5047a638435000320' id='550f14d5047a638435000320'>
+<a href='#550f14d5047a638435000320'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54f7e278c8e506f2d30000c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4ae9929ab3f99f943385e707e110efe8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54f7e278c8e506f2d30000c9'>Corey MacDonald</a>
+</div>
+<a UTCms='1427051736000' class='quanto-date posted-at response-posted-at' href='#550f14d5047a638435000320'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Novice TAI<br>
+I  ran into the same problem, as well with all iterations of this program when forward testing. I&#39;ve been working on it for the last few days, to no avail.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5510752c366053a71f000501' id='5510752c366053a71f000501'>
+<a href='#5510752c366053a71f000501'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1427141934000' class='quanto-date posted-at response-posted-at' href='#5510752c366053a71f000501'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Corey, Novice TAI: Looks like the upgrade broke my sketchy workaround (and one of my contest algos). I&#39;ll look into this when I have some time for TheQ in the next couple of days.</p>
+
+<p>@Joe Lee: When you look at the source code, you&#39;ll find the &quot;Weights&quot; part of the configuration section. &quot;Equal Weighted Hedged&quot; is the scoring setting you&#39;re looking for.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55161bb3ea86da3eca000041' id='55161bb3ea86da3eca000041'>
+<a href='#55161bb3ea86da3eca000041'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b8a7b4f44758bf5c000aea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4122a0b664faeb01757f54652164d960?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b8a7b4f44758bf5c000aea'>pangyuteng</a>
+</div>
+<a UTCms='1427512252000' class='quanto-date posted-at response-posted-at' href='#55161bb3ea86da3eca000041'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>A plot of cumulative return of the ETFs used in the default strategy, along with SPY.<br>
+This demonstrates how well the strategy is, i.e. minimal drawdown with the final return (198% or 217%) close to the best performing ETF (250%) used.  Note the different cumulative returns for SPY shown in the image (~200%) with those in Quantopian(~130%), which is likely due to my return is the simple cumulative return, when Quantopian likely accounted for slippage/commision...?<br>
+<a href="http://i.imgur.com/y4WsXIG.png">image here</a></p>
+
+<pre><code>%matplotlib inline
+import matplotlib.pyplot as plt  
+import numpy as np  
+import pandas as pd  
+from zipline.utils.factory import load_bars_from_yahoo
+
+start = &#39;2003-12-31&#39;  
+end = &#39;2014-12-31&#39;  
+ticks = (&#39;MDY&#39;,&#39;IEV&#39;,&#39;EEM&#39;,&#39;QQQ&#39;,&#39;XLV&#39;,&#39;IEF&#39;,&#39;TLT&#39;,&#39;IEF&#39;, &#39;SPY&#39;)  
+data = load_bars_from_yahoo(  
+    stocks=ticks,  
+    start=pd.Timestamp(start, tz=&#39;utc&#39;),  
+    end=pd.Timestamp(end, tz=&#39;utc&#39;),#pd.Timestamp.utcnow(),  
+    indexes={})  
+prices = data.minor_xs(&#39;price&#39;)
+
+log_returns = np.log(prices).diff()  
+compound_returns = (1 + log_returns).cumprod()  
+compound_returns.plot(figsize=(14, 6))
+
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5517e4e955c9bf0e1000028a' id='5517e4e955c9bf0e1000028a'>
+<a href='#5517e4e955c9bf0e1000028a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51d125a71144e60865000044'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7dd86784deedc047d5ad0fb30378bdd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51d125a71144e60865000044'>Peter Bakker</a>
+</div>
+<a UTCms='1427629292000' class='quanto-date posted-at response-posted-at' href='#5517e4e955c9bf0e1000028a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>changed the code so that he non-fetcher version works again  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55185265f5ed80b54c0004c7' id='55185265f5ed80b54c0004c7'>
+<a href='#55185265f5ed80b54c0004c7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54190a3694339e5d3a0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0ce35c636f83b2ccc10b4234b9e6748d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54190a3694339e5d3a0000af'>Alex</a>
+</div>
+<a UTCms='1427657319000' class='quanto-date posted-at response-posted-at' href='#55185265f5ed80b54c0004c7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Peter, thanks for the quick fix.</p>
+
+<p>Looks like there might be a pure pandas solution for the fetcher problem with multi-indexing. If you&#39;re feeling adventurous: <a href="http://pandas.pydata.org/pandas-docs/stable/advanced.html#advanced">http://pandas.pydata.org/pandas-docs/stable/advanced.html#advanced</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='551d0de6760e136f72000270' id='551d0de6760e136f72000270'>
+<a href='#551d0de6760e136f72000270'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51d125a71144e60865000044'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7dd86784deedc047d5ad0fb30378bdd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51d125a71144e60865000044'>Peter Bakker</a>
+</div>
+<a UTCms='1427967464000' class='quanto-date posted-at response-posted-at' href='#551d0de6760e136f72000270'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I wrote a small app you can read multiple tickers via one call with fetcher so we are not limited to one fetcher per ticker .<br>
+ The output is something like this:  </p>
+
+<pre><code>Date    open_vti    high_vti    low_vti close_vti   volume_vti  adj_close_vti   open_efa    high_efa    low_efa close_efa   volume_efa  adj_close_efa   open_icf    high_icf    low_icf close_icf   volume_icf  adj_close_icf   open_tlt    high_tlt    low_tlt close_tlt   volume_tlt  adj_close_tlt   open_ief    high_ief    low_ief close_ief   volume_ief  adj_close_ief  
+2/01/02 106 106.34  104.61  106.25  1627600 41.55   119.85  119.96  118.96  119.96  1215900 28.74   84.5    84.85   83.09   84.85   35200   24.44  
+3/01/02 106.46  107.39  106.35  107.39  354400  42  120.1   121.04  120 121.04  971400  29  85.23   85.3    85.07   85.22   35400   24.55  
+4/01/02 107.8   108.41  107.29  108.1   487200  42.28   122 122.07  121 121.84  377400  29.19   85.3    85.32   84.53   84.76   9600    24.41  
+</code></pre>
+
+<p>We only have to extract adj_close_SID in the algo</p>
+
+<p>Don&#39;t call it very minute though ;)</p>
+
+<p><a href="http://peterbakker.pythonanywhere.com/?stocks=VTI,EFA,ICF,TLT,IEF">http://peterbakker.pythonanywhere.com/?stocks=VTI,EFA,ICF,TLT,IEF</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='551d233019ec5a5ff7000294' id='551d233019ec5a5ff7000294'>
+<a href='#551d233019ec5a5ff7000294'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51d125a71144e60865000044'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7dd86784deedc047d5ad0fb30378bdd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51d125a71144e60865000044'>Peter Bakker</a>
+</div>
+<a UTCms='1427972914000' class='quanto-date posted-at response-posted-at' href='#551d233019ec5a5ff7000294'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>the flask code to generate the csv:</p>
+
+<pre><code>from flask import Flask, make_response,request  
+import pandas as pd  
+import pandas.io.data as web  
+import datetime as dt  
+import io
+
+app = Flask(__name__)
+
+# Route &#39;/&#39; and &#39;/index&#39; to `index`  
+@app.route(&#39;/&#39;)  
+@app.route(&#39;/index/&lt;stocks&gt;&#39;)  
+def index():  
+    #output = request.args.get(&#39;stocks&#39;)  
+    # Get data from fields  
+    stockstr = request.args.get(&#39;stocks&#39;)  
+    stocklist = stockstr.split(&quot;,&quot;)  
+    StockData = []  
+    startdate = dt.datetime(2002,1,1)  
+    enddate   = dt.datetime.utcnow()  
+    DataCollection2 = None  
+    i=0  
+    for stock in stocklist:  
+        StockDF =  web.DataReader(stock, &quot;yahoo&quot;,startdate , enddate )  
+        #print &gt;&gt; sys.stderr, StockDF  
+        StockDF = StockDF.rename(columns = {&#39;Open&#39;:&#39;Open_&#39;+stock,&#39;High&#39;:&#39;High_&#39;+stock,&#39;Low&#39;:&#39;Low_&#39;+stock,&#39;Close&#39;:&#39;Close_&#39;+stock,&#39;Volume&#39;:&#39;Volume_&#39;+stock,&#39;Adj Close&#39;:&#39;Adj_Close_&#39;+stock})  
+        StockDF.columns = map(str.lower, StockDF.columns)  
+        StockData.append(StockDF)  
+        if i==0:  
+            DataCollection2=StockDF  
+        else:  
+            DataCollection2= pd.merge(DataCollection2, StockDF, left_index=True, right_index=True, how=&#39;outer&#39;)  
+        i+=1  
+    buffers = io.StringIO()  
+    DataCollection2.to_csv(buffers,encoding=&#39;utf-8&#39;)
+
+    csv = buffers.getvalue()
+
+    if csv==None:  
+        csv=&#39;error generating content&#39;  
+    response = make_response(csv)  
+    file_name = &#39;DATA_&#39;+stockstr.replace(&#39;,&#39;, &#39;_&#39;);  
+    response.headers[&quot;Content-Disposition&quot;] = &#39;attachment; filename=&quot;&#39;+file_name+&#39;.csv&quot;&#39;  
+    return response
+
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='552730e27e218edc370002a6' id='552730e27e218edc370002a6'>
+<a href='#552730e27e218edc370002a6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e39b5ce4f6f7ef56000097'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6c8742787b4e645ef0545a026d180af2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e39b5ce4f6f7ef56000097'>joe lee</a>
+</div>
+<a UTCms='1428631780000' class='quanto-date posted-at response-posted-at' href='#552730e27e218edc370002a6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I was playing a lot with in sampling the algo with various parameters,  there is great weakness of the algo in the year of 2004,  basically the algo return is  minus 11% for almost a year the while the benchmark goes down ~%3.5.  the main risk is that the algo goes down the 10% in 14 days only between april 2 to april 14, this is a great volatility and risk.  it seems the algo , due to its monthly rebalance, didnt catch the turmoil of its ETF&#39;s,  Attach is the backtest with charts of the algo ETF so you can see they werent going down per the algo., </p>
+
+<p>if anyone have an idea how to detect and eliminate this fast turmoil, please help.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='552758af4b70daaaec00032d' id='552758af4b70daaaec00032d'>
+<a href='#552758af4b70daaaec00032d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55263f70660e382642000361'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7386c2d21c82004675b4f92393c4eb5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55263f70660e382642000361'>Bharath Rao</a>
+</div>
+<a UTCms='1428641969000' class='quanto-date posted-at response-posted-at' href='#552758af4b70daaaec00032d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Extremely nice concept.  Would it be possible to explain the crash protection mechanism?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55275ff14b70dadcb8000347' id='55275ff14b70dadcb8000347'>
+<a href='#55275ff14b70dadcb8000347'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b8a7b4f44758bf5c000aea'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4122a0b664faeb01757f54652164d960?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b8a7b4f44758bf5c000aea'>pangyuteng</a>
+</div>
+<a UTCms='1428643827000' class='quanto-date posted-at response-posted-at' href='#55275ff14b70dadcb8000347'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Bharath. The existing crash protection is very elegant, it allocates more &#39;cash&#39; when more &#39;z&#39;s are set to 0, due to negative &#39;mom&#39;s (weighted returns).</p>
+
+<p>@Joe That is a good pick. You can always use schedule_function to proactively rebalance the portfolio with your ideal trigger and frequency, below is just a not-so-elegant example.  Use of volatility maybe another option for the trigger.  Would be great to share your results if you figure something out!</p>
+
+<pre><code># your trigger here  
+def mama_bear_is_here(h_price):  
+    ret = h_price.pct_change().ix[-1]  
+    num_neg = ret[ret &lt;= 0].count()  
+    N = len(context.active)  
+    cpf = float(num_neg) / N  
+    if cpf &gt; 0.95:  
+        print &quot;look at that bear.&quot;  
+        return True  
+    else:  
+        return False
+
+#call below function with schedule_function for proactive portfolio management.  
+def rebalance_now(context, data):  
+    h_price = history(5, &#39;1d&#39;, &#39;price&#39;)[context.active]  
+    if mama_bear_is_here(h_price) is True:  
+        reallocate(context, data)  
+        rebalance(context, data)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='552766d77e218edc370003a7' id='552766d77e218edc370003a7'>
+<a href='#552766d77e218edc370003a7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55263f70660e382642000361'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b7386c2d21c82004675b4f92393c4eb5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55263f70660e382642000361'>Bharath Rao</a>
+</div>
+<a UTCms='1428645594000' class='quanto-date posted-at response-posted-at' href='#552766d77e218edc370003a7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Ted  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5527f0d84b70daaaec00061c' id='5527f0d84b70daaaec00061c'>
+<a href='#5527f0d84b70daaaec00061c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e39b5ce4f6f7ef56000097'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6c8742787b4e645ef0545a026d180af2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e39b5ce4f6f7ef56000097'>joe lee</a>
+</div>
+<a UTCms='1428680922000' class='quanto-date posted-at response-posted-at' href='#5527f0d84b70daaaec00061c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Ted and Bharath for responding.  I adapted the solution above and did massive tests.<br>
+Observations:</p>
+
+<ol>
+<li><p>This type of CPF wasnt enable to eliminate the 12% downturn occured in less than 14 days in 2014 and last the whole year.  I played with various CFP thresholds as well as tried to check CPF and balance every day, week, and bi-weekly</p></li>
+<li><p>Checking and rebalancing more than bi-weekly creates a signifcant reduction in overall performance and gain (11 years period). Regardless, the CPF system didnt help.</p></li>
+<li><p>something might be wrong with the history function , the values I am getting for the active stocks doesnt seem similar to what yahoo/google shows</p></li>
+</ol>
+
+<p>conclusions:<br>
+1. The CPF system calculates how many of the stocks in portfolio were negative, but it doesnt know if it was very small decrease or very high in %. It seems we should try momentum indicator like RSI or ADX to detect large downturn,<br>
+2. Need to check the history function validity + why more frequent rebalance cause such a big reduction in overall perfromance (10 years period)</p>
+
+<p>attached is the up to date with the new crisis rebalance and logs.  If someone can help me and continue the work it will be great.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/keller-slash-butler-a-century-of-generalized-momentum-elastic-asset-allocation-eaa'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#cea8ababaaacafada58ebfbbafa0baa1bea7afa0e0ada1a3">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

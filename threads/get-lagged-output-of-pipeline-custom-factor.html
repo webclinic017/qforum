@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+get lagged output of Pipeline Custom Factor?
+</title>
+<meta content='I&#39;m trying to figure out how to control the point in time for which a Pipeline Custom Factor returns its output.  The typical use case is for a factor to return today&#39;s value.  Is there a way to lag the output by calling/instantiating the factor with a parameter?  For example, what if I want yesterday&#39;s value?  Or N days ago? As a specific example, say I wanted the value of AdvancedMomentum N trading days ago--how would I do it?         class AdvancedMomentum(CustomFactor):             ...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="+u86QnruO350gq2O1RmbzltTkPih2Vf6xXgSvCStYqSGiUwP2Bjpnc2f9L+a9jO6Y92zkdsVQuFHd8nWjugAHw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/get-lagged-output-of-pipeline-custom-factor' property='og:url'>
+<meta content='get lagged output of Pipeline Custom Factor?' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/get-lagged-output-of-pipeline-custom-factor' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='get lagged output of Pipeline Custom Factor?' property='og:title'>
+<meta content='I&#39;m trying to figure out how to control the point in time for which a Pipeline Custom Factor returns its output.  The typical use case is for a factor to return today&#39;s value.  Is there a way to lag the output by calling/instantiating the factor with a parameter?  For example, what if I want yesterday&#39;s value?  Or N days ago? As a specific example, say I wanted the value of AdvancedMomentum N trading days ago--how would I do it?         class AdvancedMomentum(CustomFactor):             ...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/get-lagged-output-of-pipeline-custom-factor">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5bd5b7be20e5e200410bdf1b'>
+<div class='post-container' data-post-id='5bd5b7be20e5e200410bdf1b' id='5bd5b7be20e5e200410bdf1b'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>get lagged output of Pipeline Custom Factor?</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1540732862000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=get lagged output of Pipeline Custom Factor?&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fget-lagged-output-of-pipeline-custom-factor%3Futm_source%3Dwebsite_share%26utm_campaign%3Dget-lagged-output-of-pipeline-custom-factor%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fget-lagged-output-of-pipeline-custom-factor%3Futm_source%3Dwebsite_share%26utm_campaign%3Dget-lagged-output-of-pipeline-custom-factor%26utm_medium%3Dlinkedin&amp;title=get+lagged+output+of+Pipeline+Custom+Factor%3F+%28Grant+Kiehne%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pipeline' data-tag-id='561525bcf252a59171000001' href='/posts/tag/Pipeline/newest'>Pipeline</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/get-lagged-output-of-pipeline-custom-factor?utm_source=website_share&amp;utm_campaign=get-lagged-output-of-pipeline-custom-factor&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Grant Kiehne" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>I&#39;m trying to figure out how to control the point in time for which a Pipeline Custom Factor returns its output.  The typical use case is for a factor to return today&#39;s value.  Is there a way to lag the output by calling/instantiating the factor with a parameter?  For example, what if I want yesterday&#39;s value?  Or N days ago?</p>
+
+<p>As a specific example, say I wanted the value of AdvancedMomentum N trading days ago--how would I do it?</p>
+
+<pre><code>        class AdvancedMomentum(CustomFactor):  
+            inputs = (USEquityPricing.close, Returns(window_length=126))  
+            window_length = 252
+
+            def compute(self, today, assets, out, prices, returns):  
+                am = np.divide(  
+                (  
+                (prices[-21] - prices[-252]) / prices[-252] -  
+                prices[-1] - prices[-21]  
+                ) / prices[-21],  
+                np.nanstd(returns, axis=0)  
+                )  
+                out[:] = preprocess(am)  
+</code></pre>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>22 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5bd5df4d20e5e200440bdffe' id='5bd5df4d20e5e200440bdffe'>
+<a href='#5bd5df4d20e5e200440bdffe'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1540742989000' class='quanto-date posted-at response-posted-at' href='#5bd5df4d20e5e200440bdffe'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Interesting question. For this factor, I wonder if this would do the trick for N = 5 days ago?</p>
+
+<pre><code>        class AdvancedMomentum(CustomFactor):  
+            N = 5 + 1  
+            inputs = (USEquityPricing.close, Returns(window_length=126 + (N/2))  
+            window_length = 252 + N
+
+            def compute(self, today, assets, out, prices, returns):  
+                am = np.divide(  
+                (  
+                (prices[-21 - N] - prices[-252 - N]) / prices[-252 - N] -  
+                prices[-1 - N] - prices[-21 -N]  
+                ) / prices[-21 - N],  
+                np.nanstd(returns, axis=0)  
+                )  
+                out[:] = preprocess(am  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd5e627459375003e8a0ba0' id='5bd5e627459375003e8a0ba0'>
+<a href='#5bd5e627459375003e8a0ba0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1540744743000' class='quanto-date posted-at response-posted-at' href='#5bd5e627459375003e8a0ba0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant. To get the value of a factor n days ago use a simple CustomFactor like this</p>
+
+<pre><code>class Factor_N_Days_Ago(CustomFactor):  
+    def compute(self, today, assets, out, input_factor):  
+        out[:] = input_factor[0]
+
+</code></pre>
+
+<p>Then create an instance of this and pass the factor you want n days ago as the input. Pass the window length which is n+1.</p>
+
+<pre><code>    advanced_momentum_1_day_ago = Factor_N_Days_Ago([advanced_momentum], window_length=days_ago+1)
+
+</code></pre>
+
+<p>The one thing you need to ensure is that the original factor is &#39;window safe&#39;. If it is, then put the following line into it&#39;s class definition.</p>
+
+<pre><code>    window_safe = True
+
+</code></pre>
+
+<p>See the attached notebook.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd60b1735d75e004c7615df' id='5bd60b1735d75e004c7615df'>
+<a href='#5bd60b1735d75e004c7615df'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540754199000' class='quanto-date posted-at response-posted-at' href='#5bd60b1735d75e004c7615df'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Dan -</p>
+
+<blockquote>
+<p>The one thing you need to ensure is that the original factor is &#39;window safe&#39;.</p>
+</blockquote>
+
+<p>I&#39;m not sure how do check/test for window safeness.  I searched the Q help page for the topic, and didn&#39;t find anything.  I gather from Jamie&#39;s post (<a href="https://www.quantopian.com/posts/how-to-make-factors-be-the-input-of-customfactor-calculation#58f7921d92b39e5b66f9b473" rel="nofollow">https://www.quantopian.com/posts/how-to-make-factors-be-the-input-of-customfactor-calculation#58f7921d92b39e5b66f9b473</a>).  I guess the idea is that the factor needs to have the same normalization versus time on a per security basis, which I think one would want anyway for an alpha factor, right?  I thought all of the Pipeline inputs were corrected for such issues (e.g. splits), anyway?</p>
+
+<p>Also, I don&#39;t understand what this does:</p>
+
+<pre><code>window_safe = True  
+</code></pre>
+
+<p>Is it just to ensure that the author did a head-scratch to determine window safeness?  Or is it more than that?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd638ee7d33f100422e70aa' id='5bd638ee7d33f100422e70aa'>
+<a href='#5bd638ee7d33f100422e70aa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1540765935000' class='quanto-date posted-at response-posted-at' href='#5bd638ee7d33f100422e70aa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>&#39;window_safe&#39; is a zipline/pipeline term. I&#39;ve never come across it in other quant circles. If a factor is &#39;window_safe&#39; it means its value will be the same when calculated  over various &#39;windows&#39; or timeframes. Really this means its value won&#39;t be impacted by stock splits so it&#39;s &#39;safe&#39; to use whether a split is applied or not.</p>
+
+<p>As an example, a &#39;10_day_moving_average_price&#39; factor is <strong>not</strong> window_safe. If a 2:1 split occurs all the values will be cut in half. However, a &#39;10_day_return&#39; factor <strong>is</strong>. It&#39;s just a ratio which will remain the same even if the prices are halved. </p>
+
+<p>It&#39;s up to the author of a factor to determine if a factor is &#39;window_safe&#39;. The <code>window_safe</code>flag is just used in pipeline to throw an error if it finds it&#39;s using a factor in an &#39;un-safe&#39; way and therefore may be giving incorrect results. Setting this to True simply instructs pipeline to not throw an error. It should be noted that maybe using a factor with unadjusted prices is ok. It just depends upon the situation.</p>
+
+<p>So, yes. It&#39;s just to ensure the author did a &#39;head-scratch&#39;.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd684e435d75e0040761803' id='5bd684e435d75e0040761803'>
+<a href='#5bd684e435d75e0040761803'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1540785380000' class='quanto-date posted-at response-posted-at' href='#5bd684e435d75e0040761803'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Very helpful, thanks Dan! I&#39;ve wondered about &#39;window_safe&#39; for some time too.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd6d99635d75e0043761a0d' id='5bd6d99635d75e0043761a0d'>
+<a href='#5bd6d99635d75e0043761a0d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540807062000' class='quanto-date posted-at response-posted-at' href='#5bd6d99635d75e0043761a0d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Dan -</p>
+
+<p>I&#39;m still a bit confused about the need for window safeness.  Outside of Pipeline, in an algo that is run in the IDE (the &quot;bactester&quot;), when OHLCV minute bar data are retrieved, they are corrected for splits as of the current simulation time, right?  Is this also not true for Pipeline data when running an algo in the IDE?</p>
+
+<p>Or perhaps the code you shared above effectively dials back the current simulation time, so that one has to worry about splits?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd869d4d57ad100415d58fc' id='5bd869d4d57ad100415d58fc'>
+<a href='#5bd869d4d57ad100415d58fc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1540909524000' class='quanto-date posted-at response-posted-at' href='#5bd869d4d57ad100415d58fc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant, I sometimes find the whole split, window_safe, thing a bit of a head scratcher.</p>
+
+<p>Concrete examples can therefore be a help. Below is a pipeline output for AAPL at the time of their 7:1 split on 6-9-2014. The three columns are price (standard close), price 2 days ago (a typical standard custom factor), and then the price factor used in the n-days-ago factor. </p>
+
+<pre><code>              price    price_2_day_ago   price_factor_2_day_ago  
+2014-06-03  628.50000   633.000000        633.00000  
+2014-06-04  637.54000   628.500000        628.50000  
+2014-06-05  644.82000   637.540000        637.54000  
+2014-06-06  647.35000   644.820000        644.82000  
+2014-06-09  92.22613    92.480421         647.35000  
+2014-06-10  93.70000    92.226130         92.22613  
+2014-06-11  94.25000    93.700000         93.70000  
+2014-06-12  93.87000    94.250000         94.25000  
+2014-06-13  92.26000    93.870000         93.87000
+
+</code></pre>
+
+<p>Notice the &#39;price_2_day_ago&#39; and &#39;price_factor_2_day_ago&#39; are the same as long as there aren&#39;t any splits <em>between n-days-ago and the current simulation day</em>. The &#39;price_2_day_ago&#39; factor uses adjusted prices, however, &#39;price_factor_2_day_ago&#39; is the actual (unadjusted) factor value 2 days ago. It&#39;s the &#39;real&#39; value of the factor 2 days ago. This may or may not be what you want. It&#39;s not right or wrong. Just understand how to use it. &#39;window_safe&#39; is just a flag of caution.</p>
+
+<p>Not to beat this to death, but here&#39;s an example. If one wanted to know if yesterdays price was greater than the prices 2 days ago, then definitely use the adjusted values (ie column 2 above). However, if one wanted to check if a stock is priced over $100, then adjusted prices aren&#39;t correct. Column 3 above would maybe be more correct. </p>
+
+<p>Take a look at the attached notebook. The code shared above for &#39;&#39;Factor_N_Days_Ago&quot; factor works exactly as it implies. It returns the value of a factor as it would have been seen on that day. It doesn&#39;t &#39;adjust&#39; it for any subsequent splits, it&#39;s exactly &#39;as-it-was&#39;. Whether one needs to worry about splits depends upon how it is used (eg the the stock over $100 example above), or more generally, how the factor is calculated and whether it&#39;s impacted by splits. If a factor isn&#39;t impacted by splits (eg ratios or counts such as returns or up/down days) then the factor can be labeled as &#39;window_safe&#39;.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd86a6b16a88b004489997d' id='5bd86a6b16a88b004489997d'>
+<a href='#5bd86a6b16a88b004489997d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1540909675000' class='quanto-date posted-at response-posted-at' href='#5bd86a6b16a88b004489997d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>oops, forgot to attach the notebook...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd8cbeba54c52230e88dfdb' id='5bd8cbeba54c52230e88dfdb'>
+<a href='#5bd8cbeba54c52230e88dfdb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540934635000' class='quanto-date posted-at response-posted-at' href='#5bd8cbeba54c52230e88dfdb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Dan -</p>
+
+<p>You are using a notebook, but do things work the same way in the backtester?  On the help page, it clearly states:</p>
+
+<blockquote>
+<p>When your algorithm calls for historical equity price or volume data, it is adjusted for splits, mergers, and dividends as of the current simulation date. In other words, if your algorithm asks for a historical window of prices, and there is a split in the middle of that window, the first part of that window will be adjusted for the split. This adjustment is done so that your algorithm can do meaningful calculations using the values in the window.</p>
+</blockquote>
+
+<p>So, does this only apply to non-Pipelined data?  Or maybe it applies to Pipelined data, but only when running a backtest?</p>
+
+<p>Or perhaps Pipeline, when queried for lagged data/factors, as you illustrated, is effectively shifting the simulation date?</p>
+
+<p>Sorry, still confused what&#39;s going on...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd8d34dfd192b0043bb1110' id='5bd8d34dfd192b0043bb1110'>
+<a href='#5bd8d34dfd192b0043bb1110'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1540936525000' class='quanto-date posted-at response-posted-at' href='#5bd8d34dfd192b0043bb1110'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,</p>
+
+<p>One of the redeeming features of the Pipeline API is that uses the same execution engine and has the same user-facing API in both research and backtesting. The only differences between the two environments are the way that you actually run/execute the pipeline, and the shape of the output. Regardless of environment, when a pipeline is computed for day N, it is computed over a set of tabular input data (described as a 2-dimensional M*N matrix in the <a href="https://www.quantopian.com/tutorials/pipeline#lesson10">CustomFactor lesson of the Pipeline Tutorial</a>). Per-share data fields in the input data will always be adjusted as of day N.</p>
+
+<p>In response to the meaning of the simulation date: in backtesting, the &#39;simulation date&#39; is the current date of the zipline engine. In research, the &#39;simulation date&#39; is the date in <code>run_pipeline</code>. The simulation date in research is the first level of the index in the output dataframe of <code>run_pipeline</code>.</p>
+
+<p>In general, I find it helpful to play around with an example, like the AAPL split in 2014. You should play around with printing out the inputs to a <code>CustomFactor</code>, the output of <code>run_pipeline</code>, etc. to help visualize how pipeline works.</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd8df53047ada0044e16739' id='5bd8df53047ada0044e16739'>
+<a href='#5bd8df53047ada0044e16739'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540939603000' class='quanto-date posted-at response-posted-at' href='#5bd8df53047ada0044e16739'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>So, I guess I&#39;m concluding that <a href="https://www.quantopian.com/posts/get-lagged-output-of-pipeline-custom-factor#5bd5e627459375003e8a0ba0" rel="nofollow">Dan&#39;s example above</a> <em>effectively</em> shifts the simulation date when computing a lagged Pipeline custom factor, so that one needs to worry about the factor being &quot;window safe&quot; (or it&#39;ll suffer from erroneous jumps, if one is expecting adjusted data).  If I understand correctly, as of the <em>effective</em> simulation date, the data are adjusted for splits and dividends back to the time of Adam and Eve (or the Big Bang, if you prefer).</p>
+
+<p>It&#39;s a bit confusing, since the &quot;simulation date&quot; of a backtest is the current date:</p>
+
+<pre><code>get_datetime(timezone)  
+</code></pre>
+
+<p><em>Returns the current algorithm time. By default this is set to UTC, and you can pass an optional parameter to change the timezone.</em></p>
+
+<p>But if one lags a Pipeline factor in a backtest, then the data used by the factor are a trailing window of adjusted data, as of the <em>effective</em> simulation date, and not the <code>get_datetime</code> date (if I&#39;m following correctly...).</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd91608716514003bc54fe6' id='5bd91608716514003bc54fe6'>
+<a href='#5bd91608716514003bc54fe6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1540953608000' class='quanto-date posted-at response-posted-at' href='#5bd91608716514003bc54fe6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Backing up one step. The ONLY time &#39;window_safe&#39; (and likewise the majority of the above discussion) is an issue is when using pipeline AND when factors are used as inputs to other factors. </p>
+
+<p>When using any of the built in datasets as inputs, the input data is dutifully adjusted each day to be the data one would have seen on that day. It&#39;s really sort of a three step process. First the data is fetched, then it&#39;s adjusted, then it is fed to the compute method of any factors. </p>
+
+<p>Adjusting the data is not a trivial process. As an example, prices are <em>divided</em> by the split ratios (ie a 2:1 split will divide the price by 2), however volumes are <em>multiplied</em> by the split ratio (ie a 2:1 split will multiply the volume by 2). Zipline takes care of adjusting the data BEFORE feeding the data into any pipeline factors. The data is always adjusted as of the simulation date. </p>
+
+<p>So far so good...</p>
+
+<p>Now we get to using factors as inputs to other factors. While the built in datasets are dutifully adjusted for splits and dividends, zipline/pipeline doesn&#39;t have a clue how to adjust an arbitrary input (such as a custom factor). Does it multiply? Does it divide? Does it do some other funky math? So, it doesn&#39;t do anything. (Well I suppose technically it does something. It throws an error if window_safe isn&#39;t set to True). In any case, it&#39;s really now a two step process. Fetch all the data and send the data to the compute method of the factors. No intermediate adjusting. It doesn&#39;t try to &#39;adjust&#39; it because it doesn&#39;t know how to. It just thinks of it as raw data. That&#39;s what&#39;s happening in the notebook example above. </p>
+
+<p>@Grant, I wouldn&#39;t think in terms of &#39;lagging&#39; a pipeline factor or &#39;effective simulation&#39; dates. That&#39;s complicating it too much. First, one concept which may not be apparent, is that a factor ALWAYS has the same output(s) when run on a specific day. One could run the factor standalone in a notebook or in the IDE or as an input to another factor, and it will ALWAYS output the same value(s) for a specific day. It&#39;s like static dictionary. On this date this is the factor output. Period. </p>
+
+<p>Now, when using factors as inputs there are just two steps. First, the factor output is computed. (Remember the output is a fixed series of dates and associated outputs -one date - one output.) Second, this output is passed to the compute method of the other factor. No adjusting is done. &#39;&#39;Factor_N_Days_Ago&quot; is really only taking the fixed output from the input factor (which is a series of dates and the associated output) and &#39;looking up&#39; the output from 2 days ago. It&#39;s not any more complicated than that.</p>
+
+<p>Hope that helps?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bd973e67165140047c55227' id='5bd973e67165140047c55227'>
+<a href='#5bd973e67165140047c55227'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1540977638000' class='quanto-date posted-at response-posted-at' href='#5bd973e67165140047c55227'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Dan &amp; Jamie -</p>
+
+<p>I think the key concept I was missing is that, as Dan says, his <code>Factor_N_Days_Ago</code> is looking up the factor output from N days back.  I was incorrectly thinking of it as applying the factor to lagged data adjusted up to the current <code>get_datetime()</code> date of the simulation.</p>
+
+<p>Regarding the use of <code>window_safe = True</code> I&#39;m still not completely clear if Pipeline performs a test for window safeness if I don&#39;t use it (and thus it is not necessary and is a kind of override), or if it is always required when passing the output of one factor to another, or an error will result?</p>
+
+<p>I searched on the <a href="https://www.quantopian.com/help" rel="nofollow">help page</a> for a description of the <code>window_safe</code> flag but found nothing.  Generally is there documentation on this business of passing the output of one factor to another?  Seems like a basic tool.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdacd45d5c9fb004888aaad' id='5bdacd45d5c9fb004888aaad'>
+<a href='#5bdacd45d5c9fb004888aaad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1541066053000' class='quanto-date posted-at response-posted-at' href='#5bdacd45d5c9fb004888aaad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Based on some Google searches, <a href="https://www.quantopian.com/posts/get-lagged-output-of-pipeline-custom-factor#5bd638ee7d33f100422e70aa" rel="nofollow">Dan&#39;s comment above</a>, and some testing on a factor that outputs Returns (which should be window safe), I conclude that setting <code>window_safe = True</code> flags Pipeline to ignore the <code>NonWindowSafeInput</code> &quot;error&quot; and to keep calm and carry on.</p>
+
+<p>Another question is, when <code>Factor_N_Days_Ago</code> is instantiated with a mask, does it return values using the current value of the mask, or the mask N days ago?  For example, since the composition of <code>QTradableStocksUS</code> changes with time, if <code>Factor_N_Days_Ago</code> is looking up prior values of the factor, then the list of securities would change with N, due to changes in <code>QTradableStocksUS</code>.  This is what I&#39;d expect, since one is effectively storing and then looking up prior values of the factor.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c03095794c199002f0d2357' id='5c03095794c199002f0d2357'>
+<a href='#5c03095794c199002f0d2357'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1543702871000' class='quanto-date posted-at response-posted-at' href='#5c03095794c199002f0d2357'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Dan &amp; Jamie -</p>
+
+<p>Is there any way to write a function similar to the example above <code>Factor_N_Days_Ago</code> but that returns the factor values for a trailing window of N days?  It seems as though Pipeline custom factors are designed to just return a vector, so maybe I would need to iterate over the <code>days_ago</code> parameter to access a trailing window (versus a single lagged value).  Or somehow use <code>out.&lt;output_name&gt;</code> for each lagged value, and then cobble everything back together?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dabc7c7e68ce5004110af7e' id='5dabc7c7e68ce5004110af7e'>
+<a href='#5dabc7c7e68ce5004110af7e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b96b61cf2033b650abcc46a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1acd53b2f15ead52ee7304af949e0729?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b96b61cf2033b650abcc46a'>Zach Oakes</a>
+</div>
+<a UTCms='1571538887000' class='quanto-date posted-at response-posted-at' href='#5dabc7c7e68ce5004110af7e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dan,</p>
+
+<p>I&#39;ve tried using this version (copied from ipynb) in my strategy, and the simpler version on another post (for getting price 2 days ago), and I cannot get either to build -- I&#39;m getting CustomFactor unknown -- so while it may be the same backtest, etc -- I simply cannot get this code to work in any way I try.</p>
+
+<p>Would be nice if I could simply do:<br>
+USEquityPricing.close.iloc[-255]<br>
+or .shift(255)</p>
+
+<p>Unfortunately I&#39;m stuck with this -- just need to get it to run : ) </p>
+
+<p>Zach  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dadfb9854dfaa21bb098d61' id='5dadfb9854dfaa21bb098d61'>
+<a href='#5dadfb9854dfaa21bb098d61'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1571683224000' class='quanto-date posted-at response-posted-at' href='#5dadfb9854dfaa21bb098d61'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Zach,</p>
+
+<p>Thanks for the feedback. You&#39;re right that a built-in function to get values from N days ago would be helpful here. I&#39;ve added a +1 to an internal ticket tracking this feature request.</p>
+
+<p>In the meantime, would you be able to share your implementation and the corresponding error message? Maybe we can help get it running.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dae8c34360ff3003d35be98' id='5dae8c34360ff3003d35be98'>
+<a href='#5dae8c34360ff3003d35be98'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b96b61cf2033b650abcc46a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1acd53b2f15ead52ee7304af949e0729?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b96b61cf2033b650abcc46a'>Zach Oakes</a>
+</div>
+<a UTCms='1571720244000' class='quanto-date posted-at response-posted-at' href='#5dae8c34360ff3003d35be98'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Jamie,</p>
+
+<p>Thanks for the quick reply ! I actually figured out the momentum issue -- unfortunately I was missing an import haha.  Seems in the notebook format I missed it, was looking in the wrong cells.  I am still stuck, however.  I&#39;m trying to translate a deprecated strategy into current build -- the primary issue was the fundamentals (used Morningstar), but I replaced those with the new native filters in universe.<br>
+Unfortunately I&#39;m still stuck on the method of building the pipeline -- it was done kind of as a pure DF in the deprecated example, and I&#39;ve had trouble reconciling with the rest of the logic.</p>
+
+<p>Here&#39;s the &#39;new&#39; version.  I&#39;ll comment again with the original.</p>
+
+<p>(I also tried simply replacing the deprecated fundamental logic with current style, still not running)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dae8fdf0acc3a294c2683bd' id='5dae8fdf0acc3a294c2683bd'>
+<a href='#5dae8fdf0acc3a294c2683bd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b96b61cf2033b650abcc46a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1acd53b2f15ead52ee7304af949e0729?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b96b61cf2033b650abcc46a'>Zach Oakes</a>
+</div>
+<a UTCms='1571721183000' class='quanto-date posted-at response-posted-at' href='#5dae8fdf0acc3a294c2683bd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I don&#39;t know what happened -- I&#39;m getting some weird indent / formatting error here -- don&#39;t understand why my indents are aligned -- just checked them</p>
+
+<p>Maybe some issue with the commented out old code -- I tried sharing my code, but I can&#39;t because I can&#39;t get a backtest to run. Tried sharing  with the collaborate feature? </p>
+
+<p>If that was unsuccessful, here is the link to the thread from the old strategy I&#39;m trying to translate -- and get_fundamentals was the primary issue.<br>
+<a href="https://www.quantopian.com/posts/value-momentum-strategy" rel="nofollow">https://www.quantopian.com/posts/value-momentum-strategy</a></p>
+
+<p>Any help would be greatly appreciated : )  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5daf1adb360ff3620235bcf9' id='5daf1adb360ff3620235bcf9'>
+<a href='#5daf1adb360ff3620235bcf9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1571756763000' class='quanto-date posted-at response-posted-at' href='#5daf1adb360ff3620235bcf9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Zach,</p>
+
+<p>I took a look and it seems the error is coming from this line: <code>temp = context.fund_filt.copy()</code>. Specifically, the issue is that <code>fund_filt</code> is not an attribute stored on <code>context</code>, so the algorithms is raising an exception.</p>
+
+<p>That said, I think your best bet is to re-write the strategy in pipeline. The version that you are working from is using a very old version of the Quantopian API, and can be done much more simply in pipeline. I&#39;ve attached a version of something that I think is pretty close to the original post you were working from, but with most of the logic moved into pipeline. Before iterating on the strategy any further, I&#39;d highly recommend going through the <a href="https://www.quantopian.com/tutorials/getting-started">Getting Started Tutorial</a> and <a href="https://www.quantopian.com/tutorials/pipeline">Pipeline Tutorial</a> to get a better understanding of how the Pipeline API works, as it is Quantopian&#39;s core API.</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5daf2ccc360ff34b4635bdcf' id='5daf2ccc360ff34b4635bdcf'>
+<a href='#5daf2ccc360ff34b4635bdcf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b96b61cf2033b650abcc46a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1acd53b2f15ead52ee7304af949e0729?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b96b61cf2033b650abcc46a'>Zach Oakes</a>
+</div>
+<a UTCms='1571761356000' class='quanto-date posted-at response-posted-at' href='#5daf2ccc360ff34b4635bdcf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I realized the same thing last night (after we spoke) -- did you see the version since I added make_pipeline ?  Regardless I&#39;m stuck on the same thing.</p>
+
+<p>I guess the issue I&#39;m having is I&#39;m still not getting how to use the calc_return function -- I realize the context.output.copy() is the issue, but that&#39;s me trying to replicate the original where they&#39;re just copying the dataframe.  It seems they&#39;re simply calculating momentum, which I can do simpler inline like so:<br>
+    close_1yr_ago = yesterday_close / (Returns(window_length=252) + 1.0)<br>
+    mom_calc = (yesterday_close - close_1yr_ago) / close_1yr_ago</p>
+
+<p>I understand pipeline, I just didn&#39;t understand how to interact with the pipeline with a custom function like this (calc_return) -- but I don&#39;t think I need to necessarily.  I can simply filter the pipeline with masks or screens, and sort it accordingly -- kind of how I did in the Ver2 I shared first?<br>
+It seems Ver2 didn&#39;t share -- I&#39;ll try again.</p>
+
+<p>I guess my question is why it&#39;s performing so differently from the strategy I was replicating? Am I missing something here?</p>
+
+<p>Zach  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5daf2ee268ac77460c5abfab' id='5daf2ee268ac77460c5abfab'>
+<a href='#5daf2ee268ac77460c5abfab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b96b61cf2033b650abcc46a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1acd53b2f15ead52ee7304af949e0729?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b96b61cf2033b650abcc46a'>Zach Oakes</a>
+</div>
+<a UTCms='1571761890000' class='quanto-date posted-at response-posted-at' href='#5daf2ee268ac77460c5abfab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Is there a reason my backtests aren&#39;t working (loading...) when I import in here ? Sorry -- I&#39;ll try sharing/collaborating with you.</p>
+
+<p>I had another question -- I was trying to calculate a smoothness factor used in momentum, like the number of up days vs number of down days in say 1yr.<br>
+I suppose I could use :</p>
+
+<pre><code>    secdf = context.output  
+    secdf[&#39;pct_chg&#39;] = secdf[&#39;Yesterday Close&#39;].pct_change()  
+    secdf[&#39;id&#39;] = np.where((secdf[&#39;pct_chg&#39;] &lt; 0),1,-1)  
+</code></pre>
+
+<p>Is there any way to do this IN the pipeline, rather than &#39;to&#39; the pipe after it&#39;s returned?<br>
+make_pipeline():</p>
+
+<pre><code>close_1d = yesterday_close / (Returns(window_length=2) + 1.0)  
+ret_1d = (yesterday_close - close_1d ) / close_id  
+idm = np.where(ret_1d &lt; 0,1,-1).cumsum()
+</code></pre>
+
+<p>...</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/get-lagged-output-of-pipeline-custom-factor'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/get-lagged-output-of-pipeline-custom-factor'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#6b0d0e0e0f090a08002b1a1e0a051f041b020a0545080406">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

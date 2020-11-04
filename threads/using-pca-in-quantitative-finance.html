@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Using PCA in Quantitative Finance
+</title>
+<meta content='Principal component analysis (PCA) allows you to understand if there are a small number of parts of your data which can explain a wide swath of all data points observed. More specifically, PCA is a common dimensionality reduction technique used in statistics and machine learning to analyze high-dimensional datasets. Principal components allow us to quantify the variability of the data, leading to low-dimensional projections of matrices that contain the bulk of the information contained within...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="rrPFcA8BF8kNMG1+TavUdNT6nYPF8oHveGoMijPneELS1bM9rffFKrQtNE8CRHwA7HS+6r8+lPT6ZdfgmaIa+Q==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/using-pca-in-quantitative-finance' property='og:url'>
+<meta content='Using PCA in Quantitative Finance' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/using-pca-in-quantitative-finance' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Using PCA in Quantitative Finance' property='og:title'>
+<meta content='Principal component analysis (PCA) allows you to understand if there are a small number of parts of your data which can explain a wide swath of all data points observed. More specifically, PCA is a common dimensionality reduction technique used in statistics and machine learning to analyze high-dimensional datasets. Principal components allow us to quantify the variability of the data, leading to low-dimensional projections of matrices that contain the bulk of the information contained within...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/using-pca-in-quantitative-finance">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5a552eb50f3d7a00165be630'>
+<div class='post-container' data-post-id='5a552eb50f3d7a00165be630' id='5a552eb50f3d7a00165be630'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Using PCA in Quantitative Finance</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/570e873588217b6f69000557'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b864aac34bf961d32080bee21e80db5f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/570e873588217b6f69000557'>Maxwell Margenot</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1515536057000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Using PCA in Quantitative Finance&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fusing-pca-in-quantitative-finance%3Futm_source%3Dwebsite_share%26utm_campaign%3Dprincipal-component-analysis%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fusing-pca-in-quantitative-finance%3Futm_source%3Dwebsite_share%26utm_campaign%3Dprincipal-component-analysis%26utm_medium%3Dlinkedin&amp;title=Using+PCA+in+Quantitative+Finance+%28Maxwell+Margenot%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Machine Learning' data-tag-id='55c50e7d8d4710ec6e00000b' href='/posts/tag/Machine-Learning/newest'>Machine Learning</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Statistics' data-tag-id='55d33f923f6ba1005d000001' href='/posts/tag/Statistics/newest'>Statistics</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Lectures' data-tag-id='5755d15e8717dd8af5000002' href='/posts/tag/Lectures/newest'>Lectures</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Risk Model' data-tag-id='5a0269aa9cc8967fe39dd706' href='/posts/tag/Risk-Model/newest'>Risk Model</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/using-pca-in-quantitative-finance?utm_source=website_share&amp;utm_campaign=principal-component-analysis&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Maxwell Margenot" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Principal component analysis (PCA) allows you to understand if there are a small number of parts of your data which can explain a wide swath of all data points observed. More specifically, PCA is a common dimensionality reduction technique used in statistics and machine learning to analyze high-dimensional datasets. Principal components allow us to quantify the variability of the data, leading to low-dimensional projections of matrices that contain the bulk of the information contained within the original dataset. It is used in many scientific disciplines and is incredibly applicable across a wide variety of problems. In this lecture, we examine the use of PCA for image processing and for constructing statistical risk factors of a portfolio of securities.</p>
+
+<p>The Principal Component Analysis lecture&#39;s landing page is here:<br>
+<a href="https://www.quantopian.com/lectures/principal-component-analysis">https://www.quantopian.com/lectures/principal-component-analysis</a></p>
+
+<p>As always, our lectures are all available at:<br>
+<a href="https://www.quantopian.com/lectures">https://www.quantopian.com/lectures</a>  </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>25 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5a613a377e4d1279d7deaf86' id='5a613a377e4d1279d7deaf86'>
+<a href='#5a613a377e4d1279d7deaf86'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1516321335000' class='quanto-date posted-at response-posted-at' href='#5a613a377e4d1279d7deaf86'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Maxwell -</p>
+
+<p>I recently discovered that for certain types of problems, one should not use ordinary least squares, but rather some form of orthogonal regression to avoid a bias called regression dilution (attenuation).  I&#39;m wondering if when <a href="https://www.quantopian.com/posts/building-a-better-beta">calculating beta</a>, for example, a form of orthogonal least squares should be used to avoid the bias.</p>
+
+<p>For example, perhaps the first principal component of returns (e.g. of XYZ versus SPY returns) to compute beta would be more appropriate, avoiding the regression dilution bias?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a69a1fe5b32910016cefaa4' id='5a69a1fe5b32910016cefaa4'>
+<a href='#5a69a1fe5b32910016cefaa4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1516872190000' class='quanto-date posted-at response-posted-at' href='#5a69a1fe5b32910016cefaa4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Seriously? You need to pick your target market better...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a69a9e50bdece001661b6e6' id='5a69a9e50bdece001661b6e6'>
+<a href='#5a69a9e50bdece001661b6e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1516874213000' class='quanto-date posted-at response-posted-at' href='#5a69a9e50bdece001661b6e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The other target was the journal of participatory medicine. Should be going for students.</p>
+
+<p>1 result (0.42 seconds)<br>
+Search Results<br>
+Reader Comments - Journal of Participatory Medicine<br>
+ojs.jopm.org/index.php/jpm/comment/view/31/0</p>
+
+<p>Quick Essay Help. by quick essay help (2017-12-04). Email Reply. Of course, nobody wants to get low grades in assignments,especially when the marks of the write up will be included in the final exam marks. But, with the advancement of technology, students with the help of... Read more ...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a6b62c090e870000e99762b' id='5a6b62c090e870000e99762b'>
+<a href='#5a6b62c090e870000e99762b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/570e873588217b6f69000557'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b864aac34bf961d32080bee21e80db5f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/570e873588217b6f69000557'>Maxwell Margenot</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1516987072000' class='quanto-date posted-at response-posted-at' href='#5a6b62c090e870000e99762b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, OLS certainly has its its limitations. I guess that an analogue in finance to the measurement errors that cause regression dilution would likely be when we get incorrect pricing or other data from data providers. </p>
+
+<p>It sounds like you&#39;re talking about <a href="https://en.wikipedia.org/wiki/Principal_component_regression">Principal Component Regression</a>, which is a pretty cool technique that has other useful characteristics. I wouldn&#39;t necessarily use something like this to compute beta-to-SPY, however, as it would technically not be beta. For computing risk factor exposures in general, PCA can absolutely help us out. Creating statistical risk factors after you have accounted for known risk factors helps you to further cover your bases.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a6b963fe92bef4b238e48a6' id='5a6b963fe92bef4b238e48a6'>
+<a href='#5a6b963fe92bef4b238e48a6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517000255000' class='quanto-date posted-at response-posted-at' href='#5a6b963fe92bef4b238e48a6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Maxwell -</p>
+
+<p>I’ll have to put together a notebook to illustrate.  I could be off base, but the standard beta calculation is the slope of a plot of the daily returns of XYZ vs. SPY.  If one assumes this as a scatter plot of two independent measures, then the first principle component represents a vector that is the direction of greatest variation.  It can be used as a model to relate changes in XYZ to changes in SPY.  It would seem to be a valid model beta and not suffer from the pitfall of regression dilution characteristic of OLS.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7195c1ddd41c00167d285a' id='5a7195c1ddd41c00167d285a'>
+<a href='#5a7195c1ddd41c00167d285a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517393345000' class='quanto-date posted-at response-posted-at' href='#5a7195c1ddd41c00167d285a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>A relevant link:</p>
+
+<p><a href="https://shankarmsy.github.io/posts/pca-vs-lr.html">https://shankarmsy.github.io/posts/pca-vs-lr.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a72cf33b384d5001a342dc4' id='5a72cf33b384d5001a342dc4'>
+<a href='#5a72cf33b384d5001a342dc4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1517473587000' class='quanto-date posted-at response-posted-at' href='#5a72cf33b384d5001a342dc4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I have been trying PCA based models for over 2+ years on Quantopian. The fundamental problem is that if you fit PCA today and fit PCA tomorrow on same set of stocks, the factors vary a lot and so do the betas of PCR.</p>
+
+<p>Has anyone found a solution to beta and factor stability? For now, I am running model  once in X days and storing it (but that has issues with pipeline data changing often). Another alternative is functional PCA but I am not ready yet with it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a72df17f7fa2257b4720b05' id='5a72df17f7fa2257b4720b05'>
+<a href='#5a72df17f7fa2257b4720b05'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517477655000' class='quanto-date posted-at response-posted-at' href='#5a72df17f7fa2257b4720b05'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My intuitive 2 cents...</p>
+
+<p>Regarding beta stability, it has been observed that the Optimize API is not very effective in controlling beta to SPY.  For example, we&#39;ve shown on the forum that for a trailing beta computed with 
+<code>SimpleBeta</code> (which uses OLS, not PCA),  and a beta constraint of +/-0.05, the resulting beta after a 2-year backtest can be considerably higher: beta ~ 0.3 in some cases.  The suggestion is that forecasting beta to SPY with a simple trailing window regression is not so easy (assuming that there isn&#39;t a bug in the Quantopian implementation).</p>
+
+<p>I guess it is not surprising that multidimensional regressions using PCA would show a similar problem with stability, since the underlying assumption is that there is no temporal component.  The assumption is that the trailing window of data (e.g. 1-year) was statistically stable over the window, and will maintain its statistical characteristics going forward.</p>
+
+<p>In the context of market efficiency and public information, it seems reasonable to think that it would be hard to find stable <em>and</em> profitable market attributes; any naive approach will fail, since all market participants have access to simple tools, and have already applied them to the widely available information, eliminating any advantage (if there ever was one in the first place).</p>
+
+<p>The solution, perhaps, is to use dynamic models that are explicitly formulated to forecast time series that are not very statistically stable.  Usually, dynamic models of complex phenomena (e.g. weather, fluid flow, etc.) are much more computationally challenging and expensive (and in science/engineering, one has the benefit of some set of equations based on the underlying physics).  In other words, trying to gain an edge with widely available information will require something more than run-of-the-mill algorithms.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a72e8ebb384d513f33428da' id='5a72e8ebb384d513f33428da'>
+<a href='#5a72e8ebb384d513f33428da'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1517480171000' class='quanto-date posted-at response-posted-at' href='#5a72e8ebb384d513f33428da'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant -</p>
+
+<p>I like your 2 cents, especially this statement: </p>
+
+<blockquote>
+<p>In the context of market efficiency and public information, it seems<br>
+reasonable to think that it would be hard to find stable and<br>
+profitable market attributes; any naive approach will fail, since all<br>
+market participants have access to simple tools, and have already<br>
+applied them to the widely available information, eliminating any<br>
+advantage (if there ever was one in the first place).</p>
+</blockquote>
+
+<p>Also I often find myself asking the question: is there any alpha left at all in the data available? Isn&#39;t that possible that the only viable alpha is in data not publicly available (or in very expensive data)? Or, given the increase of automated trading systems, isn&#39;t that possible the alpha is becoming more and more transient so that trading strategies have to constantly  increase their trading frequency to be able to seize the alpha?  You believe the alpha is actually in the data and we only need to build more sophisticated and dynamic methods to be able to detect it. That&#39;s reasonable and eventually I need to look for and read some papers to find out more about this topic.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a72f255f9663a5c432fb222' id='5a72f255f9663a5c432fb222'>
+<a href='#5a72f255f9663a5c432fb222'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517482581000' class='quanto-date posted-at response-posted-at' href='#5a72f255f9663a5c432fb222'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Nota bene: I don&#39;t have a clue.  It would be interesting to hear from Maxwell.  Since this is a thread on PCA-based tools, are there case studies where someone has made money using them?  Or maybe you talked with Jonathan Larkin or someone else who has traded for a living, and could provide some insight.  No doubt PCA finds applicability, but I&#39;m guessing it&#39;s not like &quot;PCA...kaboom...manna from heaven!&quot;  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a72f8ebf9663a20dd2fb97c' id='5a72f8ebf9663a20dd2fb97c'>
+<a href='#5a72f8ebf9663a20dd2fb97c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517484267000' class='quanto-date posted-at response-posted-at' href='#5a72f8ebf9663a20dd2fb97c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>And here&#39;s my penny sense....</p>
+
+<p>In search of  finding beta stability through  forecasting individual stock beta to SPY by regression, PCA or other  techniques, a more efficient approach is to forecast SPY movements alone then drill down to the individual stocks. We already know what the general relationship is between the stock universe and the market, SPY, so if you can find a way to accurately forecast SPY, then controlling individual stock beta should follow.  This is how we do it with our market timing models, we try to predict with some degree of accuracy what SPY will do in the near future and based on that, do portfolio construction on individual stocks since we already know the historical relationship between individual stocks and SPY.  </p>
+
+<p>The caveat to all this is in trying to achieve total beta neutrality, you arrive at risk free rates returns which means zero alpha.  Only reason you get some alpha, in context of beta, is the wiggle room of +-0.3. Hope this helps explain the phenomena.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a739f5757afa1541400bc4c' id='5a739f5757afa1541400bc4c'>
+<a href='#5a739f5757afa1541400bc4c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/570e873588217b6f69000557'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b864aac34bf961d32080bee21e80db5f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/570e873588217b6f69000557'>Maxwell Margenot</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517526871000' class='quanto-date posted-at response-posted-at' href='#5a739f5757afa1541400bc4c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For more stable PCA, check out <a href="https://arxiv.org/abs/0912.3599">Robust PCA</a>. The paper is pretty good and the method is better for handling outliers and strange perturbations.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a748d18c5e3b1001d71f4bc' id='5a748d18c5e3b1001d71f4bc'>
+<a href='#5a748d18c5e3b1001d71f4bc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1517587736000' class='quanto-date posted-at response-posted-at' href='#5a748d18c5e3b1001d71f4bc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Maxwell, read the mentioned paper. </p>
+
+<p>I had to regrettably come to the conclusion that there was nothing there that could be of any use in trading. None of it could be applied successfully to any kind of worthwhile trading strategy. </p>
+
+<p>It was interesting for image processing, but nonetheless, not of any practical use in trading. Anyone venturing on that route should be prepared to waste a lot of time which will end with absolutely nothing to show for it.</p>
+
+<p>So, I wish well to anyone who dares try. They have my admiration for pursuing such an adventuress path.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a752e745cdf5e333b18f27a' id='5a752e745cdf5e333b18f27a'>
+<a href='#5a752e745cdf5e333b18f27a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1517629044000' class='quanto-date posted-at response-posted-at' href='#5a752e745cdf5e333b18f27a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Karl here is the revised notebook. This is more accurate.</p>
+
+<p>There are several prospective improvements:</p>
+
+<ol>
+<li>Replace PCA with SparsePCA<br></li>
+<li>Replace LinearRegression with other regularized methods.<br></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7577c0c5e3b1464d71f99a' id='5a7577c0c5e3b1464d71f99a'>
+<a href='#5a7577c0c5e3b1464d71f99a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517647808000' class='quanto-date posted-at response-posted-at' href='#5a7577c0c5e3b1464d71f99a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Pravin -</p>
+
+<p>I&#39;m an intellectually lazy technical layman (actually, I make a living at this stuff, but statistics/data science/finance are not my strong suit)--what is the executive summary of your work above, in simple terms?  The paper you provided is a hefty 47 pages, and your notebook, while I&#39;m sure technically valid, has a lot more code than explanatory prose.  I&#39;m not a Python expert and the techniques are unfamiliar--what are you showing and why would one think it is valid?</p>
+
+<p>Best regards,</p>
+
+<p>Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7583ff5cdf5e7a4718f7ad' id='5a7583ff5cdf5e7a4718f7ad'>
+<a href='#5a7583ff5cdf5e7a4718f7ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517650943000' class='quanto-date posted-at response-posted-at' href='#5a7583ff5cdf5e7a4718f7ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Maxwell -</p>
+
+<p>I&#39;d be interested in your take on the risk model and its relationship to dimensionality reduction.  If one looks at the risk model factors, it seems that they are rather arbitrary, and may not explain the actual sources of risk.  We have a long list of industry sectors, which are no doubt highly correlated, and might not explain anything.  The style risk factors, I gather, are as old as the hills, and probably explain very little, as well. </p>
+
+<p>I&#39;m still getting up the learning curve on this dimensionality reduction stuff, but I&#39;m wondering if it could be applied to the Q risk model, to understand if it makes sense, or if it is just adding noise?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7591d35cdf5e5def18f0ce' id='5a7591d35cdf5e5def18f0ce'>
+<a href='#5a7591d35cdf5e5def18f0ce'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1517654483000' class='quanto-date posted-at response-posted-at' href='#5a7591d35cdf5e5def18f0ce'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant Here is a summary of both papers:</p>
+
+<ol>
+<li><p>First paper identifies the systematic risk factors that drive the market (PCA factors) and regresses returns of each security against these factors to find a hedge portfolio. The cumulative sum of residuals should be mean reverting (we test for them and select only those). We assume that if the factors explain the returns and if the regression is stable then the portfolio of security and factors are mean reverting.</p></li>
+<li><p>The second paper contains a technique to improve mean reversion.</p></li>
+</ol>
+
+<p>Hope that helps.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7592b25cdf5e5def18f0e2' id='5a7592b25cdf5e5def18f0e2'>
+<a href='#5a7592b25cdf5e5def18f0e2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517654706000' class='quanto-date posted-at response-posted-at' href='#5a7592b25cdf5e5def18f0e2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Pravin - I should probably roll up my sleeves and try to understand those papers.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a75a62f5cdf5e7a4718f964' id='5a75a62f5cdf5e7a4718f964'>
+<a href='#5a75a62f5cdf5e7a4718f964'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517659695000' class='quanto-date posted-at response-posted-at' href='#5a75a62f5cdf5e7a4718f964'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, Pravin,</p>
+
+<p>The approach that Pravin uses in his example is somewhat similar to what I described in my above post.  It is one form of statistical arbitrage using PCA as a dimension reduction procedure to determine x principal components that can explain what drives the market (SPY, in this case) based on some lookback period of historical returns.  It is then drilled down to individual stocks by regressing against these factors and Pravin explains the rest of the procedure. Stat Arb originated from pairs trading, in this example, the pairing is between SPY and individual stocks. There are many other Stat Arb approaches from simple distance measure to more complex ones, like cointegration or copulas.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7706c3b14351027e8291d8' id='5a7706c3b14351027e8291d8'>
+<a href='#5a7706c3b14351027e8291d8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517749955000' class='quanto-date posted-at response-posted-at' href='#5a7706c3b14351027e8291d8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>It seems that for this PCA stuff to work, the factors need to be stable.  As I think we&#39;re seeing for even a simple beta-to-SPY, it is not so easy.  One suggestion would be to use beta-to-SPY as a simple test case, to sort out how to forecast the beta of a stock N days forward.  It would seem that if this is hard, then forecasting more subtle relationships would be even harder, but maybe I&#39;m thinking about this incorrectly.  In other words, we know a priori that SPY is a dominant factor, so why not start with it, before getting fancy?</p>
+
+<p>Here&#39;s a relevant reference for low-dimension PCA (2x2 or 3x3 covariance matrix) :</p>
+
+<p><a href="https://arxiv.org/abs/1306.6291">https://arxiv.org/abs/1306.6291</a></p>
+
+<p>A Method for Fast Diagonalization of a 2x2 or 3x3 Real Symmetric Matrix<br>
+M.J. Kronenburg<br>
+(Submitted on 26 Jun 2013 (v1), last revised 16 Feb 2015 (this version, v4))</p>
+
+<p>A method is presented for fast diagonalization of a 2x2 or 3x3 real symmetric matrix, that is determination of its eigenvalues and eigenvectors. The Euler angles of the eigenvectors are computed. A small computer algebra program is used to compute some of the identities, and a C++ program for testing the formulas has been uploaded to arXiv.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a77c1e5c25e40000cbf4866' id='5a77c1e5c25e40000cbf4866'>
+<a href='#5a77c1e5c25e40000cbf4866'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1517797861000' class='quanto-date posted-at response-posted-at' href='#5a77c1e5c25e40000cbf4866'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One crude way, I resolve the factor instability is to fit factors and regression only once in X days. I reuse the models for the next X days.</p>
+
+<p>A more rigorous approach is here: <a href="https://arxiv.org/pdf/1001.2363.pdf">https://arxiv.org/pdf/1001.2363.pdf</a><br>
+Python code here: <a href="https://github.com/dfm/pcp">https://github.com/dfm/pcp</a></p>
+
+<p>The L matrix are your PCs.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a77e13dc25e404151bf45a3' id='5a77e13dc25e404151bf45a3'>
+<a href='#5a77e13dc25e404151bf45a3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1517805885000' class='quanto-date posted-at response-posted-at' href='#5a77e13dc25e404151bf45a3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Pravin, the article you relate to is a resumé of the one @Maxwell cited. It does not lead anywhere as well.</p>
+
+<p>Will you be able to detect from an nxm matrix its sparse outliers? I would say: easy, even just looking at it.<br>
+However, say you have a 1,000x500 stock price variation matrix:  ΔP, and you want to find its sparse outliers. You could request something like:  ΔP &gt; mean ± ½ σ, or  ΔP &gt; mean ± 2 σ, your choice. The higher you will set the threshold, the sparser the S_0 matrix will become. Note that ΔP would have 500,000 data points. Even if you put 5,000 data points above 3σ, they will still be easy to detect. But, that is not the problem. Well, not the one worth something anyway.</p>
+
+<p>The question is: will it improve anything knowing that:  ΔP – S_0 = L_0 ? Or, will you not be looking at about the same almost randomly generated price matrix? And going forward, all the information you have accumulated over that ΔP matrix will not help you at the right hedge of the chart where you have to make your trading decisions on those 500 stocks.</p>
+
+<p>Stock prices do not have sparse low density noise that dances randomly over a stable high level backdrop signal. On the contrary, whatever signal you might have is buried in high density noise to such an extent that the noise Z_0 itself is much greater than L_0. </p>
+
+<p>If the authors had shown a PCP with high density noise, what their picture would have looked like would have just been static.</p>
+
+<p>It makes the application of PCP strictly inapplicable to extracting useful predictive information from moving stock prices. Other methods than that would be required.</p>
+
+<p>My two cents.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a77f6a2c25e40746bbf3da5' id='5a77f6a2c25e40746bbf3da5'>
+<a href='#5a77f6a2c25e40746bbf3da5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1517811362000' class='quanto-date posted-at response-posted-at' href='#5a77f6a2c25e40746bbf3da5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy thanks. It looks like what you are saying holds true. I found this paper that talks about this in financial risk domain. Yet to follow everything the paper says but could be worth the attempt: <a href="http://cdar.berkeley.edu/wp-content/uploads/2016/09/risk_seminar_slides_041216.pdf">http://cdar.berkeley.edu/wp-content/uploads/2016/09/risk_seminar_slides_041216.pdf</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a78d7924588377a27a34c7b' id='5a78d7924588377a27a34c7b'>
+<a href='#5a78d7924588377a27a34c7b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1517868946000' class='quanto-date posted-at response-posted-at' href='#5a78d7924588377a27a34c7b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Pravin, any trading strategy has for payoff matrix: Σ(H∙ΔP). Therefore an ongoing portfolio&#39;s assets can be expressed as: A(t) = A(0) + Σ(H∙ΔP) – ΣExp. The section of interest is: Σ(H∙ΔP) which characterize the trading strategy. And, it does reduce the portfolio management problem to some inventory management methods under uncertainty.</p>
+
+<p>In a market-neutral strategy is requested a 50/50 long/short scenario:<br>
+A(t) = A(0) + 0.50∙(Σ(H∙ΔP) – ΣExp) + 0.50∙(Σ(-H∙-ΔP) – ΣExp)</p>
+
+<p>where, -H is the short inventory where profits come from declining prices -ΔP. Evidently, if ΔP is positive on your short trades, you are losing money, just as if ΔP is negative on long.</p>
+
+<p>Such a portfolio should end up with: A(t) = A(0) + Σ(H∙ΔP) – ΣExp. </p>
+
+<p>This is great. It does say that you can have your lunch and eat it too. But, that is on the premise that you make as much on your longs as you do on your shorts.</p>
+
+<p>You could be market-neutral, have low beta, low volatility and low drawdowns, and still maintain your expected long-term average market CAGR. There would be, evidently, trading expenses, but then nothing is perfect. There is always a price to pay.</p>
+
+<p>However, it is not what I see in all those market-neutral strategies. They usually barely beat the risk-free rate, and that is if they do. Usually, performance is less than the average market return which could have been had simply by buying indexed funds.</p>
+
+<p>Since the outcome of a trading strategy depends on the trading methods used, one would have to conclude that the methods themselves are at fault. </p>
+
+<p>For instance, if the trading methods used are not that good at shorting, then we should not expect the short side to do its part. And if the strategy is not that good on the long side either, then we should not expect much from such a market-neutral portfolio.</p>
+
+<p>As for the slide presentation you cited, their methods limit the size of the square matrix used since they need a matrix inverse. Also, they need really sparse matrices where anomalies would be really really sparse, and where background noise would be minimal. None of which the market can provide. And, even from where they are, they are trying to ascertain the size of the forest with their nose on a single tree.</p>
+
+<p>It is like the imaging system. You might not need much math to differentiate photos. You take a snapshot with no people, and one with people. Then isolate the people with a simple subtraction... But, still, it won&#39;t tell me where they are going for lunch.</p>
+
+<p>As a footnote. Where were those factors today? What did they predict?</p>
+
+<p>BTW, I found the other mentioned paper on statistical arbitrage by Avellanda more interesting and quite well written. There is more that can be extracted from there.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7b40dfe9f07d56e5ade5e9' id='5a7b40dfe9f07d56e5ade5e9'>
+<a href='#5a7b40dfe9f07d56e5ade5e9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59f639a222b56d0242e711ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a1fc5af632f7731a179c21d9072e407f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59f639a222b56d0242e711ad'>Swapper K</a>
+</div>
+<a UTCms='1518026975000' class='quanto-date posted-at response-posted-at' href='#5a7b40dfe9f07d56e5ade5e9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi,<br>
+I used PCA a good bit since 2001 or so to manage interest rate derivative portfolios. I found it most useful to quickly hedge up the portfolio going into risk events - numbers, elections etc. I set it up so I could quickly hedge 1st, 2nd, 3rd factors or any combination...e.g. hedging 1st 3 factors would normally cover 97% of my expected risk. You could set up your hedging instruments to be any part of the curve depending on the portfolio - e.g. 2y, 10y, 30y. I set it up so I could look at factor weightings over different periods of time e.g 3 months, 1y, 2y etc - or vol, low vol environments or situations that I felt were close to the current environment. You can also apply it to rich / cheap analysis on the curve, butterflies etc but I didn&#39;t find much return from that. Am sure all of the above could be applied to stocks too. But again  I found it most useful as a hedging tool for complicated portfolios when I was in a hurry!<br>
+Regards  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/using-pca-in-quantitative-finance'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/using-pca-in-quantitative-finance'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#badcdfdfded8dbd9d1facbcfdbd4ced5cad3dbd494d9d5d7">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

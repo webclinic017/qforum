@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Machine Learning on Quantopian Part 2: ML as a Factor
+</title>
+<meta content='This is the third two of our series on Machine Learning on Quantopian. See  Part 1  to see how to run this NB on static data and  Part 3  for a fully functional ML algorithm. Recently, we presented  how to load alpha signals into a research notebook, preprocess them, and then train a Machine Learning classifier to predict future returns. This was done in a static fashion, meaning we loaded data once over a fixed period of time (using the  run_pipeline()  command), split into test and train,...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="P4kBh9l0w02YwDjw7M1/lnd77K7IggbncRGw5bebxTdD73fKe4IRriHdYcGjItfiT/XPx7JOE/zzHmuPHd6njA==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor' property='og:url'>
+<meta content='Machine Learning on Quantopian Part 2: ML as a Factor' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Machine Learning on Quantopian Part 2: ML as a Factor' property='og:title'>
+<meta content='This is the third two of our series on Machine Learning on Quantopian. See  Part 1  to see how to run this NB on static data and  Part 3  for a fully functional ML algorithm. Recently, we presented  how to load alpha signals into a research notebook, preprocess them, and then train a Machine Learning classifier to predict future returns. This was done in a static fashion, meaning we loaded data once over a fixed period of time (using the  run_pipeline()  command), split into test and train,...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='57f4cc7ad7cc8a9c610000b1'>
+<div class='post-container' data-post-id='57f4cc7ad7cc8a9c610000b1' id='57f4cc7ad7cc8a9c610000b1'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Machine Learning on Quantopian Part 2: ML as a Factor</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1533889786000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Machine Learning on Quantopian Part 2: ML as a Factor&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fmachine-learning-on-quantopian-part-2-ml-as-a-factor%3Futm_source%3Dwebsite_share%26utm_campaign%3Dmachine-learning-on-quantopian-part-2-ml-as-a-factor%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fmachine-learning-on-quantopian-part-2-ml-as-a-factor%3Futm_source%3Dwebsite_share%26utm_campaign%3Dmachine-learning-on-quantopian-part-2-ml-as-a-factor%26utm_medium%3Dlinkedin&amp;title=Machine+Learning+on+Quantopian+Part+2%3A+ML+as+a+Factor+%28Thomas+Wiecki%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Machine Learning' data-tag-id='55c50e7d8d4710ec6e00000b' href='/posts/tag/Machine-Learning/newest'>Machine Learning</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pipeline' data-tag-id='561525bcf252a59171000001' href='/posts/tag/Pipeline/newest'>Pipeline</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor?utm_source=website_share&amp;utm_campaign=machine-learning-on-quantopian-part-2-ml-as-a-factor&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Thomas Wiecki" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>This is the third two of our series on Machine Learning on Quantopian. See <a href="https://www.quantopian.com/posts/machine-learning-on-quantopian">Part 1</a> to see how to run this NB on static data and <a href="https://www.quantopian.com/posts/machine-learning-on-quantopian-part-3-building-an-algorithm">Part 3</a> for a fully functional ML algorithm.</p>
+
+<p><a href="https://www.quantopian.com/posts/machine-learning-on-quantopian">Recently, we presented</a> how to load alpha signals into a research notebook, preprocess them, and then train a Machine Learning classifier to predict future returns. This was done in a static fashion, meaning we loaded data once over a fixed period of time (using the <code>run_pipeline()</code> command), split into test and train, and predicted inside of the research notebook.</p>
+
+<p>This leaves open the question of how to move this workflow to a trading algorithm, where <code>run_pipeline()</code> is not available. Here we show how you can move your ML steps into a pipeline <code>CustomFactor</code> where the classifier gets retrained periodically on the most recent data and predicts returns. This is still not moving things into a trading algorithm, but it gets us one step closer.</p>
+
+<p>If you haven&#39;t yet, definitely read the notebook on the <a href="https://www.quantopian.com/posts/machine-learning-on-quantopian">static workflow</a> first. We will be reusing the same concepts and code but not re-explain the logic of preprocessing the data.  </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>46 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='57f5247ed1ee0f7b97000209' id='57f5247ed1ee0f7b97000209'>
+<a href='#57f5247ed1ee0f7b97000209'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1475683464000' class='quanto-date posted-at response-posted-at' href='#57f5247ed1ee0f7b97000209'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That&#39;s really nice how you combined all that work in one single factor we can easily use. Unfortunately I remember that algorithms are restricted to pass only certain factors as input to other factors (e.g. Returns and all the ones that are split/merge/divident safe). Is that restriction still in place?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f5312b7ec267c000000782' id='57f5312b7ec267c000000782'>
+<a href='#57f5312b7ec267c000000782'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56efa792edde673741000622'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/038093e0f01fafea7121e94cd85373f8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56efa792edde673741000622'>Saad Al-Chalabi</a>
+</div>
+<a UTCms='1475686707000' class='quanto-date posted-at response-posted-at' href='#57f5312b7ec267c000000782'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great work Thomas et al.,</p>
+
+<p>Would love to run the notebook, however, am running into &quot;Timeout: 300 seconds&quot; on block[9].  Any suggestions?  Can I change the timeout rule on my notebook?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f614bb40967f498800013b' id='57f614bb40967f498800013b'>
+<a href='#57f614bb40967f498800013b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1475744961000' class='quanto-date posted-at response-posted-at' href='#57f614bb40967f498800013b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Saad, thanks for reporting, we&#39;re investigating.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f619a140967f498800017d' id='57f619a140967f498800017d'>
+<a href='#57f619a140967f498800017d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1475746218000' class='quanto-date posted-at response-posted-at' href='#57f619a140967f498800017d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Luca: Yes, although you can circumvent that. However, I&#39;m not sure why you would want to do that given that it&#39;s seems like a helpful restriction. In any case, all the factors here are &quot;window-safe&quot;.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f61f943fb50a51000001c7' id='57f61f943fb50a51000001c7'>
+<a href='#57f61f943fb50a51000001c7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1475747740000' class='quanto-date posted-at response-posted-at' href='#57f61f943fb50a51000001c7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Thomas, I didn&#39;t notice there was a call to &quot;.rank()&quot; before passing alpha factors to ML. That explains why they are &quot;window-safe&quot;.</p>
+
+<p>In case someone forgot this detail like myself, here is what <a href="https://www.quantopian.com/posts/new-pipeline-features-slicing-and-correlation-slash-regression-methods">David Michalowicz said</a> about using factors as input of other factor:</p>
+
+<p>&quot;[...] is now allowed for a select few factors deemed safe for use as inputs. This includes <strong>Returns</strong> and any <strong>factors created from rank or zscore</strong>. The main reason that these factors can be used as inputs is that they are comparable across splits. Returns, rank and zscore produce normalized values, meaning that they can be meaningfully compared in any context.&quot;</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f6d841882aadf4e70001f1' id='57f6d841882aadf4e70001f1'>
+<a href='#57f6d841882aadf4e70001f1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1475795018000' class='quanto-date posted-at response-posted-at' href='#57f6d841882aadf4e70001f1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Thomas -</p>
+
+<p>You say:</p>
+
+<blockquote>
+<p>The &#39;ML&#39; column will contain for each day, the predicted probabilities of each stock to go up, relative to the other ones in the universe.</p>
+</blockquote>
+
+<p>What does this mean?  Say as a whole, the average forecast return across all stocks is zero.  So does a relative probability of &gt;50% mean that a stock&#39;s absolute price will likely rise, and a relative probability of &lt;50% that a stock&#39;s absolute price will likely drop?  And would I expect a stock with a relative probability of 80% to rise more than one with a relative probability of 60%, and if so, by how much?</p>
+
+<p>Sorry, finding the various statistics, rankings, normalizations, and relative values very foreign and confusing...but then I haven&#39;t yet caught up sorting out every line of code.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582958c0c458ec0013000813' id='582958c0c458ec0013000813'>
+<a href='#582958c0c458ec0013000813'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479104709000' class='quanto-date posted-at response-posted-at' href='#582958c0c458ec0013000813'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant<br>
+To understand the ranking step a little better, I would suggest taking a look at the Spearman Correlation Rank lecture in the Quantopian lectures section of the Learn tab. In fact, I&#39;ve found it helpful to work my way through all of the lectures.</p>
+
+<p>To put the answer in my own words I would say that it is really hard to predict whether any individual stock will go up or down in the future. One of the main problems is that a stock&#39;s returns are usually heavily dependent on the movement of the whole market. Because the market is pretty efficiently priced (all known events have been priced in), it basically takes knowing what future events will occur to be able to predict it (i.e. a crystal ball).</p>
+
+<p>However, it may be easier to say: &quot;well, I don&#39;t know what the returns of stock A will be, but can I predict that it will have a high chance of doing better than stock B according to some factor analysis?&quot; If the answer is yes you can short B and go long A to make money on their relative movements. So, by ranking the returns we&#39;re really looking at which stocks will do the best relative to the others and which will do worse.</p>
+
+<p>Then we take it even further and say that even the specific rank of a stock is hard to predict. So, we try to make it an even easier question, which is &quot;is this stock in the top half of the rankings or the bottom half?&quot;. That should be easier for a ML algorithm to predict (apparently it&#39;s still pretty hard since our accuracy is only 53%).</p>
+
+<p>Then instead of predicting the category (top half or bottom half) we output the precentage chance of being in top or bottom. Why do we do that? Because it allows us choose 10 to go long (highest chance of being in top half) and 10 to go short (highest chance of being in the bottom half). If we just had the categories as predictions we&#39;d just select a random basket from the top half category and another random basket from the bottom half category.</p>
+
+<p>As for why the input factors are ranked: well, for one, outliers. I&#39;ve seen some crazy outliers in financial ratios that would really confuse an ML algorithm. Also, it goes back to data being very noisy. It&#39;s actually beneficial to not tell the algorithm the exact value for the factor. It is more helpful to just tell it how strong the factor value is for that stock relative to the others. There might be periods where the PE ratios of the market are low and there might be times where they are high, but what the algorithm needs to know is &quot;how high is this PE ratio relative to the other stocks in the market&quot;, because that will help it figure out how well that stock would do relative to the other stocks, which is what we&#39;re actually trying to answer here.</p>
+
+<p>In the other thread you also seem to be focused on trying to fit a polynomial model to the factors. This is okay if you&#39;re dealing with a 1-D problem, but as you add more factors there&#39;s a combinatorial explosion of possible terms. In any case, you&#39;re just choosing a different ML model. I would suggest looking into the CART algorithm, into random forests, into gradient boosted machines and adaboost. It&#39;s a bit of rabbithole, but worth knowing. By the way, any algorithm that is based on decision trees (like the ones I listed) can handle categorical factors. The reason is a node in the decision tree can branch based on a category or based on a threshold of numeric value.</p>
+
+<p>Anyway, hope some of that helps.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58295c2d1871e30013000884' id='58295c2d1871e30013000884'>
+<a href='#58295c2d1871e30013000884'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479105588000' class='quanto-date posted-at response-posted-at' href='#58295c2d1871e30013000884'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas</p>
+
+<p>Thank you so much for this work. I&#39;ve found it very inspiring. I have two qualm/questions though.</p>
+
+<p>1) Is there a plan to be able to utilize these ML workflows in an algorithm? If there is, what are the details and what is the timeline?</p>
+
+<p>2) It would be great if there were an easier way to work with a larger timeframe of data. The run_pipeline function takes a start date and an end date. It would be so great if you could pass in a list of dates somehow or maybe a skip amount (so you could specify that you want just one day from each month).</p>
+
+<p>It just seems like it&#39;d be helpful to work with a long timespan and just sample one day out of every 30 days or something. I think I would want to be able to find factors that are stable over a long time. One might argue that having more recent data would be better, because stationarity can&#39;t be relied on and you should capture current sensitivities to factors. But, maybe it would make more sense to have a long timeframe and just sample more days from more recent times to get a balance between the two. Either way, we need more flexibility in specifying dates for the pipeline. The only workaround I can think of is to run the pipeline day by day and that would probably be slow.</p>
+
+<p>Finally, I thought I&#39;d offer a suggestion. Since cross-validation could be misleading due to lookahead bias, I&#39;d suggest segmenting the timeline into 4 sections (tuning training set, tuning testing set, final model training set, and final model testing set). Each of these would be non-overlapping, not necessarily the same size and chronological in that order. The tuning sets would be used for tuning variables (or hyperparameters) like &quot;how many days to be looking ahead&quot; (which you would use for a rebalance period), &quot;what fraction of data to remove from the middle section of the return rank&quot;, even &quot;what factors to use&quot; (you could automate removing low informative features, since models can improve with lower dimensionality). Then once you&#39;ve found the optimal hyperparameters for your model using the tuning pair, you train using those hyperparameters on the final model training set and test it on the final model testing set. Since the final model pair was different from the tuning pair, you should get a pretty accurate test for how your hyperparameters would actually perform.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58299334a696d40013000b34' id='58299334a696d40013000b34'>
+<a href='#58299334a696d40013000b34'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1479119676000' class='quanto-date posted-at response-posted-at' href='#58299334a696d40013000b34'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Rudiger.  --Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58299e1f75d1750013000b9e' id='58299e1f75d1750013000b9e'>
+<a href='#58299e1f75d1750013000b9e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479122471000' class='quanto-date posted-at response-posted-at' href='#58299e1f75d1750013000b9e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Rudiger.</p>
+
+<blockquote>
+<p>1) Is there a plan to be able to utilize these ML workflows in an algorithm? If there is, what are the details and what is the timeline?</p>
+</blockquote>
+
+<p>Yes, in fact just this morning I ran a 5 year backtest with weekly retraining. There were some efficiency improvements to pipeline that had to happen before but engineering came through on that. I&#39;m still tweaking things a bit but hope to post soon.</p>
+
+<blockquote>
+<p>2) It would be great if there were an easier way to work with a larger timeframe of data. The run_pipeline function takes a start date and an end date. It would be so great if you could pass in a list of dates somehow or maybe a skip amount (so you could specify that you want just one day from each month).</p>
+</blockquote>
+
+<p>Yes, I had the same thoughts when I started implementing this workflow. However, the way pipeline is coded is that all data required for the entire period is loaded into one big array. This makes things very fast. Moreover, as a lot of factors have considerable look-back (e.g. 3M vol), there would not be any memory saved if you only wanted to run pipeline e.g. weekly. In any case, the recent efficiency improvements should have lifted the limits even further so I think we can run over reasonable time-frames now. Do let me know which limits you run into.</p>
+
+<p>Your suggestion of only running pipeline on individual days works quite well actually. However, there is no run_pipeline in the IDE so it doesn&#39;t translate.  But there is probably a way to sample within pipeline.</p>
+
+<p>I really like your suggestion for cross-validation. For the walk-forward presented here, the &quot;final model testing set&quot; would be the hold-out results already used here-within for evaluating the model, correct? Please post any progress you make on that front!</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5829a30875d1750013000bcb' id='5829a30875d1750013000bcb'>
+<a href='#5829a30875d1750013000bcb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1479123727000' class='quanto-date posted-at response-posted-at' href='#5829a30875d1750013000bcb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Thomas,</p>
+
+<p>It sounds like the workflow will be exclusively focused on pipeline and its daily bars for computing returns.  In my own work on a single mean-reversion factor, I see an advantage in smoothing the data, using minute bars, versus using daily bars directly (similarly have also been requests for daily VWAP, computed from tick/minute bar data).  Will there be a way to input alpha factors both from pipeline and from the algo (derived from minute bars), so that they can be crunched by the ML alpha combination step?  Or are you focused exclusively on alpha factors that would run within pipeline?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582a3f8a9a843e00160002ce' id='582a3f8a9a843e00160002ce'>
+<a href='#582a3f8a9a843e00160002ce'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479163793000' class='quanto-date posted-at response-posted-at' href='#582a3f8a9a843e00160002ce'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas</p>
+
+<p>Can&#39;t wait to see the code for your 5 year backtest.</p>
+
+<p>Regarding sampling within the pipeline: I&#39;ve tried something like that before inside a factor&#39;s calculate function. The problem is if you specify a very large window, it still ends up ends up running out of memory. Maybe there&#39;s a better technique?</p>
+
+<p>Related question: is the lookback window that is specified in the custom factor in trading days or calendar days? I&#39;m pretty sure it&#39;s trading days, but just checking.</p>
+
+<p>And yes, the final model test set would be the same as the hold-out for the current notebook. However, there is another test set that is used for the parameter tuning. The key thing is I want to use completely different data to tune my hyperparameters than the one I use to test the final product.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582a593e6f56330013000487' id='582a593e6f56330013000487'>
+<a href='#582a593e6f56330013000487'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52bf46f0a1ca491cdb000053'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7b018ff8285e8b588c87f8d4f9533b4b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52bf46f0a1ca491cdb000053'>John O&#39;Dwyer</a>
+</div>
+<a UTCms='1479170377000' class='quanto-date posted-at response-posted-at' href='#582a593e6f56330013000487'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Rudiger</p>
+
+<p>I too wanted to work with longer periods and I found it hard and often the cell that did the work would crash because it took too long. Its a hack but the way that I solved this was to run many smaller chunks and patch them back together. I hope this helps you out. The hack also works on part 1 as well.</p>
+
+<p>@Grant</p>
+
+<p>I was thinking the same thing about the ranking VS absolute value so I developed a version of part 1 and 2 that use actual value and regression instead of ranking and classification. There are a couple hacks from the original that I had to make to get it functioning but it works. Unfortunately so far, I&#39;m finding better results with rank and classification but it you would like me to start threads on the community to work on those ideas, I can. I just need to clean them up a bit. I also have an example of an algo that uses absolute value and regression if you would like me to put that out there. The results are horrible though.</p>
+
+<p>@Thomas</p>
+
+<p>I&#39;m really excited about this direction that Q is taking with ML. Thanks for all your work on this. I have a prototype of an algo that will run a 10 year back test if you would like to see it. Its a mess and I need to clean it up a bit before sharing  it with the community but if you would like me to share it and you can build on it, just let me know.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582af9bd09e1b30013000df1' id='582af9bd09e1b30013000df1'>
+<a href='#582af9bd09e1b30013000df1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479211462000' class='quanto-date posted-at response-posted-at' href='#582af9bd09e1b30013000df1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In case it&#39;s useful to anyone, here is the function I wrote to call <code>run_pipeline()</code> on single days multiple times. It&#39;s a bit specific to my use-case but you can probably easily adapt it. Just to make sure though: You won&#39;t be able to use this in the IDE as there is no <code>run_pipeline()</code> there. I thus recommend finding other ways, like the <code>factor.downsample(&#39;week_start&#39;)</code> method.</p>
+
+<pre><code>import pandas as pd  
+def run_pipeline_intervals(pipe, start_date, end_date, freq=&#39;1BM&#39;, normalize=True, shift_returns=False):  
+    date_range = pd.date_range(start=start_date, end=end_date, freq=freq)  
+    factors = []  
+    for date in date_range:  
+        f = run_pipeline(pipe, start_date=date, end_date=date)  
+        fwd_returns = f[&#39;Cumulative Returns 1M&#39;]  
+        f = f.drop(&#39;Cumulative Returns 1M&#39;, axis=&#39;columns&#39;)  
+        if normalize:  
+            f = f.divide(f.groupby(level=0).count(), level=0)  
+        f[&#39;fwd_returns&#39;] = fwd_returns  
+        factors.append(f)  
+    factors = pd.concat(factors)  
+    factors.index.rename([&quot;date&quot;, &quot;equity&quot;], inplace=True)  
+    if shift_returns:  
+        factors[&#39;fwd_returns&#39;]  
+        # Workaround for groupby dropping nans  
+        factors[&#39;fwd_returns&#39;] = factors.fillna(-999).groupby(level=&#39;equity&#39;).fwd_returns.shift(-1)  
+        factors.loc[factors.fwd_returns == -999, &#39;fwd_returns&#39;] = np.nan  
+    return factors  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582b51bbb4aeea0016000524' id='582b51bbb4aeea0016000524'>
+<a href='#582b51bbb4aeea0016000524'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479233988000' class='quanto-date posted-at response-posted-at' href='#582b51bbb4aeea0016000524'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas</p>
+
+<p>Thanks for sharing that. One suggestion I&#39;d have for your code above is to use trading dates and not calendar dates. I&#39;m not sure what the best approach on Quantopian to do that is. Maybe you could just pull the price history for SPY and then pull out the index of the resultant Series.</p>
+
+<p>I have a few other concerns that I&#39;ve thought about, that related to survivorship bias. It stems from the way you have been shifting the backward-looking returns in the pipeline output to be forward-looking returns for another date. Let&#39;s say on 2016-10-01 your universe has stocks [a, b, c , d], and on 2016-10-06 your universe has stocks [a, b, c, e]. Then the shifting operations would have no returns defined for d and the returns of e would be unused. This may be an even bigger problem with the algorithm version that you&#39;re working on. If you define the universe based on today&#39;s date and then go get historical data for those stocks, then you&#39;re definitely introducing survivorship bias.</p>
+
+<p>One potential fix for the Research version of the pipeline is to actually define your factors in terms of previous values. So, you would define a factor like this:</p>
+
+<pre><code>class EnterpriseMultiple(CustomFactor):  
+        inputs = [morningstar.income_statement.operating_income,  
+                           morningstar.valuation.enterprise_value]  
+        window_length = 5
+
+        def compute(self, today, assets, out, operating_income, ev):  
+            out[:] = ev[-5] / operating_income[-5]  
+</code></pre>
+
+<p>Then, you could define your returns factor the way you have before:</p>
+
+<pre><code>returns_factor = Returns(inputs=[USEquityPricing.open],  
+                         mask=universe,  
+                         window_length=5)  
+factor_ranks[&#39;Returns&#39;] = returns_factor.rank(mask=universe)  
+</code></pre>
+
+<p>This would help the returns be perfectly matched with the outputs of the &quot;alpha&quot; factors. The one other thing would be to shift the actual universe selection back 5 days, but that doesn&#39;t seem to be possible with Q1500US.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582c0eb4ab402e001300093e' id='582c0eb4ab402e001300093e'>
+<a href='#582c0eb4ab402e001300093e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479282372000' class='quanto-date posted-at response-posted-at' href='#582c0eb4ab402e001300093e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Rudiger. The look-ahead thing is an issue in the code I posted above but I don&#39;t think it&#39;s a problem in the notebooks I posted. There, we&#39;re not shifting returns forward but rather factor values backward. And we don&#39;t swap in returns if some go missing, in that case d and e would be dropped from the classifier. Classification also has no knowledge of a stock disappearing the next day so it will just provide a prediction and trade into that position.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582c976121d1330fad000634' id='582c976121d1330fad000634'>
+<a href='#582c976121d1330fad000634'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479317351000' class='quanto-date posted-at response-posted-at' href='#582c976121d1330fad000634'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>So, just so I&#39;m clear, in your first notebook where you specified a range of dates for the run_pipeline, it applies the Q1500US filter to each date individually? I guess my mistake was I was thinking it&#39;s applied once for all the dates. In that case, I guess you&#39;re right. But, I do think my pre-shifting idea is a nice way to avoid having to do the shifting manually :)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582d7e82363df200150008e6' id='582d7e82363df200150008e6'>
+<a href='#582d7e82363df200150008e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479376521000' class='quanto-date posted-at response-posted-at' href='#582d7e82363df200150008e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The Q1500US filter is updated at the start of every month. If a stock is delisted it is dropped from the universe at that day. For more info, see <a href="https://www.quantopian.com/help#quantopian_pipeline_filters_Q500US">https://www.quantopian.com/help#quantopian_pipeline_filters_Q500US</a> or <a href="https://www.quantopian.com/posts/the-q500us-and-q1500us">https://www.quantopian.com/posts/the-q500us-and-q1500us</a>. I like your idea but it makes coding the factors more error-prone and complex.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582d8463363df2067f00029d' id='582d8463363df2067f00029d'>
+<a href='#582d8463363df2067f00029d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1479378026000' class='quanto-date posted-at response-posted-at' href='#582d8463363df2067f00029d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>This leaves open the question of how to move this workflow to a trading algorithm</p>
+</blockquote>
+
+<p>Hi Thomas,</p>
+
+<p>When you get the chance, I&#39;d be interested in how the <a href="https://blog.quantopian.com/a-professional-quant-equity-workflow/">workflow</a> will map onto a trading algorithm.  In particular, I&#39;m wondering if the alpha factors will come from both pipeline and user-defined functions from within the algo, when the alpha combination and portfolio construction (optimization) steps will be performed, etc.  It sounds like ultimately, you are aiming to support intraday cycling through the workflow (&quot;This process is a loop and the cycle time could be once a week, once a day, every 15 minutes, etc.), but the indication from your posts is that the alpha factors and combination will be pipeline-based (and thus run before the market opens).  Any thoughts yet on how this all might work? </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582d86441f6e8700120005a3' id='582d86441f6e8700120005a3'>
+<a href='#582d86441f6e8700120005a3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479378509000' class='quanto-date posted-at response-posted-at' href='#582d86441f6e8700120005a3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Yes, now that the ML training and prediction part moved into pipeline, all factors have to be in pipeline too, which means that you&#39;re limited to daily bars. We&#39;re on the same page that it&#39;d be preferable to do intraday stuff as well, not sure if it&#39;s possible to open pipeline to that or where that&#39;s on the roadmap.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582d8feb358fe90015000a1e' id='582d8feb358fe90015000a1e'>
+<a href='#582d8feb358fe90015000a1e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1479380976000' class='quanto-date posted-at response-posted-at' href='#582d8feb358fe90015000a1e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Thomas -</p>
+
+<p>I see.  So, presumably, if I follow correctly, prior to the open (e.g. in 
+<code>before_trading_start</code> or a new API), we would run everything with the exception of the &quot;Execution&quot; step in the <a href="https://blog.quantopian.com/a-professional-quant-equity-workflow/">workflow</a>.  Each day would start with an updated portfolio allocation vector, and then presumably, in the context of the hedge fund, this would be handed over to the order management system (OMS), which would receive N such vectors every day (where N is the number of algos in the fund portfolio).  This supposes that the algo strictly follows the workflow; it would be possible to tack on allocations derived from minute bars, so long as there isn&#39;t a strict requirement to set the allocation prior to the open (although I suppose if those allocations used minute data from prior days, then they would be ready prior to the open).</p>
+
+<p>As discussed on <a href="https://www.quantopian.com/posts/vwap-are-there-any-plans-to-fix-this">VWAP - Are there any plans to fix this?</a>, it seems feasible to incorporate daily data derived from minute bars into pipeline, and you could still stick with the framework of running the workflow before the market opens on daily values (e.g. daily VWAP).  It just seems like some smoothing over minute bars would be advantageous here, but I don&#39;t have data to support my intuition (other than my own experimentation with a long-short mean-reversion algo that seems to benefit from smoothing minute bars over a 5-day look back window, versus using daily bars).</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582f55bbe335fe00120002be' id='582f55bbe335fe00120002be'>
+<a href='#582f55bbe335fe00120002be'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479497156000' class='quanto-date posted-at response-posted-at' href='#582f55bbe335fe00120002be'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas</p>
+
+<p>I&#39;ve been working on a Notebook that tries out the day by day sampling technique we discussed. Here&#39;s the code I used:</p>
+
+<pre><code>def form_training_data(dates, universe, lag, percent_kept):  
+    pipeline = make_pipeline(universe, lag)  
+    X_list = []  
+    Y_list = []  
+    for date in dates:  
+        results = run_pipeline_for_date(pipeline, date)  
+        results_sans_returns = results.copy()  
+        returns = results_sans_returns.pop(&#39;Returns&#39;)
+
+        X = results_sans_returns.values  
+        Y = returns.values  
+        X_list.append(X)  
+        Y_list.append(Y)  
+    X = np.concatenate(X_list, axis=0)  
+    Y = np.concatenate(Y_list)  
+    lower = np.nanpercentile(Y, percent_kept * 100)  
+    upper = np.nanpercentile(Y, (1 - percent_kept) * 100)  
+    upper_X = X[Y &gt; upper]  
+    lower_X = X[Y &lt; lower]  
+    upper_row_count, upper_column_count = upper_X.shape  
+    lower_row_count, lower_column_count = lower_X.shape  
+    upper_Y = np.ones(upper_row_count)  
+    lower_Y = -np.ones(lower_row_count)  
+    X = np.concatenate((upper_X, lower_X), axis=0)  
+    Y = np.concatenate((upper_Y, lower_Y))  
+    return X, Y  
+</code></pre>
+
+<p>So, I ran this against 120 dates and it took around 24 minutes to finish (1461.63 secs). That&#39;s pretty damn slow considering that I wanted to reuse this function over and over as I varied both the lag (days to compute return over) and the percent_kept (the upper and lower percentile boundaries to keep). Let&#39;s say I want to test lags of 5, 10, 15, 20, and 25 days and percentiles kept of 50, 40, 30, 20. Then that would be a grid of 20 points that would take 8 hours to get through. Then I also wanted to automatically test pruning of less relevant features, so you can see how this is way too slow.</p>
+
+<p>Is there anything obvious I&#39;m doing wrong here (I&#39;m new to python so I&#39;m not aware of all the possible optimizations)? If I were working off of the Quantopian platform I&#39;d consider parallelizing the for loop. I&#39;m assuming that np.concatenate preallocates the full size of the output array so it shouldn&#39;t have issues with constantly having to allocate memory for larger and larger arrays as it adds each one by one.</p>
+
+<p>How long does your new code that uses separated dates take?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='583117718e69b10012000756' id='583117718e69b10012000756'>
+<a href='#583117718e69b10012000756'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/545efaf518a7c68d75006f6e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/40f6d1feb3dff9adb73b245c46e0ba04?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/545efaf518a7c68d75006f6e'>Rudiger Lippert</a>
+</div>
+<a UTCms='1479612287000' class='quanto-date posted-at response-posted-at' href='#583117718e69b10012000756'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>As a followup, I thought of two ways I can improve the time it would take to test all those scenarios. One thing I could do is compute all the return lag scenarios at once (i.e. have a column for &quot;Returns5&quot;, &quot;Returns10&quot;, etc). The other thing is that the pipelines don&#39;t have to be run each time we change the percentile thresholds for what data is kept. That can be recomputed from the existing pipeline output.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5832b4d68b5d4d0012000661' id='5832b4d68b5d4d0012000661'>
+<a href='#5832b4d68b5d4d0012000661'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1479718111000' class='quanto-date posted-at response-posted-at' href='#5832b4d68b5d4d0012000661'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Rudiger: That&#39;s a good idea. The way pipeline is written, you will get Returns5 almost for free if you also compute Returns10 (i.e. the data is only loaded once and then reused).</p>
+
+<p>What you posted before: It&#39;s not surprising that it&#39;s slow since it&#39;s not doing any smart caching and reloading a lot of data. I think your second approach of using only one pipeline call is the way to go.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='584b065bcd356e35e40001e2' id='584b065bcd356e35e40001e2'>
+<a href='#584b065bcd356e35e40001e2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1481311842000' class='quanto-date posted-at response-posted-at' href='#584b065bcd356e35e40001e2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Check out Part 3 of how to turn this workflow into an actual strategy: <a href="https://www.quantopian.com/posts/machine-learning-on-quantopian-part-3-building-an-algorithm">https://www.quantopian.com/posts/machine-learning-on-quantopian-part-3-building-an-algorithm</a>  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='585186c74a02df00150001d9' id='585186c74a02df00150001d9'>
+<a href='#585186c74a02df00150001d9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1481737939000' class='quanto-date posted-at response-posted-at' href='#585186c74a02df00150001d9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>All: Luca found two bugs in the code I posted, those should be fixed now in the top NB.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='599bdae34b652e0507105e6c' id='599bdae34b652e0507105e6c'>
+<a href='#599bdae34b652e0507105e6c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/594b86ad366c9c000d976b15'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4495f5d7a44647bd38b08783a8af3330?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/594b86ad366c9c000d976b15'>Eran Madar</a>
+</div>
+<a UTCms='1503386339000' class='quanto-date posted-at response-posted-at' href='#599bdae34b652e0507105e6c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi,</p>
+
+<p>I&#39;m new at Quantopian and recently started building my first algorithm using many of the elements presented in this 3-parts post.<br>
+I have a question about the ML custom factor which I couldn&#39;t yet figure out - the factors_pipe OrderedDict used to be sent to the ML custom factor includes the &quot;Returns&quot; column. However, when handling the &quot;inputs&quot; parameter within the &quot;compute&quot; it looks like it disregard that column, while the &quot;returns&quot; parameter used is the one defined in the &quot;compute&quot; statement.  Would be great if someone can explain why is that and how exactly it works.</p>
+
+<p>Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='599bf8ae95f6b1000d9b733f' id='599bf8ae95f6b1000d9b733f'>
+<a href='#599bf8ae95f6b1000d9b733f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1503393966000' class='quanto-date posted-at response-posted-at' href='#599bf8ae95f6b1000d9b733f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Eran,</p>
+
+<p>This is basically just a trick of Python. <code>def compute(self, today, assets, out, returns, *inputs):</code> we know that <code>returns</code> is always the first thing that gets passed in (due to the order we create the factors in). We could also just do <code>*inputs</code> and then <code>returns = inputs[0]</code> but this is a bit more convenient. But there&#39;s no magic here. Does that make sense?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='599bfc694b652e0010105fdc' id='599bfc694b652e0010105fdc'>
+<a href='#599bfc694b652e0010105fdc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/594b86ad366c9c000d976b15'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4495f5d7a44647bd38b08783a8af3330?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/594b86ad366c9c000d976b15'>Eran Madar</a>
+</div>
+<a UTCms='1503394921000' class='quanto-date posted-at response-posted-at' href='#599bfc694b652e0010105fdc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Thomas for the quick reply..</p>
+
+<p>Yes, it makes sense... and somewhat also a kind of magical behavior of Python. :)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59c87058ba100700102e5dc7' id='59c87058ba100700102e5dc7'>
+<a href='#59c87058ba100700102e5dc7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57cf1c5bcd79de9861000d14'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c4f8f50f92e330ee072d436478f512e4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57cf1c5bcd79de9861000d14'>seine yumnam</a>
+</div>
+<a UTCms='1506308184000' class='quanto-date posted-at response-posted-at' href='#59c87058ba100700102e5dc7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>if i want to retrain the model monthly, what will i replace this with?<br>
+(today.weekday == 0)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59cd72a0fdbe0a0010d5d57e' id='59cd72a0fdbe0a0010d5d57e'>
+<a href='#59cd72a0fdbe0a0010d5d57e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57cf1c5bcd79de9861000d14'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c4f8f50f92e330ee072d436478f512e4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57cf1c5bcd79de9861000d14'>seine yumnam</a>
+</div>
+<a UTCms='1506636448000' class='quanto-date posted-at response-posted-at' href='#59cd72a0fdbe0a0010d5d57e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>has anyone tried implementing Regression models instead of Classification? I would be interested in looking at the code structure  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa3af0e606b592e7016d06a' id='5aa3af0e606b592e7016d06a'>
+<a href='#5aa3af0e606b592e7016d06a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a203fee91604949f1ed5343'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4385444cb227c46b37a3edc1f7edbffe?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a203fee91604949f1ed5343'>Kelvin Ho</a>
+</div>
+<a UTCms='1520676622000' class='quanto-date posted-at response-posted-at' href='#5aa3af0e606b592e7016d06a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Thomas,</p>
+
+<p>First of all, great work!!!  </p>
+
+<p>As I&#39;m new in Quantopian and not quite familiar with the coding yet, may I ask the reason why you consolidated all the factors into the method make_factors?  Is it because of the window safe issue we have to meet?</p>
+
+<p>Have a good day,<br>
+Kelvin  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa7b1d5e40f6476a1a59064' id='5aa7b1d5e40f6476a1a59064'>
+<a href='#5aa7b1d5e40f6476a1a59064'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1520939477000' class='quanto-date posted-at response-posted-at' href='#5aa7b1d5e40f6476a1a59064'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Kelvin, mainly just because it&#39;s good coding practice. Or maybe I&#39;m not understanding your question correctly?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeb158c162eac7bb0691e27' id='5aeb158c162eac7bb0691e27'>
+<a href='#5aeb158c162eac7bb0691e27'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/595e86b4e33ae3000d0f4a0b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ffa08bfc71a79b70d605fd612c709f2a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/595e86b4e33ae3000d0f4a0b'>bo shao</a>
+</div>
+<a UTCms='1525355916000' class='quanto-date posted-at response-posted-at' href='#5aeb158c162eac7bb0691e27'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Thomas,</p>
+
+<p>I am new to Quantopian. Thanks very much for your work.<br>
+I notice you use  rank ( factors_pipe[name] = f().rank(mask=universe)), will actual value performs better than rank?<br>
+I try to changing rank to the actual value in the code, however, it gives me &quot;NonWindowSafeInput&quot; issue, do you have any suggestions?</p>
+
+<p>Thanks,<br>
+Bo  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5af5644574262f003fda3fc6' id='5af5644574262f003fda3fc6'>
+<a href='#5af5644574262f003fda3fc6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1526031429000' class='quanto-date posted-at response-posted-at' href='#5af5644574262f003fda3fc6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Bo,</p>
+
+<p>Yes, it&#39;s possible that some features will not be window-safe which would be a problem. Imagine just taking the share-price as an input and there is a split where the share-price is cut in half. It actually is not meaningful but for your classifier it looks like a huge change. To prevent that from happening, certain inputs and transforms are marked as being window-safe or not. Ranking is a transform that can be done in a window-safe way so this helps here. If you don&#39;t want that, you can instead z-score which should work or remove any features that are not window-safe.</p>
+
+<p>Best,<br>
+Thomas  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b643043eeec130045165a10' id='5b643043eeec130045165a10'>
+<a href='#5b643043eeec130045165a10'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b567ce44977e466a78638c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/21efdbbf68be9479a1af3b9509fbe5fa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b567ce44977e466a78638c9'>Michael Wilczynska</a>
+</div>
+<a UTCms='1533292611000' class='quanto-date posted-at response-posted-at' href='#5b643043eeec130045165a10'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This notebook currently produces a security violation when running the tear sheet as-is.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b6d4d15f2b77318b629ba0f' id='5b6d4d15f2b77318b629ba0f'>
+<a href='#5b6d4d15f2b77318b629ba0f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1533889813000' class='quanto-date posted-at response-posted-at' href='#5b6d4d15f2b77318b629ba0f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Michael: I updated the NB at the top with a fixed version.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ca3854c2660ab2e9ee0049a' id='5ca3854c2660ab2e9ee0049a'>
+<a href='#5ca3854c2660ab2e9ee0049a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51395c79b6579ad05200001f'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6cc51a8719e8c4165c3b1047d1f4b49f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51395c79b6579ad05200001f'>Net Beards</a>
+</div>
+<a UTCms='1554220364000' class='quanto-date posted-at response-posted-at' href='#5ca3854c2660ab2e9ee0049a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a breakdown of the mean 5 day returns for the top and bottom quantiles of each factor in the original notebook plus some others (over a two year period for Q1500US). The &quot;Mean Reversion 1M&quot; factor ranks at the top, while the ML factor is further down.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5cb07c3d5c05395a0be8e9b2' id='5cb07c3d5c05395a0be8e9b2'>
+<a href='#5cb07c3d5c05395a0be8e9b2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1555070013000' class='quanto-date posted-at response-posted-at' href='#5cb07c3d5c05395a0be8e9b2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Net: Thanks! I think this is exactly the type of analysis that&#39;s useful here, better understanding the individual factors that go into the model. Curious about 1M Momentum for me was that the factor seemed reversed, what&#39;s your take on that?</p>
+
+<p>Do you have ideas for factor selection and then only running the ML model on those?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5cb278aeeaaafc003d41734c' id='5cb278aeeaaafc003d41734c'>
+<a href='#5cb278aeeaaafc003d41734c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58fb922d1e7d5c5dd8502a9e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d50e3e993f524f3d4ec64ca5135d77a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58fb922d1e7d5c5dd8502a9e'>Johnny Cash</a>
+</div>
+<a UTCms='1555200174000' class='quanto-date posted-at response-posted-at' href='#5cb278aeeaaafc003d41734c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Factors with the largest absolute value of the difference between top and bottom quantiles returns are the most promising  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d1e046306ce9a004176fc5b' id='5d1e046306ce9a004176fc5b'>
+<a href='#5d1e046306ce9a004176fc5b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59f4a9f25da9ca00063c88a5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe667ef5da1b4d607b9d5d58d1ca5290?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59f4a9f25da9ca00063c88a5'>Stefan</a>
+</div>
+<a UTCms='1562248291000' class='quanto-date posted-at response-posted-at' href='#5d1e046306ce9a004176fc5b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas: You are creating returns via:<br>
+factors_pipe[&#39;Returns&#39;] = Returns(inputs=[USEquityPricing.open,mask=universe, window_length=n_fwd_days)</p>
+
+<p>As the returns are based on <strong>pipeline</strong> open prices, are the calculated returns <strong>really correct?</strong> </p>
+
+<p>I ask because I manually did the same exercise after having loaded closing prices via <strong>pipeline</strong> and via <strong>pricing</strong>. I did not use the Return function, but just used the formula (Ct - Ct-1) / Ct-1 after the pipeline was loaded into a dataframe. My manually calculated pipeline returns were massively wrong and lead to a wrong output feature vector for a regressor I used. Only after I switched to pricing closing data, were the returns as expected. </p>
+
+<p>I am wondering, if the return function can cope with the differently adjusted closing prices in <strong>pipeline</strong> in a way that does not create outrageous returns?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d210827be71a06bff1b44b9' id='5d210827be71a06bff1b44b9'>
+<a href='#5d210827be71a06bff1b44b9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59f4a9f25da9ca00063c88a5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe667ef5da1b4d607b9d5d58d1ca5290?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59f4a9f25da9ca00063c88a5'>Stefan</a>
+</div>
+<a UTCms='1562445863000' class='quanto-date posted-at response-posted-at' href='#5d210827be71a06bff1b44b9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Attached please find an analysis between pipeline daily returns and manually calculated returns from pricing data. Among others, I created a confusion matrix between the quantiles generated via pipeline and pricing returns. The columns show how many company would fall into each quantile when only pricing data was considered. The rows show how many companys would fall into each quantile when only pipeline data was considered. In general, you would want the outcome that a company is with both pricing and pipeline data in the same quantile. However, as can be seen these are vastly different results. I hope Quantopian or a senior member will look into that as creating the feature vector y is the most important for any machine learning method.</p>
+
+<p>I still hope I have done a rudimentary mistake and somebody could point that out to me. However, if there is no mistake, then it seems that depending on which data feed one uses, companies will be associated with different quantiles (sometimes switching quantile 1 with quantile 10, i.e. the same company is one time at the top of the list and sometimes at the bottom of the list, depending on the feed you use).</p>
+
+<p>Would be great, if somebody could take the effort to look into this / or tell me which feed is the correct one for creating a feature vector y for machine learning.</p>
+
+<p>EDIT: I meant to say deciles - not quantiles  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d2c4a3b47e192004757a973' id='5d2c4a3b47e192004757a973'>
+<a href='#5d2c4a3b47e192004757a973'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1563183675000' class='quanto-date posted-at response-posted-at' href='#5d2c4a3b47e192004757a973'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Stefan, you need to <code>.shift()</code> the get_pricing() returns to make them align. get_pricing gives you e.g. today&#39;s closing price, but in trading you won&#39;t have access to that value today, but only tomorrow.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d2c549cd2be44003f7a950d' id='5d2c549cd2be44003f7a950d'>
+<a href='#5d2c549cd2be44003f7a950d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59f4a9f25da9ca00063c88a5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe667ef5da1b4d607b9d5d58d1ca5290?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59f4a9f25da9ca00063c88a5'>Stefan</a>
+</div>
+<a UTCms='1563186332000' class='quanto-date posted-at response-posted-at' href='#5d2c549cd2be44003f7a950d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thank you Thomas,</p>
+
+<p>that hint cleared almost all misallignments up. However, in my notebook I am calculating with the <strong>open</strong> price. Why do I need to shift the open price by one period? Shouldn&#39;t that already be known on the day I trade?</p>
+
+<p>Nevertheless, I have now created a new confusion matrix with your suggestion of shifting prices by one period. Now most observations are in the right decile. However, I have some observations that seem to be still in the wrong decile. The last cell shows some of the results where misalignments happened.<br>
+Could you take a look at the examples where the decile is still incorrect? I am probably still missing something here.</p>
+
+<p>Thank you in advance, Stefan  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d2c6b72d2be44003f7a961e' id='5d2c6b72d2be44003f7a961e'>
+<a href='#5d2c6b72d2be44003f7a961e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1563192178000' class='quanto-date posted-at response-posted-at' href='#5d2c6b72d2be44003f7a961e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Think of it more like a requirement to know all your trades <em>before</em> the open of the day. Obviously this won&#39;t always be true but for the trading horizon we designed the platform (and the fund) for it is the right simplification.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5d407d44d0f8de77ec9ad981' id='5d407d44d0f8de77ec9ad981'>
+<a href='#5d407d44d0f8de77ec9ad981'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5d276c741bfbaa3d1580dcfd'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/05c39b2528f1d9b6cdacf40c988f97f0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5d276c741bfbaa3d1580dcfd'>Rho Assasinus</a>
+</div>
+<a UTCms='1564507460000' class='quanto-date posted-at response-posted-at' href='#5d407d44d0f8de77ec9ad981'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, I&#39;m extremely new here. So I might ask some stupid questions.<br>
+How do you implement the model you&#39;ve built if you can&#39;t dump the model using pickle? Do you have to train a new model every day when running the strategy? That will takes very long time to do backtesting right?  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/machine-learning-on-quantopian-part-2-ml-as-a-factor'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#50363535343231333b102125313e243f2039313e7e333f3d">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

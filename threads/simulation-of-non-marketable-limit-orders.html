@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Simulation of (non-marketable) limit orders
+</title>
+<meta content='Hi -  First, thanks to everyone working on Quantopian and Zipline, I think they have great potential and cannot believe how far they have come. Despite the inclusion of advanced features like pipeline and fundamentals, I still have some concerns about the very basic underlying trading simulation. I think the attached backtest demonstrates an issue with inaccurate simulation of limit orders.  In the backtest there are only two days with trades: - on one day we buy by putting in a (marketable)...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="9SV+oKOzF9nLXe/x+mfG9wvBi4iI5ugnTp284eHVm4CJQwjtAUXFOnJAtsC1iG6DM0+o4fIq/TzMkmeLS5D5Ow==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/simulation-of-non-marketable-limit-orders' property='og:url'>
+<meta content='Simulation of (non-marketable) limit orders' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/simulation-of-non-marketable-limit-orders' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Simulation of (non-marketable) limit orders' property='og:title'>
+<meta content='Hi -  First, thanks to everyone working on Quantopian and Zipline, I think they have great potential and cannot believe how far they have come. Despite the inclusion of advanced features like pipeline and fundamentals, I still have some concerns about the very basic underlying trading simulation. I think the attached backtest demonstrates an issue with inaccurate simulation of limit orders.  In the backtest there are only two days with trades: - on one day we buy by putting in a (marketable)...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/simulation-of-non-marketable-limit-orders">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='57a079baa4224030a7000a21'>
+<div class='post-container' data-post-id='57a079baa4224030a7000a21' id='57a079baa4224030a7000a21'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Simulation of (non-marketable) limit orders</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/549d79c5f15df2a3f90002f0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/434ab68fb11460978fce23b68a6b2a39?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/549d79c5f15df2a3f90002f0'>Bill Lyons</a>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1470220362000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Simulation of (non-marketable) limit orders&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsimulation-of-non-marketable-limit-orders%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsimulation-of-non-marketable-limit-orders%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsimulation-of-non-marketable-limit-orders%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsimulation-of-non-marketable-limit-orders%26utm_medium%3Dlinkedin&amp;title=Simulation+of+%28non-marketable%29+limit+orders+%28Bill+Lyons%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Getting Started' data-tag-id='55c50e7d8d4710ec6e000004' href='/posts/tag/Getting-Started/newest'>Getting Started</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/simulation-of-non-marketable-limit-orders?utm_source=website_share&amp;utm_campaign=simulation-of-non-marketable-limit-orders&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Bill Lyons" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hi - </p>
+
+<p>First, thanks to everyone working on Quantopian and Zipline, I think they have great potential and cannot believe how far they have come. Despite the inclusion of advanced features like pipeline and fundamentals, I still have some concerns about the very basic underlying trading simulation.</p>
+
+<p>I think the attached backtest demonstrates an issue with inaccurate simulation of limit orders. </p>
+
+<p>In the backtest there are only two days with trades:<br>
+- on one day we buy by putting in a (marketable) limit order, with a limit far above the market. As this is marketable when we insert it, it should fill just as a market order would, and it does.<br>
+- on every subsequent day, at start of day we insert a limit order to sell at a fixed price of 111. When the market eventually reaches this level, our order should fill at 111 (since we have inserted a passive limit order to sell at this level). However, all the fills come in level better than our limit (as in the first case). However, this case is different! If the market &quot;goes through&quot; the level of a limit order which is already in the market, we still only get the limit price.</p>
+
+<p>I think this is important to address: it improves the reported backtest results of any strategy using passive orders, which makes strategies look more viable for real trading than may be the case.</p>
+
+<p>To be clear: this has nothing at all to do with commissions and slippage. The above issue is purely with the price of market fills, before any commission or slippage is taken into account.</p>
+
+<p>I hope the example and explanation is clear. The key point is that non-marketable limit orders &quot;resting in the market&quot; should get filled at the limit price, or not at all. The current simulation seems to treat them as if they were re-inserted at each bar, gaining the benefit of favourable price moves and biasing the trading results upwards. This gives incorrect simulation results, compared to real trading with the same orders.  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>19 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='57a0a95fb7ad009e5b0001d4' id='57a0a95fb7ad009e5b0001d4'>
+<a href='#57a0a95fb7ad009e5b0001d4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1470146921000' class='quanto-date posted-at response-posted-at' href='#57a0a95fb7ad009e5b0001d4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is an interesting point but the slippage model has never been a priority for Q anyway. </p>
+
+<p>I can see the zipline code does exactly what you say. It doesn&#39;t check if the price  &quot;goes through&quot; the level of a limit or not.<br>
+ <a href="https://github.com/quantopian/zipline/blob/master/zipline/finance/slippage.py">https://github.com/quantopian/zipline/blob/master/zipline/finance/slippage.py</a></p>
+
+<pre><code>class VolumeShareSlippage(SlippageModel):  
+    [...omitted....]  
+    def process_order(self, data, order):  
+        volume = data.current(order.asset, &quot;volume&quot;)
+
+        max_volume = self.volume_limit * volume
+
+        # price impact accounts for the total volume of transactions  
+        # created against the current minute bar  
+        remaining_volume = max_volume - self.volume_for_bar  
+        if remaining_volume &lt; 1:  
+            # we can&#39;t fill any more transactions  
+            raise LiquidityExceeded()
+
+        # the current order amount will be the min of the  
+        # volume available in the bar or the open amount.  
+        cur_volume = int(min(remaining_volume, abs(order.open_amount)))
+
+        if cur_volume &lt; 1:  
+            return None, None
+
+        # tally the current amount into our total amount ordered.  
+        # total amount will be used to calculate price impact  
+        total_volume = self.volume_for_bar + cur_volume
+
+        volume_share = min(total_volume / volume,  
+                           self.volume_limit)
+
+        price = data.current(order.asset, &quot;close&quot;)
+
+        simulated_impact = volume_share ** 2 \  
+            * math.copysign(self.price_impact, order.direction) \  
+            * price  
+        impacted_price = price + simulated_impact
+
+        if order.limit:  
+            # this is tricky! if an order with a limit price has reached  
+            # the limit price, we will try to fill the order. do not fill  
+            # these shares if the impacted price is worse than the limit  
+            # price. return early to avoid creating the transaction.
+
+            # buy order is worse if the impacted price is greater than  
+            # the limit price. sell order is worse if the impacted price  
+            # is less than the limit price  
+            if (order.direction &gt; 0 and impacted_price &gt; order.limit) or \  
+                    (order.direction &lt; 0 and impacted_price &lt; order.limit):  
+                return None, None
+
+        return (  
+            impacted_price,  
+            math.copysign(cur_volume, order.direction)  
+        )  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1bccd3a90ced312000571' id='57a1bccd3a90ced312000571'>
+<a href='#57a1bccd3a90ced312000571'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/549d79c5f15df2a3f90002f0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/434ab68fb11460978fce23b68a6b2a39?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/549d79c5f15df2a3f90002f0'>Bill Lyons</a>
+</div>
+<a UTCms='1470217430000' class='quanto-date posted-at response-posted-at' href='#57a1bccd3a90ced312000571'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I would really like to get some response from the Quantopian / Zipline team on this. It is pretty fundamental stuff.  </p>
+
+<blockquote>
+<p>This is an interesting point but the slippage model has never been a priority for Q anyway.</p>
+</blockquote>
+
+<p>Thanks Luca, I appreciate you tracking down what seems to be the relevant part of the Zipline code for this. However, as I stressed before, this is nothing to do with the slippage model (despite apparently being in Slippage.py? I guess that means &quot;executions including potential slippage&quot;?). With slippage set to zero always, this discrepancy still exists. It is not a subtle market-impact model type of thing, it is just the bare bones logic of how orders get filled in the market.</p>
+
+<p>The issue is: if I enter an order to sell 100 shares at 111.00, and the market is currently  at 110.50, and during the day the market rises up through my level to close at 111.50, how should Zipline report I got filled (assuming no commissions, adequate volume, just the very simplest case)?</p>
+
+<p>If it is simulating correctly, it should report I got filled at 111.00. That is exactly what would happen in live trading. There is no slippage or impact model needed. </p>
+
+<p>But it does not, it reports that I sell at a higher level.</p>
+
+<p>I would like to understand: do Quantopian agree this is a bug or an oversight? If I submit a pull request to Zipline will it be merged? Is there any way the current behaviour can be justified (especially since it improves fills, rather than making them worse?)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1c77a5fe0020b650000e9' id='57a1c77a5fe0020b650000e9'>
+<a href='#57a1c77a5fe0020b650000e9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1470220159000' class='quanto-date posted-at response-posted-at' href='#57a1c77a5fe0020b650000e9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Bill, few things :</p>
+
+<p>1 - add the tag &quot;seeking help&quot;, this might higher the chances Q will look at this post<br>
+2 - or send a private message to &quot;Learn &amp; Support&quot; -> &quot;Contact Support&quot;. They have always replied to my messages and they are always very helpful<br>
+3 - the current behaviour cannot be considered a bug, it&#39;s just too optimistic: you get a better price than you probably would have in real trading but it is consistent with limit order definition (buy/sell a set number of shares at a specified price <strong>or better</strong>). Still I agree with you that it would be better to have a more realistic model<br>
+4- I understand the limit order fill price is not related to slippage model but in zipline the logic is in Slippage.py and it makes sense from the code point of view<br>
+5 - if you like to contribute to zipline project you probably have to open an issue before submitting patches. In the issue tracker you can discuss this problem. If the project maintainers agree on changing the current behaviour you can ask to be assigned the task and eventually get you code pulled in.</p>
+
+<p>My opinion is that Q is focused on its hedge fund, they are interested in modelling correctly the kind of algorithms they intend to run in their hedge fund. The little details that impact certain algorithm types (intraday, low volume stocks, hard to borrow, shorting costs, delisting, etc. etc.) are low priority for them (even though, as retail traders, those are high priority for us. But this is where Q current  business model is not ideal for a retail trader).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1c98e103b89076d0005ea' id='57a1c98e103b89076d0005ea'>
+<a href='#57a1c98e103b89076d0005ea'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1470220692000' class='quanto-date posted-at response-posted-at' href='#57a1c98e103b89076d0005ea'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Bill,</p>
+
+<p>I suspect the problem is that the Quantopian simulator is using prices from historical trades (minutely closing prices).  It doesn&#39;t model the market with a separate &quot;engine&quot; that attempts to simulate precisely what would have occurred.</p>
+
+<p>You might be able to fix the problem with your own custom slippage model, but I&#39;m not sure you can force trades for minutes when there were none.</p>
+
+<p>Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1cb583a90ced3120005eb' id='57a1cb583a90ced3120005eb'>
+<a href='#57a1cb583a90ced3120005eb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/549d79c5f15df2a3f90002f0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/434ab68fb11460978fce23b68a6b2a39?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/549d79c5f15df2a3f90002f0'>Bill Lyons</a>
+</div>
+<a UTCms='1470221153000' class='quanto-date posted-at response-posted-at' href='#57a1cb583a90ced3120005eb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Luca,</p>
+
+<p>Thank you for the response: I gave up on trying to give feedback to Q/Z once before because of the lack of response, so although you are also &quot;just&quot; a user, I thank you for at least having the conversation!</p>
+
+<p>I have added the tag you suggest, and will probably contact the Q/Z teams directly if there is still no response. </p>
+
+<p>I think you are right that Q is focused on the hedge fund, and what they currently think is most relevant to that (like large universe equity long/short portfolio construction!). However, I am not sure their judgement on what is important is necessarily infallible. Having bells and whistles like pipeline, when you cannot simulate a limit order getting filled is an odd situation to say the least. In any &quot;real-life&quot; trading, especially automated trading, you have to use limit orders only. You cannot have an algo blindly aggress the market. Although the limit orders will be at least partly marketable a lot of the time, trading with price limits is not an esoteric requirement, or one that concerns retail traders mainly. Arguably it is safer for a retail trader to send a market order then an institutional-volume algo! </p>
+
+<p>If we want the backtest to correspond to reality, the current behaviour is wrong. So I just wanted to raise this issue, but maybe the Zipline project will be a better forum for it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1ea82bd25805d04000373' id='57a1ea82bd25805d04000373'>
+<a href='#57a1ea82bd25805d04000373'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56aa51f03764b3cb990000ff'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/80fdb4de2c7bbb62d815fbd27582e5d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56aa51f03764b3cb990000ff'>Mohammad Forouzani</a>
+</div>
+<a UTCms='1470229126000' class='quanto-date posted-at response-posted-at' href='#57a1ea82bd25805d04000373'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Bill - I agree - this is a bug that needs to be addressed. I have created an <a href="https://github.com/quantopian/zipline/issues/1369">issue on github</a> and submitted a <a href="https://github.com/quantopian/zipline/pull/1370/files">PR</a> with a patch to fix this.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1f485bd25807717000803' id='57a1f485bd25807717000803'>
+<a href='#57a1f485bd25807717000803'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/549d79c5f15df2a3f90002f0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/434ab68fb11460978fce23b68a6b2a39?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/549d79c5f15df2a3f90002f0'>Bill Lyons</a>
+</div>
+<a UTCms='1470231693000' class='quanto-date posted-at response-posted-at' href='#57a1f485bd25807717000803'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Mohammad - Thanks for getting the ball rolling on the  Z side: we will see what the response is.</p>
+
+<p>Above, I was deliberately avoiding questions of slippage, to try to keep things as clear as possible. In your patch, it seems that the slippage model is applied as usual. In the case of a non-marketable limit order, even if there is a slippage model specified, it should not change the fill price in the case we are discussing: it will only effect market orders and marketable limit orders.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a1f9ee5fe00296c6000075' id='57a1f9ee5fe00296c6000075'>
+<a href='#57a1f9ee5fe00296c6000075'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56aa51f03764b3cb990000ff'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/80fdb4de2c7bbb62d815fbd27582e5d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56aa51f03764b3cb990000ff'>Mohammad Forouzani</a>
+</div>
+<a UTCms='1470233075000' class='quanto-date posted-at response-posted-at' href='#57a1f9ee5fe00296c6000075'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Bill - I see what you are saying. In my mind, all limit orders should be filled at the limit price unless there is major slippage - but I guess this is a problem of dealing with <em>minute data</em> and not tick data.</p>
+
+<p>I&#39;m going to remove my PR as it doesn&#39;t solve this issue.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a20576bd25801327000102' id='57a20576bd25801327000102'>
+<a href='#57a20576bd25801327000102'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56a7aba9319e556c95000096'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ece582af5f84c61a695c480313598943?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56a7aba9319e556c95000096'>Lotanna Ezenwa</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1470236026000' class='quanto-date posted-at response-posted-at' href='#57a20576bd25801327000102'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey everyone,</p>
+
+<p>Great insight on this bug, I agree that this is a artifact from earlier versions of Zipline that has yet to be fixed.<br>
+A lot of questions have been asked/answered in this thread, so if I miss one feel free to post it again.</p>
+
+<blockquote>
+<p>do Quantopian agree this is a bug or an oversight? </p>
+</blockquote>
+
+<p>Yep, this is a bug in Zipline. </p>
+
+<blockquote>
+<p>If I submit a pull request to Zipline will it be merged?</p>
+</blockquote>
+
+<p>Once a <a href="https://github.com/quantopian/zipline/pulls">PR is submitted</a> to Zipline, its continuous integration systems will check if merging will break other systems.<br>
+Further, you&#39;ll get feedback from the maintainers about the nature of the PR, and it&#39;s rationale. </p>
+
+<p>In general, if there is a PR with adequate unit tests that is useful to Zipline, it will be merged. </p>
+
+<p>I&#39;ve actually already submitted <a href="https://github.com/quantopian/zipline/issues/1357">an issue</a> to upgrade the ordering logic in Zipline. I&#39;ll add your finding to it.</p>
+
+<p>Thanks,<br>
+Lotanna Ezenwa</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a440297b6622231d000008' id='57a440297b6622231d000008'>
+<a href='#57a440297b6622231d000008'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/530dc58192f94a48e80002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6a81c3996de61b5880d979f288a9a743?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/530dc58192f94a48e80002b6'>Mikko M</a>
+</div>
+<a UTCms='1470382129000' class='quanto-date posted-at response-posted-at' href='#57a440297b6622231d000008'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think this is quite a major problem that skews results quite much especially with higher volatility stocks and longer term backtests.</p>
+
+<p>Has anyone tried to create a custom slippage model that would address this? It should be possible to apply custom slippage model that would always fill non-marketable limits at limit price and marketable limit prices without negative slippage from limit price.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a457f40dd1ca7027000008' id='57a457f40dd1ca7027000008'>
+<a href='#57a457f40dd1ca7027000008'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1470388222000' class='quanto-date posted-at response-posted-at' href='#57a457f40dd1ca7027000008'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I created a custom slippage that fills non-marketable limits at limit price and leaves the marketable limit ones as before. Let me know what you think .</p>
+
+<p>The patch is actually three lines of code (plus ten of comments ;) but I had to copy/paste the full VolumeShareSlippage class to test the patch.</p>
+
+<p>@Mikko, I didn&#39;t add the feature &quot;fill marketable limit prices without negative slippage from limit price&quot; can you elaborate a bit on that?</p>
+
+<p>EDIT:<br>
+To disinguish between marketable and non-marketable limit orders I used the following approximation:<br>
+if both open and close price are below/above (buy/sell) the limit price the order is markettable<br>
+if open price is above (or below for sell) limit price and close price is below (or above for sell) limit price, then the order is non-marketable<br>
+If the price is non-marketable I force the price to be limit price</p>
+
+<p>I said approximation because this code doesn&#39;t cover the scenario where the crossing of the limit price happens between the close price of the previous minute and the open price of the next minute. But in my understanding the close price of any minute must be almost identical to the open price of the  following minute, so I don&#39;t believe this is a real issue.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a458cd0dd1caacb7000915' id='57a458cd0dd1caacb7000915'>
+<a href='#57a458cd0dd1caacb7000915'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/530dc58192f94a48e80002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6a81c3996de61b5880d979f288a9a743?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/530dc58192f94a48e80002b6'>Mikko M</a>
+</div>
+<a UTCms='1470388438000' class='quanto-date posted-at response-posted-at' href='#57a458cd0dd1caacb7000915'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>@Mikko, I didn&#39;t add the feature &quot;fill marketable limit prices without negative slippage from limit price&quot; can you elaborate a bit on that? </p>
+</blockquote>
+
+<p>Thank you for the code!</p>
+
+<p>I think (I&#39;m not sure about this but I think this has been discussed at some other thread?) that current slippage model makes it possible for prices for marketable limits to fill at prices worse than limit price because of the slippage. That should not be possible.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a45ceb7b6622231d000122' id='57a45ceb7b6622231d000122'>
+<a href='#57a45ceb7b6622231d000122'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1470389491000' class='quanto-date posted-at response-posted-at' href='#57a45ceb7b6622231d000122'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Mikko, I don&#39;t know about that actually. If you find the post that talks about that it might help. I can see <a href="https://github.com/quantopian/zipline/commit/82d2ddfa9051b3bd0e9c7425b08eb544834c49d9">this bug fix</a> though, it seems related to what you are saying but it is from long ago.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a45f55a9cbd7bcbf000295' id='57a45f55a9cbd7bcbf000295'>
+<a href='#57a45f55a9cbd7bcbf000295'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/530dc58192f94a48e80002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6a81c3996de61b5880d979f288a9a743?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/530dc58192f94a48e80002b6'>Mikko M</a>
+</div>
+<a UTCms='1470390106000' class='quanto-date posted-at response-posted-at' href='#57a45f55a9cbd7bcbf000295'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Luca,</p>
+
+<p>Yes from the code an the bugfix it seems that this has been addressed. Thanks for finding the fix and the code!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a5c830bb26a6a19a0001b0' id='57a5c830bb26a6a19a0001b0'>
+<a href='#57a5c830bb26a6a19a0001b0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1470482488000' class='quanto-date posted-at response-posted-at' href='#57a5c830bb26a6a19a0001b0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For my education, perhaps someone could fill me in on this issue.  It sounds like, absent of the slippage model, simulated order fills are done using actual historical prices from the OHLCV minute bar data base.</p>
+
+<p>A few questions:</p>
+
+<ol>
+<li>Is it correct that for 
+<code>data.can_trade(stock_A)</code> <code>True</code> regardless of the value of <code>data.is_stale(stock_A)</code> an order will be accepted by the simulator?  In other words, so long as <code>stock_A</code> has had its initial historical trade (first OHLCV minute bar) at the simulation time, then an order can be submitted.<br></li>
+<li>Submitted orders won&#39;t be filled until historical trades are encountered, correct?  For example, it is possible that an order submitted at 10:30 would not be evaluated for filling until 11:00, assuming that the next historical trade occurred then.<br></li>
+<li>Only minutely closing prices are used by the order execution simulator?  Or are OHL values also considered?<br></li>
+<li>In the example provided above by Bill Lyons, the claim is that a limit order to sell at $111.00 should be filled at exactly $111.00, but this seems tricky.  Say my buy order is filled at 10 am at $110.50, and then there are no historical trades until 10:30, at which point the price has risen to $111.50.  So, the limit of $111 was crossed, but when?  Should the order be filled at $111 at 10:30?  Or should one assume a linear price versus time model, to estimate the fill time (and then post the transaction retroactively)?  Basically, one has to simulate what might have happened had the limit order been with the broker after 10:30.<br></li>
+<li>It seems that a slippage model still needs to be applied to limit orders, no?  Generally, one can&#39;t just have the order filled completely and instantaneously at a fixed price.  What if the transaction is a significant chunk of the market in the stock?<br></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57c6db079da06c556a000227' id='57c6db079da06c556a000227'>
+<a href='#57c6db079da06c556a000227'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/546cddf11784d3d4c6000436'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/eff513fd33ebe34d68f212ef2e2b2983?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/546cddf11784d3d4c6000436'>Ph Quam</a>
+</div>
+<a UTCms='1472649997000' class='quanto-date posted-at response-posted-at' href='#57c6db079da06c556a000227'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think that executing limit orders always at close price is not that wrong, it&#39;s one of several trade-offs that can be made.<br>
+There are 3 alternative implementations:<br>
+ 1. Market price is close price. Market orders execute at close price.<br>
+         1.1 Limit orders execute only at close price if marketable. This is the current situation<br>
+         1.2 Limit orders execute only at limit price without having access to close price, but marketability is determined by [low..high]<br>
+2. Market price is open price. Market orders execute at open price.<br>
+         2.1. If order is marketable at open price it executes at open price. If order is not marketable at open it executes at limit if within [low..high]. This is the only implementation of the 3, that can execute at market price (open) and limit price, because it has a whole bar of time after it has checked marketability.<br>
+Using close price for market orders shrinks the bar to a point, because market orders are immediate (first) and close price is last. First = Last, hence point.<br>
+Consulting close price and conditionally executing at limit introduces a subtle hindsight bias, it&#39;s not possible in reality.<br>
+I don&#39;t think that the current implementation is deceptively optimistic. If you believe that always executing at close price is optimistic, then you should never need a limit order.<br>
+I think that the 2.1 implementation is closest to reality (except in cases of daily opening volatility), but even if it existed, would it be accepted as default and make all the existing backtests irreproducible?<br>
+I have implemented 1.2 in <a href="https://github.com/quantopian/zipline/pull/1453">https://github.com/quantopian/zipline/pull/1453</a> as class ConservativeCloseSlippage.<br>
+There are classes that use open price, but do not switch dynamically between market and limit price as described in 2.1.<br>
+I implemented these classes, not because I find the current implementation optimistic, but because I felt that it misses much of my trades by considering only close price instead of [low..high]. So which slippage model is best? Just try which will provide best results, I believe they are conservative enough not to provide unrealistically good results.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5969c4db9abd5a00102315c1' id='5969c4db9abd5a00102315c1'>
+<a href='#5969c4db9abd5a00102315c1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1500103899000' class='quanto-date posted-at response-posted-at' href='#5969c4db9abd5a00102315c1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quantopian</p>
+
+<p>I was wondering if you have any update on this long standing bug. A solution was provided both here and on github but after a year the bug is still present and the fix not integrated. From what I understood you have big plans for the slippage model so the bug fix has been postponed, but in the meanwhile wouldn&#39;t be better to simply accept the proposed fix? From time to time I stumble across this bug and I realize too late the great backtest results are not real, this is quite annoying and for users that are not aware of the bug is even worse. So this is just a gentle reminder about the existence of this bug ;)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5969e57740d79f377af9ab5b' id='5969e57740d79f377af9ab5b'>
+<a href='#5969e57740d79f377af9ab5b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1500112247000' class='quanto-date posted-at response-posted-at' href='#5969e57740d79f377af9ab5b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Added tracking to the first backtest, these are the orders described originally, a partial sell at 111.02 instead of 111.00?  See Source Code tab for the full logging output. You can use the tool in this backtest to help clarify. Why not add OHLC to it?</p>
+
+<pre><code>2015-08-03 06:45 sod:21 INFO SOD pos: 0  
+2015-08-03 06:45 sod:26 INFO 2015-08-03 13:45:00+00:00: SOD placing buy order for 921 of Equity(22739 [VTI]) at limit 110.500000 with current price 108.480000  
+2015-08-03 06:45 _trac:82 INFO   15   Buy 921 VTI _ at 108.48 limit 110.5              e2b7  
+2015-08-03 06:46 _trac:82 INFO   16      Bot 377/921 VTI (377) at 108.52 limit 110.5    e2b7  
+2015-08-03 06:47 _trac:82 INFO   17      Bot 413/921 VTI (790) at 108.51 limit 110.5    e2b7  
+2015-08-03 06:48 _trac:82 INFO   18      Bot all 131/921 VTI (921) at 108.58 limit 110.5    e2b7  
+2015-08-04 06:45 sod:21 INFO SOD pos: 921
+
+2016-07-20 06:45 sod:21 INFO SOD pos: 921  
+2016-07-20 06:45 sod:31 INFO 2016-07-20 13:45:00+00:00: SOD placing sell order for -921 of Equity(22739 [VTI]) at limit 111.000000 with current price 110.680000  
+2016-07-20 06:45 _trac:82 INFO   15   Sell -921 VTI (921) at 110.68 limit 111.0        1727
+
+2016-07-20 07:21 _trac:82 INFO   51      Sold -578/-921 VTI (343) at 111.02  (+1439) limit 111.0    1727  
+2016-07-20 07:22 _trac:82 INFO   52      Sold -91/-921 VTI (252) at 111.04  (+228) limit 111.0    1727  
+2016-07-20 07:23 _trac:82 INFO   53      Sold -37/-921 VTI (215) at 111.02  (+92) limit 111.0    1727  
+2016-07-20 07:24 _trac:82 INFO   54      Sold -27/-921 VTI (188) at 111.02  (+67) limit 111.0    1727  
+2016-07-20 07:26 _trac:82 INFO   56      Sold -42/-921 VTI (146) at 111.02  (+105) limit 111.0    1727  
+2016-07-20 07:27 _trac:82 INFO   57      Sold -54/-921 VTI (92) at 111.02  (+134) limit 111.0    1727  
+2016-07-20 07:28 _trac:82 INFO   58      Sold -60/-921 VTI (32) at 111.01  (+149) limit 111.0    1727  
+2016-07-20 07:33 _trac:82 INFO   63      Sold -921 VTI _ at 111.03 limit 111.0         1727  
+2016-07-21 06:45 sod:21 INFO SOD pos: 0  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59bc5d8bfaae8a001089b7dd' id='59bc5d8bfaae8a001089b7dd'>
+<a href='#59bc5d8bfaae8a001089b7dd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/559b8d682492b23da7000122'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e49c96a879ca7c58df7ded854f5db842?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/559b8d682492b23da7000122'>Robert Tarlton</a>
+</div>
+<a UTCms='1505516939000' class='quanto-date posted-at response-posted-at' href='#59bc5d8bfaae8a001089b7dd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can someone explain why Quantopian spends so much time adding additional functionality when the most fundamental of functions (limit order) is not being executed correctly!??</p>
+
+<p>If exceptional functionality has to transact through garbage, the whole thing becomes garbage. I cannot believe how long this has gone without being fixed considering it invalidates any algo that uses limit orders.</p>
+
+<p>The Quantopian tool is so great but is made practically useless from this error. You guys have something special here, PLEASE PLEASE fix this.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/simulation-of-non-marketable-limit-orders'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/simulation-of-non-marketable-limit-orders'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#9afcfffffef8fbf9f1daebeffbf4eef5eaf3fbf4b4f9f5f7">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

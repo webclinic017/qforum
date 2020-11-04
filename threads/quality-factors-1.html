@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Quality Factors
+</title>
+<meta content='This post delves into what is commonly referred to in the academic literature as “quality” factors.  In contrast to value factors, quality factors may be less understood by people outside the finance/accounting fields.  I’ll divide this post into five sections:       What are quality factors       What are some nice features of quality factors       Sector neutralizing quality factors       Backtesting the Novy-Marx quality factor (gross profitability)       Factor timing on quality factors I...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="PCTddgAY6DEweFLF2S/OGV9tvy/66qey8xfAGSp7RE1AQqs7ou460ollC/SWwGZtZ+OcRoAmsqlxGBtzgD4m9g==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/quality-factors-1' property='og:url'>
+<meta content='Quality Factors' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/quality-factors-1' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Quality Factors' property='og:title'>
+<meta content='This post delves into what is commonly referred to in the academic literature as “quality” factors.  In contrast to value factors, quality factors may be less understood by people outside the finance/accounting fields.  I’ll divide this post into five sections:       What are quality factors       What are some nice features of quality factors       Sector neutralizing quality factors       Backtesting the Novy-Marx quality factor (gross profitability)       Factor timing on quality factors I...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/quality-factors-1">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='586d4ade04f95e00120000e5'>
+<div class='post-container' data-post-id='586d4ade04f95e00120000e5' id='586d4ade04f95e00120000e5'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Quality Factors</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55dea840bddf401335000278'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/56e84a9d02afa18a2f55e3d96a48fec9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55dea840bddf401335000278'>Rob Reider</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1483557598000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Quality Factors&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fquality-factors-1%3Futm_source%3Dwebsite_share%26utm_campaign%3Dquality-factors-1%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fquality-factors-1%3Futm_source%3Dwebsite_share%26utm_campaign%3Dquality-factors-1%26utm_medium%3Dlinkedin&amp;title=Quality+Factors+%28Rob+Reider%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Papers' data-tag-id='55c50e7d8d4710ec6e000007' href='/posts/tag/Papers/newest'>Papers</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Value' data-tag-id='55d33f023f6ba10065000000' href='/posts/tag/Value/newest'>Value</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Lectures' data-tag-id='5755d15e8717dd8af5000002' href='/posts/tag/Lectures/newest'>Lectures</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/quality-factors-1?utm_source=website_share&amp;utm_campaign=quality-factors-1&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Rob Reider" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>This post delves into what is commonly referred to in the academic literature as “quality” factors.  In contrast to value factors, quality factors may be less understood by people outside the finance/accounting fields.  I’ll divide this post into five sections:</p>
+
+<ol>
+<li>      What are quality factors<br></li>
+<li>      What are some nice features of quality factors<br></li>
+<li>      Sector neutralizing quality factors<br></li>
+<li>      Backtesting the Novy-Marx quality factor (gross profitability)<br></li>
+<li>      Factor timing on quality factors</li>
+</ol>
+
+<p>I will demonstrate these ideas with a notebook (and an algorithm to follow).  Two excellent papers on the subject, which I will refer to numerous times, are Asness, Frazzini, Pederson, <a href="http://www.econ.yale.edu/%7Eshiller/behfin/2013_04-10/asness-frazzini-pedersen.pdf">“Quality Minus Junk”</a>, and Novy-Marx, <a href="http://rnm.simon.rochester.edu/research/OSoV.pdf">“The Other Side of Value: The Gross Profitability Premium”</a>.</p>
+
+<p><strong>What are Quality Factors?</strong></p>
+
+<p>In very general terms, “quality” stocks are defined as stocks that have features that should command higher prices. Examples would be stocks with high profitability (in terms of, for example, return on equity, return on assets, gross profitability, gross margin), high growth (for example, the five-year growth of the above items), conservative accounting (for example, low non-cash accruals), and high payouts (for example, low net equity and debt issuance, high dividend payout ratios).  This list of quality factors is by no means comprehensive.  For example, in a paper by an Accounting professor that received a lot of attention among traders and academics, Piotroski’s <a href="https://www.chicagobooth.edu/%7E/media/FE874EE65F624AAEBD0166B1974FD74D.pdf">F-Score paper</a>  uses nine accounting variables to pick long and short stock candidates.  <strong>A key feature of quality factors is that they are solely based on accounting variables and not market values</strong>, unlike value factors (for example,  Book/Market, Price/Cash Flow, Price/Earnings, Dividend/Price,…) that use market prices to determine whether stocks are overvalued or undervalued.</p>
+
+<p>These quality factors should lead to higher valuations, and in the shared notebook that’s attached, I show that this is indeed the case.  The way I measure the valuation premium for high quality stocks is to run a cross-sectional regression of market-to-book (M/B) ratios on a measure of quality, the gross profitability-to-asset ratio (GP/A):<br>
+               (M/B)i = a + b (GP/A)i + ei<br>
+The regression coefficient, b, measures the relationship between quality and valuation premium, and the coefficient is significantly positive - higher quality stocks have higher market-to-book ratios.   However, and this is where the potential inefficiency comes in, the market may not be valuing these quality stocks high enough, which implies future expected returns should be larger.  In other words, although high quality stocks command a valuation premium, empirical evidence suggests the premium may be too modest.</p>
+
+<p><strong>Nice Features of Quality Stocks</strong></p>
+
+<p>I’m going to focus on the measure of quality used by Novy-Marx, namely gross profitability, which is defined as (revenues – cost of goods sold)/(book value of assets)).  He argues that gross profitability is a better measure than those based on earnings or cash flow.  For example, capital expenditures and R&amp;D (which are not part of cost of goods sold) reduce cash flow and earnings but may improve future operations.</p>
+
+<p>As a stand-alone factor, gross profitability performs well, but the strength in quality factors like this lies in its interaction with value factors.  First of all, quality is usually negatively correlated with value: high quality stocks tend to have higher market-to-book ratios, as we discussed.  And quality seems to do well when value doesn’t, and vice versa, so quality is a good hedge for value.  But most importantly, stocks that have both value and quality perform better than the sum of the individual factors.  Buying value stocks that also have high quality scores apparently avoids the “value trap” – stocks that are cheap but never recover.  This interaction between value and quality can be captured by trading the “corner boxes” in a double sort – going long stocks that have both high quality and high book-to-market ratios and shorting stocks that have both low quality and low book-to-market ratios.</p>
+
+<p>Novy-Marx was certainly not the first to notice the positive interaction between value and quality factors.  For example, Joel Greenblatt’s <a href="http://www.poslovni.hr/media/PostAttachments/1203672/Joel%20Greenblatt%20-%20The%20Little%20Book%20That%20Beats%20the%20Market.pdf">“The Little Book that Beats the Market”</a>  uses two factors, a quality factor (ROC) and a value factor (P/E), both measured with respect to the enterprise value of the firm (debt plus equity) rather than equity (which, they argue, makes it easier to compare companies with different capital structures). </p>
+
+<p>This strategy has very low turnover (and therefore very low transaction costs and very high capacity).  In backtesting, I rebalanced once/month, and even monthly the signals are very persistent. Since the factors involve pure accounting variables, they don’t change much over time.</p>
+
+<p>Also, the outperformance of quality portfolios is even larger if we look at the three-factor Fama-French risk-adjusted returns rather than raw returns, since quality stocks tend to have negative exposures to value.  Novy-Marx also claims that when he sorts stocks into quality deciles, high quality stocks tend to have larger market capitalizations.  The negative exposure to size would further enhance the three-factor Fama-French risk-adjusted returns.  However, I did not find any correlation between quality stocks and market capitalization in the recent period I looked at.</p>
+
+<p><strong>Sector Neutralizing</strong></p>
+
+<p>Before presenting the backtesting results, we should step back and discuss how to deal with sectors and industries.  When working with accounting data, there could be large differences between various accounting measures across different sectors.  For example, profit margin, a quality factor, may differ considerably among financial, utility, technology, and consumer discretionary stocks.  The same applies to other fundamental factors:  dividend yield, profit margins, patents, change in employees, R&amp;D normalized by assets or sales, employee utilization, accruals, stock option expensing (and many others) all vary widely across sectors.  When selecting stocks, it may be more relevant to compare companies with their peers.</p>
+
+<p>There are numerous ways of dealing with sector differences:<br>
+1.       Demean the factors by sector<br>
+2.       Standardize the factors by z-scoring within sectors<br>
+3.       Forcing strict sector neutrality (for example, computing quantiles within each sector)<br>
+4.       Eliminate certain sectors (financial stocks and utilities, for example)<br>
+5.       Selectively eliminate sectors based on performance<br>
+6.       All of the above but for industry groups rather than sectors</p>
+
+<p>I focus on demeaning because that’s what Novy-Marx did.  In almost all backtests I ran, demeaning reduced the volatility of the strategy and increased the Sharpe Ratio, and in many cases it actually increased the average returns also. </p>
+
+<p>Most academic papers demean by industries rather than sectors.  Morningstar has 69 industry groups, larger than the 24 GICS industry groups or the 47 Fama-French Industries, and with our smaller Q1500 universe, it seems too granular to demean by Morningstar’s industry groups.</p>
+
+<p>Let me make a few comments on selectively eliminating sectors.  I know it is tempting to do this, especially with tools like Alphalens, where it is easy to examine performance by sector.  Indeed, I’ve seen this approach employed in practice numerous times.  Lehman Brothers published their Quantitative Stock Selection Model, and one of the features that they touted was that they employ a large set of 27 factors, but applied them to each sector differently. (I have a hard copy of their report, but don’t have a link I can supply).  For example, in the health care sector, some factors they use are EBITDA to EV, ROE, Incremental Net Margins, Intangibles to Assets, and an Earnings Revisions Ratio.  In contrast, in the Technology sector, they use P/E, change in Share outstanding, change in employees, change in Debt to Assets, Earnings Revisions, and Earnings Surprise. And both sectors have a few common factors, like Momentum and change in Accruals.  The weights of the factors also vary within sectors, based on regression results and some subjectivity on their part.</p>
+
+<p>I would caution about the huge potential data mining involved.  Even for a single factor, there are 2^11 ways to selectively include it in the 11 sectors (2^11 – 1, if you dismiss the most likely scenario, that it doesn’t work for any sector).  I certainly think there are signals that you may think (a priori, not after-the-fact) would not work well for certain sectors.  For oil companies, ratios involving proven reserves rather than revenues might be useful.  Or insider trades may be a stronger signal for sectors where there may be more asymmetric information between the managers and investors about future products, like in the technology and pharmaceutical sectors.  But I would be very cautious about overfitting.</p>
+
+<p><strong>Testing the Novy-Marx Paper</strong></p>
+
+<p>Sorting stocks into 10 deciles based on only GP/A results in a Sharpe Ratio of 0.46 and a total return over 14 years of 53%, which is comparable to the Sharpe Ratio of sorting stocks only on B/M, where the total return is 64%.  Because quality is a hedge against value, a simple 50-50 mix of GP/A and B/M portfolios has about the same average returns but a much higher Sharpe Ratio than either factor by itself.</p>
+
+<p>The 50-50 mix of GP/A and B/M simply adds the longs and the shorts of the two separate factors, but doesn’t take advantage of any interaction between the two factors.  Trading the corner boxes of a double sort, or ranking stocks based on each factor and summing the ranks cap, resulted in significantly higher returns than that of the individual factors. </p>
+
+<p>Book/Market is a relatively weak value signal, and quality factors work even better in conjunction with value factors like P/S or P/CF. However, the goal here is not to come up with an optimized multifactor model but merely to demonstrate the nice interaction between quality and a simple value factor.</p>
+
+<p><strong>Factor Timing</strong></p>
+
+<p>Because fundamental factors are so noisy and inconsistent, factor timing has become the holy grail of fundamental factor models.  There have been numerous attempts at trying to improve performance using factor timing, just like people try to time the overall stock market.  For example, the momentum factor is known for having infrequent but severe crashes (most recently after the financial crisis) despite performing well overall, and a recent paper, <a href="http://faculty.chicagobooth.edu/tobias.moskowitz/research/mom11.pdf">“Momentum Crashes”</a>  argues that a bear market indicator and a volatility forecasting signal can be used to double the Sharpe Ratio of a static momentum strategy.</p>
+
+<p>With quality factors, Asness et al. argue that if there are periods when high quality stocks have higher valuations (measured by high Market/Book ratios), then the market is already pricing in high valuations for quality stocks, and high values now will lead to lower returns in the future.  Conversely,  when quality is not priced in, quality should have higher future returns.  Although Asness et al. don’t directly test a trading strategy for timing quality factors, they run regressions of future factor returns on ex ante measures of quality factor valuations and find a significant relationship.</p>
+
+<p>I backtested several timing strategies that were suggested but not tested in Asness et al.  Every month, I performed the cross-sectional regression described earlier, regressing Market/Book value of each stock on the gross profitability of each stock in the universe (actually, I regressed Book/Market, not Market/Book, and reversed the sign later: stocks could have negative Book Values, and it’s not a good idea to look at factor ratios where the denominator can be negative).  I first standardized the Book/Market and Gross Profitability, which reduces the influence of outliers and also allows for easier interpretation of the regression coefficient. The slope of the monthly regressions is the signal used for factor timing.</p>
+
+<p>I got very mixed results when I tried factor timing in this way.  A few backtests I ran marginally improved the performance, but a majority of them did worse than the static strategy.  The timing was not able to avoid the Quant crash of August 2007 when value severely underperformed but quality held up well – the slope coefficient was pointing a little more to quality than value, but nowhere near the extreme ranges.  Asness et al. argue that timing would have done very well during the tech crash of 2000, but that is before our data starts.  And even Asness, in a separate piece in Institutional Investor (<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2763956">here</a>), places some skepticism on the ability to time factors.</p>
+
+<p>I record the slope coefficient in my backtesting to show how it varies over time.  For most of the backtesting period, it ranged from about 0.20 to 0.33.  The rule I used was that if the slope of the cross sectional regression went above a threshold, I only traded the value factor, and if the slope went below another threshold, I only traded the quality factor (which of course involves some look ahead bias to find reasonable ranges).  I should mention that there are an endless set of ways to dynamically adjust the mix of quality and value so the potential for data mining is huge.  </p>
+
+<p>This is by no means the only way to do factor timing.  For example, Hua, Kantsyrev, and Qian, <a href="http://www.master272.com/finance/memoire_2016/qian_factor_timing_model.pdf">“Factor-Timing Model”</a> propose more of a pure statistical approach to factor timing.  They start with a set of potential conditioning variables that are used for timing another set of factors (the conditioning variables they use are the VIX, the Fed Funds rate, U.S. Consumer Confidence index, the calendar month, the debt-to-market capitalization ratio spread, and the book-to-price ratio spread). They employ a sequential approach to figure out which conditioning variables to use and how many to use, guided by the Akaike Information Criterion (AIC) (see the Quantopian lecture “Autocorrelation and AR Models”). I plan to play around with their timing technique and see how it does out of sample. My suspicion is that this leads to overfitting and won’t perform well out of sample, but it would be an interesting technique to try out.  I have a healthy bit of skepticism on factor timing, but I haven’t given up completely on the idea that it could improve factor performance.</p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>5 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='586d6617eb6ca119580001a5' id='586d6617eb6ca119580001a5'>
+<a href='#586d6617eb6ca119580001a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5118dbf1a4d447e2a6000050'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ce323165e919dbc2ce95c864939caf12?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5118dbf1a4d447e2a6000050'>Costantino</a>
+</div>
+<a UTCms='1483564574000' class='quanto-date posted-at response-posted-at' href='#586d6617eb6ca119580001a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great work! but I want to point again the attention to one of the biggest limitation of using fundamentals data with the pipeline API: <strong>the lack of annual and TTM data.</strong></p>
+
+<p>Novy-Marx uses <strong>annual</strong>  gross profitability and the same does Piotroski and the majority of other study.</p>
+
+<p>The community is asking for that since years, there is a lot of posts about this theme (simply look in the forum for &quot;historical fundamental data&quot; or &quot;fundamentals timeframe&quot;) and I hope to see this feature in the new year 2017 :-)<br>
+Quantopian is the best platform out there, but this lack is becoming very disturbing.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587d33b87a16ad000a611468' id='587d33b87a16ad000a611468'>
+<a href='#587d33b87a16ad000a611468'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54bc7dc9274d0d4adc000143'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/eb824bc94ce390aa3b5f052b631493ae?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54bc7dc9274d0d4adc000143'>Chao Guo</a>
+</div>
+<a UTCms='1484600248000' class='quanto-date posted-at response-posted-at' href='#587d33b87a16ad000a611468'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for your detailed and easy-to-follow notebook. Great graph presentations! Appreciate for sharing references to numerous sources to check out!</p>
+
+<p>The <em>get_backtest</em> function seems not to work after I copy your notebook. Not sure if anybody else has the same issue.  However, I can still see the backtesting performance graph without issue. </p>
+
+<p>It is interesting to note that the strategy works well in Q1500 out of the sample but not with Q500. Would it be that Q500 securities are much more efficiently priced in the GP/A quality factor? Does that imply market can be more efficient in pricing small caps in the future?</p>
+
+<p>Notice that even after you demean by sector, sectors like Energy, Materials, Real Estate and Telecom have much smaller number of companies. Can you rank stocks according to “GP_to_A_demean” within each sector? Then for each sector, you can better match number of long and short. Correct me if I am wrong. I see you rank the whole universe base on “GP_to_A_demean” in the notebook. </p>
+
+<p>In the <em>Boxplot</em> grouped by sector_name, different sectors have different GP/A mean and variance. For a similar level of mean across Financial, Healthcare, Industrial and Material, the variance is quite different. Does that title your preference when matching factors with sectors?</p>
+
+<p>One general question regarding the cross-sectional regression. In the regression result for “bm_z” and “gp_z”, the t is very significant for “gp_z” and R-squared is 5.6%. From your experience, can you help understand what number can be taken as a great number?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588e5d568fd5a90f14cc7211' id='588e5d568fd5a90f14cc7211'>
+<a href='#588e5d568fd5a90f14cc7211'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55dea840bddf401335000278'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/56e84a9d02afa18a2f55e3d96a48fec9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55dea840bddf401335000278'>Rob Reider</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1485725014000' class='quanto-date posted-at response-posted-at' href='#588e5d568fd5a90f14cc7211'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Chao,</p>
+
+<p>Thanks for your comments and questions.</p>
+
+<ul>
+<li>Since I didn’t share all the backtesting runs, unfortunately you can’t rerun any cells in the notebook that use the 
+<code>get_backtest</code> function.<br></li>
+<li>I do find that a vast majority of the strategies I&#39;ve looked at in the past work better for small cap universes than large cap ones (ignoring transaction costs), but you&#39;re correct that there is a particularly big difference in this case.  Interestingly, over his much longer backtesting period, Novy-Marx argues that quality factors work particularly well on large cap stocks (see Table 7 in his paper for a backtest on the 500 largest stocks), but I did not find that to be the case with recent data.  I don&#39;t know whether small caps will get more efficient in the future, but it seems like this difference in inefficiency between small caps and large caps has existed for a while.<br></li>
+<li>You could rank stocks separately for each sector as you say, and you could also z-score rather than de-mean stocks within each sector.  Both methods produce not only longs and shorts that are close to sector neutral, but also the number of longs and shorts would closely match the sector weights (by just de-meaning like I did, you get close to sector neutrality but some sectors are over- or under-represented).  It’s really an empirical question on which method is best.<br></li>
+<li>Similar to the last question, de-meaning does over-represent sectors that have higher variance in factor scores.  And for other factors, there may be a completely different set of sectors that are over-represented.  Again, it&#39;s an empirical question whether tilting towards sectors where there is more differentiation in scores is better.<br></li>
+<li>The R-squared we get is about the same as Asness gets over his 1986-2012 backtesting period (and half of what he gets in the 1956-2012 period). There are obviously many other omitted factors that can help explain the variation in B/M (for example, profit growth).  Of course the magnitude of this R-squared from a cross-sectional regression of B/M on GP/A cannot be compared to the lower R-squared that you would  typically see from a traditional Fama-MacBeth cross-sectional regressions of (noisier) <em>monthly returns</em> on GP/A.<br></li>
+</ul>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b326946330bee6e1a1fad8a' id='5b326946330bee6e1a1fad8a'>
+<a href='#5b326946330bee6e1a1fad8a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a7b42a8b2d7246c2ae19d2a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7efd6720b34533cd523565d0bfc4efe9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a7b42a8b2d7246c2ae19d2a'>Thomas James</a>
+</div>
+<a UTCms='1530030406000' class='quanto-date posted-at response-posted-at' href='#5b326946330bee6e1a1fad8a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Nice job!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b7835b3a5adff0042ba71b6' id='5b7835b3a5adff0042ba71b6'>
+<a href='#5b7835b3a5adff0042ba71b6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b26836d5c34c10046eba7e0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2994bdc17f1a5cb906a8efb55745ef4a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b26836d5c34c10046eba7e0'>Evan Kim</a>
+</div>
+<a UTCms='1534604723000' class='quanto-date posted-at response-posted-at' href='#5b7835b3a5adff0042ba71b6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello,</p>
+
+<p>Your link to the &quot;Factor-Timing Model&quot; by Hua, Kantsyrev, and Qian does not load. Would you be able to provide an alternate link? I am unable to find one on the web either  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/quality-factors-1'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/quality-factors-1'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#35535050515754565e754440545b415a455c545b1b565a58">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

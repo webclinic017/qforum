@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Pairs Trading with Machine Learning
+</title>
+<meta content='One popular and successful algo type I see on Quantopian is Pairs Trading. Though this category of strategies can exhibit attractive performance characteristics, I often see community algorithms which have a very small set of eligible pairs. As in any quant strategy,  the  breadth of bets  is proportional to the quality returns. As such, as the creator of a pairs trading strategy, you always prefer more (valid) pairs rather than fewer. The notebook below shows a concrete example of using...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="QTUF2vSuece1VbE2dCEI7Kbh/1E0+EoXmIs4OQTKMQ49U3OXVlirJAxI6Ac7zqCYnm/cOE40XwwahONTro9TtQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/pairs-trading-with-machine-learning' property='og:url'>
+<meta content='Pairs Trading with Machine Learning' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/pairs-trading-with-machine-learning' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Pairs Trading with Machine Learning' property='og:title'>
+<meta content='One popular and successful algo type I see on Quantopian is Pairs Trading. Though this category of strategies can exhibit attractive performance characteristics, I often see community algorithms which have a very small set of eligible pairs. As in any quant strategy,  the  breadth of bets  is proportional to the quality returns. As such, as the creator of a pairs trading strategy, you always prefer more (valid) pairs rather than fewer. The notebook below shows a concrete example of using...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/pairs-trading-with-machine-learning">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='59a5c2c96a803b300d7e1066'>
+<div class='post-container' data-post-id='59a5c2c96a803b300d7e1066' id='59a5c2c96a803b300d7e1066'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Pairs Trading with Machine Learning</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1504035529000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Pairs Trading with Machine Learning&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fpairs-trading-with-machine-learning%3Futm_source%3Dwebsite_share%26utm_campaign%3Dpairs-trading-with-machine-learning%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fpairs-trading-with-machine-learning%3Futm_source%3Dwebsite_share%26utm_campaign%3Dpairs-trading-with-machine-learning%26utm_medium%3Dlinkedin&amp;title=Pairs+Trading+with+Machine+Learning+%28Jonathan+Larkin%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pairs Trading' data-tag-id='55c50e7d8d4710ec6e000009' href='/posts/tag/Pairs-Trading/newest'>Pairs Trading</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Machine Learning' data-tag-id='55c50e7d8d4710ec6e00000b' href='/posts/tag/Machine-Learning/newest'>Machine Learning</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Market Neutral' data-tag-id='55d33f6e3f6ba10061000002' href='/posts/tag/Market-Neutral/newest'>Market Neutral</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Visualization' data-tag-id='56d0b532f8f0e57992000001' href='/posts/tag/Visualization/newest'>Visualization</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/pairs-trading-with-machine-learning?utm_source=website_share&amp;utm_campaign=pairs-trading-with-machine-learning&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Jonathan Larkin" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>One popular and successful algo type I see on Quantopian is Pairs Trading. Though this category of strategies can exhibit attractive performance characteristics, I often see community algorithms which have a very small set of eligible pairs. As in any quant strategy,  the <a href="https://blog.quantopian.com/the-foundation-of-algo-success/">breadth of bets</a> is proportional to the quality returns. As such, as the creator of a pairs trading strategy, you always prefer more (valid) pairs rather than fewer. The notebook below shows a concrete example of using machine learning techniques, readily available in <code>scikit-learn</code>, to find pairs. The presumption here is that these pairs have a high likelihood of continuing to exhibit mean reverting behavior out-of-sample -- a goal which we can validate in due time.  </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>45 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='59a610fafa574c00106e1cd7' id='59a610fafa574c00106e1cd7'>
+<a href='#59a610fafa574c00106e1cd7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52f33a9cb0a067d03e00012c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3344570c54eb9f4c44385e076eda369a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52f33a9cb0a067d03e00012c'>Anthony Ng</a>
+</div>
+<a UTCms='1504055546000' class='quanto-date posted-at response-posted-at' href='#59a610fafa574c00106e1cd7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jonathan. Thank you very much for this. This is a really neat notebook to illustrate the use of ML to assist in analytics and relationship discovery. Enough of direct application of ML to market data (OHLCV). Thank you for advancing the frontier. Again.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a614405b2059000dfa7fbd' id='59a614405b2059000dfa7fbd'>
+<a href='#59a614405b2059000dfa7fbd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5929c5f4a76c22000d329d92'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5ec18483d35ccb497ca800f820998851?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5929c5f4a76c22000d329d92'>Leo M</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1504056384000' class='quanto-date posted-at response-posted-at' href='#59a614405b2059000dfa7fbd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>HI @Jonathan, this is extremely good research and I will definitely be going through each step and doing my own detailed analysis. </p>
+
+<p>I have a couple of tangential questions with implementing a pairs trading strategy or a variant of it in a long short portfolio for the purpose of writing an algorithm that can fit the requirements for an allocation.</p>
+
+<p>a) Does the alpha from the strategy originate from the dataset (financial_health_grade). It appeared to me the assumption that stocks of the same financial_health_grade behave similarly is made at the beginning of the process. But the clustering appears to be using the equity pricing to arrive at clusters. Will the alpha be considered to be part of dataset or the clustering algorithm. I am asking this question because there has been a push recently to find alpha in the datasets that Quantopian provides and not sure if an economic rationale can be made that the alpha was derived from the financial_health_grade directly.</p>
+
+<p>b) I also have a general question with pairs trading as a strategy for Q fund allocation. Does pairs trading fit with the requirements of Q fund allocation criteria where we need to control for beta, sector risk and position concentration risk to be within certain bounds that is achieved normally through order_optimal_portfolio and underlying cvxopt. If we know which pairs we are going to trade, it might not always be possible to fit in well with the underlying algorithm in order_optimal_portfolio for stock selection with controlled risk exposures.</p>
+
+<p>Regardless of my Q allocation questions, definitely seems a very interesting area to explore further.</p>
+
+<p>Please advice.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a68795c4f34f09fc04c662' id='59a68795c4f34f09fc04c662'>
+<a href='#59a68795c4f34f09fc04c662'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504085909000' class='quanto-date posted-at response-posted-at' href='#59a68795c4f34f09fc04c662'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Jonathan -</p>
+
+<p>Thanks for sharing this work.  One of my goals with Quantopian is to learn some ML techniques; I&#39;ll benefit from looking over your notebook in detail.</p>
+
+<p>A few initial comments:</p>
+
+<ul>
+<li>You do the clustering, followed by the pairs analysis.  But how does this compare with finding pairs by randomly picking pairs from the entire universe and testing them?  In other words, if I am willing to wait N minutes/hours/days to find M pairs, how much benefit does the clustering provide over a brute force technique?  And would I expect the trade-ability to be better for pairs from the clustering technique, over brute force?<br></li>
+<li>Given that the same stock is in more than one pair, this perhaps suggests that some kind of &quot;basket&quot; trading (versus &quot;pair&quot; trading) approach might be more effective.  Qualitatively, maybe there is a multi-dimensional expanding and shrinking of a glob of stocks, versus a collection of discrete two-stock tangos?<br></li>
+<li>I posted this <a href="https://www.quantopian.com/posts/clustering-example-from-yesteryear">example</a>, which may be of interest.<br></li>
+<li>Generally, I&#39;d think that Quantopian would be ripe for generating various point-in-time universes derived via ML techniques, that would be made available to the crowd.  You are kinda-sorta doing this with the <a href="https://www.quantopian.com/posts/alpha-vertex-precog-dataset">Alpha Vertex PreCog data sets</a>, but presumably have no control over the ML details.  For the present example you&#39;ve shared, if it turns out to be a viable technique, one could imagine a Pipeline-compatible universe of pairs, updated nightly, with the underlying code made available to users, so that there would be complete transparency.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a6d3645b2059000dfa9442' id='59a6d3645b2059000dfa9442'>
+<a href='#59a6d3645b2059000dfa9442'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504105316000' class='quanto-date posted-at response-posted-at' href='#59a6d3645b2059000dfa9442'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I can address a few of these points.</p>
+
+<ul>
+<li>Just looking through all pairs will yield a massive amount of multiple comparisons bias <a href="https://www.quantopian.com/lectures/p-hacking-and-multiple-comparisons-bias">https://www.quantopian.com/lectures/p-hacking-and-multiple-comparisons-bias</a>, which would render the results not useful. The advantage of a clustering technique is it lets you do a first pass that can suggest related baskets, effectively doing dimensionality reduction on features. Within this new smaller set you can pick likely candidates and do out of sample testing.<br></li>
+<li>Absolutely, the Johansen test (unfortunately not available in Python) checks for N-way cointegration. <a href="https://en.wikipedia.org/wiki/Johansen_test">https://en.wikipedia.org/wiki/Johansen_test</a> The intuition here is that cointegration just means that some linear combination of time series sums to a stationary time series. This stationary series is mean reverting and can be traded as such. To get more intuition see here <a href="https://www.quantopian.com/lectures/integration-cointegration-and-stationarity">https://www.quantopian.com/lectures/integration-cointegration-and-stationarity</a>. I don&#39;t know any examples that trade baskets of cointegrated stocks, but it&#39;s certainly feasible.<br></li>
+</ul>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a7215a12cbfc201dcf323e' id='59a7215a12cbfc201dcf323e'>
+<a href='#59a7215a12cbfc201dcf323e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504125274000' class='quanto-date posted-at response-posted-at' href='#59a7215a12cbfc201dcf323e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Anthony, To your point, I think there are many applications of ML which can be valuable to an investment process beyond trying to fit and predict prices/returns directly. This is just one example. Signal combination, as described in this <a href="https://www.quantopian.com/posts/machine-learning-on-quantopian">popular series</a> is another great application.</p>
+
+<p>@Leo,</p>
+
+<blockquote>
+<p>a) Does the alpha from the strategy originate from the dataset (financial_health_grade). It appeared to me the assumption that stocks of the same financial_health_grade behave similarly is made at the beginning of the process. But the clustering appears to be using the equity pricing to arrive at clusters. Will the alpha be considered to be part of dataset or the clustering algorithm. I am asking this question because there has been a push recently to find alpha in the datasets that Quantopian provides and not sure if an economic rationale can be made that the alpha was derived from the financial_health_grade directly,</p>
+</blockquote>
+
+<p>My analysis does not purport to say anything about any alpha embedded in the <code>financial_health_grade</code>. There very well may be some alpha there, but this analysis does not require that. I&#39;m simply saying that stocks with similar health grades should have similar economic reactions and stock price behavior. I use equity prices, translated to returns and then reduced to 50 PCA loadings, to do the clustering along with market cap and <code>financial_health_grade</code>. The feature matrix for the clustering has 52 columns: 50 are the PCA loadings, one is the <code>financial_health_grade</code>, and one is market cap. A completely separate analysis could be done (via <code>alphalens</code>) to see if the <code>financial_health_grade</code> is in fact an alpha factor, but, again, that&#39;s unrelated to my post.  </p>
+
+<blockquote>
+<p>b) I also have a general question with pairs trading as a strategy for Q fund allocation. Does pairs trading fit with the requirements of Q fund allocation criteria where we need to control for beta, sector risk and position concentration risk to be within certain bounds that is achieved normally through order_optimal_portfolio and underlying cvxopt. If we know which pairs we are going to trade, it might not always be possible to fit in well with the underlying algorithm in order_optimal_portfolio for stock selection with controlled risk exposures.</p>
+</blockquote>
+
+<p>Yes! A pairs algo is very well suited to a Q fund allocation. One feature of pairs algos which is very nice is that the long and short sides are naturally balanced with self-similar assets. Thus a pairs book, often without any additional massaging, is naturally beta and sector neutral. The challenge with pairs algos is often coming up with enough valid pairs and, relatedly, achieving consistent capital usage. There is a <a href="https://www.quantopian.com/lectures/example-pairs-trading-algorithm">sample algo here</a> which uses <code>order_optimal_portfolio</code> within a pairs algo.</p>
+
+<p>@Grant, </p>
+
+<p>I concur with Delaney&#39;s response. Regarding the Johansen test, I noticed <a href="https://www.quantopian.com/posts/johansen-cointegration-test-in-python">this lonely post</a> which points to a Python implementation you can copy/paste. I have not tried it.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a74d4b1bd9ba0010948f91' id='59a74d4b1bd9ba0010948f91'>
+<a href='#59a74d4b1bd9ba0010948f91'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5929c5f4a76c22000d329d92'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5ec18483d35ccb497ca800f820998851?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5929c5f4a76c22000d329d92'>Leo M</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1504136523000' class='quanto-date posted-at response-posted-at' href='#59a74d4b1bd9ba0010948f91'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jonathan, thanks for explaining in detail and providing useful pointers including the order_optimal_portfolio changes that are needed to go along with paris trading strategy.  I see now how the pairs trading strategy itself can reduce the risk exposures and why we don&#39;t need order_optimal_portfolio to do that for us in this strategy. </p>
+
+<p>I had stayed away from what would appear to be pure price based strategies before because I had developed some misconceptions that Mean reversion type algorithms wree not being favored in the Q allocation after reading some forum posts, thanks for clarifying the situation. </p>
+
+<p>This is a very interesting topic to explore and I would definitely be spending some time in this area soon expanding upon your excellent research work.</p>
+
+<p>Regards,<br>
+Leo  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a759b532347100105dc340' id='59a759b532347100105dc340'>
+<a href='#59a759b532347100105dc340'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/584709c0d105bc4727000072'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fbbdf71510a43bd01dc2b787ecd3c797?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/584709c0d105bc4727000072'>luc prieur</a>
+</div>
+<a UTCms='1504139701000' class='quanto-date posted-at response-posted-at' href='#59a759b532347100105dc340'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Jonathan,</p>
+
+<p>I don&#39;t get the PCA decomposition that you use:</p>
+
+<p>Your code:<br>
+N_PRIN_COMPONENTS = 50<br>
+pca = PCA(n_components=N_PRIN_COMPONENTS)<br>
+pca.fit(returns)</p>
+
+<p>Then, you use:<br>
+pca.components_.T as the new data.</p>
+
+<p>I would have done:<br>
+X = np.hstack(<br>
+    (PCA(n_components=N_PRIN_COMPONENTS).fit_transform(returns.T),<br>
+     res[&#39;Market Cap&#39;][returns.columns].values[:, np.newaxis],<br>
+     res[&#39;Financial Health&#39;][returns.columns].values[:, np.newaxis])<br>
+)</p>
+
+<p>Essentially, you have 504 data samples with some 1400 features that you want to reduce to 50. i.e. 504 samples of 50 features.   The fit_transform finds the new axes and transforms the data.  You just use the axes.</p>
+
+<p>Thanks,</p>
+
+<p>Luc  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a7d3ffd7d84d130c8a4c0e' id='59a7d3ffd7d84d130c8a4c0e'>
+<a href='#59a7d3ffd7d84d130c8a4c0e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504171007000' class='quanto-date posted-at response-posted-at' href='#59a7d3ffd7d84d130c8a4c0e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Regarding the multiple comparisons bias, I don&#39;t yet have an intuitive feel for it.  Say I have a box of 1000 toothpicks and I want to find pairs that have nearly the same weight and length, to within specified tolerances.  I have a weighing scale and a measurement microscope.  I roll up my sleeves and start making random pairwise comparisons.   After 1000*999/2 = 499,500 comparisons, I&#39;m done, and have a list of pairs of toothpicks (I forgot to mention, prior to my evaluation, I had each toothpick laser-engraved with a serial number).  So where does the bias come in?</p>
+
+<p>I guess the idea here is that if I have some additional information about the toothpicks, aside from weight and length, then I <em>might</em> be able to use it to improve my assessment.  For example, if the toothpicks are colored (for the holidays), red and green, then I might hypothesize that the red toothpicks were made in a red toothpick factory, and the green ones in separate factory.  In this case, clustering by color <em>might</em> help improve my assessment, and reduce the number of spurious pairs.  But then, if the toothpicks are all made in the same factory, and the coloring process does not affect the weight and/or length differently by color, then I could be claiming I&#39;d discovered an improved technique for toothpick pairing, but done nothing substantive.</p>
+
+<p>For Jonathan&#39;s analysis, I&#39;m thinking that the hypothesis is something like &quot;All of this fancy analysis works, and reduces the number of spurious cointegrated pairs, over a brute-force approach.&quot;  So, it would seem that one would actually need to do the brute-force analysis, and then figure out how to compare it to the proposed technique, to determine if it is beneficial.  It may be &quot;the bomb&quot; but to me the advantage is unclear (other than perhaps reducing the problem down to being more computationally tractable with the resources available).</p>
+
+<blockquote>
+<p>A pairs algo is very well suited to a Q fund allocation.</p>
+</blockquote>
+
+<p>Intuitively, like other well-known quant techniques using readily available data (e.g. price mean reversion), I&#39;d think that there would be pretty slim pickings out there.  My assumption is that for decades now, hedge funds have had big honkin&#39; computers churning away at the problem, squeezing out the alpha from pairs trading.  I don&#39;t have any industry experience, but it doesn&#39;t seem like Quantopian would have any edge in this area.  That said, perhaps as an incremental alpha factor in the multi-factor grand scheme described in <a href="https://blog.quantopian.com/a-professional-quant-equity-workflow/">Jonathan&#39;s blog post</a>, one could roll it into the mix, just for yucks.  Would it be feasible to formulate pairs trading as a general pipeline alpha factor?</p>
+
+<p>As a general comment, I&#39;d concur that the messaging on what is most likely to get an allocation is muddled.  On the one hand, we have the directive to use &quot;alternate data sets&quot; and on the other, guidance that pairs trading, potentially only using company fundamentals and price-volume data would be attractive.  And also guidance that multi-factor algos are desirable (but perhaps only if all of the factors are based on alternate data sets?).  Personally, I don&#39;t want to spend the next 6 months developing a pairs trading algo (or alpha factor, if that is feasible), and then another 6 months paper trading it, only to hear that my odds of getting an allocation are slim due to the <a href="https://www.quantopian.com/allocation">strategic intent</a> not matching the requirements (this is the message I think I got regarding price mean reversion strategies and possibly even price mean reversion alpha factors...I&#39;m not sure).  In some sense, an advantage Quantopian has over traditional hedge funds is that they could ignore the strategic intent altogether, and just base their assessments and allocations on the black-box algo performance.  This would eliminate the risk of herd mentality or personal biases on the part of the the fund team.  Just go with the data.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a80c75dbb606000da564eb' id='59a80c75dbb606000da564eb'>
+<a href='#59a80c75dbb606000da564eb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1504185461000' class='quanto-date posted-at response-posted-at' href='#59a80c75dbb606000da564eb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The notebook is great. I think everyone understands that the <a href="https://www.quantopian.com/lectures/example-pairs-trading-algorithm">sample algo here</a>  (lecture 24) referenced in passing was merely provided as a starting point for pairs trading back then, I&#39;ll just temper it a little bit, not to over-dissect, but since I took a look, then for those who might travel that path, couple of things to know... If cloning that, the end date is automatically adjusted forward for today and so it isn&#39;t a surprise that since it originated quite awhile ago, 3 of its 4 stocks have delisted, so these comments apply only running to the end of 2015 before the delists (before the first in Feb 2016). It does hit a leverage of 1.36 at one point and as always that is something for us to keep an eye on. Its FixedSlippage results in no partial fills which can be useful for testing sometimes, <a href="https://www.quantopian.com/help#ide-slippage">from Help</a>: <em>naive use of fixed slippage models will lead to unrealistic fills, particularly with large orders and/or illiquid securities</em>. Using the same FixedSlippage, returns are nearly identical at 1M vs 10M although capital usage becomes just 9%. So the slippage line can be commented for default slippage and then at 1M there are an average of [integer edited later because there may have been a bug in the count at this time] minutes of partial fills per stock, and the effect takes returns from +29 to -16 and lowers max leverage to .52. Both of the ABGB and FSLR pair took losses. Not a big deal since it is just a starting point to build upon, there&#39;s also the other pairs-trading algo (more basic, lecture 23) in the <a href="https://www.quantopian.com/lectures/">lecture series</a> worth knowing about.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a866b39f618c283729ff5a' id='59a866b39f618c283729ff5a'>
+<a href='#59a866b39f618c283729ff5a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504208563000' class='quanto-date posted-at response-posted-at' href='#59a866b39f618c283729ff5a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@luc,</p>
+
+<blockquote>
+<p>Essentially, you have 504 data samples with some 1400 features that you want to reduce to 50. i.e. 504 samples of 50 features. The fit_transform finds the new axes and transforms the data. You just use the axes.</p>
+</blockquote>
+
+<p>It is intentional that I don&#39;t do the transform of the data. The financial interpretation is that the <code>pca.components_.T</code> are per stock betas to hidden statistical factors. When you go through with <code>fit_transform(...)</code> you get the time series of each hidden factor. I don&#39;t want those. I simply want to cluster on the betas.</p>
+
+<p>@Grant, Olive Coyote,</p>
+
+<p>I don&#39;t agree that this work is for the sole benefit of computation time. The key difference between finding pairs and your toothpick analogy is that the result of your toothpick search will be the ground truth but this is not so in statistical work. The shortest toothpick today doesn&#39;t stop being the shortest toothpick tomorrow. A brute force pairs search will surely come up with many spurious results. To protect against data mining you should condition your search.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a86a1132347150365dca62' id='59a86a1132347150365dca62'>
+<a href='#59a86a1132347150365dca62'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504209425000' class='quanto-date posted-at response-posted-at' href='#59a86a1132347150365dca62'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant,</p>
+
+<blockquote>
+<p>I posted this <a href="https://www.quantopian.com/posts/clustering-example-from-yesteryear">example</a>, which may be of interest.</p>
+</blockquote>
+
+<p>That example is based on an example in the <code>scikit-learn</code> docs <a href="http://scikit-learn.org/0.16/auto_examples/applications/plot_stock_market.html#example-applications-plot-stock-market-py">here</a>. If you think about this work as a three step process: 1) define features, 2) cluster, 3) visualize, I chose 1) PCA + financial_health_grade + market cap, 2) <code>DBSCAN</code>, 3) <code>T-SNE</code>; the example cited chose 1) <code>covariance.GraphLassoCV</code> on intraday price changes, 2) Affinity Propagation, and 3) Locally Linear Embedding.</p>
+
+<p>I had reproduced this in Quantopian Research awhile back. We don&#39;t expose some of the fancy matplotlib classes and methods he uses, so my actual visualization code is a little different. </p>
+
+<p>It&#39;s fun to see how many different ways one can cluster stocks.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a89e2a57a0292375a5e577' id='59a89e2a57a0292375a5e577'>
+<a href='#59a89e2a57a0292375a5e577'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504222762000' class='quanto-date posted-at response-posted-at' href='#59a89e2a57a0292375a5e577'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jonathan -</p>
+
+<p>Thanks for the additional example.</p>
+
+<p>For the toothpicks, there is a measurement error of the weight and length, so just picking at random will result in some pairings that aren&#39;t correct.  But if clustering by color results in more uniformity in each cluster, then it should help.  For example, if the differences were slight and were not well-resolved by the measurements, then the color factor could provide a boost.  At least that&#39;s my intuition, but I need to sleep on it, and read a bit more about multiple comparisons bias (if that is actually what is at play here).</p>
+
+<p>I&#39;m not saying that the clustering, etc. doesn&#39;t help for stocks, but just that if you don&#39;t actually compare it to brute force, then there is no way to tell.  So if you are trying to show the benefit over brute force, you&#39;ll need to do a bit more work.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a8a8ce9f618c28372a0716' id='59a8a8ce9f618c28372a0716'>
+<a href='#59a8a8ce9f618c28372a0716'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1504225486000' class='quanto-date posted-at response-posted-at' href='#59a8a8ce9f618c28372a0716'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>After reading this notebook, I needed only one experiment to ascertain if there was something in this clustering of correlated stocks. Since the notebook is looking at one stock universe from its leet (1337) point of view, I opted to simply change its random seed, without changing anything else. This way, all that is changed is this peeping hole into the past.</p>
+
+<p>Here are the outcome of the 4 tests:<br>
+<img src="https://image-proxy.quantopian.com/04d8d8259c29d55028158a751fbca4b837a9c7c9/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f70696330312e706e67" /><br>
+<img src="https://image-proxy.quantopian.com/c2c7ceb95fdb8f892e25418afa740073d3d7e569/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f70696330322e706e67" /><br>
+<img src="https://image-proxy.quantopian.com/4dbbe233bf3dc83f9d7cafefc1667d70d709b0f4/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f70696330332e706e67" /><br>
+<img src="https://image-proxy.quantopian.com/5f236f4e3090a0a7ed0efdda188421314ee3a422/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f70696330342e706e67" /> </p>
+
+<p>The clustering which should have been only slightly differentiable, is all over the place. The point being that out of the gazillion possibilities, gazillions were possible. And, therefore, whatever trading strategy that might be constructed from any of those perceptions might not carry that well going forward. </p>
+
+<p>My way of saying: I do not see anything there. Or, am I missing on something.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a8c8adcf0071000fbff261' id='59a8c8adcf0071000fbff261'>
+<a href='#59a8c8adcf0071000fbff261'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504233645000' class='quanto-date posted-at response-posted-at' href='#59a8c8adcf0071000fbff261'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy,</p>
+
+<p>T-SNE is a visualization step; it does not affect the formation of the clusters. T-SNE is meant to visually validate that the clusters are distinct. To me, your experiment validates the soundness of these clusters, not the other way around. With the various random state parameters you chose, in all cases, the clusters remain intact and clearly separable in space. The individual cluster shapes are in many cases even the same (just rotated in space). The location of the clusters in the plane is not important. The random state parameter serves to simply inform the artistic rendering of the plot.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a8dec1cf0071000dbff423' id='59a8dec1cf0071000dbff423'>
+<a href='#59a8dec1cf0071000dbff423'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504239297000' class='quanto-date posted-at response-posted-at' href='#59a8dec1cf0071000dbff423'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant</p>
+
+<p>I think you bring up a great example of one of the fundamental differences between systems studied in engineering and systems studied in finance. Generally in engineering the past is representative of the future. A toothpick&#39;s weight will not change over time (by much at least), and other properties are also the same over time. We refer to this more generally as <a href="https://www.quantopian.com/lectures/integration-cointegration-and-stationarity">stationarity</a>. In engineering systems studied are similar, laws of physics hold over time. A bridge built one way that stands up now will likely stand up tomorrow. The opposite is true in finance and many other more volatile and less stationary systems.</p>
+
+<p>The implicit assumption in many engineering approaches is that the past implies the future. In finance that assumption is not a given and must in itself be checked.</p>
+
+<p>Consider if the weights of the toothpicks were changing over time and drawn from some unknown stochastic process. This is effectively the case here. When non-stationarity exists, you cannot just assume past implies future. You need to understand more of the system and effectively model what is going on. At the end of the day you do want to produce stationarity in your residuals (model error), as this means you have explained any non-stationarity in the system. If you just searched through your data from yesterday&#39;s toothpicks, there may be no relationship to tomorrows toothpicks.</p>
+
+<p>What the clustering is doing is searching for toothpicks that have properties which we believe are more likely to make them similar, effectively the driving factors of the relationship. As far as multiple comparisons, I recommend you actually go through the lecture and get your hands dirty. There are real experiments in there that you can muck with and see for yourself if you don&#39;t believe me.</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a92d360ac008000d12b823' id='59a92d360ac008000d12b823'>
+<a href='#59a92d360ac008000d12b823'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504259382000' class='quanto-date posted-at response-posted-at' href='#59a92d360ac008000d12b823'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Delaney -</p>
+
+<p>I know about stationarity.  In manufacturing, it is a key concept in statistical process control (e.g. see the <a href="http://www.itl.nist.gov/div898/handbook/mpc/section2/mpc221.htm">Shewhart control chart</a> described on the nice <a href="http://www.itl.nist.gov/div898/handbook/">NIST site</a>).  In trading, Bollinger bands are basically control charts with a bet on stationarity.</p>
+
+<p>As far as I can tell, the multiple comparisons problem has nothing to do with stationarity.  It is a general pitfall associated with making repeated statistical tests and finding an increasing number of false positives with the number of tests.  In the case of toothpick weight, suppose my question is &quot;Do I have a bunch of toothpicks in excess of 101 g?&quot; and in my box of 1000 toothpicks, there are none above 100 g (but a lot right at 100 g).  If I use a cheapo &quot;noisy&quot; weight scale, the probability of answering incorrectly goes up, with the number of toothpicks I measure (asymptotically approaching an answer of &quot;yes&quot; when the correct answer is &quot;no&quot;).  The solution to the problem is to get a better weight scale.  In the case of stock pairs, if the question is &quot;Do I have a bunch of stock pairs that I can trade profitably?&quot; and I search brute force with a marginal technique, then I&#39;ll answer &quot;yes&quot; (and lose money) when the correct answer is &quot;no&quot; (and not lose money).  The brute force approach for finding stock pairs would work if one had a better test.</p>
+
+<p>The issue I see here is that the analysis needs to test for both cointegration and its stationarity.  The latter is what really matters for trading, so to show that clustering is an improvement over brute-force pair selection, one would need to look at the persistence of the conintegration of each pair versus time.  If I&#39;m thinking about this correctly, one really needs to find techniques that spit out pairs with persistent cointegration.  Presumably clustering helps, but it is still an open question.</p>
+
+<p>One suggestion is to consider if using minutely data would help.  In science/engineering, one common technique to improve the signal to noise ratio (SNR) is to increase the sampling rate, smooth, and then down-sample (for data storage, computations, etc).  For example, rather than using daily closing prices, estimate the daily VWAP from the minute bars, and use it instead (unless there is something special about the last trade price of the day).  The &quot;error bars&quot; will be much smaller.</p>
+
+<p>Also, analyses can take into account the error bars.  For example, for x-y data that have unequal error bars, one can do a straight-line fit, applying less weight to points with larger error bars.  Is there a way to account for error bars when searching for pairs?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a95b5a28c3fa001068aa9c' id='59a95b5a28c3fa001068aa9c'>
+<a href='#59a95b5a28c3fa001068aa9c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1504271194000' class='quanto-date posted-at response-posted-at' href='#59a95b5a28c3fa001068aa9c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jonathan, even if I can see the artistry of the cluster separation, it does not mean I can extract worthwhile profits when they move from quadrant to quadrant shifting their center of mass, their axis, and size. It is like hitting a moving target that can change shape and direction from second to second, almost like shooting in the dark. An illusion: oops, it was there, and now it&#39;s not. Where did it go? Oops, it moved again.</p>
+
+<p>To me, you are more providing a do not do this in your trading strategy since overall profit might be more than illusive. For instance, what kind of pair trading strategy could even extract a reasonable profit from cluster 4? I do not see how anyone could ever extract more than 1% over those 2 years, no matter the nature of his/her pair trading strategy.</p>
+
+<p>There might be something to do playing cluster against cluster, but they too are moving all over the place. They positively correlate one second, and the reverse the next. The image I get from peeping at that past data is more than just a blur.</p>
+
+<p>All I see from cluster 4 is this: take anyone of those 3 stocks, they were about equivalent in the past. If someone forced the inclusion of one of those 3 stocks in another kind of simulation, they might not see much of a difference whichever stock was used.</p>
+
+<p>Has anyone on Quantopian posted a cloneable pair trading strategy using these clustering methods? Let me see how productive they would have been or could be?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a9795170720f7d4c3f53ef' id='59a9795170720f7d4c3f53ef'>
+<a href='#59a9795170720f7d4c3f53ef'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504278865000' class='quanto-date posted-at response-posted-at' href='#59a9795170720f7d4c3f53ef'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>You said something which is exactly right &quot;one would need to look at the persistence of the conintegration of each pair versus time. If I&#39;m thinking about this correctly, one really needs to find techniques that spit out pairs with persistent cointegration.&quot; That&#39;s the core of this, we&#39;re looking for cointegration that persists.</p>
+
+<p>The noisy scale analogy works as well, just keep in mind that it can not only incorrectly categorize 99g picks as 101g, but it could also categorize 102g as 97g. Getting a more accurate scale/test is absolutely the solution. That is the subject of a lot of research in statistics, and generally the only real way is to increase sample size and check underlying assumptions. Otherwise I think you&#39;re on the right track here. The other thing about clustering is just that we&#39;re hoping it will increase your likelihood of finding pairs. If you brute forced it you might end up with way too many pair candidates to wade through. There are many ways to find pairs, this is just one potential technique to be investigated.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59a9e1afbcbca618ec18f632' id='59a9e1afbcbca618ec18f632'>
+<a href='#59a9e1afbcbca618ec18f632'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504305583000' class='quanto-date posted-at response-posted-at' href='#59a9e1afbcbca618ec18f632'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Delaney -</p>
+
+<p>I&#39;m trying to picture what this whole thing might look like, using the Q research platform, to sort out if it at all makes sense to then pursue an algo.  It seems like we need some sort of rolling analysis, going back as far as we can (e.g. 2002).  I guess every day, one would find a new set of clusters, and then find the pairs in those clusters?  And then find pairs that persist long enough to make money on them?  And then sort out a model that would reliably identify pairs that will persist long enough to make money on them (since on any given day, we&#39;d want to know how to do a drop/add of our universe of pairs of stocks)?</p>
+
+<p>I&#39;m also wondering how to deal with the fact that we don&#39;t really have discrete pairs, but baskets of stocks (since some stocks form pairs with more than a single other stock)?</p>
+
+<p>And I guess we&#39;d want to have the pairs trading strategy as an alpha factor in a multi-factor algo, not as a single-factor algo, right?</p>
+
+<p>The whole thing feels kinda gnarly at this point...whew!  Or am I making it harder than it needs to be?</p>
+
+<p>What&#39;s the game plan on your end?  Are you going to work this through to the end, as a public domain effort?  Or are you looking for the crowd to carry it through?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aa8c1653076f0010a4df44' id='59aa8c1653076f0010a4df44'>
+<a href='#59aa8c1653076f0010a4df44'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504349206000' class='quanto-date posted-at response-posted-at' href='#59aa8c1653076f0010a4df44'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Using the white/grey/black edge lingo of the book &quot;Black Edge,&quot; pairs trading of this sort would be firmly in the white edge category.  The information is readily accessible (although not necessarily free) and the analysis tools (both software and hardware) are commercial off-the-shelf (again, not necessarily free, but we aren&#39;t talking about nation-state class supercomputers coded by a team of wizards here).  For a universe of stocks comparable to the Q1500US, it would be interesting to see what kind of &quot;alpha decay&quot; pairs trading has undergone since, say, 1990 (or even back to 2002, using the Q data).  If the trend is asymptotically approaching zero alpha, then it might be wise to move on to something else.</p>
+
+<p>Another angle is that although reportedly the hedge fund world is highly secretive, I suspect not so much.  I gather that Quantopian is now pretty well plugged into the hedge fund scene.  What&#39;s the word on the street regarding the potential viability of equity pairs trading, using Quantopian in its present form?  I don&#39;t work in the field, and so I have no idea if this is more of an illustration, a pure academic exercise, or a short-putt to a Q fund allocation (I sorta doubt the latter, since if it were, then it wouldn&#39;t be put in the public domain).  I have no idea if this is akin to &quot;Hey, check this out: we have a new-fangled contraption called the automobile powered by an internal combustion engine.  Just pour in some gasoline and away she goes!&quot;  More background and justification would be helpful.  I&#39;m happy to donate some time to Quantopian, but it is a lot more fun if, intuitively, I have a sense that I&#39;m vectored in the right direction.</p>
+
+<p>On a separate note, I&#39;d be careful not to dismiss the brute force approach out of hand due to the computational effort.  For the Q1500US, there are 1,124,250 pairs to analyze.  On the surface, it doesn&#39;t sound so bad, since the computation can be parallelized to generate the base list of pairs versus time.  There are about 2x10^6 pixels in a 1080p HDTV, so it is like one HDTV frame per trading day--back-of-the-envelope, data storage and transmission should be no problemo.  What am I missing?  I guess where I&#39;m heading is that Q could put out a database of all the pairs, back to 2002, and then users could try to understand how to filter out the spurious pairs (the implication of Jonathan&#39;s post is that they aren&#39;t all spurious; it is just a matter of developing a model to find the trade-able pairs point-in-time).</p>
+
+<p>Here&#39;s a potentially relevant paper:</p>
+
+<p><a href="https://www.diva-portal.org/smash/get/diva2:818972/FULLTEXT01.pdf">https://www.diva-portal.org/smash/get/diva2:818972/FULLTEXT01.pdf</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aa98e1b64f3a2e83bca6c3' id='59aa98e1b64f3a2e83bca6c3'>
+<a href='#59aa98e1b64f3a2e83bca6c3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4ec777fc345f20000e000008'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d1c340e13d187142fc34a5cff3a5eed5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4ec777fc345f20000e000008'>James Jack</a>
+</div>
+<a UTCms='1504352481000' class='quanto-date posted-at response-posted-at' href='#59aa98e1b64f3a2e83bca6c3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,</p>
+
+<p>In general you need a hypothesis to start off with, as to why two time-series would affect one another, otherwise you select pairs which have no relationship at all ( Delaney&#39;s link to lecture 16 is effective ). </p>
+
+<p>For example, if I give you the following data for a time-series...</p>
+
+<p>9<br>
+6.5<br>
+6.7<br>
+6.9<br>
+13.5<br>
+16.4<br>
+20.3<br>
+27<br>
+24.3<br>
+19.7<br>
+17<br>
+10.4<br>
+10.2<br>
+10<br>
+10.6<br>
+14.1<br>
+16.1<br>
+18<br>
+22.1<br>
+25.8<br>
+21.7<br>
+21.5<br>
+17.6<br>
+12.5<br>
+9.2<br>
+8.8<br>
+8<br>
+11.6</p>
+
+<p>...how confident are you that the trend will repeat?</p>
+
+<p>(The above is a real time-series and has a real answer.)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aaacb15282bf00101d3dc4' id='59aaacb15282bf00101d3dc4'>
+<a href='#59aaacb15282bf00101d3dc4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504357553000' class='quanto-date posted-at response-posted-at' href='#59aaacb15282bf00101d3dc4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well, my hypothesis could be that the Q1500US has no spurious pairs; any pair found by brute force will be profitable.  Personally, I don&#39;t know if the hypothesis is true or false (but it should be easy to show; perhaps Delaney shows this in his notebook, if I can wade through all of the Python and stats).  My point is that one way to go at the problem is to pre-compute all of the pairs, and then try to sort out a means to filter out the spurious ones.  In some sense, that&#39;s what Jonathan is doing.  Any pairs not within clusters would be filtered out.  There is a multitude of filters that could be applied, so having the entire universe of point-in-time candidate pairs to filter on could be useful (it would seem to be a nice fit for Pipeline).  Then testing simple hypotheses would be easy (e.g. &quot;Filtering out all pairs with tickers not starting with the same letter of the alphabet will result in a profitable portfolio of remaining pairs&quot;).</p>
+
+<p>Regarding the time series you shared, I&#39;ll bet $5 US it will repeat.  How long do I have to wait for the answer?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aab666bf2c210010bb9762' id='59aab666bf2c210010bb9762'>
+<a href='#59aab666bf2c210010bb9762'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504360038000' class='quanto-date posted-at response-posted-at' href='#59aab666bf2c210010bb9762'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>&quot;Horses are highly social herd animals that prefer to live in a group. There also is a linear dominance hierarchy in any herd. They will establish a &quot;pecking order&quot; for the purpose of determining which herd member directs the behavior of others, eats and drinks first, and so on.&quot;</p>
+
+<p>Ref..: <a href="https://en.wikipedia.org/wiki/Horse_behavior">https://en.wikipedia.org/wiki/Horse_behavior</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aadfd7bf2c210010bb9b0b' id='59aadfd7bf2c210010bb9b0b'>
+<a href='#59aadfd7bf2c210010bb9b0b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4ec777fc345f20000e000008'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d1c340e13d187142fc34a5cff3a5eed5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4ec777fc345f20000e000008'>James Jack</a>
+</div>
+<a UTCms='1504370647000' class='quanto-date posted-at response-posted-at' href='#59aadfd7bf2c210010bb9b0b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,</p>
+
+<p>So before knowing any more, you were willing to bet $5.</p>
+
+<p>In fact the time-series is the monthly average temperature recorded in London in degrees C, starting from December 2012. </p>
+
+<p>With that new knowledge, how much would you bet now? A lot more I would assume. Of course this scenario is academic but the point remains: we want a structural reason for a pattern to continue because, without it, you can invest very little.</p>
+
+<p>A fun example would be to take a year of temperatures following that period and do some stats. What if I gave you a p-value of 0.06 that the following year&#39;s data came from the same population? Would you assume the pattern had ended? </p>
+
+<p>Taking only the pairs which satisfy the statistical mumbo jumbo (from your total 1,124,250 pairs) will definitely contain spurious results. Your argument is then to filter them down more...</p>
+
+<p>...one option is to take each pair and decide whether there is any reason why two entities should be so related. That would take a while.</p>
+
+<p>...another option is to wait 2 years, and use the out-of-sample data to &quot;filter your filter&quot;. Some of those which had real relationships will be filtered out (false negatives) and some of those with no relationship will continue (false positives). That&#39;s the same problem you had before.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aae1248fa5b3000d268436' id='59aae1248fa5b3000d268436'>
+<a href='#59aae1248fa5b3000d268436'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1504370980000' class='quanto-date posted-at response-posted-at' href='#59aae1248fa5b3000d268436'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, I agree with your point of view. Let me clarify mine.</p>
+
+<p>Let&#39;s take 1,000 Q members running Jonathan&#39;s notebook. They all, only replace the leet with none (no random seed), or each take a different seed. This would make the pinhole from which they will look at this Q1500US ball of variance unique. The outcome would be related to the very microsecond they launch the pairing clustering. What would be the answer?</p>
+
+<p>Everyone of them would get a different pairing chart. They might get some look alike clusters, which is cute, but these clusters would appear in different quadrants, having positive and negative inter-correlations, spread more or less around their erratic center of mass.</p>
+
+<p>Technically, you would have 1,000 charts like the ones I&#39;ve posted. Some in the group, if they apply some pair trading strategy to their found clusters, might win something, not much, but still win. However, we would have no way of saying: members 13, 37, and 42 will be the best, or even worse, that they will win at all.</p>
+
+<p>And if those 1,000 members did the test again, they each would get a different answer. What would their trading strategies do with that? Designing a trading strategy using clustered pairing that could be profitable would be a daunting task. However, for anyone succeeding over some 100 simulations, meaning profiting, might have a robust system even if profits are low.</p>
+
+<p>The tool, nonetheless, might be useful in detecting price movement similarities. A way of finding substitute replacement candidates for your portfolio, if you ever needed some. But then again, why select another poorly behaving stock to replace the one you had if you could go right out and simple select a better one with maybe no relation to the one you had or its cluster?   </p>
+
+<p>The cluster pairing might have its use for someone wishing stable returns, even if below market averages. I think I will be looking for greener pastures.</p>
+
+<p>I found Jonathan&#39;s notebook very interesting.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aaf966be1586000d93e2c2' id='59aaf966be1586000d93e2c2'>
+<a href='#59aaf966be1586000d93e2c2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504377190000' class='quanto-date posted-at response-posted-at' href='#59aaf966be1586000d93e2c2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Another random thought is that one could do the fancy ML either as Jonathan has shown and then find the pairs or first trim down the Q1500US to contain only stocks that belong to at least one pair (or only one pair?), and then run the ML, and pair identification, per Jonathan&#39;s recipe.</p>
+
+<p>It seems like this would give the ML a  better shot since irrelevant stocks would not be adding noise/confusion.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59ac9a73019604001013f563' id='59ac9a73019604001013f563'>
+<a href='#59ac9a73019604001013f563'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52670e6a2763c5cfb70002c7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/da33ec858011a8fad211c7e0ae68160c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52670e6a2763c5cfb70002c7'>Alan Coppola</a>
+</div>
+<a UTCms='1504483955000' class='quanto-date posted-at response-posted-at' href='#59ac9a73019604001013f563'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>First, @Jonathan, thanks for the instructive notebook.  I appreciate the effort and know that ita always takes a few long days to complete something like what you did!</p>
+
+<p>Second, I&#39;ve been trying to learn&amp;apply some stat arb, that uses pairs or copula trading, and came upon this interesting  final report from a recent class project.   Any comments about how one would apply the clustering used in this post, using ideas in the linked-to paper below would be appreciated.</p>
+
+<p><a href="https://web.stanford.edu/class/msande448/2017/Final/Presentations/gr6.pdf">https://web.stanford.edu/class/msande448/2017/Final/Presentations/gr6.pdf</a><br>
+<a href="https://web.stanford.edu/class/msande448/2017/Final/Reports/gr6.pdf">https://web.stanford.edu/class/msande448/2017/Final/Reports/gr6.pdf</a></p>
+
+<p>Third, there were some Q forum posts relating to cointegration and pairs trading, both notebook and algo, in the past that  would seem useful to create an algo.  I&#39;m looking at them for ideas on how to get pairs that are in a productive  mean-reversion state.  Any help here appreciated! </p>
+
+<p><a href="https://www.quantopian.com/posts/pipeline-pair-cointegration-notebook-3700-cointegrated-pairs">https://www.quantopian.com/posts/pipeline-pair-cointegration-notebook-3700-cointegrated-pairs</a></p>
+
+<p>Personally, I have been having trouble with time-outs wrt the limits Q sets on  when trying to compute factors based on the above concepts.<br>
+I end up having to put timers all over the place and adjust the problem size parameters based on how much time  is allotted for that run.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59acb03942230a000d2d09e5' id='59acb03942230a000d2d09e5'>
+<a href='#59acb03942230a000d2d09e5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5990e2fe08357c0010e9d8b0'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5f744ee220dade65df972f07ed04755f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5990e2fe08357c0010e9d8b0'>Ashish Agarwal</a>
+</div>
+<a UTCms='1504489529000' class='quanto-date posted-at response-posted-at' href='#59acb03942230a000d2d09e5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great post @Jonathan. How did you come up with the number of 1.9 in DBSCAN(eps=1.9, min_samples=3) . Eps is an important parameter in DBSCAN and can influence number of pairs. Was it a random guess ? I see it creates maximum number of pairs at 1.9  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59ae7de0f4636b000d3503c5' id='59ae7de0f4636b000d3503c5'>
+<a href='#59ae7de0f4636b000d3503c5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/584709c0d105bc4727000072'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fbbdf71510a43bd01dc2b787ecd3c797?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/584709c0d105bc4727000072'>luc prieur</a>
+</div>
+<a UTCms='1504607712000' class='quanto-date posted-at response-posted-at' href='#59ae7de0f4636b000d3503c5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I have modified Jonathan&#39;s notebook to use monthly returns of stocks as clustering features instead of a PCA decomposition of the daily returns.  My assumption is that co-integrated stocks move in similar fashion over longer periods of time.  So instead of reducing 504 day returns to 50 components, I directly use 24 months of returns as features.  The results seem correct to me. </p>
+
+<p>Comments please.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59aec29fdd67eb1c7fae06ed' id='59aec29fdd67eb1c7fae06ed'>
+<a href='#59aec29fdd67eb1c7fae06ed'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5441e3042c869f0bc00000e2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/07eec08109406c6cd989e75416ffbbb8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5441e3042c869f0bc00000e2'>Jonathan Larkin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504625311000' class='quanto-date posted-at response-posted-at' href='#59aec29fdd67eb1c7fae06ed'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Olive,  </p>
+
+<blockquote>
+<p>It&#39;s a big stretch, in my opinion, to say that this (large) number of principal components has any underlying economic meaning. Maybe the first 3 can proxy for latent factors -- the yield curve can be decomposed into parallel shifts, tilts, and twists, using PCA, for example -- but 50?<br>
+This still feels like a data mining exercise, with the main benefit being computational efficiency.</p>
+</blockquote>
+
+<p>I made an affirmative choice to use 50 factors. Commercial risk models for the US equity market typically have between 20 and 75 factors. For example, the Barra US Total Market Model has 75 factors (all with direct economic meaning); the Northfield US Short Term Equity Risk Model has 20 factors (purely statistical). The US treasury yield curve or major swap curves can be well explained by a very small number of factors, but the equity market is much more complex.</p>
+
+<p>@Guy,  </p>
+
+<blockquote>
+<p>...even if I can see the artistry of the cluster separation, it does not mean I can extract worthwhile profits when they move from quadrant to quadrant...</p>
+
+<p>...replace the leet with none (no random seed), or each take a different seed. This would make the pinhole from which they will look at this Q1500US ball of variance unique. The outcome would be related to the very microsecond they launch the pairing clustering...</p>
+</blockquote>
+
+<p>The clusters are deterministic and do not move. They are chosen by the <code>DBSCAN</code> algorithm which is deterministic. You are conflating the clustering with the visualization.     </p>
+
+<p>@Ashish,  </p>
+
+<blockquote>
+<p>How did you come up with the number of 1.9 in DBSCAN(eps=1.9, min_samples=3) .</p>
+</blockquote>
+
+<p>I chose <code>DBSCAN</code> because, unlike KMeans, Agglomerative Clustering, etc., you do not need to specify the number of clusters <em>and</em> not all samples get clustered. The latter feature is attractive to me because it makes sense to me that not every stock will be so closely related to at least one other stock that a viable pair relationship would sustain. It is likely that most stocks are &quot;noise&quot; with respect to this analysis and <code>DBSCAN</code> handles that well. I chose <code>3</code> as the <code>min_samples</code> parameter because I wanted to be able to find small clusters. In this application, it seems reasonable to me that tightly related stocks would exist in small clusters. Per the <a href="http://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html#dbscan">docs</a>, &quot;Epsilon is a distance value, so you can survey the distribution of distances in your dataset to attempt to get an idea of where it should lie.&quot; That&#39;s essentially what I did -- I did not tune the parameter programmatically; rather I chose a few values and settled on this one once I found a setting that produced a handful of tight clusters. The result might be improved with a different approach. I was careful though not to spend a  lot of time on tuning this parameter.</p>
+
+<p>@ Grant,  </p>
+
+<blockquote>
+<p>On a separate note, I&#39;d be careful not to dismiss the brute force approach out of hand due to the computational effort.</p>
+</blockquote>
+
+<p>This example workflow is <em>not</em> meant to reduce the computational effort; rather it is meant to mitigate data mining and spurious results.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59afbc50809ac467de34450f' id='59afbc50809ac467de34450f'>
+<a href='#59afbc50809ac467de34450f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504689232000' class='quanto-date posted-at response-posted-at' href='#59afbc50809ac467de34450f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jonathan, Delaney -</p>
+
+<p>There&#39;s a lot for my little pea brain to take in here, but there appears to be a straightforward recipe for avoiding this multiple comparisons pitfall, call the <a href="https://en.wikipedia.org/wiki/Bonferroni_correction">Bonferroni correction</a>.  You are using a fixed p-value:</p>
+
+<p><code>find_cointegrated_pairs(data, significance=0.05)</code></p>
+
+<p>Unless there is a reason to think that the clustering has completely eliminated the multiple comparisons bias, shouldn&#39;t the p-value be divided by the number of candidate pairs within each cluster?</p>
+
+<p>Trying the Bonferroni correction should be a minor tweak to your code:</p>
+
+<pre><code>def find_cointegrated_pairs(data, significance=0.05):  
+    # This function is from https://www.quantopian.com/lectures/introduction-to-pairs-trading  
+    n = data.shape[1]  
+    score_matrix = np.zeros((n, n))  
+    pvalue_matrix = np.ones((n, n))  
+    keys = data.keys()  
+    pairs = []  
+    for i in range(n):  
+        for j in range(i+1, n):  
+            S1 = data[keys[i]]  
+            S2 = data[keys[j]]  
+            result = coint(S1, S2)  
+            score = result[0]  
+            pvalue = result[1]  
+            score_matrix[i, j] = score  
+            pvalue_matrix[i, j] = pvalue  
+            if pvalue &lt; significance:  
+                pairs.append((keys[i], keys[j]))  
+    return score_matrix, pvalue_matrix, pairs  
+</code></pre>
+
+<p>What needs to change?</p>
+
+<p>As is stated <a href="https://en.wikipedia.org/wiki/Bonferroni_correction">here</a>, &quot;The correction comes at the cost of increasing the probability of producing false negatives, i.e., reducing statistical power.&quot;  Elsewhere, I&#39;ve read that for a large number of comparisons (e.g. brute-force pairs search), the p-value ends up so small that the correction tends to reduce the statistical power to zero.  But here we have a more modest number of pairs, and your hypothesis is that some of them should be the real deal, so maybe the Bonferroni correction would be appropriate (perhaps multiplying the resulting p-value by a hyperparameter scale value, if too few pairs result).  Generally, I&#39;d think that if the clusters are of unequal size, then you shouldn&#39;t be using the same p-value for each (since the risk of multiple comparison bias goes up with cluster size).</p>
+
+<blockquote>
+<p>it is meant to mitigate data mining and spurious results</p>
+</blockquote>
+
+<p>If that is the premise, then you&#39;ll need to compare the brute-force method to this one.  If both methods yield zilch in terms of profitability (or if the new method provides negligible benefit), then no progress has been made.  Since you have data going back to 2002, you can make the comparison without waiting for out-of-sample data to roll in (if you are careful in your methodology).  My basic point is that if you are wanting to show that the proposed method is better, you have to say better than what, and quantify the improvement.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59b066b700cbe3000d283e4d' id='59b066b700cbe3000d283e4d'>
+<a href='#59b066b700cbe3000d283e4d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504732855000' class='quanto-date posted-at response-posted-at' href='#59b066b700cbe3000d283e4d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Bonferroni is a great way to correct your p-values when running a smaller number of tests. It tends to be over-conservative when running many tests and can quickly reduce a process to one that is way too under-sensitive and never triggers.</p>
+
+<p>If you were to run it on 1M pairs you&#39;d be dividing the p-values by 1M, which would result in an incredibly low chance a good pair ever made it through. This is the fundamental problem with multiple comparisons. Generally it&#39;s best to intelligently reduce the number of tests that are being done.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59b1cf56930ca9000da44c75' id='59b1cf56930ca9000da44c75'>
+<a href='#59b1cf56930ca9000da44c75'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504825174000' class='quanto-date posted-at response-posted-at' href='#59b1cf56930ca9000da44c75'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>Generally it&#39;s best to intelligently reduce the number of tests that are being done.</p>
+</blockquote>
+
+<p>O.K.  Sounds good.  But if the number of tests is more than one, then a correction for multiple comparisons would need to be applied, right?.  So, I&#39;m wondering if the p = 0.05 used above is too high?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59b297c95fa040000dc85b3a' id='59b297c95fa040000dc85b3a'>
+<a href='#59b297c95fa040000dc85b3a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504876489000' class='quanto-date posted-at response-posted-at' href='#59b297c95fa040000dc85b3a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s my attempt to apply the Bonferroni correction to Jonathan&#39;s notebook, accounting for the within-cluster multiple comparisons bias, at a significance of p = 0.05.  Did I apply it correctly?</p>
+
+<p>The result, as one might expect, is that we end up with fewer pairs--only two!  And interestingly, there are 4 <em>unique</em> tickers.  All 4 are in the energy business, so I guess at some level, it makes sense.  Is there something unique about the energy business that would tend to result in statistically significant pairs (over other businesses)?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59b318986e42b8000d4637e0' id='59b318986e42b8000d4637e0'>
+<a href='#59b318986e42b8000d4637e0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1504909464000' class='quanto-date posted-at response-posted-at' href='#59b318986e42b8000d4637e0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>We have to distinguish between exploratory analysis and definitive testing. The analysis above is exploratory and intended to suggest hypotheses. As such the certainty doesn&#39;t have to be as rigorous. After you had a specific set of pairs you had validated, then you would want to definitively test using all the proper correction factors.</p>
+
+<p>In exploratory analysis we face higher risk of the test saying no to a good pair, so we are okay with it being overly sensitive.<br>
+In definitive testing we face risk of trading something not really a pair, so we want to make sure the test is very specific and apply all correction factors.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59b3af262dd576001024b1f0' id='59b3af262dd576001024b1f0'>
+<a href='#59b3af262dd576001024b1f0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1504948006000' class='quanto-date posted-at response-posted-at' href='#59b3af262dd576001024b1f0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Delaney -</p>
+
+<p>It is potentially an incremental improvement to Jonathan&#39;s code:</p>
+
+<pre><code>def find_cointegrated_pairs(data, significance=0.05):  
+    # This function is from https://www.quantopian.com/lectures/introduction-to-pairs-trading  
+    n = data.shape[1]  
+    c = n*(n-1)/2 # Bonferroni correction  
+    score_matrix = np.zeros((n, n))  
+    pvalue_matrix = np.ones((n, n))  
+    keys = data.keys()  
+    pairs = []  
+    for i in range(n):  
+        for j in range(i+1, n):  
+            S1 = data[keys[i]]  
+            S2 = data[keys[j]]  
+            result = coint(S1, S2)  
+            score = result[0]  
+            pvalue = result[1]  
+            score_matrix[i, j] = score  
+            pvalue_matrix[i, j] = pvalue  
+            if pvalue &lt; significance/c:  
+                pairs.append((keys[i], keys[j]))  
+    return score_matrix, pvalue_matrix, pairs  
+</code></pre>
+
+<p>If I&#39;ve done it correctly, the Bonferroni correction is applied to each cluster.  To get more pairs, one can simply increase the p-value.  For example, I&#39;ve increased it to p = 0.2 in the attached notebook, and now get 6 pairs:</p>
+
+<p>[(Equity(1665 [CMS]), Equity(21964 [XEL])),
+ (Equity(5792 [PCG]), Equity(18584 [LNT])),<br>
+ (Equity(1023 [BOH]), Equity(11215 [UMBF])),<br>
+ (Equity(3675 [EQC]), Equity(11478 [FR])),<br>
+ (Equity(3675 [EQC]), Equity(33026 [DCT])),<br>
+ (Equity(3675 [EQC]), Equity(39204 [PDM]))]</p>
+
+<p>Generally, my point is that the pair search algorithm should account for cluster size, since if I understand this multiple comparisons jazz correctly, the probability of spitting out spurious pairs goes up with cluster size.</p>
+
+<p>I&#39;m still getting up the learning curve, but I gather that one would run so-called ROC curves, to compare various approaches (e.g. brute force, clustering with no Bonferroni correction, clustering with Bonferroni correction, etc.).  Basically, the notebook is spitting out pairs that are hypothetically trade-able.  So, with a way to determine the true trade-ability of the pairs, one could do a set of ROC curves, to compare the power of detecting pairs.  How would one score the trade-ability of a pair?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7d678f10250962f131a1f3' id='5a7d678f10250962f131a1f3'>
+<a href='#5a7d678f10250962f131a1f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518167951000' class='quanto-date posted-at response-posted-at' href='#5a7d678f10250962f131a1f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Said -</p>
+
+<p>Note that Jonathan is no longer with Quantopian (although I guess he could still be active as a user...haven&#39;t seen any activity since he left, however).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeb6815a2e6dd0040333c5f' id='5aeb6815a2e6dd0040333c5f'>
+<a href='#5aeb6815a2e6dd0040333c5f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/568c40dc2893501027000141'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/866918e40c4fa7b1f5f297cce06e6d7c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/568c40dc2893501027000141'>Esteban Zuluaga</a>
+</div>
+<a UTCms='1525377045000' class='quanto-date posted-at response-posted-at' href='#5aeb6815a2e6dd0040333c5f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I didn&#39;t quite get why would Jonathan apply a PCA to the returns series. Isn&#39;t this wrapping too much valuable information, reducing largely the significance of the sample? I mean, the sample is large at the transversal scale, but really small on time (quantity of returns involved in the analysis).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aff380e2aca09717d7d87d7' id='5aff380e2aca09717d7d87d7'>
+<a href='#5aff380e2aca09717d7d87d7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a7f0b851bd2a000107012f5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2ac867dafb84fb456bbbecf27778b309?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a7f0b851bd2a000107012f5'>John Strong</a>
+</div>
+<a UTCms='1526675471000' class='quanto-date posted-at response-posted-at' href='#5aff380e2aca09717d7d87d7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What a pity Jonathan Larkin is no longer around to field questions! I really regret missing that window of opportunity.</p>
+
+<p>I find it fascinating that he chose to use the Principal Components as factors!! But it is also tantalizing, because I only have conjectures as to why this might work and the author of the algo is not here to explain. </p>
+
+<p>My conjecture: a Principle Component eigenvector can be thought of as a vector of weights that indicate how much each of the original features contributes to the principal component, so I&#39;m guessing that the eigenvector identifies which stocks covary along its axis in the reduced dimension space. This is because the eigenvectors are aligned along the axes of greatest variance, and so, presumably, two stocks covarying along the new axis would both have large weights for the features that most contribute to defining the new axis. Is my conjecture remotely correct? Do the principal components make good factors, because they identify covarying stocks? Of course, covariance is not enough. We must also test for cointegration, but stocks that covary a lot along a principal component axis might make good candidates for a cointegration test. Am I hot, cold or lukewarm?</p>
+
+<p>The following sentences by Jonathan Larkin were <em>extremely</em> <em>rich</em>. He said:</p>
+
+<blockquote>
+<p>The financial interpretation is that the 
+<code>pca.components_.T</code> are  per stock betas to hidden statistical factors. When you go through  with <code>
+fit_transform  
+</code> you get the time series of each hidden factor.  I don&#39;t want those. I simply want to cluster on the betas.</p>
+</blockquote>
+
+<p>Mr. Delaney MacKenzie, could you possibly be persuaded to unpack this statement by Jonathan Larkin?</p>
+
+<p>What does Jonathan mean when he refers to the principle component eigenvectors as &quot;per stock betas&quot;?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b07459e9fc18819703c70e8' id='5b07459e9fc18819703c70e8'>
+<a href='#5b07459e9fc18819703c70e8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5346083a839ff34e1400010a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e2319a353b35eac99e765c836ba72044?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5346083a839ff34e1400010a'>Delaney Mackenzie</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1527203230000' class='quanto-date posted-at response-posted-at' href='#5b07459e9fc18819703c70e8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello John,</p>
+
+<p>My understanding is also not perfect as I haven&#39;t reviewed the above in a while, but let me know is this is helpful.</p>
+
+<p>You already unpacked most of Jonathan&#39;s intent in your correct diagnosis of why PCA was chosen here. By finding common synthetic underlying factors which explain maximal variance of all the stocks, we&#39;re effectively hypothesizing that there are some hidden causal elements of stock movements. For instance, one would hope that in doing a PCA of all stocks in the US market, one would get a factor very similar to the SPY ETF.</p>
+
+<p>By looking at how each real pricing series is expressed as a linear combination of the underlying factors, we&#39;re looking at how much each stock has beta exposure to each hidden factor. This is no different from any other beta, as it&#39;s just how dependent series Y is on explanatory series X (<a href="https://www.quantopian.com/lectures/factor-risk-exposure">https://www.quantopian.com/lectures/factor-risk-exposure</a>).</p>
+
+<p>In this case we&#39;re looking for stocks with similar factor exposure, as that would imply that there are similar underlying causal factors, and therefore likelihood of cointegration.</p>
+
+<p>Apologies if this isn&#39;t helpful.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b07492ba0e2d03a12e7c5ca' id='5b07492ba0e2d03a12e7c5ca'>
+<a href='#5b07492ba0e2d03a12e7c5ca'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a7f0b851bd2a000107012f5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2ac867dafb84fb456bbbecf27778b309?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a7f0b851bd2a000107012f5'>John Strong</a>
+</div>
+<a UTCms='1527204139000' class='quanto-date posted-at response-posted-at' href='#5b07492ba0e2d03a12e7c5ca'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Very helpful, Delaney. I&#39;m quite grateful that you took time to respond. </p>
+
+<p>This sentence nailed it for me: &quot;By looking at how each real pricing series is expressed as a linear combination of the underlying factors, we&#39;re looking at how much each stock has beta exposure to each hidden factor.&quot;</p>
+
+<p>Very interesting.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c7914f29308c43a57527eee' id='5c7914f29308c43a57527eee'>
+<a href='#5c7914f29308c43a57527eee'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a6b8804e92bef4b238e475a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/82be5885c70ef73fbe49310640b82ec9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a6b8804e92bef4b238e475a'>Joseph Moorhouse</a>
+</div>
+<a UTCms='1551439090000' class='quanto-date posted-at response-posted-at' href='#5c7914f29308c43a57527eee'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Quantopian community, fairly new to the platform as well as quantitative research. Really excellent notebook to work through and really interesting to explore the concepts used. </p>
+
+<p>Over the past few weeks, I&#39;ve been exploring <code>sklearn.decomposition.PCA</code> and <code>sklearn.cluster.DBSCAN</code> source in an attempt to fully understand what&#39;s going on in the notebook. I have a variety of questions, which are summarised below. </p>
+
+<ol>
+<li>For this application, should we necessarily be concerned with reducing dimensionality? Could we potentially be neglecting factors with low, but significant variance?<br></li>
+<li>My understanding is that PCA assumes the interrelated variables are ‘related’ due to common exposures to important factors, and that these factors are diluted with noise? But if we assume that stock pricing data has a low Signal to Noise ratio, by omitting low variance components, are we clustering primarily on volatility/noise?<br></li>
+<li>Using <code>n_components = 50</code>, the model manages to explain roughly 60% of the variance of the original sample. How do we know 60% is sufficient?<br></li>
+<li>If these components are projected back into the original space, (shown in the attached notebook) does <code>n_components = 50</code> sufficiently describe the original data? Is this important and how would you go about assessing this statistically? </li>
+</ol>
+
+<p>Thanks in advance.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f1edbc6d72fce0017bc69c5' id='5f1edbc6d72fce0017bc69c5'>
+<a href='#5f1edbc6d72fce0017bc69c5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5eb8255b5f5fb900424cb661'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e3b34d69abc32738ba2a30d88d408bda?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5eb8255b5f5fb900424cb661'>Na Miller</a>
+</div>
+<a UTCms='1595857862000' class='quanto-date posted-at response-posted-at' href='#5f1edbc6d72fce0017bc69c5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Jonathan,</p>
+
+<p>Excellent notebook and really interesting to apply machine learning technology to explore the old concept. </p>
+
+<p>I have one question after reading through your notebook: </p>
+
+<p>In your DBSCAN method, you set &quot;eps = 1.9&quot;.  Could you explain a little more about this?</p>
+
+<p>Thanks in advance,  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f31a043260e92000d2d9246' id='5f31a043260e92000d2d9246'>
+<a href='#5f31a043260e92000d2d9246'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5ce9b008467a37003e706b6a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/74f0790e290841f9e2576d4f6821f321?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5ce9b008467a37003e706b6a'>Tony L</a>
+</div>
+<a UTCms='1597087811000' class='quanto-date posted-at response-posted-at' href='#5f31a043260e92000d2d9246'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Jonathan,</p>
+
+<p>Can this be applied to the IDE? As in, how can one use this method of identifying pairs in the IDE to rebalance and recreate a new portfolio of pairs on a monthly rolling basis? Is it possible to do this?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f4793d057761b0011e3ca91' id='5f4793d057761b0011e3ca91'>
+<a href='#5f4793d057761b0011e3ca91'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5d189929ac0382004988e936'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1e006a867fdabee20b0b513cddd99189?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5d189929ac0382004988e936'>Dave od</a>
+</div>
+<a UTCms='1598526416000' class='quanto-date posted-at response-posted-at' href='#5f4793d057761b0011e3ca91'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In my opinion the notepad is very unclearly explained. I read sentences that try to justify the procedure more philosophically than mathematically.<br>
+When you mix the &quot;scores matrix&quot; with &quot;MketCAp&quot; and Financial Health &quot;, it seems to me like mixing wine with redbull.<br>
+&quot;Let&#39;s add some fundamental values ​​as well to make the model more robust.&quot; ?. You can do it, yes. You can add any other variable that has nothing to do with it and still apply DBSCAN later and you can get clusters, even paint them and confirm that the points appear to be together. You can even obtain an algorithm with some gain in this way during a certain time frame.
+But without clarifying the decisions and the background of the procedure, it does not contribute much.<br>
+I am not saying that the algorithm is correct or not. I dont know it. I say that I do not understand the procedure and what is done should be explained and justified.<br>
+Is there anyone in this group who can clarify and elaborate on the notebook steps further, please?  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/pairs-trading-with-machine-learning'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/pairs-trading-with-machine-learning'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#31575454555350525a714044505f455e4158505f1f525e5c">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

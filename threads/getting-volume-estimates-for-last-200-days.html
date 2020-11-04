@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Getting volume estimates for last 200 days
+</title>
+<meta content='This is an idea that&#39;s been rattling about in my skull for the past couple days and I wanted to get a grip on it. The idea is to find out the expected volume traded for a stock in 15 minute periods throughout the day. I seem to recall some technical docs showing an expected daily volume shape for FX (e.g. EURUSD, USDGBP) and it would appear to be the same shape seen in a lot of stocks you look at (e.g. Apple, GDX). I believe this was supposedly due to some convention that a lot of businesses...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="pq12kwnW5F2EMqtY7Wp8VJ5XkkevyoJNroackQqHFd7aywDeqyA2vj0v8mmihdQgptmxLtUGl1YsiUf7oMJ3ZQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/getting-volume-estimates-for-last-200-days' property='og:url'>
+<meta content='Getting volume estimates for last 200 days' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/getting-volume-estimates-for-last-200-days' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Getting volume estimates for last 200 days' property='og:title'>
+<meta content='This is an idea that&#39;s been rattling about in my skull for the past couple days and I wanted to get a grip on it. The idea is to find out the expected volume traded for a stock in 15 minute periods throughout the day. I seem to recall some technical docs showing an expected daily volume shape for FX (e.g. EURUSD, USDGBP) and it would appear to be the same shape seen in a lot of stocks you look at (e.g. Apple, GDX). I believe this was supposedly due to some convention that a lot of businesses...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/getting-volume-estimates-for-last-200-days">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='50bfeaff856c650200000035'>
+<div class='post-container' data-post-id='50bfeaff856c650200000035' id='50bfeaff856c650200000035'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Getting volume estimates for last 200 days</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4ec777fc345f20000e000008'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d1c340e13d187142fc34a5cff3a5eed5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4ec777fc345f20000e000008'>James Jack</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1354754815000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Getting volume estimates for last 200 days&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fgetting-volume-estimates-for-last-200-days%3Futm_source%3Dwebsite_share%26utm_campaign%3Dgetting-volume-estimates-for-last-200-days%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fgetting-volume-estimates-for-last-200-days%3Futm_source%3Dwebsite_share%26utm_campaign%3Dgetting-volume-estimates-for-last-200-days%26utm_medium%3Dlinkedin&amp;title=Getting+volume+estimates+for+last+200+days+%28James+Jack%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/getting-volume-estimates-for-last-200-days?utm_source=website_share&amp;utm_campaign=getting-volume-estimates-for-last-200-days&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="James Jack" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>This is an idea that&#39;s been rattling about in my skull for the past couple days and I wanted to get a grip on it. The idea is to find out the expected volume traded for a stock in 15 minute periods throughout the day. I seem to recall some technical docs showing an expected daily volume shape for FX (e.g. EURUSD, USDGBP) and it would appear to be the same shape seen in a lot of stocks you look at (e.g. Apple, GDX). I believe this was supposedly due to some convention that a lot of businesses do large money transaction in the afternoon. (?)</p>
+
+<p>I give mean and median because I&#39;m concerned the mean will get distorted by infrequent events that will pull it up higher than it should be. In any case I&#39;m hoping the expected volume can serve as an alert function that activates during a 15-minute period rather than looking at daily volumes. Or maybe it can be factored in to risk calculation or stop loss pips.</p>
+
+<p>I&#39;d be interested to know what people think of the validity of this idea.</p>
+
+<pre><code>2011-06-01 to 2012-07-20 
+
+Apple  
+2012-03-16PRINThr 09 15M 3 |__________+| avg 001,417,444 median 001,319,850  
+2012-03-16PRINThr 09 15M 4 |_____+_____| avg 000,929,187 median 000,826,939  
+2012-03-16PRINThr 10 15M 1 |____+______| avg 000,853,247 median 000,812,934  
+2012-03-16PRINThr 10 15M 2 |___+_______| avg 000,722,859 median 000,619,149  
+2012-03-16PRINThr 10 15M 3 |__+________| avg 000,652,738 median 000,551,053  
+2012-03-16PRINThr 10 15M 4 |__+________| avg 000,609,862 median 000,512,860  
+2012-03-16PRINThr 11 15M 1 |_+_________| avg 000,564,771 median 000,478,505  
+2012-03-16PRINThr 11 15M 2 |_+_________| avg 000,539,959 median 000,463,664  
+2012-03-16PRINThr 11 15M 3 |+__________| avg 000,508,562 median 000,415,784  
+2012-03-16PRINThr 11 15M 4 |+__________| avg 000,479,606 median 000,395,295  
+2012-03-16PRINThr 12 15M 1 |+__________| avg 000,486,563 median 000,399,899  
+2012-03-16PRINThr 12 15M 2 |+__________| avg 000,460,922 median 000,396,765  
+2012-03-16PRINThr 12 15M 3 |_+_________| avg 000,510,430 median 000,417,907  
+2012-03-16PRINThr 12 15M 4 |__+________| avg 000,622,532 median 000,491,329  
+2012-03-16PRINThr 13 15M 1 |______+____| avg 001,014,892 median 000,630,034  
+2012-03-16PRINThr 13 15M 2 |__+________| avg 000,661,318 median 000,520,006  
+2012-03-16PRINThr 13 15M 3 |__+________| avg 000,624,403 median 000,512,537  
+2012-03-16PRINThr 13 15M 4 |_+_________| avg 000,566,288 median 000,456,620  
+2012-03-16PRINThr 14 15M 1 |_+_________| avg 000,574,354 median 000,463,050  
+2012-03-16PRINThr 14 15M 2 |_+_________| avg 000,584,645 median 000,457,780  
+2012-03-16PRINThr 14 15M 3 |_+_________| avg 000,563,922 median 000,462,651  
+2012-03-16PRINThr 14 15M 4 |_+_________| avg 000,558,784 median 000,428,737  
+2012-03-16PRINThr 15 15M 1 |__+________| avg 000,609,071 median 000,485,752  
+2012-03-16PRINThr 15 15M 2 |_+_________| avg 000,601,427 median 000,526,258  
+2012-03-16PRINThr 15 15M 3 |__+________| avg 000,666,040 median 000,604,595  
+2012-03-16PRINThr 15 15M 4 |_____+_____| avg 000,943,177 median 000,934,635
+
+ONNN (ON Semiconductor)  
+2012-03-20PRINThr 09 15M 3 |_+_________| avg 000,237,576 median 000,186,468  
+2012-03-20PRINThr 09 15M 4 |+__________| avg 000,223,283 median 000,173,341  
+2012-03-20PRINThr 10 15M 1 |___+_______| avg 000,259,366 median 000,189,085  
+2012-03-20PRINThr 10 15M 2 |_____+_____| avg 000,281,018 median 000,198,247  
+2012-03-20PRINThr 10 15M 3 |_____+_____| avg 000,287,848 median 000,201,619  
+2012-03-20PRINThr 10 15M 4 |__________+| avg 000,350,042 median 000,207,198  
+2012-03-20PRINThr 11 15M 1 |_________+_| avg 000,340,653 median 000,211,236  
+2012-03-20PRINThr 11 15M 2 |________+__| avg 000,324,139 median 000,202,714  
+2012-03-20PRINThr 11 15M 3 |_____+_____| avg 000,286,178 median 000,205,761  
+2012-03-20PRINThr 11 15M 4 |_________+_| avg 000,332,328 median 000,259,333  
+2012-03-20PRINThr 12 15M 1 |________+__| avg 000,321,328 median 000,245,583  
+2012-03-20PRINThr 12 15M 2 |________+__| avg 000,320,378 median 000,240,944  
+2012-03-20PRINThr 12 15M 3 |_______+___| avg 000,316,508 median 000,249,354  
+2012-03-20PRINThr 12 15M 4 |______+____| avg 000,300,224 median 000,245,325  
+2012-03-20PRINThr 13 15M 1 |________+__| avg 000,320,301 median 000,242,133  
+2012-03-20PRINThr 13 15M 2 |________+__| avg 000,326,379 median 000,274,737  
+2012-03-20PRINThr 13 15M 3 |________+__| avg 000,324,037 median 000,248,464  
+2012-03-20PRINThr 13 15M 4 |_______+___| avg 000,306,500 median 000,220,496  
+2012-03-20PRINThr 14 15M 1 |_____+_____| avg 000,285,140 median 000,193,687  
+2012-03-20PRINThr 14 15M 2 |__+________| avg 000,248,875 median 000,199,446  
+2012-03-20PRINThr 14 15M 3 |___+_______| avg 000,257,385 median 000,191,004  
+2012-03-20PRINThr 14 15M 4 |____+______| avg 000,275,044 median 000,190,443  
+2012-03-20PRINThr 15 15M 1 |_+_________| avg 000,238,376 median 000,176,720  
+2012-03-20PRINThr 15 15M 2 |___+_______| avg 000,257,596 median 000,219,895  
+2012-03-20PRINThr 15 15M 3 |__+________| avg 000,250,348 median 000,200,369  
+2012-03-20PRINThr 15 15M 4 |__+________| avg 000,248,569 median 000,176,774
+
+GDX (Gold ETF)  
+2012-03-16PRINThr 09 15M 3 |______+____| avg 000,711,057 median 000,666,623  
+2012-03-16PRINThr 09 15M 4 |____+______| avg 000,599,519 median 000,538,703  
+2012-03-16PRINThr 10 15M 1 |____+______| avg 000,592,639 median 000,519,764  
+2012-03-16PRINThr 10 15M 2 |___+_______| avg 000,527,237 median 000,463,687  
+2012-03-16PRINThr 10 15M 3 |__+________| avg 000,489,911 median 000,417,336  
+2012-03-16PRINThr 10 15M 4 |__+________| avg 000,447,815 median 000,357,440  
+2012-03-16PRINThr 11 15M 1 |_+_________| avg 000,407,810 median 000,356,955  
+2012-03-16PRINThr 11 15M 2 |_+_________| avg 000,387,370 median 000,332,677  
+2012-03-16PRINThr 11 15M 3 |+__________| avg 000,361,327 median 000,310,327  
+2012-03-16PRINThr 11 15M 4 |+__________| avg 000,355,739 median 000,298,136  
+2012-03-16PRINThr 12 15M 1 |+__________| avg 000,342,020 median 000,298,440  
+2012-03-16PRINThr 12 15M 2 |+__________| avg 000,344,947 median 000,293,096  
+2012-03-16PRINThr 12 15M 3 |_+_________| avg 000,424,699 median 000,345,259  
+2012-03-16PRINThr 12 15M 4 |______+____| avg 000,720,441 median 000,429,333  
+2012-03-16PRINThr 13 15M 1 |___+_______| avg 000,501,190 median 000,389,802  
+2012-03-16PRINThr 13 15M 2 |__+________| avg 000,466,778 median 000,390,625  
+2012-03-16PRINThr 13 15M 3 |__+________| avg 000,457,901 median 000,372,447  
+2012-03-16PRINThr 13 15M 4 |__+________| avg 000,437,321 median 000,375,267  
+2012-03-16PRINThr 14 15M 1 |__+________| avg 000,435,395 median 000,371,273  
+2012-03-16PRINThr 14 15M 2 |_+_________| avg 000,428,614 median 000,349,773  
+2012-03-16PRINThr 14 15M 3 |_+_________| avg 000,394,675 median 000,333,577  
+2012-03-16PRINThr 14 15M 4 |_+_________| avg 000,384,808 median 000,325,763  
+2012-03-16PRINThr 15 15M 1 |_+_________| avg 000,379,693 median 000,321,267  
+2012-03-16PRINThr 15 15M 2 |_+_________| avg 000,400,275 median 000,312,125  
+2012-03-16PRINThr 15 15M 3 |___+_______| avg 000,537,801 median 000,475,631  
+2012-03-16PRINThr 15 15M 4 |__________+| avg 000,949,103 median 000,915,943
+
+SPY  
+2012-03-16PRINThr 09 15M 3 |______+____| avg 010,816,723 median 010,800,819  
+2012-03-16PRINThr 09 15M 4 |____+______| avg 008,913,886 median 008,523,452  
+2012-03-16PRINThr 10 15M 1 |_____+_____| avg 009,854,374 median 008,692,415  
+2012-03-16PRINThr 10 15M 2 |___+_______| avg 007,737,873 median 006,621,353  
+2012-03-16PRINThr 10 15M 3 |__+________| avg 007,066,672 median 006,139,161  
+2012-03-16PRINThr 10 15M 4 |__+________| avg 006,785,590 median 005,885,742  
+2012-03-16PRINThr 11 15M 1 |_+_________| avg 006,296,436 median 005,674,478  
+2012-03-16PRINThr 11 15M 2 |+__________| avg 005,631,402 median 005,004,667  
+2012-03-16PRINThr 11 15M 3 |_+_________| avg 005,644,208 median 005,161,715  
+2012-03-16PRINThr 11 15M 4 |+__________| avg 005,321,792 median 004,762,634  
+2012-03-16PRINThr 12 15M 1 |+__________| avg 005,373,665 median 004,487,740  
+2012-03-16PRINThr 12 15M 2 |+__________| avg 005,131,689 median 004,304,978  
+2012-03-16PRINThr 12 15M 3 |+__________| avg 005,474,237 median 004,639,656  
+2012-03-16PRINThr 12 15M 4 |__+________| avg 007,055,652 median 006,000,617  
+2012-03-16PRINThr 13 15M 1 |___+_______| avg 008,475,983 median 007,541,209  
+2012-03-16PRINThr 13 15M 2 |_+_________| avg 006,205,333 median 005,735,625  
+2012-03-16PRINThr 13 15M 3 |__+________| avg 006,813,658 median 005,850,969  
+2012-03-16PRINThr 13 15M 4 |_+_________| avg 006,051,840 median 005,378,849  
+2012-03-16PRINThr 14 15M 1 |_+_________| avg 006,451,752 median 005,498,595  
+2012-03-16PRINThr 14 15M 2 |_+_________| avg 006,445,270 median 005,159,042  
+2012-03-16PRINThr 14 15M 3 |_+_________| avg 006,395,686 median 005,465,874  
+2012-03-16PRINThr 14 15M 4 |_+_________| avg 005,974,819 median 004,944,123  
+2012-03-16PRINThr 15 15M 1 |__+________| avg 006,926,707 median 005,652,126  
+2012-03-16PRINThr 15 15M 2 |__+________| avg 007,422,549 median 005,882,195  
+2012-03-16PRINThr 15 15M 3 |____+______| avg 008,877,035 median 007,986,374  
+2012-03-16PRINThr 15 15M 4 |__________+| avg 015,372,120 median 015,120,789
+
+FCS (Fairchild)  
+2012-03-23PRINThr 09 15M 3 |+__________| avg 000,074,294 median 000,052,131  
+2012-03-23PRINThr 09 15M 4 |_+_________| avg 000,076,166 median 000,055,497  
+2012-03-23PRINThr 10 15M 1 |+__________| avg 000,073,090 median 000,053,030  
+2012-03-23PRINThr 10 15M 2 |_+_________| avg 000,076,560 median 000,056,204  
+2012-03-23PRINThr 10 15M 3 |+__________| avg 000,073,904 median 000,061,932  
+2012-03-23PRINThr 10 15M 4 |_____+_____| avg 000,085,043 median 000,058,920  
+2012-03-23PRINThr 11 15M 1 |_________+_| avg 000,095,649 median 000,056,034  
+2012-03-23PRINThr 11 15M 2 |____+______| avg 000,084,031 median 000,057,308  
+2012-03-23PRINThr 11 15M 3 |__+________| avg 000,077,618 median 000,056,158  
+2012-03-23PRINThr 11 15M 4 |____+______| avg 000,083,649 median 000,059,234  
+2012-03-23PRINThr 12 15M 1 |____+______| avg 000,084,593 median 000,060,148  
+2012-03-23PRINThr 12 15M 2 |________+__| avg 000,095,010 median 000,070,348  
+2012-03-23PRINThr 12 15M 3 |_________+_| avg 000,097,689 median 000,067,337  
+2012-03-23PRINThr 12 15M 4 |____+______| avg 000,084,371 median 000,060,589  
+2012-03-23PRINThr 13 15M 1 |________+__| avg 000,094,247 median 000,069,852  
+2012-03-23PRINThr 13 15M 2 |________+__| avg 000,093,311 median 000,072,481  
+2012-03-23PRINThr 13 15M 3 |__________+| avg 000,099,117 median 000,067,627  
+2012-03-23PRINThr 13 15M 4 |______+____| avg 000,087,505 median 000,061,915  
+2012-03-23PRINThr 14 15M 1 |_____+_____| avg 000,086,597 median 000,061,758  
+2012-03-23PRINThr 14 15M 2 |_______+___| avg 000,091,209 median 000,054,665  
+2012-03-23PRINThr 14 15M 3 |______+____| avg 000,088,997 median 000,059,388  
+2012-03-23PRINThr 14 15M 4 |____+______| avg 000,083,557 median 000,055,581  
+2012-03-23PRINThr 15 15M 1 |____+______| avg 000,082,675 median 000,060,272  
+2012-03-23PRINThr 15 15M 2 |__+________| avg 000,077,509 median 000,056,330  
+2012-03-23PRINThr 15 15M 3 |____+______| avg 000,082,909 median 000,054,318  
+2012-03-23PRINThr 15 15M 4 |+__________| avg 000,074,374 median 000,057,244
+
+ADI  
+2012-03-16PRINThr 09 15M 3 |___+_______| avg 000,157,131 median 000,119,771  
+2012-03-16PRINThr 09 15M 4 |___+_______| avg 000,142,452 median 000,116,636  
+2012-03-16PRINThr 10 15M 1 |__+________| avg 000,141,661 median 000,119,205  
+2012-03-16PRINThr 10 15M 2 |__+________| avg 000,141,752 median 000,114,394  
+2012-03-16PRINThr 10 15M 3 |__+________| avg 000,131,459 median 000,105,712  
+2012-03-16PRINThr 10 15M 4 |__+________| avg 000,125,219 median 000,103,020  
+2012-03-16PRINThr 11 15M 1 |__+________| avg 000,132,247 median 000,104,010  
+2012-03-16PRINThr 11 15M 2 |__+________| avg 000,131,928 median 000,100,130  
+2012-03-16PRINThr 11 15M 3 |_+_________| avg 000,120,514 median 000,099,078  
+2012-03-16PRINThr 11 15M 4 |_+_________| avg 000,120,559 median 000,090,018  
+2012-03-16PRINThr 12 15M 1 |__+________| avg 000,125,242 median 000,091,855  
+2012-03-16PRINThr 12 15M 2 |+__________| avg 000,106,182 median 000,079,723  
+2012-03-16PRINThr 12 15M 3 |+__________| avg 000,097,519 median 000,081,081  
+2012-03-16PRINThr 12 15M 4 |+__________| avg 000,102,500 median 000,083,730  
+2012-03-16PRINThr 13 15M 1 |+__________| avg 000,097,776 median 000,083,051  
+2012-03-16PRINThr 13 15M 2 |_+_________| avg 000,108,144 median 000,083,857  
+2012-03-16PRINThr 13 15M 3 |_+_________| avg 000,109,571 median 000,084,394  
+2012-03-16PRINThr 13 15M 4 |_+_________| avg 000,115,072 median 000,085,748  
+2012-03-16PRINThr 14 15M 1 |_+_________| avg 000,115,730 median 000,086,777  
+2012-03-16PRINThr 14 15M 2 |_+_________| avg 000,122,450 median 000,096,041  
+2012-03-16PRINThr 14 15M 3 |__+________| avg 000,136,221 median 000,104,120  
+2012-03-16PRINThr 14 15M 4 |___+_______| avg 000,158,995 median 000,122,469  
+2012-03-16PRINThr 15 15M 1 |______+____| avg 000,207,033 median 000,152,691  
+2012-03-16PRINThr 15 15M 2 |__________+| avg 000,275,316 median 000,222,625  
+2012-03-16PRINThr 15 15M 3 |_____+_____| avg 000,194,803 median 000,159,642  
+2012-03-16PRINThr 15 15M 4 |____+______| avg 000,169,711 median 000,137,864
+
+CRM (salesforce)  
+2012-03-19PRINThr 09 15M 3 |____+______| avg 000,102,184 median 000,087,688  
+2012-03-19PRINThr 09 15M 4 |____+______| avg 000,103,499 median 000,086,302  
+2012-03-19PRINThr 10 15M 1 |____+______| avg 000,103,172 median 000,080,961  
+2012-03-19PRINThr 10 15M 2 |____+______| avg 000,104,416 median 000,081,675  
+2012-03-19PRINThr 10 15M 3 |______+____| avg 000,116,168 median 000,072,970  
+2012-03-19PRINThr 10 15M 4 |_____+_____| avg 000,112,701 median 000,065,736  
+2012-03-19PRINThr 11 15M 1 |___+_______| avg 000,094,826 median 000,064,704  
+2012-03-19PRINThr 11 15M 2 |__+________| avg 000,089,734 median 000,065,180  
+2012-03-19PRINThr 11 15M 3 |_+_________| avg 000,083,267 median 000,065,239  
+2012-03-19PRINThr 11 15M 4 |_+_________| avg 000,081,585 median 000,060,300  
+2012-03-19PRINThr 12 15M 1 |_+_________| avg 000,080,043 median 000,058,701  
+2012-03-19PRINThr 12 15M 2 |+__________| avg 000,073,789 median 000,061,532  
+2012-03-19PRINThr 12 15M 3 |+__________| avg 000,076,481 median 000,061,783  
+2012-03-19PRINThr 12 15M 4 |_+_________| avg 000,081,647 median 000,070,192  
+2012-03-19PRINThr 13 15M 1 |_+_________| avg 000,080,761 median 000,066,618  
+2012-03-19PRINThr 13 15M 2 |_+_________| avg 000,084,003 median 000,069,204  
+2012-03-19PRINThr 13 15M 3 |___+_______| avg 000,093,288 median 000,075,425  
+2012-03-19PRINThr 13 15M 4 |_______+___| avg 000,124,216 median 000,091,253  
+2012-03-19PRINThr 14 15M 1 |________+__| avg 000,127,479 median 000,092,448  
+2012-03-19PRINThr 14 15M 2 |__________+| avg 000,144,946 median 000,092,702  
+2012-03-19PRINThr 14 15M 3 |________+__| avg 000,128,170 median 000,097,578  
+2012-03-19PRINThr 14 15M 4 |_______+___| avg 000,123,994 median 000,100,176  
+2012-03-19PRINThr 15 15M 1 |_________+_| avg 000,135,939 median 000,106,186  
+2012-03-19PRINThr 15 15M 2 |_______+___| avg 000,124,408 median 000,095,803  
+2012-03-19PRINThr 15 15M 3 |______+____| avg 000,116,695 median 000,094,669  
+2012-03-19PRINThr 15 15M 4 |______+____| avg 000,119,043 median 000,095,106  
+</code></pre>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>3 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='50c0702ffdd318020000002a' id='50c0702ffdd318020000002a'>
+<a href='#50c0702ffdd318020000002a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1354788911000' class='quanto-date posted-at response-posted-at' href='#50c0702ffdd318020000002a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello James,</p>
+
+<p>Clever workaround for the lack of general plotting capability in Quantopian!  </p>
+
+<p>If you do a Google (or Google Scholar) search on &quot;liquidity premium&quot; you might find some relevant information on the impact of trading volume on price.</p>
+
+<p>Apple, GDX, and SPY all have the same characteristic volume versus time curve.  Any idea why?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='50c0a72bfdd3180200000048' id='50c0a72bfdd3180200000048'>
+<a href='#50c0a72bfdd3180200000048'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4ec777fc345f20000e000008'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d1c340e13d187142fc34a5cff3a5eed5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4ec777fc345f20000e000008'>James Jack</a>
+</div>
+<a UTCms='1354802987000' class='quanto-date posted-at response-posted-at' href='#50c0a72bfdd3180200000048'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Interesting. Well I suppose the more liquid a stock is the more likely people will come in and out of positions exactly when they want to. The volume-time curve will then just illustrate what people want to do. That peak on Apple (and other stocks with a similar curve) is around 12.45-1.15pm  which is when people go to lunch -- so maybe its people closing off their positions before eating? ;) Also the west coast will wake up about 3hrs after NYSE starts, which places it at about 12.30pm. I don&#39;t buy this theory completely, since Apple (550$) is no doubt traded all around the world....</p>
+
+<p>If ONNN (6$) is relatively illiquid then I suppose the interaction between volume and price is more significant. Those trying to get rid of a large position will have to do so over longer periods of time to mask their intention. If its 3pm and you need shot of 10M$ then its already too late?</p>
+
+<p>What do you think?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='50c0cd1efdd3180200000087' id='50c0cd1efdd3180200000087'>
+<a href='#50c0cd1efdd3180200000087'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1354812702000' class='quanto-date posted-at response-posted-at' href='#50c0cd1efdd3180200000087'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Very interesting.</p>
+
+<p>I think you should re-slice the data, and rather than look at all 200 days, look at the dates as they relate to options expiration.  Apple, for instance, has a lot of options market, and you&#39;ll see lots of volume on expiration day.  </p>
+
+<p>This is fascinating stuff.</p>
+
+<p>Dan  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/getting-volume-estimates-for-last-200-days'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/getting-volume-estimates-for-last-200-days'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#bbdddededfd9dad8d0fbcacedad5cfd4cbd2dad595d8d4d6">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

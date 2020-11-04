@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+The Payoff Matrix
+</title>
+<meta content='The Payoff Matrix This notebook is full of matrix formulas. You don&#39;t need math to understand the message. For me, putting an equal sign on something is a big statement. All one can do after is declare: not equal, and show why. It is not a matter of opinion anymore, it is a matter of proof. The file looks at the trading problem from a payoff matrix perspective, which in itself can represent any trading strategy whatsoever. It concludes with any trading strategy could also be expressed as: the...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="MdD5JT4D+caK8a0KFFEIUHi7ou1vYzxtSBge/EuHwJZNto9onPUrJTPs9DtbvqAkQDWBhBWvKXbKF8WW4cKiLQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/the-payoff-matrix' property='og:url'>
+<meta content='The Payoff Matrix' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/the-payoff-matrix' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='The Payoff Matrix' property='og:title'>
+<meta content='The Payoff Matrix This notebook is full of matrix formulas. You don&#39;t need math to understand the message. For me, putting an equal sign on something is a big statement. All one can do after is declare: not equal, and show why. It is not a matter of opinion anymore, it is a matter of proof. The file looks at the trading problem from a payoff matrix perspective, which in itself can represent any trading strategy whatsoever. It concludes with any trading strategy could also be expressed as: the...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/the-payoff-matrix">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='57cf4c5f1f479237410000a3'>
+<div class='post-container' data-post-id='57cf4c5f1f479237410000a3' id='57cf4c5f1f479237410000a3'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>The Payoff Matrix</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1473205455000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=The Payoff Matrix&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fthe-payoff-matrix%3Futm_source%3Dwebsite_share%26utm_campaign%3Dthe-payoff-matrix%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fthe-payoff-matrix%3Futm_source%3Dwebsite_share%26utm_campaign%3Dthe-payoff-matrix%26utm_medium%3Dlinkedin&amp;title=The+Payoff+Matrix+%28Guy+Fleury%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/the-payoff-matrix?utm_source=website_share&amp;utm_campaign=the-payoff-matrix&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Guy Fleury" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p><strong>The Payoff Matrix</strong></p>
+
+<p>This notebook is full of matrix formulas. You don&#39;t need math to understand the message. For me, putting an equal sign on something is a big statement. All one can do after is declare: not equal, and show why. It is not a matter of opinion anymore, it is a matter of proof.</p>
+
+<p>The file looks at the trading problem from a payoff matrix perspective, which in itself can represent any trading strategy whatsoever. It concludes with any trading strategy could also be expressed as: the number of trades times the average profit per trade, leaving only two variables to consider when designing trading strategies.</p>
+
+<p>It converts the search for trading profits to a statistical search of price differentials, how to detect them to then try to capture part of those moves. What you want, over the long term, is to average it all out as cash in your portfolio, and not in someone else&#39;s.</p>
+
+<p>Read it. You should end with: WHAT?</p>
+
+<p>Use the <strong>cloned notebook</strong>, it is better formatted.</p>
+
+<p>If you have some trouble with those files. Here is the HTML formatted document.</p>
+
+<p><a href="http://alphapowertrading.com/images/divers/Payoff_Matrix.html">http://alphapowertrading.com/images/divers/Payoff_Matrix.html</a>  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>36 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='57d41972f79dc3f2b1000797' id='57d41972f79dc3f2b1000797'>
+<a href='#57d41972f79dc3f2b1000797'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1473517943000' class='quanto-date posted-at response-posted-at' href='#57d41972f79dc3f2b1000797'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>The Game Inside</strong></p>
+
+<p>Designing trading programs implies mathematical formulas. We all have a vision of what our trading programs should do. Presented in this notebook, as in the prior one (Payoff Matrix) are building blocks for what I want to do with Quantopian. As if putting on paper, preparing an overall plan on how I want to use its facilities. The process could help others.</p>
+
+<p>The first step is to design and structure this plan, to be followed later, by learning what is needed to do the job. Already I know the tools are there. But, I do have to learn the programming language anew and adapt my preferred programs and trading methods.</p>
+
+<p>What follows in this HTML file is a description of the math involved in this process:</p>
+
+<p><a href="http://alphapowertrading.com/images/divers/The_Game_Inside.html">http://alphapowertrading.com/images/divers/The_Game_Inside.html</a></p>
+
+<p>Use the cloned notebook,  or the HTML file, they are better formatted.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57d8098b2fac8dd2b9000005' id='57d8098b2fac8dd2b9000005'>
+<a href='#57d8098b2fac8dd2b9000005'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1473776021000' class='quanto-date posted-at response-posted-at' href='#57d8098b2fac8dd2b9000005'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Strategy Design Defects</strong></p>
+
+<p>This article examines stock trading strategies with structural defects. Meaning strategies designed to fail, even before they start trading. It is not because someone has designed a stock trading program that it will make money. You need more than that. One thing is sure, might as well learn not to include in your own programs trading procedures that are almost assured to obliterate your long term portfolio performance. But then, anyone can design their trading strategies the way they want.</p>
+
+<p>HTML file:  <a href="http://alphapowertrading.com/images/divers/Strategy_Design_Defects.html">http://alphapowertrading.com/images/divers/Strategy_Design_Defects.html</a></p>
+
+<p>This is the third part of a series, see the other two above:</p>
+
+<p><strong>The Payoff Matrix</strong><br>
+<strong>The Game Inside</strong>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57db325e3d33fc9b7c00016c' id='57db325e3d33fc9b7c00016c'>
+<a href='#57db325e3d33fc9b7c00016c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1473983077000' class='quanto-date posted-at response-posted-at' href='#57db325e3d33fc9b7c00016c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Strategy Enhancers</strong></p>
+
+<p>The following article is part of a series. It deals with ways to enhance a stock trading strategy by incrementally increasing the number of trades to be executed over a long term trading interval as well as increasing the average profit per trade. Thereby, giving a higher performance at the portfolio level.</p>
+
+<p>HTML file: <a href="http://alphapowertrading.com/images/divers/Strategy_Enhancers.html">http://alphapowertrading.com/images/divers/Strategy_Enhancers.html</a></p>
+
+<p>To gain a better understanding of this article, see the following notebooks above:</p>
+
+<p><strong>The Payoff Matrix</strong></p>
+
+<p><strong>The Game Inside</strong></p>
+
+<p><strong>Strategy Design Defects</strong>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57dbac5be60fdac8f600005c' id='57dbac5be60fdac8f600005c'>
+<a href='#57dbac5be60fdac8f600005c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57dbaa842bb3bf869700003e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a3ebbf4a5d3484006b6b0795d7ea271a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57dbaa842bb3bf869700003e'>Bonjola Warble</a>
+</div>
+<a UTCms='1474014311000' class='quanto-date posted-at response-posted-at' href='#57dbac5be60fdac8f600005c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Total agreement - kudos to you. We put slightly differently but end result same.</p>
+
+<p>See our paper:</p>
+
+<p><strong>Steiner Integrability for Simply Prime, Artinian,<br>
+Uncountable Classes</strong></p>
+
+<blockquote>
+<p>Assume ~ J 6= 0 . In effect, the main result was the classication of<br>
+contra- Grassmann, canonical planes. We show that there exists a<br>
+characteristic, almost surely Taylor and holomorphic natural random<br>
+variable. Recent developments in advanced statistical potential theory<br>
+have raised the question of whether every quasi-arithmetic<br>
+manifold is ultra-complete and quasi-hyperbolic. Therefore in future<br>
+work, we plan to address questions of stability as well as smoothness.  </p>
+
+<p>Conclusion<br>
+Every student is aware that ;r 6= k!0k. The goal of the present article is to<br>
+construct homeomorphisms. It has long been known that 0 is not invariant<br>
+under w [6]. Unfortunately, we cannot assume that 00 = 00. Every student is<br>
+aware that every domain is open.<br>
+Conjecture 7.1. Let us suppose Milnor&#39;s criterion applies. Let y &lt; kjk be<br>
+arbitrary. Then every Jacobi vector is quasi-Milnor.<br>
+A central problem in advanced Galois theory is the characterization of canonically<br>
+Littlewood, multiplicative matrices. This reduces the results of [27, 32, 28]<br>
+to an approximation argument. In [11, 29], it is shown that j is complex and<br>
+super-degenerate. This reduces the results of [24] to the general theory. Therefore<br>
+it has long been known that every contra-Perelman functor is anti-natural<br>
+[1].
+Conjecture 7.2. Let kPk &lt; Gz be arbitrary. Let 􀀀  ;. Then ;r<br>
+=
+Mn.<br>
+We wish to extend the results of [1] to non-unconditionally Selberg graphs.<br>
+This reduces the results of [17] to a recent result of Li [10]. This reduces the<br>
+results of [21] to a standard argument. In [13], the main result was the classi<br>
+cation of solvable, simply positive groups. A central problem in non-linear<br>
+operator theory is the construction of pointwise orthogonal, measurable, canonical<br>
+functions. B. Maruyama&#39;s characterization of meager probability spaces was<br>
+a milestone in formal potential theory. Unfortunately, we cannot assume that<br>
+f  e.  </p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57e8359abbbef2d057000685' id='57e8359abbbef2d057000685'>
+<a href='#57e8359abbbef2d057000685'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1474835876000' class='quanto-date posted-at response-posted-at' href='#57e8359abbbef2d057000685'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Trade Detection</strong></p>
+
+<p>What I see most often are stock trading strategies that operate on the premise of finding some kind of anomaly or pattern that the developer hopes will repeat in the future. He tries to select the best methods he has to do the job. But, it still is limiting in the sense that one is not looking to increase the number of trades but simply to accept the strategy&#39;s generated number of trades. As if looking only at one way to increase end results. It&#39;s okay, but one should want more, and could do more.</p>
+
+<p>The purpose of designing a trading strategy is to have it go live once it has passed all the tests. Not just that the program is debugged, does not crash, or does not run wild. There are other tests to be conducted before releasing a trading strategy. Still, the ultimate purpose is to have it run live, to let it trade as programmed. </p>
+
+<p>To make you the profits anticipated, according to your backtests, a trading strategy should behave about the same as it did on past data. You know that your trading strategy will be faced with totally unseen price data, and will react as instructed. </p>
+
+<p>However, if the program has flaws in its design, non-validated premises, or even a misunderstanding of the game at hand; a live program might not do what its author thought it should do, and not respond as expected, but would nonetheless respond as programmed.</p>
+
+<p>Whatever, in the end, it will be your program. So, why not make it a good one? </p>
+
+<p>Anything you put in a strategy that does not resemble reality will find its way back to haunt you, and most probably, hurt you financially. You should not be surprised if reality has its own path and will continue its course in spite of what you think it should be or should do. </p>
+
+<p>Double check those trading procedures, understand what they do, their side effects and interrelationships with other procedures within your program. How will these trading procedures evolve in time? They might be fix, they are code after all, but their impact will change as the portfolio grows. So, your methods, procedures should adapt there too.</p>
+
+<p>The money your program will make is not just a fluke. You will have worked for it, you will have earned it, every penny of it.</p>
+
+<p>The following article is part of my research notes leading to transforming some of my preferred trading strategy designs to the minute level. My current strategies are EOD (end of day). This will be a major transformation, but also, what I see as an opportunity to increase overall performance.</p>
+
+<p>I anticipate being able to reduce the average holding time per trade. It will give the ability to trade more. And in a payoff matrix, as was shown in this series of articles, it counts. There are mathematical formulas, however, the context explains what they stand for. </p>
+
+<p>There is one statement in the attached notebook I find important. See what it implies. It needed a context to put it in perspective.</p>
+
+<p><strong>HTML</strong> file:  <a href="http://alphapowertrading.com/images/divers/Trade_Detection.html">http://alphapowertrading.com/images/divers/Trade_Detection.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57f29369a7ac3b4d89000955' id='57f29369a7ac3b4d89000955'>
+<a href='#57f29369a7ac3b4d89000955'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1475515252000' class='quanto-date posted-at response-posted-at' href='#57f29369a7ac3b4d89000955'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Stock Trading Decisions</strong></p>
+
+<p>The attached notebook deals with the perception of trading decisions within the context of building a long term stock portfolio. It is the continuation of a series of articles dealing with the underlying math behind a stock trading strategy. </p>
+
+<p>Instead of looking for a trading strategy that tries to shift its portfolio weighs from period to period as in a Markowitz or Sharpe rebalancing scenario, the search is for long term repeatable procedures that can affect a portfolio&#39;s payoff matrix over its entire multi-period multi-asset trading interval. The main interest is not on a trade here and there, but on the possible thousands and thousands of trades over a portfolio&#39;s lifespan. All influenced by the trading functions put on the table.</p>
+
+<p>The notebook highlights the output of a trading strategy, and what should be done to improve upon it. It can be resumed in two charts:</p>
+
+<h1>1:  Average Win Distribution</h1>
+
+<p><a href="http://alphapowertrading.com/images/divers/AverageWinDistribution.png">http://alphapowertrading.com/images/divers/AverageWinDistribution.png</a></p>
+
+<h1>2:  Average Loss Distribution</h1>
+
+<p><a href="http://alphapowertrading.com/images/divers/AverageLossDistribution.png">http://alphapowertrading.com/images/divers/AverageLossDistribution.png</a></p>
+
+<p>A trading strategy should have for objective to shift to the right the average profit per trade. Doing so will improve overall performance.</p>
+
+<p>These notebooks are a lot more for my benefit than anything else. They serve as preparation to my game plan, to gain a better understanding of what I need to do. I don&#39;t want to just convert some of my existing trading strategies from one language to another. I want to do more, produce better overall programs and trading strategies. To go beyond what I have done before. Hope it can help others design their own better strategies based on these observations. </p>
+
+<p><strong>HTML file</strong>:  <a href="http://alphapowertrading.com/images/divers/Trade_Decision_Process.html">http://alphapowertrading.com/images/divers/Trade_Decision_Process.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57fc2d0525a616b1cf000319' id='57fc2d0525a616b1cf000319'>
+<a href='#57fc2d0525a616b1cf000319'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1476144397000' class='quanto-date posted-at response-posted-at' href='#57fc2d0525a616b1cf000319'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Prediction Dilemma</strong></p>
+
+<p>This notebook tries to elaborate on the predictability, not of stock price movements, but mostly on portfolio performance outcomes. It tries to do this using only two numbers, one of which is just a trade counter.</p>
+
+<p>The objective being to show that those two numbers which characterize a trading strategy can add some understanding of a strategy&#39;s long term goals. As if giving the ability to make napkin estimates of where a portfolio might be some 20+ years down the line, thereby providing a reasonable guesstimate.</p>
+
+<p>This document is again offered in HTML due to the math formulas, in case. One does not need the math to understand the message.</p>
+
+<p><strong>HTML file</strong>:  <a href="http://alphapowertrading.com/images/divers/Prediction_Dilemma.html">http://alphapowertrading.com/images/divers/Prediction_Dilemma.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57ffbcfeb94c992522000924' id='57ffbcfeb94c992522000924'>
+<a href='#57ffbcfeb94c992522000924'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1476377861000' class='quanto-date posted-at response-posted-at' href='#57ffbcfeb94c992522000924'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Extracting Tradable Information</strong></p>
+
+<p>This notebook elaborates on trading methodology infrastructure. It is part of the background information needed to go forward. It uses a MACD trading strategy as example to set mathematical structure to trading procedures. It could have used something else, the whole point is not on the MACD, but trading strategies in general.</p>
+
+<p>It is a transition file, needed to understand what is coming.</p>
+
+<p>The next one: A Portfolio&#39;s Core Position will elaborate on the premises presented in the present notebook, and will try to show that there are things a trader can control. The notebook after that might end the series with a bang. A conclusion that should give any developer more than food for thought since it provides an equation that could help improve about any trading strategy.</p>
+
+<p>The premise being that if you can express mathematically the outcome of an automated stock trading strategy using its metrics, then you know on what to concentrate your efforts to improve its design. Hope some will find it helpful.</p>
+
+<p>Again, the document is offered in HTML due to the equations. I found it easier to do it this way. However, no one needs the math to understand the message. It is only used to emphasize the points presented. An equal sign is a tough argument to break, it certainly is not an opinion.</p>
+
+<p>HTML file:    <a href="http://alphapowertrading.com/images/divers/Extracting_Tradable_Information.html">http://alphapowertrading.com/images/divers/Extracting_Tradable_Information.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='580b7912b902c8c1ca000aeb' id='580b7912b902c8c1ca000aeb'>
+<a href='#580b7912b902c8c1ca000aeb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1477146909000' class='quanto-date posted-at response-posted-at' href='#580b7912b902c8c1ca000aeb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Portfolio Core Position</strong></p>
+
+<p>This notebook shows what I consider the core of a trading strategy. Looks at the trading problem from a different angle than most. Starting from the end results metrics, going back to design strategies that will affect these metrics over the entire trading interval. As if designing a strategy backwards, but most certainly constructively, allowing for a multi-asset, multi-period view of the stock portfolio management problem.</p>
+
+<p>It also says that any trading strategy can be viewed with either 2 or 3 variables. And that they are sufficient to explain the output, the performance results of any strategy. And if such is the case, then that is all that is important. It is then our task to make these 2 or 3 variables do what we want them to do.</p>
+
+<p>HTML file:  <a href="http://alphapowertrading.com/images/divers/Portfolio_Core_Position.html">http://alphapowertrading.com/images/divers/Portfolio_Core_Position.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='580b809d714ff62436000c1e' id='580b809d714ff62436000c1e'>
+<a href='#580b809d714ff62436000c1e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/580b7ed8714ff62436000c0c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/653d88817be72d1fcb206651de64365d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/580b7ed8714ff62436000c0c'>Junk Shop</a>
+</div>
+<a UTCms='1477148837000' class='quanto-date posted-at response-posted-at' href='#580b809d714ff62436000c1e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Your work is FANTASTIC! I have a few words to add:</p>
+
+<p>It has long been known that the Riemann hypothesis holds [16]. We wish<br>
+to extend the results of [34, 1] to uncountable homomorphisms. Next, it<br>
+is not yet known whether there exists a real finite arrow equipped with a<br>
+conditionally smooth subalgebra, although [34] does address the issue of<br>
+degeneracy.<br>
+A. Leibniz’s classification of pseudo-Eratosthenes subgroups was a milestone<br>
+in operator theory. Recently, there has been much interest in the<br>
+classification of elliptic, conditionally left-solvable, Z-Gaussian lines. A useful<br>
+survey of the subject can be found in [16]. Therefore this reduces the<br>
+results of [10] to an approximation argument. This could shed important<br>
+light on a conjecture of Poincar´e. In [31], the main result was the derivation<br>
+of countably integral, open, co-combinatorially sub-Hamilton classes. It has<br>
+long been known that W ≤ 0 .  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5819f6544165ca97ff000155' id='5819f6544165ca97ff000155'>
+<a href='#5819f6544165ca97ff000155'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1478096477000' class='quanto-date posted-at response-posted-at' href='#5819f6544165ca97ff000155'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>A Tradable Plan</strong>  Part I</p>
+
+<p>This notebook is another step in this series. Refer to preceding notebooks starting with the Payoff Matrix to gain a better understanding of what is being put forward in this two part installment. </p>
+
+<p>Any automated stock trading strategy can be resumed by 3 of its performance metrics. Namely, the number of trades, average bet size, and net profit margin per trade (n, u, PT). Everything else is of lesser consequence, part of features, preferences, or descriptive properties. </p>
+
+<p>If those 3 numbers totally explain a strategy&#39;s final result, then that is where one should put his/her efforts when designing, or modifying a trading strategy. </p>
+
+<p>One only needs to concentrate on how can a strategy make more trades, increase its trading unit size, and increase the average profit margin. Not just on one trade, but on the thousands and thousands of trades an automated trading program can make over its lifetime. </p>
+
+<p>This can be done using a variety of approaches and trading techniques. Or, one could transform, modify existing strategies with for sole intent to increase any of those 3 numbers, or all three, thereby increasing overall return. Three numbers, two of which, you set yourself. </p>
+
+<p>The following HTML file is more explicit:</p>
+
+<p>HTML file:  <a href="http://alphapowertrading.com/images/divers/A_Tradable_Plan_Part_I.html">http://alphapowertrading.com/images/divers/A_Tradable_Plan_Part_I.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5826024c72607900130002c9' id='5826024c72607900130002c9'>
+<a href='#5826024c72607900130002c9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1478885971000' class='quanto-date posted-at response-posted-at' href='#5826024c72607900130002c9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>A Tradable Plan – Part II</strong></p>
+
+<p>This notebook is the conclusion to Part I above. Hope it is helpful.</p>
+
+<p>HTML file:  <a href="http://alphapowertrading.com/images/divers/A_Tradable_Plan_Part_II.html">http://alphapowertrading.com/images/divers/A_Tradable_Plan_Part_II.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582a07b94ddabe0013000612' id='582a07b94ddabe0013000612'>
+<a href='#582a07b94ddabe0013000612'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1479149508000' class='quanto-date posted-at response-posted-at' href='#582a07b94ddabe0013000612'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>The Deviation X Strategy</strong></p>
+
+<p>All the preceding notebooks were in preparation for what I want to do using Quantopian. My objective is to convert an existing program to the Quantopian world and improve on it. I think it can perform even better due to being able to shorten the average trade interval. This would have for effect to increase trading and to accelerate the impact of the internal positive feedback loop in those trading procedures, thereby raising performance levels. The strategy (DEVX8) has excellent metrics for an EOD trading system, at least, I like the way it behaves. </p>
+
+<p>Hope some see some benefit in it, or some ideas that might help them do even better on their own. I know I can using Quantopian to do better, and as a preview simply look at this 3-part article that was also chronicled here.</p>
+
+<p><strong>A Simple Stock Trading Strategy</strong>:  <strong><a href="http://alphapowertrading.com/index.php/papers/214-simple-stock-trading-i">Part I</a></strong>, <strong><a href="http://alphapowertrading.com/index.php/papers/215-simple-stock-trading-ii">Part II</a></strong>, and <strong><a href="http://alphapowertrading.com/index.php/papers/216-simple-stock-trading-strategy-iii">Part III</a></strong></p>
+
+<p>The following article does give an overview of what DEVX8 does: <a href="http://alphapowertrading.com/index.php/papers/231-the-deviation-x-strategy"><strong>The Deviation X Strategy</strong></a>.</p>
+
+<p>To wet your appetite, I will focus on trading strategy scalability.  </p>
+
+<p>From a previous notebook, a portfolio had for equation: A(t) = A(0) + n*u*PT. Therefore, to up the ante and scale the strategy up, I could simply double the trade unit, double the initial capital, and obtain double the results, as in: 2*A(t) = 2*A(0) + n*2*u*PT. So, here are the first and last price chart of that article.</p>
+
+<p>ABT following: A(t) = A(0) + n*u*PT.<br>
+<a href="http://alphapowertrading.com/images/DEVX/ABT_DEVX8_Nov12_10k.png">http://alphapowertrading.com/images/DEVX/ABT_DEVX8_Nov12_10k.png</a></p>
+
+<p>ABT following: 2*A(t) = 2*A(0) + n*2*u*PT.<br>
+<a href="http://alphapowertrading.com/images/DEVX/ABT_DEVX8_Nov12_20k.png">http://alphapowertrading.com/images/DEVX/ABT_DEVX8_Nov12_20k.png</a></p>
+
+<p>What this illustrate is that scalability might be the easiest problem to solve since all you need to do is throw more money at it.</p>
+
+<p>Anyway, my mathematical backdrop is complete, now time to program the whole thing using Python.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582cb07dab402e0016001418' id='582cb07dab402e0016001418'>
+<a href='#582cb07dab402e0016001418'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1479323779000' class='quanto-date posted-at response-posted-at' href='#582cb07dab402e0016001418'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Controlling a Stock Trading Strategy</strong></p>
+
+<p>This next article goes beyond what we usually see in stock portfolio management. </p>
+
+<p>A request for more profits is made to a trading strategy by changing 3 of its parameter settings which have nothing to do with lookback periods, or indicators. They control trade aggressiveness, by that is meant the how the strategy should behave going forward. The objective is to control the trading activity, mostly by increasing it since the portfolio equation can be stated as: A(t) = A(0) + n*u*PT. And increasing either of the 3 numbers, n, u, or PT, one can increase his/her portfolio performance, even above what they could already do.</p>
+
+<p>How just slightly changing 3 numbers can substantially change a portfolio&#39;s performance level simply by making the demand for more profits. A must read for anyone here. It can only bring you new ideas and show it can be done.</p>
+
+<p><a href="http://alphapowertrading.com/index.php/papers/232-controlling-a-stock-trading-strategy"><strong>Controlling a Stock Trading Strategy</strong></a></p>
+
+<p>For a preview, here is the difference table showing the impact over this 20.71 year simulation. It shows that changing those 3 numbers added $ 145 million in profits and the article explains why.</p>
+
+<p>DEVX8 – Nov. 14  2016  Differences<br>
+<a href="http://alphapowertrading.com/images/DEVX/DEVX8_Nov_14_Summary_stats_Diff.png">http://alphapowertrading.com/images/DEVX/DEVX8_Nov_14_Summary_stats_Diff.png</a></p>
+
+<p>Hope it gives you new ideas, new avenues to explore.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='582fae36d17b8e0012000196' id='582fae36d17b8e0012000196'>
+<a href='#582fae36d17b8e0012000196'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1479519806000' class='quanto-date posted-at response-posted-at' href='#582fae36d17b8e0012000196'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>A Buy &amp; Weak Hold</strong></p>
+
+<p>The previous post: <strong>Controlling a Stock Trading Strategy</strong> was to show you could control a trading strategy to do more than it had before by using mathematical functions that could impact its 3 most important portfolio metrics: n, u, and PT, namely the number of trades, the trading unit used, and the profit margin.</p>
+
+<p>To show you could do more, a base for comparison was provided in the post: <strong>The Deviation X Strategy</strong>. With this, I will be able to compare the portfolio output under the same testing conditions using the same trading strategy over the same trading interval. I found it more important to see how one can take an existing trading strategy and push it to do more. A backtest is a demonstration that it can or that it can not be done. Evidently, this articles goes for it can be done.</p>
+
+<p>But whatever, a simulation won&#39;t change that there are only three portfolio metrics of importance, and if you don&#39;t improve on them you will stay with what your trading strategy gives and go no further. And that in itself can be limiting.</p>
+
+<p>The Deviation X Strategy in its own right had impressive performance levels. Nonetheless, slightly changing 3 of its controlling functions saw its portfolio rise by more than $145 million in added profits with no real negatives to the system since it generated better metrics in all the departments that count. Therefore, one would have to conclude that the increased numbers were the reason for the rise in profits, since nothing else was changed.</p>
+
+<p>Controlling a Stock Trading Strategy also ended with: you could do more since cash reserves which were supposed to be used more, and were, still went up by a substantial amount indicating that there was more room, more than enough reserves available to do much more. As if the step taken wasn&#39;t the limit but just a step in the positive direction.</p>
+
+<p>This 3rd test is being done under the same conditions as the other two: same stocks, same trading strategy, same trading interval of 5,387 trading days (this time plus 2 days), same initial capital, same trading unit, and same random-like trading. It will also be run once as in the other two tests. Whatever the output, that is what will be reported. The objective is to show that not only can we increase profits, it can all be done with ease. </p>
+
+<p>Trading will be more aggressive, increasingly taking more trades as equity rises, and selling more as the ongoing inventory increases. As previously noted: the main objective remains the same, and that is to acquire and accumulate more shares, it is the primary task of the DEVX8 program.</p>
+
+<p>To save everyone&#39;s time, instead of going little step by little step as in Controlling a Stock Trading Strategy, I opted to simply jump to a higher setting, not pushing the machine to its limits, but just a straight jump to a higher level of acquisition, since that is the main driver of the strategy: to build a long term portfolio. Therefore, it should accumulate more shares along the way.</p>
+
+<p>When I look at the internals of this program, I see a variation of the Buy &amp; Hold theme. It stands ready to wait for a long time for its profit. But, if it did only that, it could only expect to reach about the same average performance return as the average. </p>
+
+<p>You want more. So, you change the theme itself to: Buy &amp; Weak Hold, meaning by this that for a price you “consent” to sell some of your profitable positions knowing that most often you will be able to replace them later at a better price.</p>
+
+<p><strong>The New Test</strong></p>
+
+<p>For this test, I changed 4 of the 9 settings. The same 3 as in the previous test which now will be raised to 40 from 30, and a 4th giving it a minor nudge going from 95 to 98. The first three settings have the same mission to increase trading activity. Raising their value to 40 is a demand, a request to do more, and accumulate more shares in the process. The forth one is making a request to try to generate more profits over the whole process. To do so, it can raise PT as well as have an impact on n, and thereby increase the ability to acquire even more shares. Therefore, I should see the inventory rise due to the acquisition of more shares than in the previous tests and see profits rise due to the increased trading activity. Trades can only be executed if there is cash in the account. </p>
+
+<p>The strategy will attempt to accumulate more cash in order to take advantage of more trading opportunities available within the allowed trading windows. Not only that, but by raising PT, even just a little, it will impact all n trades taken since the profit formula is: n*u*PT. </p>
+
+<p>First, let&#39;s see how ABT did on this new test.</p>
+
+<p>1   <strong>ABT</strong>  -  November 16th test with controls: 40, 98, 80, 40, 40, 40<br>
+<a href="http://alphapowertrading.com/images/DEVX/ABT_DEVX8_N16_97.png">http://alphapowertrading.com/images/DEVX/ABT_DEVX8_N16_97.png</a></p>
+
+<p>The ABT chart looks about the same as in the previous tests; except for the numbers, order placement, and quantity traded. Compared to the first test in: The Deviation X Strategy, ABT added $ 57.2 million in profits raising its total to: $ 98.7 million. To do this, it traded more, doing 10,440 trades of which 4,590 were closed generating $ 69.9 million in profits. During the process, it added 1,484,650 shares to bring its total to 2,193,935 shares in inventory. Still had $ 11.9 million in its cash reserves. ABT increased its 20.72 year CAGR to 29.09%. The only number that came down was the percent of winning trades which was slightly reduced by 1.59% to 86.32%, and this reduction is not significant enough to matter.</p>
+
+<p>We wanted ABT to do more, and it managed to come out ahead, traded more, accumulated more shares, and even accumulating more cash in the process.</p>
+
+<p>Here are the test results for the group:<br>
+2    DEVX8 – Nov. 16  2016  with controls: 40, 98, 80, 40, 40, 40<br>
+<a href="http://alphapowertrading.com/images/DEVX/DEVX8_Nov_16_Summary_stats.png">http://alphapowertrading.com/images/DEVX/DEVX8_Nov_16_Summary_stats.png</a></p>
+
+<p>The story for ABT is about the same for all the other stocks in the portfolio. They all traded more, accumulated more shares and more cash, they all increased their long term CAGR as well, raising their profit margins and cash reserves. Actually, they all outperformed ABT. In all, the strategy executed 99,058 trades with an impressive 91.44% average winning trades.</p>
+
+<p>Total, compared to the first test, the portfolio added $ 996,828,862 in value to its original return of: $ 661,918,539 bringing it to a grand total of: $ 1,658,747,401. Now that is added performance for changing just 4 numbers!</p>
+
+<p>In its share accumulation program, it acquire 7,043,896 shares valued at $ 664,389,306.</p>
+
+<p>The portfolio under the (40, 98, 80, 40, 40, 40) control setting had for mission to increase n and PT in the portfolio equation: A(t) = A(0) + n*u*PT.  And, I have to say, it succeeded. </p>
+
+<p>Just as in the previous article: Controlling a Stock Trading Strategy, here is the difference table comparing this Nov. 16th test to the Nov. 12th test (Deviation X Strategy).</p>
+
+<p>3   DEVX8 – Nov. 16th test compared to Nov. 12th<br>
+<a href="http://alphapowertrading.com/images/DEVX/DEVX8_Nov_16_Summary_stats_Diff_Nov12.png">http://alphapowertrading.com/images/DEVX/DEVX8_Nov_16_Summary_stats_Diff_Nov12.png</a></p>
+
+<p>This new test with its higher settings manage to add 5.73% in long term CAGR getting it up to an average 32.33%. The price to pay to execute all this appears to be the small reduction in the percent of winning trades which decreased by an average of -1.13% to 91.44%. The strategy did not break down, on the contrary, it thrived, and appear to be ready to do even more if requested.</p>
+
+<p>The rest of this article appears <strong><a href="http://alphapowertrading.com/index.php/papers/233-the-buy-weak-hold">HERE</a></strong>, with the 9 other stock charts which can serve as verification for the numbers presented in chart # 2.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5838e2b453a2e70015000141' id='5838e2b453a2e70015000141'>
+<a href='#5838e2b453a2e70015000141'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1480123068000' class='quanto-date posted-at response-posted-at' href='#5838e2b453a2e70015000141'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Boost Your Stock Trading Performance</strong></p>
+
+<p>My series of notebooks started with setting up the mathematical backdrop to a stock trading methodology made to last. Putting a stock portfolio payoff matrix at the center of it all as the bean counter for any trading strategy: A(t) = A(0) + Σ(H.*ΔP). This time function was then reduced to: A(t) = A(0) + n * u * PT. </p>
+
+<p>Three numbers of interest: number of trades done, trading unit used, and average profit percent for trade. Three portfolio metrics given by any simulated, or live, stock trading portfolio whatever its composition. One could view  n * u * PT as a trading strategy&#39;s signature.</p>
+
+<p>Arguments were put forward that a trading strategy designer&#39;s job was to find ways to increase the output of: n * u * PT, since that is where trading profits came from. They were the only metrics that affected the total outcome of a trading strategy. There was time involved in the process, but at bean counting time, what mattered was: A(t) = A(0) + n * u * PT. On the right hand side of the equal sign you only had numbers, and for unit, a dollar sign.</p>
+
+<p>Were brought forward enhancer functions which were resumed in:  A(t) = A(0) + (1+g(t)) * n * u * PT. Evidently, with g(t) &gt; 0, portfolio profits will get larger. But, if we went a little further, and put on the table: A(t) = A(0) + (1+g(t))^t * n * u * PT, you would go much faster by introducing a time compounding function. It is a major distinction, in fact, a game changer. It is like putting your existing trading strategy on steroids.</p>
+
+<p>Since n, the number of trades could make such a difference in a portfolio&#39;s performance, it was suggested to find ways to increase it as much as one could, this on the premise that a trading strategy already had PT &gt; 0, meaning it had a profitable edge.</p>
+
+<p>In <strong>Prediction Dilemma</strong> it was said that prediction is not that easy to achieve over the short term where a trader intends to play. Short term, randomness in stock price variations is rather high, so high in fact that most have a hard time escaping the randomness of the draw. </p>
+
+<p>There was also this dilemma: whatever predictive tool you might have developed over past data might not be that predictive going forward. As if whatever you did as predictive simulation would be almost irrelevant since the future might not adhere to, or acknowledge, your view of the statistical world you built in your trading model. Or, if you could predict some price variations, the average spread might be insufficient to cover frictional costs.</p>
+
+<p>It is not because you have some statistics on past data that they necessarily become probabilities on the future. And, if your statistics show close to randomness, then you might be just making quasi-random bets, gambling your way out, thinking you have a predictive system. </p>
+
+<p>The stock market is complex, not simple. Sure, prices have only two ways to go: up or down. So, you can say: probability for going up is close to 50%, but is it really? The closer you get to the 50/50 state, the more winning a bet will be due entirely to chance, and your game will just have been converted to a gambling proposition. Not investing, not trading, but simply gambling with all that it implies. And in such circumstances, maybe a fancy theory on how the market works and your declared ability to predict short term price movements might be, may we say in need of a reality check. </p>
+
+<p>The first consequence of putting the market in a 50/50 proposition is not knowing if you will end up winning the game at all, and that one is a bummer. You will have reduced your future to the equivalent of a single flip of a coin. Has anyone noticed that there are no individual short term traders that have lasted for decades?</p>
+
+<p>It was then proposed to extract tradable information from all the available data with an eye on n since it counted so much in the final output of a trading strategy.</p>
+
+<p>All this was pretty basic, and with this foundation it was time to start building a trading plan where n, u and PT would be the center of attraction. Everything you could program your trading strategy to do would be reflected in those 3 numbers. It didn&#39;t say which method to use, as if saying anything you want, it only said that the only 3 portfolio metrics of importance were: n, u and PT.</p>
+
+<p>In <strong>Controlling a Stock Trading Strategy</strong>, it was shown how these principles could be applied to a trading strategy. I used DEVX8 for illustrative purposes, but it could have been done with other trading strategies as well. For instance, another example is: <strong>A Simple Stock Trading Strategy</strong>. You will find a dozen more on my website showing different ways to sliced and dice n, u and PT.</p>
+
+<p>In the presented scenarios, emphasis was put on controllability. As if saying you want more, then go out there and get more. Turn on the volume.</p>
+
+<p>It was shown that small additions to enhancer functions would generate higher portfolio returns from the same trading strategy. Not a line of code changed, and yet, performance would increase due to these portfolio metrics being asked to do more. It was more like ordered to do more.</p>
+
+<p>This is a major departure from a trading philosophy adopting a kind of Markowitz view of the market always rebalancing portfolio weights from period to period. </p>
+
+<p>Here is proposed that one should look at his/her trading strategy not just from period to period, but as a whole over the entire duration or life of a portfolio. Not counting on tomorrow I rebalance, but, on a long term vision of where you want to go, as if a trade was just part of a much larger long term plan.</p>
+
+<p>This point of view would be of interest only if it could provide a higher performance level than under a Markowitz trading environment.</p>
+
+<p>In my last post: A Buy &amp; Weak Hold, was shown that you can push on your machine with no real or significant detrimental side effects. In a way showing you could easily exceed traditional trading methods.</p>
+
+<p>Enhancer functions were applied to a trading strategy. Changing the value of 4 numbers that had everything to do with the demands you made on a trading system. They were not wishes, or better predictive methods, or better trading setups, or a better use of indicators, or changes is lookback periods. They were explicit demands to do more, to increase trading activity and accumulate more shares over the long run.</p>
+
+<p>Simple bean counting measures, administrative procedures directing and funnelling the outcome of a trading strategy to its goal of building a long term portfolio.</p>
+
+<p>And yet, apparently, almost no one shows any interest in what could be quite a different approach from traditional trading methods. This is not a crackpot&#39;s perspective, but trading rules that can be implemented by anyone, even without the help of a machine. </p>
+
+<p>These simulations only serving to say that there is something there worth more than just a glance. Especially, if it is based on such an elaborate mathematical backdrop. As said elsewhere: an equal sign is a powerful statement. Also, a simple observation, if there was nothing there, then the simulations would have shown it. They usually are without mercy on such things.</p>
+
+<p>To make the point even more compelling, the program used was a year old, operated as if randomly trading with random-like entries and random-like exits using market order for the next day at the open. Those are really adverse conditions to make a buck.  </p>
+
+<p>No matter how we look at the market game, it remains a CAGR game and it is our job to design the best trading strategies we can. But that does not mean that we will be able to escape the math of the game.</p>
+
+<p>In:  <strong>A Buy &amp; Weak Hold</strong>, you can see how just by changing 4 numbers, (4 constants by the way), starting with a $ 5 million stock portfolio, the strategy ended with $ 1.6 billion, managing a 32.33% average CAGR over its 20.7 year testing interval, doing 99,058 trades, and still managing to end with 60% of its equity in cash.</p>
+
+<p>The same trading strategy was used for all 3 tests. No code logic changed, not a single line, no optimized or fitted data in any way. Each of the 3 tests were ran once with their respective settings to show the progression it could make. Using intermediate values would have generated intermediate results. Pushing for more would have resulted in still more.</p>
+
+<p>This was taking what I view as a generic trading strategy and making it do more, trading the same way as it did before, but requesting an increase in trading activity. This was not done by increasing the bet size since it remained the same in all 3 tests. It was done by requesting an increase in the number of trades and an increase in the profit margin.</p>
+
+<p>The outcome was to change the portfolio equation from: A(t) = A(0) + n * u * PT into a more elaborate self-engineered alpha generator: A(t) = A(0) + (1+g(t))^t * n * u * PT.</p>
+
+<p>If your trading strategy already does better than what was presented in:  A Buy &amp; Weak Hold, then, congratulation. Nonetheless, you might find that you could do even more using some of the proposed techniques. If your trading strategy does not do better, well, maybe looking at the presented principles might help you boost your performance level too.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='585428f0f51c182548000071' id='585428f0f51c182548000071'>
+<a href='#585428f0f51c182548000071'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1481910519000' class='quanto-date posted-at response-posted-at' href='#585428f0f51c182548000071'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><h1><strong>The WOW Factor</strong></h1>
+
+<p>I will start with the conclusion since it is intended to raise eyebrows and it can be given in one screenshot:</p>
+
+<h1>1  <strong>Example Momentum - WOW</strong></h1>
+
+<p><a href="http://alphapowertrading.com/images/divers/SampleMomentum_Mods_v01.png">http://alphapowertrading.com/images/divers/SampleMomentum_Mods_v01.png</a></p>
+
+<p>The above chart comes from modifications to the program found in the Quantopian <a href="https://www.quantopian.com/lectures#Example:-Momentum-Algorithm">Lecture 43: Example Momentum Algorithm</a>. To achieve such results, I modified parts of the code that dealt with n, u and PT since they are the only portfolio metrics of significance.</p>
+
+<p>Note that the above chart is just an exploration of possibilities. As is, it would require a lot of guts to put it in operation. For those afraid of the max drawdown, that can easily be solved by adding $ 9 million to the initial capital and not using it.</p>
+
+<p>To increase performance, I increased n considerably since it is the easiest to do, and will have a major impact on the payoff: (1+a) * n * u * PT. Then added some leverage since that too has an impact: (1+lev) * (1+a) * n * u * PT. When using leverage, what you want is to generate a higher rate of return than the cost of the leveraging which in this case is more than covered.  Also increased the trading opportunities available by rebalancing 3 times a month instead of only once. This has for impact to reduce the trading interval and also detect more trade candidates. The trading strategy itself, its logic, was not changed. Mostly just changed numbers here and there.</p>
+
+<p>The original version of the program produced the following chart:</p>
+
+<h1>2   <strong>Sample Momentum – Original Version</strong></h1>
+
+<p><a href="http://alphapowertrading.com/images/divers/SampleMomentum_original_version.png">http://alphapowertrading.com/images/divers/SampleMomentum_original_version.png</a></p>
+
+<p>There are what I consider flaws in this design. I used a bulldozer to massacre the code. But maybe most importantly, I changed what the trading strategy should do by giving it a longer term vision than just rebalancing from one period to the next.</p>
+
+<p>I wanted to answer one question: how far can it go? Based on chart #1, it is pretty far, and it is still not the limit. Mind you, I would not trade like this either. I would repair what I consider as design flaws first, and would also add procedures to reduce its volatility. Nonetheless, it is a good indication that one can put the pedal to the metal so to speak.</p>
+
+<p>For the less adventurous, maybe a more mundane set of modifications might be suitable. Chart #3 is the result of slightly broadening the selection process, pushing leverage to 1.5, and adding a mid-month rebalancing made to increase trading opportunities.</p>
+
+<h1>3   <strong>Sample Momentum – Partial Modifications</strong></h1>
+
+<p><a href="http://alphapowertrading.com/images/divers/SampleMomentum_Mods_partial.png">http://alphapowertrading.com/images/divers/SampleMomentum_Mods_partial.png</a></p>
+
+<p>When designing a trading strategy, one should have a long term vision of what that trading strategy can or might do. Going from period to period à la Markowitz, or à la Sharpe ratio rebalancing, might not be enough, when one could do so much more.</p>
+
+<p>Ah yes, the total return on chart #1 translates to $ 22 billion. One should consider putting $10 million instead of only one, while still only using one. It would reduce volatility. Maybe what chart #1 says is: find the limits of your trading strategy. It is a lot easier to reduce your trading strategy to your comfort zone than to raise it.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5856f062d8a63000120002a5' id='5856f062d8a63000120002a5'>
+<a href='#5856f062d8a63000120002a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1482092653000' class='quanto-date posted-at response-posted-at' href='#5856f062d8a63000120002a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>The WOW Factor – Added Notes</strong></p>
+
+<p>In my previous post (see above), it was said I would not trade in that fashion. For one, I do not have that kind of capital available. And two, I may be too chicken. I prefer a smoother ride. But, that does not mean that this particular trading strategy is wrong, or that we can not extract useful trading procedures from it. Even downplayed the strategy could make quite an impact.</p>
+
+<p>The strategy did give more than an indication of where upper trading limits might reside. And based on the strategy&#39;s code, it could do even more. I was exploring to find where these limits were, and even at the presented level, the program had not reached them yet.</p>
+
+<p>For your convenience, here is chart #1 again:<br>
+1    <strong>Example Momentum - WOW</strong><br>
+<a href="http://alphapowertrading.com/images/divers/SampleMomentum_Mods_v01.png">http://alphapowertrading.com/images/divers/SampleMomentum_Mods_v01.png</a></p>
+
+<p>What the chart does give is this: you can push an ordinary trading strategy to a much higher performance level simply by making changes to trading procedures having an impact on: n*u*PT. The rest seams secondary, meaning, the how you do it is opened to about any method you might like. All you want is to have those trading procedures have a net positive impact.</p>
+
+<p>Sometimes, you have to go further than everyone else, even if in doing so, you are alone. And it is not because you think differently that you are necessarily wrong. It might just be that you have a different way of doing things.</p>
+
+<p>From the previous post, the question should have been: is the simulation that generated chart #1 possible? The answer to that is: yes, as evidenced by the chart.</p>
+
+<p>As said before, I would not trade exactly like that without correcting some of the strategy&#39;s flaws (at least what I consider as flaws). It is nonetheless a feasible trading strategy as is, even with all the wasted resources and shortcomings. This trading strategy trades that it likes it or not. It just trades, for no other particular reason than the price changed between rebalancing periods.</p>
+
+<p>The strategy might start trading 7 stocks on its first trading day, but gradually, it will trade more and more, to the point that at the end it is taking over 30,000 trades each day it rebalances. There is nothing wrong with that, a machine is doing the work, and since the profits are there, why not take them. After all, the strategy is only doing what it is programmed to do.</p>
+
+<p>It is to show that if I push hard on “n”, the number of trades, a part of the major portfolio metrics of significance: A(t) = A(0) + (1+lev)*(1+a)*n*u*PT (see previous article). I can increase profits considerably by also raising “a” and leveraging it right up to a WOW level. </p>
+
+<p>Chart #1 remains a viable trading strategy. It is very erratic with wide day to day variations, and might require nerves of steel as can be seen in the volatility and beta numbers. The program seeks volatility and this can have quite an impact on u*PT.</p>
+
+<p>Some might say: you did not account for commissions and slippage. Yes, they were accounted for. The program used the default Quantopian setting which already accounts for them. So, what you see on chart #1 does include frictional costs. Even so, they would add up to less than $10 million over the trading interval. Go ahead, double it, triple it, put it at $100 million if you want. It does not make a notable difference on the final result. One could see those frictional costs at most as a trivial consideration.</p>
+
+<p>What I see in this trading strategy is just a different way, a different set of trading procedures, than what I usually use to push n*u*PT higher. As such, it adds to my arsenal of available trading techniques. It now becomes available should I need a marked down version of it.</p>
+
+<p>The only thing not seen in the presented simulation is the interest charges related to the leveraging since the strategy does use leveraging. But there, whatever those charges might be, they would be more than compensated for by the excessively high return which would have taken a $10 million dollar account to a $ 22 billion profit.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='585867b2191ddb4bdf0001fe' id='585867b2191ddb4bdf0001fe'>
+<a href='#585867b2191ddb4bdf0001fe'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1482188732000' class='quanto-date posted-at response-posted-at' href='#585867b2191ddb4bdf0001fe'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>🌋</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58586eb0191ddb4bdf00024b' id='58586eb0191ddb4bdf00024b'>
+<a href='#58586eb0191ddb4bdf00024b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1482190520000' class='quanto-date posted-at response-posted-at' href='#58586eb0191ddb4bdf00024b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>💣💣💥💥💥😀😀😀</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58589d1ec20b293aab000017' id='58589d1ec20b293aab000017'>
+<a href='#58589d1ec20b293aab000017'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1482202404000' class='quanto-date posted-at response-posted-at' href='#58589d1ec20b293aab000017'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Luke, I understand your point of view. I have the same questions all the time: is it feasible, can it work, will it sustain itself, will it blow up, are there any bugs in the program, how about logical or unexpected bugs, is there a bias in the stock selection process, is there unintentional peeking ahead, is the data okay, and on and on.</p>
+
+<p>Like I said, I would not trade according to that chart without correcting what I consider as design flaws. What was presented was just an exploration phase of a design, a look at the possibilities, looking for the limits. And on a first look, I don&#39;t mind seeing a chart like the one presented. I see it only as an idea of where I might find some of those limits. The strategy then goes to the next design phase where I will try to eliminate whatever I didn&#39;t like without using over-fitting procedures. I might even end up with a totally different design. But, it does not mean that all that is in that strategy is no good. Only that some of that stuff needs to be corrected, whatever the undesirable behavior may be.</p>
+
+<p>Just like you, I did not like the big drops. But that can be alleviated considerably without changing the underlying trading methodology which by itself show promise. I used a bulldozer in that design, without any finesse whatsoever. So, I am not disappointment by what came out. It only said I have more work to do to bring it down to my comfort zone, and I do have ways of doing that.</p>
+
+<p>I don&#39;t use trading methods as usually used in the strategies I see on Quantopian. I go for building a portfolio over time: that is accumulating shares for the long term while trading over the process. It makes it a quite different kind of trading strategy. So the big numbers you see have two parts, a trading process used to generate profits which are reinvested in acquiring additional shares. This profit reinvestment creates a positive feedback loop which becomes the reason why the portfolio&#39;s equity grows in time.</p>
+
+<p>The strategy is building a portfolio of shares, and whatever it will be holding with fluctuate in sync with the market. There is nothing mysterious in what is presented. However, I am not yet in the habit of providing my code for public consumption. That might come to change, but for now, I don&#39;t want anyone to get harmed by what I consider an unfinished program that is still in the exploratory stage. </p>
+
+<p>It is also why I only provided the mathematical background to a methodology since I do think one could convert their own trading strategy to one that also accumulate shares over the long term. And since no one has disproved any of the equations provided, not even Anthony, I stand by them. So, technically, you, and others, have an invitation to show that the equal sign used in my demonstration is not valid. Only then, you could have my “house of cards” crumble and show it is all BS. An equal sign is a powerful statement, it certainly is not just an opinion.</p>
+
+<p>On the other hand, it might be an invitation for you to look more closely at what is really proposed in that portfolio building, not just the trading aspect, but also the long term share accumulation process.</p>
+
+<p>I know when I will start putting restrictions on that strategy, the return will drop somewhat. I don&#39;t know by how much. But, it will drastically reduce the drawdowns as I&#39;ve done in other programs. However, I will have to wait and see what those modifications will be. But for sure, there will be drawdowns for the simple fact that part of the portfolio will be in stocks, not only part of the time, but almost all of the time. That is no different from any long term holder.</p>
+
+<p>However, except for the drawdowns, there is nothing wrong with the methodology itself. Look at other charts I&#39;ve presented which operate under the same principles that show more subdued results even if they too could also be considered high.</p>
+
+<p>As said before, it is not because you do it differently that it is necessarily wrong. There is no attempt at deception in what I presented. Only a different method of doing things. It might appeal to some, and others not. When I will be better versed in Python, I know I will be able to better control my trading strategies.</p>
+
+<p>Thanks for bringing it up, I&#39;m sure others had the same point of view but couldn&#39;t find words to say so.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5858aa8f345177458f00064a' id='5858aa8f345177458f00064a'>
+<a href='#5858aa8f345177458f00064a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5674b7bd1869e73f4a000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e411d64f7a123f5c2102614fafa48b58?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5674b7bd1869e73f4a000334'>Luke Izlar</a>
+</div>
+<a UTCms='1482205845000' class='quanto-date posted-at response-posted-at' href='#5858aa8f345177458f00064a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Ok, so I see now too late what I walked into, I was annoyed by some other thing and stepped on a land mine. </p>
+
+<p>The math is out of my depth but I would suggest looking at your assumptions before worrying about math equations. In my experience algo trading is a lot like starting a business - the hardest part is the execution. Math equations that can extract value from the market are a dime a dozen but you would be hard pressed to find someone successfully running one live. Is one of your assumptions that the very thing you have to do to make it trade-able won&#39;t also render it useless? It&#39;s happened to me before.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='585a958726a9931f8f00041e' id='585a958726a9931f8f00041e'>
+<a href='#585a958726a9931f8f00041e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1482331533000' class='quanto-date posted-at response-posted-at' href='#585a958726a9931f8f00041e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Luke, why should it be a minefield? All I presented is something a little different. I too want to know what that code is doing. I use equations to explain, translate what a strategy does. If not, then I would have only an opinion, maybe an educated guess, and as such, it could become a trivial statement.</p>
+
+<p>But don&#39;t worry. The math used in this thread, from beginning to end, was to demonstrate that the trading problem can be boiled down to a single equation: A(t) = A(0) + n*u*PT. With only three portfolio metrics of importance. Whatever trading strategy you design, when it will be time to tally results,  the total profit will be given by:  n*u*PT. The first variable, the number of trades made, the second, the bet size used, and the third, the net average percent profit per trade. It is all, just three numbers.</p>
+
+<p>If you examine that equation, it is not that big a problem to solve. You want, over an extended period of time, to maximize n*u*PT to the best of your abilities under the constraint A(0), your trading capital. Whatever trading method you use to do so can be adapted to whatever trading style you want. There is nothing esoteric, it all ends in very simple math.</p>
+
+<p>I prefer a fixed trading unit: u = p*q. This way, part of the equation is solved. This also makes my trading strategies scalable. The net average percent profit per trade will depend on the trading strategy&#39;s long term edge. Once that is found, I am left with the problem of finding ways to increase n, the number of trades. Whatever I do that will push n*u*PT higher should be worth investigating, finding the reasons why, to see if these trading procedures could easily be applied going forward.</p>
+
+<p>Simulations are often explorations on how far you can go. It is a lot easier to scale down a trading strategy to a more desirable level that to scale it up. Now, that is my observation, an opinion, and I can not provide an equation on that one. </p>
+
+<p>All trading strategies start, and end, with questions: Would you use that strategy in live trading? Would it survive over the long term? Will it outperform the benchmarks? Is that a trading methodology you like? Will you accept higher risk for higher returns? What will your strategy do in a black swan event?</p>
+
+<p>But, whatever trading strategy you prefer, and this goes for any other trading strategy on Quantopian, it will have for answer the equation: A(t) = A(0) + n*u*PT.  And that is not an opinion.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586550a52aa5fe0015000146' id='586550a52aa5fe0015000146'>
+<a href='#586550a52aa5fe0015000146'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1483034798000' class='quanto-date posted-at response-posted-at' href='#586550a52aa5fe0015000146'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Stock Trading Profits: Take Your Share</strong></p>
+
+<p>My previous post (<strong>The WOW Factor</strong>) might appear at first glance as an exaggeration of some kind. For one thing, it is not a hoax or a data manipulation of some kind. It is just an aggressive trading program. It only needed deep pockets. The simulation was part of the development cycle where one tests for up and down limits. A lot of it is doable under more restrained methods. These added methods would have for only purpose to reduce the strategy&#39;s volatility and drawdowns. They would still generate high returns, lower than what was shown, but still relatively quite high compared to market averages.</p>
+
+<p>But, here is a question. How much drawdown and volatility are you ready to bare for higher long term performance levels? If there is no volatility, there is no price variation, there is no return, or is there? </p>
+
+<p>Since volatility is usually expressed using the standard deviation σ, when σ is approaching zero, are we not approaching a straight line? And if a straight line, where is the price variation Δp to make a profit since σ would tend to zero?</p>
+
+<p>The same goes for a stock price having a low beta. Does it automatically say that there is no price variation, or that price variations are very subdued, both up and down, compared to a benchmark? So many questions. And yet, they all deserve answers.</p>
+
+<p>Take, for instance, STZ over the past 5 years. You see a low beta stock with a low σ having its price almost going straight up over the period. Yet, the price increased with an average 50% CAGR for those 5 years. A lot of trading methods might not even have selected it as a trade candidate, (not enough variability) or predicted that it would behave the way it did (no highly discernible patterns). Nonetheless, you had in STZ one of the smoothest rides you could get.</p>
+
+<p>The best bet scenario was to go all in from the start, or was it? </p>
+
+<p>Doing this would have given you a 50% portfolio CAGR over the past 5 years, putting you in the top 0.1% of portfolio managers on the planet. Lower risk and lower beta than the market with a much higher return. Some 40 alpha points above market averages. Year after year the price went up. It wasn&#39;t what one might call a trading vehicle, but more like an investment. You bought and you held for the duration, riding this almost straight line up. Trying to time it would probably have produced less.</p>
+
+<p>Where was the portfolio efficient frontier or the efficient market hypothesis on this one? How about the proverbial reversal to the mean thingy, it was as if nowhere to be seen. Should stocks behave like STZ or not? First, the question: is it possible, is not a question. One just looks at the facts, at what was there. The future still remains unknown, but for the past 5 years, that stock did great by all counts.</p>
+
+<p>My question is: could you have done more? The answer is: Yes. Among other things, you could have reinvested paper profits. Say that, as STZ went up, at every 15-point rise you took the added paper profit to buy additional shares. That you did this or not, the stock price would still have gone up. That was not your decision. </p>
+
+<p>Your decision was what do you do about it? Do you ante up or not? You will always be with that question: do you, or don&#39;t you make the bet? What are the odds that you win your bet? I do not know. You do your research to get the conviction you need to place your bet, or you pass.</p>
+
+<p>Still, that scenario would have taken your CAGR higher for the period. Starting with $ 1 million, buying additional shares at every 15-point rise, starting at $ 20 some 5 years ago, by the time STZ reached $155, instead of making $ 6.75 million in profits, it would be $ 13.67 million. Instead of getting a 50.6% CAGR, it was raised to 71.1% for the period. Adding some 21 alpha points to your already high portfolio return. All due to a simple trading procedure. Not even guesswork, just a procedure with no predictive ability. It only said what you would do if the price went up 15 points. </p>
+
+<p>So, yes, you can do more. But, like in everything else, you will have to do more to get there. Even if you put up half of the paper profits to work, it will still up your CAGR. Also, putting less on the table, cutting the initial stake by a factor of 10 ($ 100k), would give you one tenth the above profits, and still maintain the same CAGR as above. You have a scalable trading strategy by design. </p>
+
+<p>And we can&#39;t say that it is a complicated trading method, requiring a PhD to understand, or even a computer to execute. It does not even require much of your time. You could put it on a machine to diversify your bets, to do a lot more stocks at a time, all that would be required is more capital which would produce a lot more. If you can scale it down, you can also scale it up and maintain its CAGR.</p>
+
+<p>Would this have added risk? Yes. But note that it is not the market risk that increased. The beta did not change, the σ was the same, and yet, your risk increased. It increased due to the method of play. Not because of some structural change in the market, but by what you were doing as portfolio manager. At the start, you were taking the same risk as anybody else taking a position in STZ. It is only at $ 35, that you added some shares, with already a 15 point profit in hand. I don&#39;t see risking paper profits the same as risking capital. One is, I risk their money, while the other is that I risk mine.</p>
+
+<p>You could have quit at any time, at any step, on the way up. If you felt ill at ease, as presently for example, you could exit the entire position with all the accumulated profits. Twice as much profit than not having executed that simple procedure. This also puts an opportunity cost on a single decision of yours, on not doing a simple task.</p>
+
+<p>That says that maybe your real job might have been to find STZ. That was not very hard. </p>
+
+<p>It was making new highs almost every other week over the past 5 years. That is 1,825 days where, every day, you were reminded that STZ was going up (1,300 trading days). That you started at $ 20, $ 25, or $ 30 would not make that much of a difference. But what would, would have been not participating at all.  </p>
+
+<p>Finding STZ in a market that has been going up for the past 7 years, how hard could that be? It was floating on top a sea of variance. Still, it clawed its way up penny by penny. Don&#39;t think for a minute that STZ was alone making new highs over those past 7 years. It had a lot of company. It was not the only scenario available. You could have had hundreds to choose from. That is where your computer comes in handy.</p>
+
+<p>I hope some see the points I am making. The stock selection process might not be that difficult, but the method of play should be such that you can enhance on what is out there.<br>
+The profit reinvestment procedure was done, without trading, only to show a first step in getting there. </p>
+
+<p>A stock with higher volatility (σ) and higher beta, can give one the ability to trade over the process, meaning that you can up the ante again. The higher beta, higher sigma stock is providing more trade opportunities, more: Δp&gt;0 with greater amplitude.</p>
+
+<p>A higher σ, or a beta exceeding 1.00 say that the stock price swings more than the average. And this represent larger profit opportunities too. Again, do you take them or not. It is not the market that is going to decide for you, unless you let it. Nonetheless, that you delegate this decision to the market, to a program, keep it discretionary or not, it remains your decision.</p>
+
+<p>Oh yes, you would not have the ability to know when STZ would hit its 15-point markers as it was going up, but then again, did you know that before? I don&#39;t see what you would be missing, since I do not think your trading methods ever gave you a clue on that one either. Otherwise, you would have been all in at $20 and stayed in. However, your programs too could have observed that, hey, STZ is going up...</p>
+
+<p>The price of a stock is the representation of a company&#39;s value as a business. In one number you have a valuation, an estimate of its past, present, and its discounted uncertain future. That is what is tradable: the uncertain future. But you already know this. If a company is prosperous, it is making more money. It is increasing its valuation, and that is reflected in a future higher price. Before you want to participate, provide some risk support that someone else do not want anymore, you want to see some evidence that the company is indeed prospering. And that can only be shown by a higher stock price. If they don&#39;t succeed in showing you some Δp&gt;0 over a recent period, why would you buy? Let any stock first show you that it has a Δp&gt;0 over your period of interest, then you may get interested in it. And if at some point, it disappoints, dump it. You are in the business of making your portfolio prosper, and not in absorbing losses.</p>
+
+<p>In all, if you want more, you will have to do more.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587d3b65a06a2a0b91501d7b' id='587d3b65a06a2a0b91501d7b'>
+<a href='#587d3b65a06a2a0b91501d7b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1484602213000' class='quanto-date posted-at response-posted-at' href='#587d3b65a06a2a0b91501d7b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>A Stock Trading Strategy Signature</strong></p>
+
+<p>This is the continuation of: <strong><a href="https://www.linkedin.com/pulse/playing-stock-market-game-time-all-guy-r-fleury">Playing the Stock Market Game: Time is All</a></strong> </p>
+
+<p>Repeatedly applying an automated trading strategy to a bunch of stocks in a backtest will produce the same answer every time. It is the output of a program. A recipe, a set of trading rules, procedures, coded instructions and software routines.</p>
+
+<p>Since the output of a trading strategy can be expressed as a time function: A(t) = A(0) + n∙u∙PT, then, A(0) + n∙u∙PT is its unique signature. Leaving us with 3 portfolio metrics of consequence.</p>
+
+<p>There may be millions of trading strategies out there, and many more not yet designed. Each has its unique signature. You apply any one of them, and you generate:  A(_k)(t) = A(0) + n∙u∙PT.</p>
+
+<p>Due to this equation, the output of any trading strategy can be compared to any other. It also means that if you run my trading strategy on your computer, we both get the same answers. It is just a program being executed. </p>
+
+<p>There lies part of the problem: the strategy&#39;s signature. You only have 3 numbers. Two of which you can set yourself. The other a sequential counter of your trading activity.</p>
+
+<p>People play a short term stock market game as if in a none random-like environment. </p>
+
+<p>Stock prices might not be totally random, but, on the short term, they sure have a high noise to signal ratio. So high in fact, it is hard to distinguish and separate the background signal from the predominant ambient noise. The signal is literally buried in a turbulent sea of variance.</p>
+
+<p>It is understandable. If price variations were less randomly distributed, then you would be able to make better predictions, and be able to quantify them. Give them reliable occurrence probabilities, improve on allocation methods and betting procedures. There is a lot of money involved should you become good at it too.</p>
+
+<p>However, in this buzzling statistical swarm of price variations it is difficult to make highly accurate forecasts. Which in itself gives an indication as to the high degree of randomness in price fluctuations. </p>
+
+<p>What most strategy develop design are trading strategies somewhat adapted to this unique past swarm of price variations. That too could be an expression of randomness since a lot of these trading strategies tend to break down going forward. Why do they break down if their past data was somewhat representative of their future? Were bets not made pursuant to their “predictive” analysis? </p>
+
+<p>The future too is a unique occurrence. It offers no replays.</p>
+
+<p>If a trading strategy has this distinctive signature, then, it is all there is. Or, is it? Is it all it can do?</p>
+
+<p>Have we for only solution to find better and better strategy designs as a way to improve performance? </p>
+
+<p>This quest has been on for decades, and still, most portfolio managers have a hard time beating averages. </p>
+
+<p>Note, that the average is almost given away, as a kind of default value to anyone willing to participate for a long time. The market average does not set the bar that high having for secular trend a little less than a 10% CAGR (dividends included). So, how could you not outperform the averages?</p>
+
+<p>Is your search reduced to continuously finding ever better trading strategies which become better adapted to their singular past? It is a real conundrum. The better they get, the more they are adapted to their past, over-fitted, and the more they might break down going forward. Becoming totally misaligned with reality and maybe even condemned to underperform averages, or worse, destroy one&#39;s portfolio.</p>
+
+<p>Even with the high degree of price randomness, you still design trading strategies that backtest well on your selected stocks, but with a limited future. Are you bound to design trading strategies having a high propensity of achieving close to market averages? And this, not necessarily due of your program per se, but just because you participated in the game.</p>
+
+<p>It is why you have to look at the problem differently. As simple as that. </p>
+
+<p>It is not by doing what everyone else is doing that you will exceed what everyone else is doing. </p>
+
+<p>It is by finding new ways, exploring untried avenues, looking at the total picture and not just from period to period. It is by giving your trading strategies a long term vision that you will stand a chance of outperforming the majority out there. </p>
+
+<p>If you don&#39;t do it, well, that is a matter of choice too. You can always rely on index funds to at least give you close to average returns over the long run. But there too, you will need to put in the time.</p>
+
+<p><strong>Redesign Your Trading Strategies</strong></p>
+
+<p>Then again, you might wish to redesign the whole thing from scratch. Your trading strategy might have a unique signature, but that does not mean it is the end of it. </p>
+
+<p>On the contrary, it might just be a starting point, the initial block of a trading methodology. This does not mean you will be able to escape the portfolio&#39;s equation: A(t) = A(0) + n∙u∙PT. The same equation would apply to a portfolio of diverse asset portfolios: Ʃ A(_k)(t).</p>
+
+<p>Nonetheless, I do state: you could do better by controlling those 3 portfolio metrics. Redesigning them as time functions:  A(t) = A(0) + (1+f(a))∙n∙(1+f(b))∙u∙(1+f(c))∙PT.  To increase performance, the only requirement would be: f(a) &gt; 0, f(b) &gt; 0, f(c) &gt; 0, or any combination thereof. </p>
+
+<p>It did not change the signature of the trading strategy. It only emphasized your long term action. Stuff, procedures you could add to your trading strategy to make it behave the way you want it to behave.</p>
+
+<p>For instance, you could increase the trade unit with time: (1+f(b))^t ∙ u. It will impact your portfolio for its entire duration, and show on your total return. Increasing u is increasing the bet size going forward, it does not change the decision points, only the quantity traded. But with the net result of increasing performance: n∙(1+f(b))^t∙u∙PT &gt; n∙u∙PT.</p>
+
+<p>What would happen? With time, these functions would increase the importance of each of the 3 portfolio metrics, increase overall performance by a factor of: (1+f(a))∙(1+f(b))∙(1+f(c)). This, without changing the strategy&#39;s signature, or its coded logic.</p>
+
+<p>It shifts upward the CAGR curve, ever so slightly in the beginning, almost imperceptibly. But gradually, the CAGR curve would improve, widening its spread compared to a benchmark, and thereby be an alpha generator on its own. A self-engineered one at that.</p>
+
+<p>You can outperform the averages just by changing your point of view on the problem. The strategy will stay automated. It will respond to these 3 scaling and controlling factors: (1+f(a))∙(1+f(b))∙(1+f(c)), and increase performance. Not due to randomness, but to your preset controls.</p>
+
+<p>We are left with 3 questions. How can we increase n? How can we increase u? And, how can we increase PT? Better yet, how can we increase all three at the same time over the long haul? After all, at bean counting time, you want to have reached the finish line!</p>
+
+<p>This is how you will exceed your trading strategy&#39;s signature.</p>
+
+<p>This post is also available here:<br>
+<a href="http://alphapowertrading.com/index.php/papers/240-a-stock-trading-strategy-signature">http://alphapowertrading.com/index.php/papers/240-a-stock-trading-strategy-signature</a></p>
+
+<p>See related articles:</p>
+
+<p>Playing the Stock Market Game: Time is All<br>
+<a href="http://alphapowertrading.com/index.php/papers/239-playing-the-stock-market-game-time-is-all">http://alphapowertrading.com/index.php/papers/239-playing-the-stock-market-game-time-is-all</a></p>
+
+<p>Boost Your Stock Trading Performance:<br>
+<a href="http://alphapowertrading.com/index.php/papers/234-boost-your-stock-trading-performance">http://alphapowertrading.com/index.php/papers/234-boost-your-stock-trading-performance</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5887ad54e79bf30555192afd' id='5887ad54e79bf30555192afd'>
+<a href='#5887ad54e79bf30555192afd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1485286740000' class='quanto-date posted-at response-posted-at' href='#5887ad54e79bf30555192afd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Why Most Trading Strategies Fail</strong></p>
+
+<p>If a stock trading strategy is designed to generate thousands upon tens of thousands of trades, it will asymptotically approach a kind of law of large numbers. Meaning that the numbers: in n∙u∙PT will become more representative of the whole due to the sheer size of n. </p>
+
+<p>These three numbers might start as metrics in your portfolio backtest, but due to the large number of trades taken, they also become the trading strategy&#39;s unique long term signature. You will be able to use the words: on average.</p>
+
+<p>If your portfolio backtest was over the past 20 years, it should provide a pretty good approximation for the next 20. </p>
+
+<p>It goes like this. As the number of trades increase, u∙PT tends asymptotically to a limit. This is easy to visualize. Take 100,000∙u∙PT. Then, add one more trade. You will not see PT move by much. In fact, the added trade&#39;s profit percent will tend to be close to PT, the average. Since 1/100,000 of the difference will be able to make it move. The same applies if you put in a million trades. The formula is: lim (n → large n) Σ(H.*ΔP) / n = u∙PT, the net average profit per trade.</p>
+
+<p>A long term backtest is becoming a reasonable approximation of what your trading strategy will do in the future. We have an explicit equation to make this estimate: A(t) =  A(0) + n∙u∙PT. This can be said even in the face of usual disclaimers like: “past results are not indicative of future performance” which in fact will hold if you keep the word performance as in return.</p>
+
+<p>You will not know in which stock, at what time, or at what price trades will be taken going forward. But, you do know, right now, that your trading strategy will continue to execute trades as instructed and as programmed. It will produce, on average, about the same output per time unit going forward as it did in the past in its backtest. </p>
+
+<p>This puts a lot of importance on the long term backtest. You want to know the approximation of the asymptotic limit of  u∙PT. You want to know the trading strategy&#39;s distinctive signature. And, it will be given for a large n. Meaning for a trading strategy generating a lot of trades over an extensive period of time.</p>
+
+<p>This will also give how much you had to put on the table to achieve that goal. That is: n∙u. Evaluating your performance becomes easy as well. It will be: </p>
+
+<p>A(t) / A(0) = (A(0) + n∙u∙PT) / A(0)</p>
+
+<p>It is also from here that you will see why most trading strategies slow down going forward, if not fail to maintain their performance level.</p>
+
+<p>We already stated that due to a trading strategy&#39;s signature, and the law of large numbers we should see our trading strategies do about the same as they did in the past. This over extended periods of time. Time was a basic requirement for having a large number of trades. </p>
+
+<p>Take for example a backtest done over the last 20 years producing: n∙u∙PT in total profits. It might not matter how large n∙u∙PT was. So, let&#39;s make it huge. Make it such an outstanding backtest that it could result in only one conclusion: this is the trading strategy to be used for the next 20 years. It is that good.</p>
+
+<p>Then, as expected, over the next 20 years you get about the same results as the 20-year backtest. Great. Your trading strategy lived up to its expectations.</p>
+
+<p>The total outcome is in: A(t) = A(0) + n∙u∙PT + n∙u∙PT. Over the added 20 years, you got about the same amount of profit as in the backtest. </p>
+
+<p>The strategy was expected to do about the same number of trades, had a constant trade unit, and PT tended to a limit. Therefore, you do get about the same amount of profit in either of the 20-year periods. So, what your trading strategy did in the past did become indicative of what it would do in the future.</p>
+
+<p>Doubling profits over a 20-year period is a 3.5% CAGR. Nothing more. Now, that is a bummer. Still, those are the numbers. All your trading strategy could do over the added 20 years would be to double its total profits, at most.</p>
+
+<p>You could have done better during those 20 added years abandoning your trading strategy altogether. Not trade it at all, and buy index funds. This, no matter what your trading strategy&#39;s performance level would have shown over its backtest. </p>
+
+<p>The nature of the market will probably not change during those added 20 years. Neither would your trading strategy, it would have been frozen in time. It would have kept a relatively stable u∙PT, due to the large number of trades. It would have generated: n∙u∙PT.</p>
+
+<p>And, yet, you would have been better off to scrap your high performing trading strategy rather than having it go live, and underperform market averages.</p>
+
+<p>I hope I am stressing the point enough. </p>
+
+<p>You have to take measures to force your trading program to increase those three portfolio metrics to compensate for what is a built-in and normal performance degradation. </p>
+
+<p>I have shown how this can be done in recent articles. Maybe most importantly, how this compensation can be done with ease.</p>
+
+<p>If you do not do it, it will not happen. </p>
+
+<p>If you do not compensate for these inherent structural gaming deficiencies, the market will not do it for you. Nor will your program. </p>
+
+<p>Going forward, your trading strategy will simply fail over the long run. And this, no matter how good it was. </p>
+
+<p>It will fail for doing what it did best.</p>
+
+<p>It will fail, not by doing less, not by breaking down, not due to changes in regime. But rather because it will be doing the exact same things it did in its backtests. </p>
+
+<p>Technically, it does not matter how good your trading strategy was, it will not be able to do more. Its upper limit is: A(t) = A(0) + 2∙n∙u∙PT over those 40 years. With the first 20 years just to show you could get: n∙u∙PT.</p>
+
+<p>Your trading program is just a program. As it turns out, it would simply not be enough to have it do the same thing going forward as it did in its backtest.</p>
+
+<p>One has to compensate. No alternative. No other choice. On the other hand, you might find that n∙u∙PT is enough.</p>
+
+<p>This is part of the math of the game. You can ignore it. But... there is a price!</p>
+
+<p>See related articles:</p>
+
+<p><strong>Stock Trading Strategy Math I</strong><br>
+<a href="http://alphapowertrading.com/index.php/papers/241-stock-trading-strategy-math-i">http://alphapowertrading.com/index.php/papers/241-stock-trading-strategy-math-i</a><br>
+<strong>A Stock Trading Strategy Signature</strong><br>
+<a href="http://alphapowertrading.com/index.php/papers/240-a-stock-trading-strategy-signature">http://alphapowertrading.com/index.php/papers/240-a-stock-trading-strategy-signature</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588ccdedf9103e3ae9f61c7b' id='588ccdedf9103e3ae9f61c7b'>
+<a href='#588ccdedf9103e3ae9f61c7b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1485622765000' class='quanto-date posted-at response-posted-at' href='#588ccdedf9103e3ae9f61c7b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Just published my new book: <strong>Building Your Stock Portfolio</strong>. </p>
+
+<p>It is available on <a href="http://www.amazon.com/dp/B01MYCRVEG">Amazon</a>:   <a href="http://www.amazon.com/dp/B01MYCRVEG">http://www.amazon.com/dp/B01MYCRVEG</a></p>
+
+<p><strong>Building Your Stock Portfolio</strong> has for sole purpose to help you make more money. It is about you building a long term stock portfolio for whatever reason you might have, and making sure you reach your goals. </p>
+
+<p>Is presented the making of a trading philosophy, a methodology which hopefully could become part of yours. My main objective being that you will not be copying what I do, but doing what will be right for you going forward.</p>
+
+<p>You could apply in a discretionary fashion what will be presented but will find ways to delegate most of the work to a machine which will run your program under your terms.  </p>
+
+<p><strong>Building Your Stock Portfolio</strong> will help you structure and build your trading strategy to do what you want. It will emphasize the major points to consider along the way.</p>
+
+<p>It is about designing trading strategies made to survive and thrive over the long term. Correct time, gaming related deficiencies, and help you engineer alpha from within the method of play itself. All designed so that one&#39;s stock portfolio will outperform market averages over the long term.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a98dd4d0fab326bdd9c5fa6' id='5a98dd4d0fab326bdd9c5fa6'>
+<a href='#5a98dd4d0fab326bdd9c5fa6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1519967565000' class='quanto-date posted-at response-posted-at' href='#5a98dd4d0fab326bdd9c5fa6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Basic Portfolio Math</strong></p>
+
+<p>Some of the stuff in portfolio management is so basic that we often forget how really basic it is. The building block of a portfolio is the position taken in some shares of a listed company as an investment or as a short-term speculative move. In both cases, the objective is to make a profit. We buy an asset and hold on to it, or resell it later on for a profit. Trading is simply doing the latter more often.</p>
+
+<p>The problem is not with the understanding of the game, it comes from asking very basic questions, like: what, when, and how much. An even more basic question is: why initiate that trade, at that time, in the first place?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e9c89a2530a3a0042595816' id='5e9c89a2530a3a0042595816'>
+<a href='#5e9c89a2530a3a0042595816'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1587317154000' class='quanto-date posted-at response-posted-at' href='#5e9c89a2530a3a0042595816'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Designing Your Strategy Your Way</strong></p>
+
+<p>My last article: <a href="https://alphapowertrading.com/index.php/2-uncategorised/361-reverse-engineer-your-trading-strategy" rel="nofollow">Reverse-Engineer Your Trading Strategy</a> ended with:</p>
+
+<blockquote>
+<p>&quot;... you need to design something better. The long-term 30-year prize<br>
+is worth \(\$2,199,269,115\)+. So, sit down, and figure it out! &quot;</p>
+</blockquote>
+
+<p>One might think this would require extraordinary skills to be deployed, when, in fact, staying power might be one of the main ingredients. Undertaking a 30-year endeavor is easy to state. Having an automated trading strategy doing the job however will require persistence, consistency and long-term marketability. </p>
+
+<p>Every single CAGR point you gain above the suggested 20\(\%\) makes the ending objective even more desirable. Mr. Buffett has managed a 20\(\%\) CAGR over his 50-year plus career. Why should you not be able to do the same, or maybe even do better?</p>
+
+<p>The follow-ups to the above-cited article will deal with what is required to achieve those objectives. Evidently, the payoff matrix will be at the center of the math behind these trading strategies. I intend to go from the math to how to design such a strategy out of the many possibilities within your own objectives and portfolio constraints. You might find that the limits you put on your own strategies might be your major drawback.</p>
+
+<p>Articles that have led to this point are cited at the end of that article.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e9de155910bf9004b091de1' id='5e9de155910bf9004b091de1'>
+<a href='#5e9de155910bf9004b091de1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1587405141000' class='quanto-date posted-at response-posted-at' href='#5e9de155910bf9004b091de1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Reverse-Engineer For More Profits</strong></p>
+
+<p>We design stock trading strategies simply to make money. The more the better. But it all has to be done within constraints of available capital and minimizing overall risks. Trading has a number of differences when compared to long-term investing in many regards. A trade, almost by definition, is seen as a short duration thing that can come out profitable or not. While in the long-term setting of investing, durability, appreciation and overall trends gain more importance. Short-term fluctuations are practically ignored while trading might live by them.</p>
+
+<p>But whatever the trading strategy, it has some basic math to explain what it does. Not sophisticated math mind, as will be demonstrated here, but inherent structures nonetheless that are dependent on the how the trading is done. Most of the text that follows is about averages, and we can use these averages due to the large numbers that will be used. In all cases designing diversified portfolios with hundreds of stocks and thousands of other possibilities.</p>
+
+<p><strong>It Is All About Your Choices</strong></p>
+
+<p>In the end, it will all be about your choices. The way you see your own trading environment and how you wish to interact with it. And all this within your own constraints.</p>
+
+<p>As mentioned before\(^1\), any stock trading strategy can be represented by the following set of equations: $$F(t) = F_0 + \sum^n_1 (\mathbf{H} \cdot \Delta \mathbf{P}) = F_0 + n \cdot  x_{avg} = F_0 \cdot (1 + g)^t = F_0 \cdot (1 + r_m + \alpha_t - ex_t)^t$$ The 4 equal signs above give the same final outcome which is the value of the total sum of realized profits and losses over the investment period based on the trading strategy matrix \(\mathbf{H}\). </p>
+
+<p>A general curve for: \(n \cdot  x_{avg} = \$10,000,000\) is displayed below:</p>
+
+<p><strong>Total Outcome Combinations</strong><br>
+<img src="https://image-proxy.quantopian.com/1267285b50809084e16c5590c738a2ebddedf831/68747470733a2f2f616c706861706f77657274726164696e672e636f6d2f696d616765732f6469766572732f6e5f76735f617665726167655f782e706e67" /></p>
+
+<p>All the combinations of \(n\) and \(x_{avg}\) in the above chart give the same answer. And as such, a large number of strategies can satisfy the above. 1,000,000 trades with an average net profit of \(\$\)10, or 50,000 trades making, on average, \(\$\)200 per trade give the same answer: \(\$\)10,000,000. Therefore, your performance will depend on those two numbers and how you will extract them or build them in your trading strategy.</p>
+
+<p><strong>A Basic Formula</strong></p>
+
+<p>If you look at the composition of \(x_{avg}\) you have: \(x_{avg} = u \cdot PT\), where \(u\) is the bet size, the trade unit, or the stock allocation, and \(PT\) the average percent profit on the trade. Here, you could also view \(PT\) as some kind of average profit target. However, it should be noted that this is an average \(PT\) and overall will fluctuate with time. What was used is simply an average based on the average net profit per trade as reported for instance when using the <strong><em>round_trips=True</em></strong> option in a backtest analysis.</p>
+
+<p>Making \(\$\)10,000 bets and taking, on average, 2\(\%\) on those bets could satisfy the above relationship. Therefore, this is not that big a deal. What is required is making it 50,000 times over the 30-year life span of this portfolio. This could be done with 1,667 trades per year with an average 2\(\%\) net profit target. Nothing here that could be considered as unrealistic. That is a 40 cents move on a \(\$\)20 stock or a price move of \(\$\)2 on a \(\$\)100 stock. Either of which can occur on a daily basis multiple times on quite a number of stocks. </p>
+
+<p>Furthermore, 1,667 trades per year is less than 7 trades per day on average. In the beginning, 7 trades of this type could even be done by hand on a discretionary basis. However, with time, it would require a lot more monitoring since this number should increase over time. Your trade monitoring time is also a trading expense, even in an automated trading strategy, and even if it might be at a lower level.</p>
+
+<p>The problem is the same, over the next 30 years, if your goal is to reach \(\$\)172,494,023 (a 10\(\%\) return) or a 20\(\%\) CAGR or more giving \(\$\)2,363,763,138 or more based on an initial \(\$10,000,000\) capital. </p>
+
+<p>You have to determine the bet size and the average percent profit per trade you or your program can reach. From the numbers, it should not be that difficult. That you decrease the initial stake by a factor of ten, you will have to also reduce the ultimate outcome by a factor of 10.</p>
+
+<p>The first question might be: are there really that many 2\(\%\) moves in those stock prices? The answer is: there are a lot more than enough to do the job. But, you are not necessarily limited to just a 2\(\%\) average profit per trade. There are so many ways to handle this problem.</p>
+
+<p>A long-term stock trading program should be dynamic, it should change over time in order to satisfy the long-term objectives, and mostly it should be consistent with these objectives. Most of the time, I see strategies that use constants that will prevail during the portfolio&#39;s entire trading interval. On what basis should a constant be considered in an environment that fluctuates all the time?</p>
+
+<p>We need to understand the dynamics of the payoff matrix. From the above equation: \(n \cdot x_{avg} = n \cdot u \cdot PT\) we need \(n\), \(u\), and \(PT\) to increase with time in order to reach these goals. Overall these increases are not that large since all of them are spread over time and need to respond to how far or how long you have been on the task. It will depend, evidently on the initial capital used and the design of your holding matrix \(H\). </p>
+
+<p>The table below presents one possible scenario out of the multitude of other solutions. Starting with a 30-year CAGR objective with an initial \(\$ 10,000,000\) capital. It shows that an average profit target per trade of about \( PT = 2\% \) to \(PT = 3\% \) could have been sufficient to reach the objectives based on the trading unit used which were relatively small to start with.</p>
+
+<p><strong>The Payoff Matrix Projections</strong><br>
+<img src="https://image-proxy.quantopian.com/bdc137deb523880fb737370c0e99b4fc7a337a79/68747470733a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f5061796f66665f4d61747269785f30312e706e67" /></p>
+
+<p>The numbers used are relatively rough as should be expected. There is no finesse here, only some estimates that fulfill the stated objectives. And as we could surmise even without doing any calculation, that there would be more work to be done the higher the CAGR objective. But, most of it was resolved by simply adding more stocks to trade at each level while increasing the average trade unit and the average profit per trade.</p>
+
+<p>All in all, not that big an endeavor, but still requiring to be consistent and be there for the duration while continuously executing those trades.</p>
+
+<p>I will stress that what is presented is not the only solution. What counts is adapting your trading strategy to comply with your long-term CAGR objectives. One thing is sure, if you do cut the initial capital by a factor of 10 or 100, then you should expect to revise those numbers to the downside and should expect also to reduce the total outcome by a factor of 10 or 100. In simple compounding return math: \(F_0\) as a scalar does matter.</p>
+
+<p>You want more, then you will have to design that in too. You could consider each component of \(n \cdot x_{avg} = n \cdot u \cdot PT\) as time-varying functions. Making them adapt to the trading environment. For instance, \(n\) is an ever increase monotonic function as it should be since it is simply a trade counter. The more you can increase this number with all other things being equal, the more your outcome will rise. Nothing extraordinary there, again simple math. </p>
+
+<p>It is how you will make your payoff matrix follow your long-term objectives that will matter. But, no matter what is done in those trading strategies, they have to comply with your own trading limits, constraints, and aspirations. It is this balance that needs to be met since overall you need the confidence necessary to apply those trading strategies knowing that that is where you will end up by following your payoff matrix as you designed it. </p>
+
+<p>If you do not know what your trading strategy is really doing and on what basis it is operating, how could you ever have any confidence that it will get you where you want to go?</p>
+
+<p>Do your own table as above, with your numbers, then figure out how your program should achieve them, or modify it to reach those new objectives. It is a matter of programming your strategy to fulfill those objectives. And there, there are a lot of trading strategies that can do the job. It is all in your hands. It is all your choice.</p>
+
+<hr>
+
+<p>\(^1\) <a href="https://alphapowertrading.com/index.php/2-uncategorised/361-reverse-engineer-your-trading-strategy" rel="nofollow">Reverse-Engineer Your Trading Strategy</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ea3832c7585640b6b27371f' id='5ea3832c7585640b6b27371f'>
+<a href='#5ea3832c7585640b6b27371f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1587774252000' class='quanto-date posted-at response-posted-at' href='#5ea3832c7585640b6b27371f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>Design Your Trading Strategy And Retire</strong></p>
+
+<p>We often design stock trading strategy simulations by first programming them on some economic notion and then observe the outcome. As if the trading procedures, over the long term, would resolve the appreciation problem all by themselves, when a more global view should be taken. The where you want to go and how far will it take you? </p>
+
+<p>Most of it could be determined beforehand. More planning and a better outlook as to what you really want to do. </p>
+
+<p>You design something and wait for the outcome, or you design the desired outcome and then find ways to make it happen. </p>
+
+<p>Most often, time will prove to be a major ingredient in that equation.</p>
+
+<p>My previous article broke down a portfolio&#39;s payoff matrix to 3 numbers. They gave the final answer to the outcome of a stock trading portfolio, no matter its size or composition:$$F(t) = F_0 + \sum^n_1 (\mathbf{H} \cdot \Delta \mathbf{P}) = F_0 + n \cdot  u \cdot PT$$ A table with those numbers was provided to achieve different possible CAGR scenarios. They were not the only solutions, infinitely more are available and in all cases the equal sign will hold.</p>
+
+<p>All the profits and losses, whatever their origin, were accounted for in the equation: $$ \sum^n_1 (\mathbf{H} \cdot \Delta \mathbf{P}) = n \cdot x_{avg} = n \cdot u \cdot PT$$ where \(n\), \(\,u\) and \(PT\) were program variables which, technically, you can design to be whatever you want. </p>
+
+<p>For instance, someone who bought Berkshire Hathaway some 50 years ago and maintained his position (about 30 did so) would have: \(1 \cdot \$10,000 \cdot (1+ 0.20)^{50} = \$910,043,815\). More than enough to pay for coffee and retire. </p>
+
+<p>A single trade decision was enough, sitting down and waiting was the only thing required. That the market went up or down on a daily basis, you still had to just sit down and wait even in periods of market turmoil. Berkshire Hathaway has had 4 major drawdowns in excess of 50\(\%\) over that period. </p>
+
+<p>Then the question is: what was more important? Staying the course or getting out at the first sign of trouble? Shouldn&#39;t someone have introduced some capital preservation measures in the process in order to alleviate the drawdowns?</p>
+
+<p><strong>What Will You Do Going Forward?</strong></p>
+
+<p>The problem is not what others did, but what you will do going forward? </p>
+
+<p>I can say, whatever you do, it will have to comply with the above math. There is no escaping it. </p>
+
+<p>You trade, you will generate a certain number of trades over the entire trading interval, no matter how long it is. You will generate profits and losses. That you do win or lose, it can all be averaged out. </p>
+
+<p>It does not make sense to build a portfolio for 20 years and see it all fail in a couple of months due to poor planning and poor execution. We cannot say that this thing is that complex. You have only 3 numbers to watch for. Only 3 questions to answer:</p>
+
+<p>\(\quad\) <strong>1</strong>) How many trades (\(n\)) can my program do over these 20 or 30 years? </p>
+
+<p>\(\quad\) <strong>2</strong>) What is its average bet size (\(u\))? \(\,\) Hint: \(F(t) \div j\).</p>
+
+<p>\(\quad\) <strong>3</strong>) What kind of average edge per trade (\(PT\)) can I get? </p>
+
+<p>Whatever your trading strategy does, to further improve performance, you need to answer the following questions:</p>
+
+<p>\(\quad\) <strong>1</strong>) How can I increase (\(n\)) over the trading interval?</p>
+
+<p>\(\quad\) <strong>2</strong>) How can I increase the average bet size (\(u\))?</p>
+
+<p>\(\quad\) <strong>3</strong>) What can I do to increase the strategy&#39;s average edge per trade (\(PT\))?</p>
+
+<p>It is not a matter of curve-fitting. It is doing what will increase those numbers while maintaining executability.</p>
+
+<p>The 3 numbers mentioned become some kind of program pressure points. With all other things being equal, increasing any one of them will improve on the final results. Since you have only those three numbers:\(\;n\), \(\,u\) and \(PT\), you will have to find ways to increase the number of trades if you want to increase the final results. The same goes if you increase the trade unit \(u\) (the allocation). These are critical numbers to your trading strategy just as is \(PT\), your program&#39;s average trading edge.</p>
+
+<p>The trading game is not an instant lottery game. It is a long-standing endeavor just as investing is. It is only that the rules of engagement are different. But, whatever trading methods you intend to use, those 3 numbers will prevail, that you like it or not.</p>
+
+<p><strong>Trade Allocation</strong></p>
+
+<p>The initial stock allocation is rather easy to determine. You intend to trade \(j\) stocks in your portfolio, then: \(F_0 \div j\). For a 400-stock portfolio, we have: \(\$10,000,000 \div 400 = \$25,000\), or \(0.25\%\) of equity. This means a stock could drop to zero and only damage the total portfolio value by \(0.25\%\)! You could use any other kind of allocation as well. It depends on what you want to do and how you want to do it.</p>
+
+<p>Should you opt to trade only 5 stocks in your portfolio. The math with change. The bet size will increase to \(\$10,000,000 \div 5 = \$2,000,000\) and represent a \(20.00\%\) drop if a single stock goes to zero. Those are not nice odds. You are definitely better off to diversify and thereby reduce your market risk. Nevertheless, the market will take whatever bet size you want to put on the table. It does not care a bit that you win or lose, nor how much you bet. </p>
+
+<p>You should be in control of what you do and not let emotions or the thrill of the game dictate what is to be done.</p>
+
+<p><strong>It Is All About Your CAGR</strong></p>
+
+<p>The table in my previous post showed the case for long-term \(5\%, 10\%, 15\%\) and \(20\%\) CAGRs. The \(5\%\) case is about the long-term average for individual traders trying to make it on their own (refer to academic papers on the subject). The \(10\%\) is about what one could expect using index funds over the long term. Usually a little less due to all the expenses and management fees. </p>
+
+<p>To reach the \(15\%\) CAGR level, you need to add some alpha to the game. This can be achieved using better timing methods, better stock selections, and better trading techniques. What you want to see is: \((1+ g_m + \alpha) = 1.15\) which would require an alpha of about \(0.05\), which is not that much but is still hard to get. </p>
+
+<p>The majority of fund managers, over the long term, have failed to even achieve this. And with all their resources in manpower and equipment, not to include the best minds out there, what could make you think that you can outperform these guys without designing better methods than theirs? You have to innovate and reengineer your trading methods for where you want to go and not just hope that somehow, over the long term, by some kind of luck, you will get there.</p>
+
+<p>Everywhere, in this trading game, you need to be reasonable. Everything needs to make sense. The big question: is this kind of trading methodology feasible or not? It should always be asked. </p>
+
+<p>However you trade, the money has to come from somewhere. You want to make it in a one-shot deal, then you better be right! I agree, nothing beats the biggest bet on the biggest move. But, the question should be: can you support the risk? Can you find this big bet? Can you predict that &quot;black swan&quot;, that outlier that might appear once a generation, or once in a thousand years? That kind of bet is not for everyone. Your goal should not be to bet on those things but to make sure that over the long haul you win and win big. You want to build your retirement fund, that is your objective.</p>
+
+<p>Already, with a \(20\%\) CAGR over the long term, you could mimic Mr. Buffett&#39;s portfolio return. That is \(10\%\) in alpha points which few have realized over the past 50 years. You know it is reasonable, you have Mr. Buffett&#39;s example that it has been done (and there are others that have done it too). </p>
+
+<p>There are advantages in trading that are not found in investing. This is where you should concentrate the efforts to increase this alpha even further. Go for \(15\%\) or \(20\%\) alpha points to jack your CAGR to \(25\%\) or \(30\%\). This will make quite a difference over the long term. It is a compounding game after all, and time is a major ingredient in the solution to the payoff matrix.</p>
+
+<p><strong>Doing More</strong></p>
+
+<p>In the following table, which is an extention to the previous one, I raised the CAGR up to a \(30\%\) level with an example of the number of stocks and trading unit that could be required to do the job.</p>
+
+<p><strong>The Payoff Matrix Projections Extended</strong><br>
+<img src="https://image-proxy.quantopian.com/ea690e8a1f2913162465919796ca394f8308b6eb/68747470733a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f5061796f66665f4d61747269785f30332e706e67" /></p>
+
+<p>We should notice that to increase performance, the strategy traded more as we got along, just as the trade unit \(u\) was increased. However, the requested average profit target was not increased that much. It was gradually increased from \(2.0\%\) to about \(3.2\%\). This is looking for, on average, an average \(2.0\%\) to \(3.2\%\) price change on a weekly basis. The bet size was also gradually increased. </p>
+
+<p>It is all about your trading methods and your choices. Millions of other number combinations could have been used to reach the same objectives.</p>
+
+<p><strong>You Can Do It</strong></p>
+
+<p>The point is: can you force your trading strategy to do such things? And the answer is: definitely yes. It is your planning that matters here. The how you look at the game and the math behind it. </p>
+
+<p>For instance, from the above, you know that you have to increase the bet size as you go along. That is not difficult. It can be incorporated in your trading strategy design simply by adding to the number of stocks you are going to trade. Or, simply increase the trading frequency or use some leverage.</p>
+
+<p>Your initial bet size is proportional to \(F_0 \div j\) as stated earlier for an equally weighted scenario. As the portfolio grows, the bet size will grow proportionally since the trade unit will remain proportional, on a continuous basis, to the number of stocks traded \(\,u(t) = F(t) \div j\). You can fix the allocation to a fraction of equity as: \(1 \div j\).</p>
+
+<p>So, yes, the trading unit will vary with time following in locksteps with the portfolio&#39;s equity line. But this should not be surprising since at the start of the trading strategy the number of stocks to be traded was fixed \(j\).</p>
+
+<p>It is why in each CAGR scenario, the number of stocks to be traded was increased as the estimated CAGR level increased. This is done in order not to accelerate the bet sizing too much and maintain a lower estimated average profit target to do the job. Evidently, increasing the average profit target will produce even more.</p>
+
+<p>This is quite a different structure for a trading strategy setup that we usually see in academic papers, or in practice for that matter. But, nonetheless, everything holds. If you want to achieve more out of your trading strategy you will have to provide more time and trade more with the preset notion of where you are going. One thing is sure, you will not be able to escape the above equation no matter what you do. And ignoring those 3 numbers will not make them go away either.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eac5f53a7d9b7003f36f587' id='5eac5f53a7d9b7003f36f587'>
+<a href='#5eac5f53a7d9b7003f36f587'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1588354899000' class='quanto-date posted-at response-posted-at' href='#5eac5f53a7d9b7003f36f587'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I thought I would share my last article published on LinkedIn. It is related to the above post. </p>
+
+<p>It looks at the number of trades generated by a rebalancing function.  </p>
+
+<p>The article states that rebalancing can dictate the number of trades that will be taken over the life of a portfolio simply knowing or having an estimate of its turnover rate. </p>
+
+<p>For instance, the math can estimate how many trades would be executed for a 400-stock portfolio over some 20 years if you have an estimate of the turnover rate which we can get from a single simulation.</p>
+
+<p>This says that the rebalancing procedure itself will preschedule the trading activity.  </p>
+
+<p>Follow the link:</p>
+
+<p><a href="https://alphapowertrading.com/index.php/2-uncategorised/364-the-portfolio-rebalancing-gambit-i" rel="nofollow">https://alphapowertrading.com/index.php/2-uncategorised/364-the-portfolio-rebalancing-gambit-i</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eaf02f6ba60ec003ddf3fc5' id='5eaf02f6ba60ec003ddf3fc5'>
+<a href='#5eaf02f6ba60ec003ddf3fc5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1588527862000' class='quanto-date posted-at response-posted-at' href='#5eaf02f6ba60ec003ddf3fc5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My latest article published on LinkedIn, also related to the above subject, should bring added insight into the restructuring, or reengineering, of a long-term trading strategy.</p>
+
+<p>The article further elaborates on the portfolio&#39;s payoff matrix equation and presents it as a tool to reach long-term objectives. It also makes the point that you can design a stock trading strategy that can profit from market noise in the most simple of ways.</p>
+
+<p>Follow the link below:</p>
+
+<p><a href="https://alphapowertrading.com/index.php/2-uncategorised/365-the-portfolio-rebalancing-gambit-part-ii-of-iii" rel="nofollow">https://alphapowertrading.com/index.php/2-uncategorised/365-the-portfolio-rebalancing-gambit-part-ii-of-iii</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eb56845f27f240044f8a44a' id='5eb56845f27f240044f8a44a'>
+<a href='#5eb56845f27f240044f8a44a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1588947013000' class='quanto-date posted-at response-posted-at' href='#5eb56845f27f240044f8a44a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My last article of the rebalancing series elaborates on the use of a portfolio&#39;s payoff matrix equation. It presents different scenarios based on initial settings which could be programmed according to one&#39;s long-term objectives.</p>
+
+<p>You have here an equation, not some opinion, but an equation that dictates the long-term outcome of a periodically rebalanced trading strategy. It can be used to make estimates of a portfolio&#39;s payoff or help build prototypes of strategies based on their internal settings.</p>
+
+<p>Whatever the trading strategy you want to automate, even starting from a discretionary basis, it will end up complying with the shown equation. The equation is saying explicitly what are the variables that matter and where the strategy&#39;s pressure points are.</p>
+
+<p>You have tried factors, indicators, various stock selection methods, winsorizing, z-scoring, combined factors, pairing, market-neutral, beta-neutral, long/short and hedged scenarios, regressing this and that and more, all of which expressed as mathematical formulas incorporated in your trading logic. A payoff matrix can include any of these, even all of them, but with a vision of the big picture. The question is: What is the long-term objective of your trading strategy? That payoff matrix equation is giving you an answer, at least, an estimate. </p>
+
+<p>If your trading strategy does not survive over the long term, it is worth absolutely nothing. Period. To be worth something, your trading strategy needs to generate some alpha over and above long-term market averages, otherwise, an index fund could have performed as good or better than your strategy did which would have been a better alternative than your strategy.</p>
+
+<p>The payoff matrix equations are tools you can add to your trading arsenal. You have absolutely no obligation to use them. It does remain your choice after all.</p>
+
+<p>Follow the link below for more:</p>
+
+<p><a href="https://alphapowertrading.com/index.php/2-uncategorised/366-the-portfolio-rebalancing-gambit-iii" rel="nofollow">https://alphapowertrading.com/index.php/2-uncategorised/366-the-portfolio-rebalancing-gambit-iii</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ec2b6dd6e89540045bb1320' id='5ec2b6dd6e89540045bb1320'>
+<a href='#5ec2b6dd6e89540045bb1320'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1589819101000' class='quanto-date posted-at response-posted-at' href='#5ec2b6dd6e89540045bb1320'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My latest article is related to the above series of recent posts on a strategy&#39;s portfolio rebalancing structure. There are some quite interesting points in it and I thought it might be of some use to some.  </p>
+
+<p>Simply follow the link:</p>
+
+<p><strong>Lessons From The Portfolio Rebalancing Gambit</strong></p>
+
+<p><a href="https://alphapowertrading.com/index.php/2-uncategorised/367-lessons-from-the-portfolio-rebalancing-gambit" rel="nofollow">https://alphapowertrading.com/index.php/2-uncategorised/367-lessons-from-the-portfolio-rebalancing-gambit</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ec7fa6db725a67374a9150a' id='5ec7fa6db725a67374a9150a'>
+<a href='#5ec7fa6db725a67374a9150a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1590164077000' class='quanto-date posted-at response-posted-at' href='#5ec7fa6db725a67374a9150a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><strong>The Inner Workings Of A Stock Trading Program</strong></p>
+
+<p>My <a href="https://alphapowertrading.com/index.php/2-uncategorised/367-lessons-from-the-portfolio-rebalancing-gambit" rel="nofollow">last article</a> admitted that the trading strategy used was effectively trading on market noise. Even under those conditions, it could win and win big. It is surprising that, after such a statement, system designers were not in an uproar and making all those points that could be made to rebuke the claims. The article went even further by providing a portfolio payoff matrix equation which enabled making long-term estimates of the portfolio&#39;s future value.</p>
+
+<p>This equation is not common, but most certainly, it is ordinary. </p>
+
+<p>The equation illustrated the point that a rebalancing stock trading program has an inherent structure. The way it was designed would determine what it would do going forward, or for that matter, going backward as in a simulation. </p>
+
+<p>Having an equation to explain the behavior of your trading strategy takes away all the pseudo-things you might have to say about it. There is no secret sauce, no the trick is this or that. You only have a rather plain math equation with an equal sign. An equal sign is not an opinion on something, it is a statement. Here it is again:</p>
+
+<p>\(F(t) = F_0 + \Sigma (\mathbf{H} ∙ \Delta \mathbf{P} ) = F_0 + y ∙ rb ∙ j ∙ E[tr] ∙ u(t) ∙ E[PT] =  F_0 ∙ (1 + g)^t\)</p>
+
+<p>where \(y\) is the number of years the rebalancing is applied, \(rb\) is the number of rebalance per year, \(j\) the number of stocks in the portfolio, and \(tr\) the expected turnover rate. u(t) is the betting function and E[PT] the expected average percent profit margin. The portfolio had its equivalent growth rate expressed as \(g\). </p>
+
+<p><strong>Rebalancing</strong></p>
+
+<p>No matter what you did or how you did it, the equation would prevail.</p>
+
+<p>The application of this equation only required a scheduled periodic rebalancing function applied to the selected stocks. The program used something like the following line of code:  </p>
+
+<pre><code>schedule_function(rebalance, date_rules.week_start(), time_rules.market_open())  
+</code></pre>
+
+<p>And that single line of code was sufficient to predetermine how the strategy would behave with its selected stocks for the entire duration of the portfolio.</p>
+
+<p>In the above equation, if you increase the number of years \(y\), you will increase the final outcome. If you rebalance 400 stocks \(j\) on a weekly basis \(rb = 52\) with an estimated turnover rate of 40% \(E[tr] = 0.40\), the strategy will make on average 8,320 trades per year. You do this for 10 years \(y = 10\), the estimate goes up to 83,200 trades. This, without even knowing how the trading strategy will actually trade. If you do it for 20 years \(y = 20\), you could reach an estimated 166,400 trades.</p>
+
+<p>It is the structure of the program, its rebalancing procedure, that is dictating how the trading strategy will behave. </p>
+
+<p>That it be in a simulation or going forward. It is the expected average turnover rate \(E[tr]\) that will determine the number of trades that will be executed. You increase the turnover to \(E[tr] = 0.60\), it will increase the number of trades to 249,600 over those 20 years.</p>
+
+<p>No reason is given for any of the trades other than due to the weekly rebalancing procedure. </p>
+
+<p>The program will trade no matter what. If you increase the number of stocks to 500, over those same 20 years with the same turnover rate, it would increase the number of trades to 312,000. Yet, there was no internal change to the program. Only the number of stocks in the portfolio was increased, and that decision was not made by the program, but by the program&#39;s designer.</p>
+
+<p>The number of stocks to trade is an independent trading decision, just as a weekly or monthly rebalancing, or how long you want it to last. </p>
+
+<p>You can do a simple napkin calculation to determine how your trading strategy will behave over the long term without even engaging in a simulation. It will give you the expected number of trades \(E[n] = y ∙ rb ∙ j ∙ E[tr]\) over the entire expected life of the portfolio.</p>
+
+<p>It is the structure of your program that is dictating the number of trades your trading strategy might do over the years. Note, the number of trades your trading strategy will do does not say you will make a profit, only that, on average, as an estimate, you will do that many trades whatever their respective outcomes.</p>
+
+<p>So, there really is no secret sauce in the number of trades to be performed, that was fixed from the start with the rebalancing scheduled function. And if you think that it is your program that is going to determine the number of trades, think again, since the rebalancing function has control over this and market variance, market noise will be sufficient to trigger all those trades.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/the-payoff-matrix'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/the-payoff-matrix'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#5b3d3e3e3f393a38301b2a2e3a352f342b323a3575383436">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

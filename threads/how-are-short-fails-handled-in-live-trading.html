@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+How are short fails handled in live trading?
+</title>
+<meta content='If my algo goes to short some shares, and there aren&#39;t any available to short, what happens?  How can I detect that situation in my code (to get out of opposing hedge legs for instance)?  What about if it&#39;s short-sale restricted, what happens to market orders/marketable limit/resting limit orders?  Do they just hang around until filled on an uptick?Thanks,Simon.' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="voGSl0DMqQFRm6sYi5vKdzZDkPBgbx1/lvsGAaOq+vnC5+Ta4jp74uiG8inEdGIDDs2zmRqjCGQU9N1rCe+YQg==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/how-are-short-fails-handled-in-live-trading' property='og:url'>
+<meta content='How are short fails handled in live trading?' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/how-are-short-fails-handled-in-live-trading' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='How are short fails handled in live trading?' property='og:title'>
+<meta content='If my algo goes to short some shares, and there aren&#39;t any available to short, what happens?  How can I detect that situation in my code (to get out of opposing hedge legs for instance)?  What about if it&#39;s short-sale restricted, what happens to market orders/marketable limit/resting limit orders?  Do they just hang around until filled on an uptick?Thanks,Simon.' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/how-are-short-fails-handled-in-live-trading">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='55343695aace27183d00015f'>
+<div class='post-container' data-post-id='55343695aace27183d00015f' id='55343695aace27183d00015f'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>How are short fails handled in live trading?</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1429485205000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=How are short fails handled in live trading?&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhow-are-short-fails-handled-in-live-trading%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhow-are-short-fails-handled-in-live-trading%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhow-are-short-fails-handled-in-live-trading%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhow-are-short-fails-handled-in-live-trading%26utm_medium%3Dlinkedin&amp;title=How+are+short+fails+handled+in+live+trading%3F+%28Simon+Thornington%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/how-are-short-fails-handled-in-live-trading?utm_source=website_share&amp;utm_campaign=how-are-short-fails-handled-in-live-trading&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Simon Thornington" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>If my algo goes to short some shares, and there aren&#39;t any available to short, what happens?  How can I detect that situation in my code (to get out of opposing hedge legs for instance)?  What about if it&#39;s short-sale restricted, what happens to market orders/marketable limit/resting limit orders?  Do they just hang around until filled on an uptick?</p>
+
+<p>Thanks,</p>
+
+<p>Simon.  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>29 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='55343e416e625ce7a400018c' id='55343e416e625ce7a400018c'>
+<a href='#55343e416e625ce7a400018c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429487171000' class='quanto-date posted-at response-posted-at' href='#55343e416e625ce7a400018c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>While I am asking questions, has anyone tried to do a backtest with realistic short locate fees?  Is it possible to programmatically withdraw cash from the account to simulate the various fees?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553440246e625c1695000150' id='553440246e625c1695000150'>
+<a href='#553440246e625c1695000150'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9c43fb2eb000200021a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/37326afc5ac6ba3a9f8c1b3b4482e669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9c43fb2eb000200021a'>Alex S</a>
+</div>
+<a UTCms='1429487654000' class='quanto-date posted-at response-posted-at' href='#553440246e625c1695000150'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In production, IB holds the order until it&#39;s able to be submitted.  For stocks which don&#39;t have available borrow, that can take a long time, since it requires more borrow to appear or for someone who&#39;s selling short to buy the stock back.  In TWS, you can identify that the state of the order is &#39;held&#39; but I&#39;m not sure if this info is available through Quantopian.  In production, it&#39;s actually quite annoying. . .</p>
+
+<p>I haven&#39;t tried backtesting with realistic borrow fees.  Do the stocks you&#39;re planning to short have a high borrow cost?  If so, it&#39;s likely they will also have a highly variable borrow cost -- 5% in some days, 10% a month later so figuring out which number to use is hard and I don&#39;t think that IB offers a history of cost-of-borrow.  For me, I just view borrow as a fixed expense and subtract off a couple of % of return a year to compensate for it.  I&#39;m sure you can do it more accurately (generally, borrow is only charged for overnight positions so it&#39;s easy enough to keep track off if you know what rate to charge) but am rather dubious on the value.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553441f1afb6f1c6850001b1' id='553441f1afb6f1c6850001b1'>
+<a href='#553441f1afb6f1c6850001b1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/518adef0ac9d8e67a000000a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2114608fe0c1969868c3db6b76e511d1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/518adef0ac9d8e67a000000a'>Michael Van Kleeck</a>
+</div>
+<a UTCms='1429488115000' class='quanto-date posted-at response-posted-at' href='#553441f1afb6f1c6850001b1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>To remove cash at the time of a trade, perhaps you could use a custom commission model, as in <a href="https://www.quantopian.com/posts/removing-cash-from-portfolio-to-pay-taxes">this post about taxes</a>.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553444146e625ce7a40001af' id='553444146e625ce7a40001af'>
+<a href='#553444146e625ce7a40001af'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429488663000' class='quanto-date posted-at response-posted-at' href='#553444146e625ce7a40001af'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>IB has a Short Loan Borrow rates tool in their Mosaic, with historical rates: <a href="https://institutions.interactivebrokers.com/en/index.php?f=1572">https://institutions.interactivebrokers.com/en/index.php?f=1572</a>  </p>
+
+<p>Pretty awesome.  I will probably just start to avoid the stocks with high rates, and try them out in a more nimble algo.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553446d2ca629cee8b000194' id='553446d2ca629cee8b000194'>
+<a href='#553446d2ca629cee8b000194'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9c43fb2eb000200021a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/37326afc5ac6ba3a9f8c1b3b4482e669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9c43fb2eb000200021a'>Alex S</a>
+</div>
+<a UTCms='1429489364000' class='quanto-date posted-at response-posted-at' href='#553446d2ca629cee8b000194'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Simon, that&#39;s actually pretty amazing.  I&#39;ve tried checking the borrow rates through IB before but through a much clumsier approach.  </p>
+
+<p>If you&#39;re planning a long-short portfolio, keep in mind that IB doesn&#39;t net proceeds of short sales against charges for long purchases and charges different interest rates for both.  IE, if your account has a net value of 100k and in it, you&#39;re long 200k of stock and short 100k, from IB&#39;s perspective, you are borrowing 100k (at 1.63 %) and lending 100k (at 0%).  When interest rates are higher, this spread gets larger.  This spread is likely to be more than the actual cost to borrow the stock unless you&#39;re short-selling some hard-to-borrow products.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553542de1b2c1d362c000084' id='553542de1b2c1d362c000084'>
+<a href='#553542de1b2c1d362c000084'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429553889000' class='quanto-date posted-at response-posted-at' href='#553542de1b2c1d362c000084'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hmm, I see.  It&#39;s possible to recoup 50% of their stock lending revenue by joining their Stock Yield Enhancement program, but one probably cannot avoid the margin loan spread...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5537daf29dac51d8e60000dd' id='5537daf29dac51d8e60000dd'>
+<a href='#5537daf29dac51d8e60000dd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429723894000' class='quanto-date posted-at response-posted-at' href='#5537daf29dac51d8e60000dd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>In production, IB holds the order until it&#39;s able to be submitted. For stocks which don&#39;t have available borrow, that can take a long time, since it requires more borrow to appear or for someone who&#39;s selling short to buy the stock back. In TWS, you can identify that the state of the order is &#39;held&#39; but I&#39;m not sure if this info is available through Quantopian. In production, it&#39;s actually quite annoying. . .</p>
+</blockquote>
+
+<p>Okay so I just saw this problem today in IB paper trading, and now I&#39;m worried.  Quantopian folks - is there any way to probe whether an order is in this state?  I am trying to leg into baskets, and if one leg gets held, my P&amp;L is at risk since the hedges are not in place.  If it is still held after a couple of minutes, I&#39;d like to be able to figure that out and back out of the other legs and try again tomorrow or something...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5537dce2fe755db3190001a3' id='5537dce2fe755db3190001a3'>
+<a href='#5537dce2fe755db3190001a3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429724389000' class='quanto-date posted-at response-posted-at' href='#5537dce2fe755db3190001a3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><a href="https://www.quantopian.com/help#api-orderobj">https://www.quantopian.com/help#api-orderobj</a></p>
+
+<p>There&#39;s nothing like &quot;status&quot; in here, but in the IB live trading, the web app knows the order is held.  That&#39;s frustrating!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5537dd1f7ebddd79a3000235' id='5537dd1f7ebddd79a3000235'>
+<a href='#5537dd1f7ebddd79a3000235'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9c43fb2eb000200021a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/37326afc5ac6ba3a9f8c1b3b4482e669?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9c43fb2eb000200021a'>Alex S</a>
+</div>
+<a UTCms='1429724450000' class='quanto-date posted-at response-posted-at' href='#5537dd1f7ebddd79a3000235'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hopefully Quantopian can implement the correct solution in their API.  </p>
+
+<p>As a quick hack, you can put in logic to check for the condition where if you have a sell order out, the last market price is above your limit price and you haven&#39;t gotten a fill, the borrow fail must be happening.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5537ddc3f556a2cf080000ad' id='5537ddc3f556a2cf080000ad'>
+<a href='#5537ddc3f556a2cf080000ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429724614000' class='quanto-date posted-at response-posted-at' href='#5537ddc3f556a2cf080000ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yeah I&#39;m going to have to do something, or else this strategy is kaput on Quantopian!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5537de867ebddd5f630001bf' id='5537de867ebddd5f630001bf'>
+<a href='#5537de867ebddd5f630001bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429724812000' class='quanto-date posted-at response-posted-at' href='#5537de867ebddd5f630001bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This data is definitely available in their API too, so there&#39;s no reason in theory we couldn&#39;t find out the shortability of a stock without having to attempt to short it, time out on the fill, then go flat everything else that we bought/sold, which is going to cost money every day that we fail.</p>
+
+<p><a href="https://www.interactivebrokers.com/en/software/api/apiguide/tables/using_the_shortable_tick.htm">https://www.interactivebrokers.com/en/software/api/apiguide/tables/using_the_shortable_tick.htm</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55381ff51458f28b02000418' id='55381ff51458f28b02000418'>
+<a href='#55381ff51458f28b02000418'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1429741560000' class='quanto-date posted-at response-posted-at' href='#55381ff51458f28b02000418'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>Is it possible to programmatically withdraw cash from the account to simulate the various fees?</p>
+</blockquote>
+
+<p>Have a look at <a href="https://www.quantopian.com/posts/removing-cash-from-portfolio-to-pay-taxes">https://www.quantopian.com/posts/removing-cash-from-portfolio-to-pay-taxes</a> to see if anything posted or referenced there might work.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553830d1778d7ab7510001f4' id='553830d1778d7ab7510001f4'>
+<a href='#553830d1778d7ab7510001f4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429745876000' class='quanto-date posted-at response-posted-at' href='#553830d1778d7ab7510001f4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yeah, something like that might be possible.  More concerned about the short fail problem.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55398398cd57249d88000298' id='55398398cd57249d88000298'>
+<a href='#55398398cd57249d88000298'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54c80b949e7be091ea000051'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/451b973ee76049658b2896a0f49e9432?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54c80b949e7be091ea000051'>Kevin Quilliam</a>
+</div>
+<a UTCms='1429832603000' class='quanto-date posted-at response-posted-at' href='#55398398cd57249d88000298'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Simon,<br>
+You can certainly check to see what&#39;s in your portfolio to determine if the stock you thought you were going to buy was actually purchased. Also should show up as unexecuted in the order status right? I&#39;ve been working around this too, and I&#39;ve been trying to do the short first, then checking on the next minute bar to see if it executed before I do the long side of the hedge. Gives me a minute slippage but better than the short side not filling. The real show stopper for me is what happens when I&#39;m forced to cover the short, since IB just liquidates it without telling Q? Since this could happen at any time, I really have to check my portfolio every minute to make sure it hasn&#39;t unexpectedly changed from the previous minute, and I haven&#39;t figured out how to pass state between minutes in order to do that.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55398ba4cd57249d880002c2' id='55398ba4cd57249d880002c2'>
+<a href='#55398ba4cd57249d880002c2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429834663000' class='quanto-date posted-at response-posted-at' href='#55398ba4cd57249d880002c2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hmm I wasn&#39;t going to worry about THAT, since I believe IB will call you during the day before they force cover at the close, no?  At that point, I figure you have to stop the algo, close all the legs by hand and restart it without them, or something?  I am not sure how reliable it would be to write algo code that attempts to handle that situation automatically.  Without knowing if it&#39;s available for short again the next day, would it attempt to re-open that basket?  </p>
+
+<p>If you want to pass state between minutes, you can throw stuff in the context, FYI.  I am just not sure if it&#39;s a good idea for this situation, although I am certainly thinking about it now.  I wonder if both situations could be handled the same way - inside context, store your expected portfolio.  During a rebalance minute, update that, and order_target_percent it.  During a non-rebalance minute/scheduled, if they differ in share count, shut down that basket and close out all the legs.  That gives it a minute to execute the rebalance, which should be plenty.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55399000a8a3a9b4ba000246' id='55399000a8a3a9b4ba000246'>
+<a href='#55399000a8a3a9b4ba000246'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429835779000' class='quanto-date posted-at response-posted-at' href='#55399000a8a3a9b4ba000246'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This brings me to another question - is there any way for an algo to send an email?  I would certainly like to be alerted if the algo had to shut down a basket due to a discrepancy between expected and actual portfolios...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553992176c2192bbee0004ba' id='553992176c2192bbee0004ba'>
+<a href='#553992176c2192bbee0004ba'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54c80b949e7be091ea000051'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/451b973ee76049658b2896a0f49e9432?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54c80b949e7be091ea000051'>Kevin Quilliam</a>
+</div>
+<a UTCms='1429836313000' class='quanto-date posted-at response-posted-at' href='#553992176c2192bbee0004ba'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks, I&#39;ll give that a shot and shoot you the code if I figure it out first. </p>
+
+<p>In my experience IB will not only not call you when they liquidate you, but when you call them to ask why your position was mysteriously closed out they&#39;ll give you three mutually exclusive answers and then tell you that they don&#39;t have any control over what their risk algorithm does. I recently had them auto-liquidate a position because their algorithm felt a 5 point option spread could lose 8 points, and there was no convincing them otherwise. If you haven&#39;t yet had the opportunity to work with their autoliquidation routines and &quot;customer service&quot; you&#39;re in for a treat!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5539ad126c2192bbee000545' id='5539ad126c2192bbee000545'>
+<a href='#5539ad126c2192bbee000545'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429843220000' class='quanto-date posted-at response-posted-at' href='#5539ad126c2192bbee000545'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The trouble of course is that although things will almost certainly fill in a minute in IB, Quantopian won&#39;t fill them if there wasn&#39;t a trade that minute, and so we can&#39;t use the same code for backtesting Quantopian vs IB.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5539cfabcd57249d8800045e' id='5539cfabcd57249d8800045e'>
+<a href='#5539cfabcd57249d8800045e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1429852078000' class='quanto-date posted-at response-posted-at' href='#5539cfabcd57249d8800045e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here is what I came up with (with the baskets removed, just add in your baskets at the top).  I hate this sort of code, completely not what I want to be doing.</p>
+
+<pre><code>import datetime  
+import pytz  
+import pandas as pd  
+from zipline.utils.tradingcalendar import get_early_closes
+
+def initialize(context):  
+    set_slippage(slippage.FixedSlippage(spread=0.00))  
+    set_commission(commission.PerShare(cost=0.0035, min_trade_cost=0.35))  
+    A = sid(???)  
+    B = sid(???)  
+    C = sid(???)  
+    D = sid(???)  
+    E = sid(???)  
+    F = sid(???)  
+    context.baskets = [  
+        {  
+            A: +0.2,  
+            B: -0.2,  
+        },  
+        {  
+            C: +0.15,  
+            D: -0.15,  
+        },  
+        {  
+            E: +0.15,  
+            F: -0.15,  
+        }  
+    ]  
+    # these will be calculated during our ordering_logic  
+    context.desired_positions = []  
+    context.spy           = sid(8554)  
+    start_date = context.spy.security_start_date  
+    end_date   = context.spy.security_end_date  
+    context.early_closes = get_early_closes(start_date, end_date).date  
+    # this is the grace period that we give orders to work.  Should be short for IB  
+    # since we don&#39;t want to be unhedged for long, but unfortunately, might need to  
+    # be very long for Quantopian backtesting, since they do not fill during no-trade  
+    # bars  
+    context.order_cancel_working_time = datetime.timedelta(0,30*60,0)  
+    schedule_function(ordering_logic,  
+                      date_rule=date_rules.every_day(),  
+                      time_rule=time_rules.market_close(minutes=40),  
+                      half_days=True)
+
+    # TEST FUNCTION DO NOT RELEASE!!!  
+    schedule_function(simulate_call_in,  
+                      date_rules.month_start(days_offset=10),  
+                      time_rules.market_open(minutes=30),  
+                      half_days=True)  
+# TEST FUNCTION  
+def simulate_call_in(context, data):  
+    sid_to_call_in = list(context.baskets[0].keys())[0]  
+    log.warn(str(get_now()) + &quot;: CALLING IN &quot; + str(sid_to_call_in.symbol))  
+    order_target(sid_to_call_in, 0.0)  
+def get_now():  
+    return pd.Timestamp(get_datetime()).tz_convert(&#39;US/Eastern&#39;)
+
+def percent_to_shares(context, data, sid, percentage_of_port):  
+    port_val = context.portfolio.portfolio_value  
+    cash_target = port_val * percentage_of_port  
+    last_price = data[sid][&#39;price&#39;]  
+    shares_target = cash_target / last_price  
+    return int(shares_target)  
+def calculate_desired_basket(context, data, basket):  
+    basket_all_traded = True  
+    for sid in basket:  
+        if sid not in data:  
+            basket_all_traded = False  
+    desired_basket = {sid: (percent_to_shares(context,data,sid,basket[sid]) if basket_all_traded else 0.0)  for sid in basket}  
+    return desired_basket  
+def calculate_desired_positions(context, data, baskets):  
+    desired_positions =  [ calculate_desired_basket(context, data, basket) for basket in baskets ]  
+    return desired_positions
+
+def ordering_logic(context, data):  
+    record( leverage=context.account.leverage )  
+    context.desired_positions = calculate_desired_positions(context, data, context.baskets)  
+    rebalance(context, data) 
+
+def rebalance(context, data):  
+    now = get_now()  
+    for basket in context.desired_positions:  
+        # this is silly, but apparently necessary for Quantopian  
+        basket_all_traded = True  
+        for sid in basket:  
+            if sid not in data:  
+                basket_all_traded = False  
+        if basket_all_traded:  
+            for sid in basket:  
+                log.info(str(now) + &quot;: Targeting &quot; + str(basket[sid]) + &quot; for &quot; + str(sid.symbol))  
+                order_target(sid, basket[sid])  
+
+def cancel_all_stale(context, data):  
+    now = get_now()  
+    sids_cancelled = set()  
+    fresh_orders = False  
+    open_orders = get_open_orders()  
+    for security, orders in open_orders.iteritems():  
+        for oo in orders:  
+            if ((get_datetime() - oo.dt) &gt; context.order_cancel_working_time):  
+                log.warn(str(now) + &quot;: Cancelling order placed at &quot; + str(oo.dt) +  &quot; for &quot; + str(oo.amount) + &quot; shares of &quot; + str(oo.sid.symbol) + &quot;!&quot;)  
+                sids_cancelled.add(oo.sid)  
+                cancel_order(oo)  
+            else:  
+                fresh_orders = True  
+                #log.info(str(now) + &quot;: NOT CANCELLING order for &quot; + str(oo.amount) + &quot; shares of &quot; + str(oo.sid.symbol) + &quot; because it&#39;s fresh!&quot;)  
+    return (sids_cancelled, fresh_orders)
+
+def tolerable(context, data, sid, a, b):  
+    last_price = data[sid][&#39;price&#39;]  
+    a_cash = a*last_price  
+    b_cash = b*last_price  
+    cash_diff = abs(a_cash - b_cash)  
+    port_value = context.portfolio.portfolio_value  
+    diff = cash_diff / port_value  
+    tol = 0.01 # 1% of port value is ok  
+    return diff &lt; tol
+
+def verify_basket(context, data, basket_desired_positions):  
+    basket_okay = True  
+    for sid in basket_desired_positions:  
+        desired_position = basket_desired_positions[sid]  
+        if not tolerable(context, data, sid, desired_position, context.portfolio.positions[sid].amount):  
+            basket_okay = False  
+    new_basket = {sid: (basket_desired_positions[sid] if basket_okay else 0.0) for sid in basket_desired_positions}  
+    return (new_basket, basket_okay)  
+def verify_positions(context, data, desired_shares):  
+    all_baskets_okay = True  
+    new_desired_positions = []  
+    for basket in context.desired_positions:  
+        (new_desired_basket, basket_okay) = verify_basket(context, data, basket)  
+        if (not basket_okay):  
+            all_baskets_okay = False  
+        new_desired_positions.append(new_desired_basket)  
+    return (new_desired_positions, all_baskets_okay)  
+def handle_data(context, data):  
+    now = get_now()  
+    (sids_cancelled, fresh_orders) = cancel_all_stale(context, data)  
+    # only bother checking out portfolio if we actually have one  
+    if (len(context.portfolio.positions) &gt; 0):  
+        # if this is the same minute as our ordering_logic, we won&#39;t cancel those orders, they have  
+        # one minute to work.  
+        if (fresh_orders == False):  
+            # if we cancelled some orders, presumably held because of no shorts available, give them a minute  
+            # to cancel  
+            if (len(sids_cancelled) == 0):  
+                # if there was nothing to cancel and nothing fresh, double check that our positions haven&#39;t been  
+                # changed from underneath us  
+                (new_positions, all_positions_okay) = verify_positions(context, data, context.desired_positions)  
+                if (not all_positions_okay):  
+                    log.error(str(now) + &quot;: Portfolios not converging, backing out of unbalanced baskets!&quot;)  
+                    context.desired_positions = new_positions  
+                    rebalance(context, data)
+
+</code></pre>
+
+<p>Note that without all this crappy error handling code that we are trying to do every minute, this algorithm would otherwise be nothing but a list and dictionary comprehension calling order_target_percent!  Literally 10 lines of code!  <strong>This is insane!</strong></p>
+
+<p>Anyway, basically, we try to proactively rebalance once per day, and give those orders N minutes to work.  After those minutes are up, we cancel the orders, and give those orders a minute to cancel.  This is how we catch short fails.</p>
+
+<p>If we have no working orders and nothing to cancel, we check to make sure our portfolio is all what we intended.  If it&#39;s not, due to a short fail not filling, or a short getting called in from underneath us, we log an error, set that entire hedged basket to 0 and rebalance towards it.  Those orders will clearly have to abide by the same logic, but that&#39;s okay, we&#39;ll be 0 on that basket for the rest of the day.  The next morning, we try again.  Or that&#39;s the theory anyway!  Comments welcome.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553a09d608a56edeee000333' id='553a09d608a56edeee000333'>
+<a href='#553a09d608a56edeee000333'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1429866971000' class='quanto-date posted-at response-posted-at' href='#553a09d608a56edeee000333'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>is there any way for an algo to send an email?</p>
+</blockquote>
+
+<p>To the best of my knowledge, no.  However, you could &quot;roll your own&quot; by writing a script to monitor the dashboard &#39;Logs&#39; output, and send you an e-mail under pre-defined circumstances (“Danger, Will Robinson!”)</p>
+
+<blockquote>
+<p>The trouble of course is that although things will almost certainly fill in a minute in IB, Quantopian won&#39;t fill them if there wasn&#39;t a trade that minute, and so we can&#39;t use the same code for backtesting Quantopian vs IB.</p>
+</blockquote>
+
+<p>In the research platform, you could apply a model to fill in the missing bars, so that the backtest trades every minute for security XYZ, as it does for the frequently traded SPY, for example.  You&#39;d probably also want to fiddle with the slippage model.  And commissions.  And don&#39;t forget to automatically cancel all orders at the end of the day.  In theory, at least in my feeble mind, you could bring a backtest into alignment with real-world trading at IB, particularly if you add some non-deterministic, Monte Carlo jazz.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='553a98bcc16c1ab5640003f5' id='553a98bcc16c1ab5640003f5'>
+<a href='#553a98bcc16c1ab5640003f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b9b56c02cabe5dae000143'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e9388ae5102f3b152fa6225f955a29d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b9b56c02cabe5dae000143'>Alisa Deychman</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1429903552000' class='quanto-date posted-at response-posted-at' href='#553a98bcc16c1ab5640003f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>An order can be detected as &#39;held&#39; using the order status. See this thread: <a href="https://www.quantopian.com/posts/how-to-detect-if-an-order-has-been-canceled">https://www.quantopian.com/posts/how-to-detect-if-an-order-has-been-canceled</a>. </p>
+
+<p>The corresponding order status is 4: <a href="https://github.com/quantopian/zipline/blob/master/zipline/finance/blotter.py#L42">https://github.com/quantopian/zipline/blob/master/zipline/finance/blotter.py#L42</a>. It looks like this is missing from the API documentation and we will add that in. </p>
+
+<p>I&#39;d love to see automatic alerts sent from your IB algo! Currently this is not possible, you can log when an event happens in the algo. In the future, I&#39;d like to see email and/or SMS messages to be triggered within the code.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5543e879b52e6869c80001ed' id='5543e879b52e6869c80001ed'>
+<a href='#5543e879b52e6869c80001ed'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1430513787000' class='quanto-date posted-at response-posted-at' href='#5543e879b52e6869c80001ed'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><a href="http://ibkb.interactivebrokers.com/article/845">http://ibkb.interactivebrokers.com/article/845</a></p>
+
+<p>More details on IB&#39;s short fail handling.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5543ebb22b28b4fef90001ce' id='5543ebb22b28b4fef90001ce'>
+<a href='#5543ebb22b28b4fef90001ce'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54c80b949e7be091ea000051'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/451b973ee76049658b2896a0f49e9432?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54c80b949e7be091ea000051'>Kevin Quilliam</a>
+</div>
+<a UTCms='1430514614000' class='quanto-date posted-at response-posted-at' href='#5543ebb22b28b4fef90001ce'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Simon,<br>
+     Thanks for that. This part really scares me:<br>
+&quot;Given the volume of formal recalls which we receive but are not later acted upon, IB does not provide customers with advance warning of these recall notices.
+In the event the recall does result in buy-in, the lender executes the buy-in transaction and notifies IB of the execution prices. IB, in turn, allocates the buy-in to customers based upon their settled short stock position and unsettled trades are not considered when determining liability. Recall buy-ins are viewable within the TWS trades window once posted to the account with notifications sent, on a best efforts basis, by approximately 17:30 EST.&quot;</p>
+
+<p>In other words. &quot;We&#39;ll know 3 days in advance if your short position is going to be closed against your will, but we aren&#39;t going to bother to tell you. If it does get closed, we&#39;ll make our best effort to tell you by 5:30 that night, but won&#39;t guarantee that we will.&quot;  Seriously IB?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5543f73c2b28b4b87f00022a' id='5543f73c2b28b4b87f00022a'>
+<a href='#5543f73c2b28b4b87f00022a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1430517567000' class='quanto-date posted-at response-posted-at' href='#5543f73c2b28b4b87f00022a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yeah, that&#39;s a bit iffy.  Regrettably, it does seem like nightmarish logic <em>is</em> required to confirm that what&#39;s actually in the portfolio is congruent with what is desired and what was expected.  I just hate adding so much python to such simple algorithms, since every line of code is another potential bug, especially in dynamically typed non-automatically-regression-tested code.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55449f929e719fc907000489' id='55449f929e719fc907000489'>
+<a href='#55449f929e719fc907000489'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1430560661000' class='quanto-date posted-at response-posted-at' href='#55449f929e719fc907000489'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>it does seem like nightmarish logic is required to confirm that what&#39;s actually in the portfolio is congruent with what is desired and what was expected</p>
+</blockquote>
+
+<p>This type of control problem is not new under the sun, so if it can be abstracted, then standard approaches can be applied.  It sounds like you are basically trying to transition your system (positions at IB) into a specified state within a certain amount of time, and then monitor the system, taking action when indicated.</p>
+
+<p>The &quot;box&quot; you are trying to control (IB account) has numerous states, some desirable, some not-so-desirable.  You might start by elaborating all of the states.  I gather that it is something like this:</p>
+
+<ol>
+<li>Fully hedged basket.<br></li>
+<li>Partially hedged basket.<br></li>
+<li>Empty basket.</li>
+</ol>
+
+<p>I&#39;m guessing that you want to be either in state 1 or state 3; the risk is ending up in state 2.  I&#39;m gathering that the problem comes in when you try to make the transition 3 --> 1 or 1 --> 3 (or you are sitting in 1 or 3), you end up in state 2, which is a failure.  When your system is in a state of failure, the question is what action do you want to take?  Naively, if a failure of any degree is detected, and state 3 is safe, then you&#39;d want to transition immediately to state 3.  Or you could put in a fixed wait time, to see if the system self-corrects (e.g. when a failure is detected, wait 15 minutes, and then pull the plug).  Failures could be handled differently, depending on the situation.  If you are sitting fat, dumb, and happy in state 1 and out-of-the-blue, you end up in state 2, you could immediately transition to the safe state 3 (and similarly, if somehow you flop into state 2 from state 3, you&#39;d immediately force the system back to state 3).  You could also consider adding a fourth state, which would effectively bring everything to a halt, requiring you to stop the algorithm.  It would be a hack, but you could actually call a function that would cause handle_data() to time-out, and induce a crash, which hopefully would trigger Q support to contact you via e-mail and/or phone (instead of a time-out, a memory overload error would work, too).  Or you could write a script to monitor the log output of your Q algo dashboard, and send you an e-mail when certain flags are encountered.</p>
+
+<p>I don&#39;t think that there is any way around the tedious engineering work to control the remote system (IB) properly.  It&#39;s kinda like when I put our oven into self-clean mode, and the door must be closed, and is locked automatically, so I don&#39;t end up setting the house on fire, or end up with a family member in the emergency room.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5544eb142b28b4b87f000597' id='5544eb142b28b4b87f000597'>
+<a href='#5544eb142b28b4b87f000597'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1430579992000' class='quanto-date posted-at response-posted-at' href='#5544eb142b28b4b87f000597'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yes, I suppose you are right. It is just such a pain, and compounded by the fact that it has to be done in python at one minute polls and without types, provers and tests. At this point I am just complaining, I&#39;ll stop.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5547b521fb571275e6000105' id='5547b521fb571275e6000105'>
+<a href='#5547b521fb571275e6000105'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1430762788000' class='quanto-date posted-at response-posted-at' href='#5547b521fb571275e6000105'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>FWIW I am testing a variant of the above algorithm, which rather than aborting a basket to flat when some leg executions fail, it just calculates the &quot;implied portfolio value&quot; from the realized sizes of all the legs (ie: the reverse of the order_target_percent calculation), takes the min of that, then resizes the unbalanced basket to that size.  </p>
+
+<p>So, if 5% of one leg couldn&#39;t get shorted, it&#39;ll just resize the other legs to 95% too, resulting in a balanced but smaller-than-ideal basket.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='554892eb91d2ba5b3e000565' id='554892eb91d2ba5b3e000565'>
+<a href='#554892eb91d2ba5b3e000565'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1430819566000' class='quanto-date posted-at response-posted-at' href='#554892eb91d2ba5b3e000565'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Simon,</p>
+
+<p>Sounds good.  I&#39;m assuming that you&#39;d need to cancel the order that did not go through completely?  And assuming that the other leg&#39;s order got filled completely, then you&#39;d need to submit another order to balance that leg against the one that couldn&#39;t be established fully (presumably due to the &quot;short fail&quot; problem)?  Are you making adjustments the next minute bar, or are you allowing some time for things to percolate at IB?</p>
+
+<p>Also, what if you intentionally put in a larger order than necessary on the short side?  Maybe you&#39;d land closer to the mark, and if you end up with too many shares short, then you could trim back until you are perfectly hedged.</p>
+
+<p>By the way, does Interactive Brokers paper trading simulate this kind of thing accurately?</p>
+
+<p>Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5548e6fb8f3190a156000058' id='5548e6fb8f3190a156000058'>
+<a href='#5548e6fb8f3190a156000058'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1430841091000' class='quanto-date posted-at response-posted-at' href='#5548e6fb8f3190a156000058'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant: yes to everything. I give ib orders two minutes to fill, but that has to be increased to 6 hours or whatnot when testing in Quantopian.</p>
+
+<p>I did get a short fail reject order and a short fail hold order in IB paper trading. I simulated the buy-in case  myself by adding a test schedule_function which kicks out part of the leg. That&#39;s in the code above the too. </p>
+
+<p>As for ordering extra, I don&#39;t think they are allocated pro rata, so I don&#39;t think it would help. Either you get them, or you don&#39;t, AFAIK.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/how-are-short-fails-handled-in-live-trading'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/how-are-short-fails-handled-in-live-trading'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#90f6f5f5f4f2f1f3fbd0e1e5f1fee4ffe0f9f1febef3fffd">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

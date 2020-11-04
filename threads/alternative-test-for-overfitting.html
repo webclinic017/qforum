@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Alternative Test For Overfitting
+</title>
+<meta content='Inspired by the work of Dr. Thomas Wiecki here  tackling-overfitting-via-cross-validation-over-quarters  and the new Factset data with its mandatory 1 year holdout period, I just wanted to share with the community my alternative methodology for tackling overfitting using what I call &quot;backward and forward holdout period backtests&quot;.  The essence of this technique is to find consistency in generalization results from the &quot;training phase&quot; of the backtest when applied to data it has not seen...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="nVcO2s3n7sIlyykXRzKTTvmnPeZWV7YiMwZBl+63RjjhMXiXbxE8IZzWcCYI3Ts6wSkejyybozmxCZr9RPIkgw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/alternative-test-for-overfitting' property='og:url'>
+<meta content='Alternative Test For Overfitting' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/alternative-test-for-overfitting' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Alternative Test For Overfitting' property='og:title'>
+<meta content='Inspired by the work of Dr. Thomas Wiecki here  tackling-overfitting-via-cross-validation-over-quarters  and the new Factset data with its mandatory 1 year holdout period, I just wanted to share with the community my alternative methodology for tackling overfitting using what I call &quot;backward and forward holdout period backtests&quot;.  The essence of this technique is to find consistency in generalization results from the &quot;training phase&quot; of the backtest when applied to data it has not seen...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/alternative-test-for-overfitting">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5bdb9101f40838004685e560'>
+<div class='post-container' data-post-id='5bdb9101f40838004685e560' id='5bdb9101f40838004685e560'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Alternative Test For Overfitting</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1541343100000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Alternative Test For Overfitting&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Falternative-test-for-overfitting%3Futm_source%3Dwebsite_share%26utm_campaign%3Dalternative-test-for-overfitting%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Falternative-test-for-overfitting%3Futm_source%3Dwebsite_share%26utm_campaign%3Dalternative-test-for-overfitting%26utm_medium%3Dlinkedin&amp;title=Alternative+Test+For+Overfitting+%28James+Villa%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Tools and Tips' data-tag-id='55c50e7d8d4710ec6e000011' href='/posts/tag/Tools-and-Tips/newest'>Tools and Tips</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Alphalens' data-tag-id='5b61da7da902a275124a9372' href='/posts/tag/Alphalens/newest'>Alphalens</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Fundamentals' data-tag-id='5bbf6123cb181d749727e7fc' href='/posts/tag/Fundamentals/newest'>Fundamentals</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/alternative-test-for-overfitting?utm_source=website_share&amp;utm_campaign=alternative-test-for-overfitting&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="James Villa" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Inspired by the work of Dr. Thomas Wiecki here <a href="https://www.quantopian.com/posts/tackling-overfitting-via-cross-validation-over-quarters" rel="nofollow">tackling-overfitting-via-cross-validation-over-quarters</a> and the new Factset data with its mandatory 1 year holdout period, I just wanted to share with the community my alternative methodology for tackling overfitting using what I call &quot;backward and forward holdout period backtests&quot;.  The essence of this technique is to find consistency in generalization results from the &quot;training phase&quot; of the backtest when applied to data it has not seen before, in this case, the backward and forward dates/periods.</p>
+
+<p>I start by doing  a two year backtest from 10/12/2015 to 10/13/2017. This algo makes use of Factset and Morningstar fundamental data together with some OHLCV technical indicators. The results, from the onset, looks quite dismal and boring, and one might be tempted to dismiss and throw away.</p>
+
+<p>Here&#39;s the returns tearsheet:</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>20 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5bdb939cf40838004085e57c' id='5bdb939cf40838004085e57c'>
+<a href='#5bdb939cf40838004085e57c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541116828000' class='quanto-date posted-at response-posted-at' href='#5bdb939cf40838004085e57c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I now apply this to the &quot;backward holdout period&quot; backtest. I went as far back as the data availability will allow which was 2005, purposely as these will cover different market regime changes. I wanted to see how my alpha combination factors will perform in such grueling phases of regime changes.</p>
+
+<p>As you can see, it held up quite nicely! Here&#39;s the returns tearsheet:  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdb9568f40838004685e59c' id='5bdb9568f40838004685e59c'>
+<a href='#5bdb9568f40838004685e59c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541117288000' class='quanto-date posted-at response-posted-at' href='#5bdb9568f40838004685e59c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Now for the &quot;forward holdout period&quot; backtest, the caveat here is you have to enter it in the contest to take a &quot;peek&quot; at the one year holdout period. And so I did, here&#39;s the returns tearsheet:  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdbf82ca64678003da66b57' id='5bdbf82ca64678003da66b57'>
+<a href='#5bdbf82ca64678003da66b57'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541142572000' class='quanto-date posted-at response-posted-at' href='#5bdbf82ca64678003da66b57'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>To summarize the results of the different phases:</p>
+
+<pre><code>                        Training Phase   Backward   Forward
+
+Annual Returns            0.8%          3.9%          2.8%  
+Annual Volatility         1.3%          1.5%          1.3%  
+Max Drawdown             -2.3%         -1.8%         -1.2%  
+Sharpe Ratio              0.61          2.59          2.17  
+</code></pre>
+
+<p>While the two year &quot;training phase&quot; exhibit below than par results in risk adjusted returns, both the 10+ years of backward holdout and 2 year forward holdout period show some nice results.  Overfit models exhibit an opposite behavior, where in sample periods normally show nice risk adjusted returns only to falter when presented with out of sample data. To further verify whether my in sample results are not just a fluke, I go back to the long backward holdout backtest and see whether there are some years that exhibit a similar behavior.  Indeed, years 2010 and 2013 shows similar behavior / results as my in sample  / training phase. </p>
+
+<p>It is also interesting to note that portfolio volatility across the board seem to be fairly consistent, only skewed during the 2008 Global Financial Crisis where market volatility is extremely high. It is also during this period that the algo achieved its highest returns! This further boost my confidence in the system, assuming that history repeats itself, the trading strategy will be able to not only weather the storm, it can also possibly excel!</p>
+
+<p>I hope this helps, specially the young guns out there just starting out in this complex world of financial trading!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdc6cadc0063f0047f64db0' id='5bdc6cadc0063f0047f64db0'>
+<a href='#5bdc6cadc0063f0047f64db0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b1f9ef65ad768004ad5f513'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5435859afd955dddb6ccc1f0a31a482b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b1f9ef65ad768004ad5f513'>Zenothestoic</a>
+</div>
+<a UTCms='1541172397000' class='quanto-date posted-at response-posted-at' href='#5bdc6cadc0063f0047f64db0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I see your reasoning and agree with it. The only question I have is that period of increased negative correlation to the benchmark in 2008. I&#39;m not sure from the charts whether or not that period still complies with the beta to the S&amp;P Rules?</p>
+
+<p>In any event, I wonder whether the reason for that out-performance needs further consideration? I get the impression that the straighter the curve the better pleased Quantopian will be.</p>
+
+<p>I wonder whether there is some hint of an anomaly here which might cause harm rather than benefit in future market conditions?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdf04e28250fd003c057025' id='5bdf04e28250fd003c057025'>
+<a href='#5bdf04e28250fd003c057025'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541342434000' class='quanto-date posted-at response-posted-at' href='#5bdf04e28250fd003c057025'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Anthony (Zenothestoic),</p>
+
+<p>Thanks for your feedback. </p>
+
+<p>To answer your first question, the algo strategy passes all contest metrics for 2008 during the GFC, the beta-to-SPY is only -0.02, well within the threshold of +- 0.30.  </p>
+
+<p>I think the ideal returns curve for a low beta, low volatility, market neutral long short strategy, is a smooth upward curve where returns outperforms the market during times of negative returns and high volatility and underperforms while still being postive the market returns in times of strong momentum (upward trending). I believe this strategy exhibits this behavior and doubt there is some anomaly at play here. The smoothness of the returns curve is somewhat distorted/disrupted during this period due to the extraordinary high volatility, where one can amass good returns if you are betting on the right side. I attached the full round trips tearsheet to clearly illustrate this point. During this period the algo had a 55% hit rate on shorts and 50% hit rate on longs and I know for a fact that during momentum/trending periods, the opposite is true which leads me to believe that this particular algo is able to adapt to the different market regimes and the reason for this is in my design which worked as intented.</p>
+
+<p><strong>Sorry I&#39;m having problems attaching the notebook, some technical difficulties on Q&#39;s end. I will re-try later on.</strong>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdf07988250fd0041057014' id='5bdf07988250fd0041057014'>
+<a href='#5bdf07988250fd0041057014'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b1f9ef65ad768004ad5f513'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5435859afd955dddb6ccc1f0a31a482b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b1f9ef65ad768004ad5f513'>Zenothestoic</a>
+</div>
+<a UTCms='1541343128000' class='quanto-date posted-at response-posted-at' href='#5bdf07988250fd0041057014'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Sounds hugely fruitful James. As a fundamental analyst by training I have long meant to quantify the value of long and much vaunted ratios which are now available for easy back testing.</p>
+
+<p>There seems to be a subtle shift at Quantopian and for the better. Anecdotally there seems to be less day to day activity in the forum but it seems to me to be of better quality than it was when I was last using the back -tester.</p>
+
+<p>I am now coming to believe more closely their mission statement - to democratize Wall Street. Given the huge advances they have made with Alphalens, Pyfolio, Zipline and the datasets I am coming to believe that great things may be done here.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdf08dd0318000049b3572e' id='5bdf08dd0318000049b3572e'>
+<a href='#5bdf08dd0318000049b3572e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541343453000' class='quanto-date posted-at response-posted-at' href='#5bdf08dd0318000049b3572e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;m glad you feel the same way I do. Yeah, seems like great things are now coming into fruition. Best!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5bdfb2640318000049b35b6a' id='5bdfb2640318000049b35b6a'>
+<a href='#5bdfb2640318000049b35b6a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541386852000' class='quanto-date posted-at response-posted-at' href='#5bdfb2640318000049b35b6a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s the the full round trip tearsheet for 2008:  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be01477e813440043850fd8' id='5be01477e813440043850fd8'>
+<a href='#5be01477e813440043850fd8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1541411959000' class='quanto-date posted-at response-posted-at' href='#5be01477e813440043850fd8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi James,</p>
+
+<p>Great post, love the ingenuity! What I like is that this method can also be used in the backtester. A couple of questions:</p>
+
+<ul>
+<li>If the factor didn&#39;t look good on your training period, why move forward? Technically you couldn&#39;t have known it would perform well on these periods. I assume this example was chosen as an illustrative example (like I did in my other post, and that&#39;s totally fine) but I think it&#39;s important to think what protocol should be followed here. Certainly, you are not allowed to make any changes to the factor after you move on from the test set. As the factor does not do well in the training set, why didn&#39;t you tweak it further? What would you have done if the factor failed the backward or forward test?<br></li>
+<li>What do you think is the benefit of this vs the quarter approach (not trying to do one-up-manship here, I think more options are good, but we should try to compare them).</li>
+</ul>
+
+<p>In any case, the exact method to do hold-out testing is not as critical as doing hold-out testing in the first place, so posts like these are very valuable in teaching this mindset.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be039fd57412500440ca7cc' id='5be039fd57412500440ca7cc'>
+<a href='#5be039fd57412500440ca7cc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541421565000' class='quanto-date posted-at response-posted-at' href='#5be039fd57412500440ca7cc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Thomas,</p>
+
+<p>Thanks.  This methodology is actually what I use in my deep learning models to gauge overfitting and is anchored on the assumption that financial time series are non-stationary. </p>
+
+<p>The training period was chosen as the last two years available as per the FactSet data availability to be as close to the forward one year holdout period as possible. Just my arbitrary choice but could be any middle chunk of the whole dataset.</p>
+
+<p>Due to the non-stationarity of the time series, this method actually forces you to move forward, unless of course, the results of the training phase are significantly or ridiculously dismal then it might just be a waste of time. In terms of protocol, it&#39;s really just a judgement call. The reason to move ahead with the backward and forward holdout backtest even with under par performance in the training period is to test the generalization ability of the factors on data it has not seen before. This is also a way to handle the non-stationarity of the financial time series without tweaking the factor/s after the fact. In other words, the validation of how well the factors perform (or overfit) rests more on the results of the holdout data. One can then evaluate and compare the results of the training set to what had happened in the past and what could happen in the future.</p>
+
+<p>Financial Modeling is as much an art as it is a science.  Since the choice of training set is quite arbitrary, the modeler should ask questions after running the backward and forward holdout periods like: Was the behavior of the training set similar to any occurences in the past or in the &quot;future&quot;? If it did then, the confidence in acceptability is easier to judge. In the other case where it fails the backward and forward tests, then it is also easier to conclude that the factors overfitted that particular training set/period as it did not generalized well in data it had not seen before.</p>
+
+<p>Honestly, I really don&#39;t know what the benefits of this method of holdout validation is vs. your quarter approach.  I&#39;m sure there are both pros and cons in either method. I just view it as another alternative test for the veracity of factors and / or overfitting.</p>
+
+<p>P.S. - Perhaps the more profound difference in doing this type of holdout testing is the use of the backtester vs. AlphaLens. The main advantage of using the backtester is that it already includes the transaction  and slippage costs. It also already incorporates the risk model framework.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be1634eb499d5004c729622' id='5be1634eb499d5004c729622'>
+<a href='#5be1634eb499d5004c729622'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b1f9ef65ad768004ad5f513'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5435859afd955dddb6ccc1f0a31a482b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b1f9ef65ad768004ad5f513'>Zenothestoic</a>
+</div>
+<a UTCms='1541497678000' class='quanto-date posted-at response-posted-at' href='#5be1634eb499d5004c729622'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>As the factor does not do well in the training set, why didn&#39;t you tweak it further?</p>
+</blockquote>
+
+<p>Ouch. Sad to relate, in my view and in my experience of trading futures &quot;tweaking&quot; is the very spawn of Beelzebub.  I have made that mistake so often. I prefer James approach: if one period looks bad, move on to other periods and see if that one period was anomalously bad in a sea of goodness.</p>
+
+<p>If all is till looking dismal, dump it.</p>
+
+<p>I do think these guys have it largely right: <a href="https://mathinvestor.org/" rel="nofollow">Mathematical Investor</a></p>
+
+<p>Let me expand a little. I have been working hard on the various Q tools over the past week and thinking hard also about what they want. When you take a look at <a href="https://www.quantopian.com/lectures/example-long-short-equity-algorithm" rel="nofollow">Example Long Short Equity Algorithm</a> you become very aware how tightly Q have tied up what they want.</p>
+
+<p>They have already set so many parameters: dollar neutral, sector neutral, factor neutral, choice of universe, max gross leverage, winsorisation, optimisation with constraints.  All you have to do is to choose the factors. One at a time in the case of alphalens - at least when your are making your choice for eventual input into a &quot;combination factor&quot;.</p>
+
+<p>So take EPS growth by way of example. It is a quarterly event (unless you convert into some daily metric - eg the related PER).  I&#39;m not sure I am happy fiddling much further with it. It either dives price or it does not.  Perhaps it does not drive price (or is ignored in one particular year) but if it does not I prefer the approach of trying out a few different years to see overall whether the assumption is correct.</p>
+
+<p>I can see that the use of moving averages my be of use (with PER for instance - although that will take us ominously close to the already closely related factor of momentum). But I&#39;m not too sure about tweaking it much further.  The parameters are already so many and so tightly set.</p>
+
+<p>I may be talking in ignorance but it seems you have already gone so far down the line in terms of rigid system design that further tweaking seems a bit ominous.  Perhaps I will veer from the paths of righteousness as my journey progresses.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be17741b499d500467296a5' id='5be17741b499d500467296a5'>
+<a href='#5be17741b499d500467296a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1541502785000' class='quanto-date posted-at response-posted-at' href='#5be17741b499d500467296a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>if one period looks bad, move on to other periods and see if that one period was anomalously bad in a sea of goodness. If all is till looking dismal, dump it.</p>
+</blockquote>
+
+<p>I don&#39;t see a reason to not just test it on the whole time-period then. You only need to protect against overfitting if you&#39;re actually fitting something. Of course, an approach where you just define your idea ahead of time, test it once (on all the data, staggered doesn&#39;t make a difference) and then either dump it or submit it to the contest is probably the most robust way as there is no chance to overfit. I would call this a pure hypothesis driven approach. For other approaches where you look at the data to guide your strategy you need protection against overfitting in the form of cross-validation. We might call this data-driven.</p>
+
+<p>@Zenothestoic<br>
+That all sounds fine to me. Just note that a factor does not have to be simple, or even single-factor. The final factor might be a non-linear (e.g. via ML) combination of several factors, like I exemplified in the ML on Q posts. I would imagine these types of multi-factor alphas are less likely to have been discovered already.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be19284611221004983a6c1' id='5be19284611221004983a6c1'>
+<a href='#5be19284611221004983a6c1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b1f9ef65ad768004ad5f513'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5435859afd955dddb6ccc1f0a31a482b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b1f9ef65ad768004ad5f513'>Zenothestoic</a>
+</div>
+<a UTCms='1541509764000' class='quanto-date posted-at response-posted-at' href='#5be19284611221004983a6c1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>No. But the initial testing on alpha lens is single factor then multifactor. Perhaps a crappy single factor fits well with other factors for non correlation.  As to discovery of new factors I guess one always has to beware causation correlation arguments. But of course most of the metrics are well tried and tested. Ecclesiastes had it dead right. As did that memorable phrase from Battlestar Galactica. It has happened before; it will happen again.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be19668414008004bbc725c' id='5be19668414008004bbc725c'>
+<a href='#5be19668414008004bbc725c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1541510760000' class='quanto-date posted-at response-posted-at' href='#5be19668414008004bbc725c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Right, although you can put a combined multi-factor alpha also into alphalens.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be19edcb499d5004972977b' id='5be19edcb499d5004972977b'>
+<a href='#5be19edcb499d5004972977b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b5de4c283a1d16d4e980135'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d3bae6571bf30670a1dffcb6df1317fb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b5de4c283a1d16d4e980135'>Corey Levinson</a>
+</div>
+<a UTCms='1541512924000' class='quanto-date posted-at response-posted-at' href='#5be19edcb499d5004972977b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, I&#39;m new here. How do I see the Python code used to generate your validation strategy? All I&#39;m seeing is plots.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be1a87e5357b300468b2ec9' id='5be1a87e5357b300468b2ec9'>
+<a href='#5be1a87e5357b300468b2ec9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5b1f9ef65ad768004ad5f513'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5435859afd955dddb6ccc1f0a31a482b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5b1f9ef65ad768004ad5f513'>Zenothestoic</a>
+</div>
+<a UTCms='1541515390000' class='quanto-date posted-at response-posted-at' href='#5be1a87e5357b300468b2ec9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Thomas. Yes I am getting the hang of it. A powerful tool.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be209c6b499d56bb5729195' id='5be209c6b499d56bb5729195'>
+<a href='#5be209c6b499d56bb5729195'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541540294000' class='quanto-date posted-at response-posted-at' href='#5be209c6b499d56bb5729195'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Corey,</p>
+
+<p>Welcome to Quantopian!</p>
+
+<p>Unfortunately, I can&#39;t share the python code for this algo since it is a contest entry and therefore vying for fund allocation. It is also proprietary and is thus considered an Intellectual Property of the author. For python code examples, I suggest you go through the Quantopian Lecture Series.  There are tons of educational content and resources you can find in the Help section. Additionally, Quantopian has provided the community with some very powerful tools such as the Backtester which is tailored to guide authors through the contest criteria, Pyfolio which gives analysis of results, AlphaLens which can analyze factors, the plots you see here are what they call Tearsheets which gives you in depth analysis of the results of your algo and much more.  My advice to you is to be patient and spend some time learning the different facets of financial trading through the resources provided here in the Quantopian website and community forum.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be21cc041400845f3bc6d18' id='5be21cc041400845f3bc6d18'>
+<a href='#5be21cc041400845f3bc6d18'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541545152000' class='quanto-date posted-at response-posted-at' href='#5be21cc041400845f3bc6d18'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas, @Zeno,</p>
+
+<p>Let me expound a little more on the importance of recognizing the non-stationarity of financial timeseries as it relates to holdout validation.  I&#39;m sure you both are familar with this phenomena but for the benefit of those that don&#39;t, non-stationarity of a time series refers to statistical properties such as mean, variances and autocorrelations of data series that change over time. This phenomena is why prediction is so challenging. Non-stationary behaviors manifest itself as trends, cycles, random walks or combinations of the three.  We often refer to them as changes in market regimes or conditions.</p>
+
+<p>To answer Thomas&#39; question:  If the factor didn&#39;t look good on your training period, why move forward? Since the choice of the training period is arbitrary, one might have chosen a period that is highly random and therefore most difficult to predict, if not impossible. So under my methodology, one is almost always forced to move ahead and test on holdout data to see how the factors behave in different time periods / conditions.  As in my example above, the results of the training period is dismal in the risk adjusted returns sense but when the factors were presented in holdout data, both backward and forward, the results were generally quite satisfying.  Further, I can look back at the results of the holdout periods to confirm if the behavior of the training period also similarly occured in the holdout period, in this case it did.  </p>
+
+<p>In summary, since the non stationarity of financial time series manifests itself as trends, cycles, random or a combination of the three over time, the quant modeler must be cognizant of these phenomena to  make better judgement on whether the algo overfits or not based on the training period.  There is really not much a quant can do in periods of randomness because the level of predictability is very low if not nil.  However, I believe the key is to find factors that are able to adapt to both trending and cycling (mean reverting) periods where predictability exists.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be33a577feefb00471b81bc' id='5be33a577feefb00471b81bc'>
+<a href='#5be33a577feefb00471b81bc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5929c5f4a76c22000d329d92'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5ec18483d35ccb497ca800f820998851?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5929c5f4a76c22000d329d92'>Leo M</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541618263000' class='quanto-date posted-at response-posted-at' href='#5be33a577feefb00471b81bc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I have been using a variant of James method quite effectively for a few months now. In my approach I use chunked periods backward and forward.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5be357576271101ccc724635' id='5be357576271101ccc724635'>
+<a href='#5be357576271101ccc724635'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1541625687000' class='quanto-date posted-at response-posted-at' href='#5be357576271101ccc724635'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Leo M,</p>
+
+<p>Thumps Up!  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/alternative-test-for-overfitting'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/alternative-test-for-overfitting'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#ddbbb8b8b9bfbcbeb69daca8bcb3a9b2adb4bcb3f3beb2b0">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

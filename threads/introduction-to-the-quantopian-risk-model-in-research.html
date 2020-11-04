@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Introduction to the Quantopian Risk Model in Research
+</title>
+<meta content='Earlier today we  announced  the release of the  Quantopian Risk Model  . In this notebook, we give an introduction to the Quantopian Risk Model and introduce new APIs for interacting with risk model on the Quantopian Research Platform.' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="3eYDnSWQMX6/oaVTZ0JzbSWU3GgNOpJ6LEb0M/y1zpyhgHXQh2bjnQa8/GIordsZHRr/AXf2h2GuSS9ZVvCsJw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/introduction-to-the-quantopian-risk-model-in-research' property='og:url'>
+<meta content='Introduction to the Quantopian Risk Model in Research' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/introduction-to-the-quantopian-risk-model-in-research' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Introduction to the Quantopian Risk Model in Research' property='og:title'>
+<meta content='Earlier today we  announced  the release of the  Quantopian Risk Model  . In this notebook, we give an introduction to the Quantopian Risk Model and introduce new APIs for interacting with risk model on the Quantopian Research Platform.' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/introduction-to-the-quantopian-risk-model-in-research">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5a035dc9036bed00090c8f64'>
+<div class='post-container' data-post-id='5a035dc9036bed00090c8f64' id='5a035dc9036bed00090c8f64'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Introduction to the Quantopian Risk Model in Research</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4e322fa200fffd0001000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f59406ed486edc76c94544468c11344d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4e322fa200fffd0001000001'>Scott Sanderson</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1510170557000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Introduction to the Quantopian Risk Model in Research&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fintroduction-to-the-quantopian-risk-model-in-research%3Futm_source%3Dwebsite_share%26utm_campaign%3Dintroduction-to-the-quantopian-risk-model-in-research%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fintroduction-to-the-quantopian-risk-model-in-research%3Futm_source%3Dwebsite_share%26utm_campaign%3Dintroduction-to-the-quantopian-risk-model-in-research%26utm_medium%3Dlinkedin&amp;title=Introduction+to+the+Quantopian+Risk+Model+in+Research+%28Scott+Sanderson%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='API' data-tag-id='55c50e7d8d4710ec6e000001' href='/posts/tag/API/newest'>API</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Q Updates' data-tag-id='55c50e7d8d4710ec6e000012' href='/posts/tag/Q-Updates/newest'>Q Updates</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pipeline' data-tag-id='561525bcf252a59171000001' href='/posts/tag/Pipeline/newest'>Pipeline</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Risk Model' data-tag-id='5a0269aa9cc8967fe39dd706' href='/posts/tag/Risk-Model/newest'>Risk Model</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/introduction-to-the-quantopian-risk-model-in-research?utm_source=website_share&amp;utm_campaign=introduction-to-the-quantopian-risk-model-in-research&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Scott Sanderson" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Earlier today we <a href="https://www.quantopian.com/posts/new-tool-for-quants-the-quantopian-risk-model">announced</a> the release of the <a href="https://www.quantopian.com/risk">Quantopian Risk Model</a> .</p>
+
+<p>In this notebook, we give an introduction to the Quantopian Risk Model and introduce new APIs for interacting with risk model on the Quantopian Research Platform.  </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>25 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5a035eacc15b140009b6ff31' id='5a035eacc15b140009b6ff31'>
+<a href='#5a035eacc15b140009b6ff31'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4e322fa200fffd0001000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f59406ed486edc76c94544468c11344d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4e322fa200fffd0001000001'>Scott Sanderson</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1510170284000' class='quanto-date posted-at response-posted-at' href='#5a035eacc15b140009b6ff31'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is the algorithm that is analyzed in the section on perf attribution.  It&#39;s an updated version of the Optimize API announcement post algorithm that uses the new <code>QTradableStocksUS</code> (announced <a href="https://www.quantopian.com/posts/working-on-our-best-universe-yet-qtradablestocksus">in this post</a>) and uses our newest APIs for accessing fundamentals  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a03821765f48d1c3704e987' id='5a03821765f48d1c3704e987'>
+<a href='#5a03821765f48d1c3704e987'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1510179351000' class='quanto-date posted-at response-posted-at' href='#5a03821765f48d1c3704e987'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Good stuff. Performance attribution is definitely a good addition.</p>
+
+<p>I have one question/request for clarification on a few of the style factors. It seems that the size and value style factors are defined opposite to the typical way they are used in the academic literature. More specifically:</p>
+
+<ul>
+<li><p>Size factor Definitions  </p>
+
+<ul>
+<li>Academics:  Small minus Big<br></li>
+<li>Quantopian: Big minus Small</li>
+</ul></li>
+<li><p>Value Factor Definitions  </p>
+
+<ul>
+<li>Academics:  Cheap Minus Expensive<br></li>
+<li>Quantopian: Expensive Minus Cheap</li>
+</ul></li>
+</ul>
+
+<p>I&#39;m sure this wasn&#39;t a trivial decision on Quantopian&#39;s part. I just want to make sure I am understanding the definitions, particularly in regards to the value factor. My thinking is, &quot;If I have positive exposure to the value factor, I have positive exposure to cheap stocks.&quot; However, it doesn&#39;t look like this is correct.</p>
+
+<p>The other issue that may confuse users is that the rolling_fama_french plots in Pyfolio appear to use the traditional academic definitions (small minus big, and high book to market (cheap) minus low book to market (expensive)). On the other hand, these plots are labeled specifically, so that may clear up any confusion on the matter.</p>
+
+<p>Any clarification is appreciated.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a03835346200a53020faf6f' id='5a03835346200a53020faf6f'>
+<a href='#5a03835346200a53020faf6f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1510179667000' class='quanto-date posted-at response-posted-at' href='#5a03835346200a53020faf6f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Also, there is a minor typo in the box plot function in case anyone wants to reuse that function. If I&#39;m not mistaken, the data parameter passed into <code>sns.boxplot()</code> should read <code>exposures.dropna()</code></p>
+
+<pre><code>def visualize_exposures_distribution(exposures):  
+    ax = sns.boxplot(data=exposures.dropna(), orient=&#39;h&#39;);  
+    ax.set_title(&#39;Distribution of Daily Factor Exposures&#39;)  
+    ax.set_xlabel(&#39;Daily Exposure&#39;)  
+    ax.set_ylabel(&#39;Factor&#39;);  
+    return ax  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a061103b9f4d000098cd182' id='5a061103b9f4d000098cd182'>
+<a href='#5a061103b9f4d000098cd182'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57e2b12557e9c947ce001019'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5dcb3defe1ec9651d858cf3e5ee79d9b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57e2b12557e9c947ce001019'>Rene Zhang</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1510347011000' class='quanto-date posted-at response-posted-at' href='#5a061103b9f4d000098cd182'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Michael Matthews Thanks for your questions. Under the Fama French framework in late 90s, the size and value factors are defined as the relative performance between small-cap stocks minus big-cap stocks and between cheap stocks minus expensive stocks. It is true that academic papers often define them this way. But, it does not have to be this way in practice. For example, if you use the size factor the relative performance between the big-cap stocks minus the small-cap stocks, the factor exposure and corresponding factor returns just need to change sign of the numbers. The exposure weighted factor returns (how much gain or loss obtained from the size factor) are same. For example, suppose SMB factor return on one day is <code>.1</code>, AAPL&#39;s factor exposure is <code>-0.25</code>, and its factor exposure weighted return is <code>.1 * (-.25) = -.025</code>. If use BMS, the BMS factor return would be <code>-.1</code>, AAPL&#39;s factor exposure would be <code>0.25</code>, and its factor exposure weighted return is still <code>-.1 * (.25) = -.025</code>.</p>
+
+<p>The way how we define the style factors is closer to the commercial risk models. To be specific, </p>
+
+<ul>
+<li>The size factor definition in the Quantopian risk model is Big minus Small (measured in the log of market capitalization)<br></li>
+<li>The value factor definition in the Quantopian risk model is cheap minus expensive (measured in the ratio between stockholder&#39;s equity and market cap)</li>
+</ul>
+
+<p>We will update our post to more explicitly explain style factors soon.</p>
+
+<p>As far as interpreting exposures, the way you explain them sounds perfect to me. If a portfolio has <code>positive exposure</code> to the Quantopian value factor, its return is positively influenced by the performance of “cheap companies (high-value companies)” in the market.  If n portfolio has <code>positive exposure</code> to the Quantopian size factor, its return is positively influenced by the performance of “big-cap companies” in the market. </p>
+
+<p>Here, this risk model is not based on the Fama French 3 factor model, using it could provide you more and maybe different insights from using <code>rolling_fama_french</code> plots in Pyfolio. I encourage you to use both to gain more insights about your algo.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a09d09087162a00144a9c42' id='5a09d09087162a00144a9c42'>
+<a href='#5a09d09087162a00144a9c42'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1510592656000' class='quanto-date posted-at response-posted-at' href='#5a09d09087162a00144a9c42'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Rene Zhang, Thanks for the clarification.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a0eb71df8d248001b0a317c' id='5a0eb71df8d248001b0a317c'>
+<a href='#5a0eb71df8d248001b0a317c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1510913821000' class='quanto-date posted-at response-posted-at' href='#5a0eb71df8d248001b0a317c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Scott/Rene -</p>
+
+<p>I think I&#39;m following this:</p>
+
+<blockquote>
+<p>each asset&#39;s factor loadings are calculated by running a multiple linear regression of the asset&#39;s returns against the factor returns.</p>
+</blockquote>
+
+<p>However, please clarify the actual model.  Generally, I recall that OLS multiple regression is applicable to a general multivariate polynomial.  For example, one could use multiple regression to find the coefficients of:</p>
+
+<p><code>y = b0 + b1*x1 + b2*x2 + b12*x1*x2 + b11*x1^2 + b22*x2^2</code></p>
+
+<p>From a mathematical standpoint, even though the model is nonlinear, the coefficients can be found using linear algebra alone (even though the equation is polynomial, linear methods can be used to find the coefficients, versus an iterative solver).</p>
+
+<p>Presumably, the model you are using is of the simplest form:</p>
+
+<p><code>y = b0 + b1*x1 + b2*x2</code></p>
+
+<p>Or are you including factor interactions, up to first order?  For example:</p>
+
+<p><code>y = b0 + b1*x1 + b2*x2 + b12*x1*x2</code></p>
+
+<p>Generally, I&#39;d think you&#39;d want to account for potential factor interactions, unless there is a reason to think that they would be negligible <em>a priori</em>.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a11eb6b837b9400160201ce' id='5a11eb6b837b9400160201ce'>
+<a href='#5a11eb6b837b9400160201ce'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5453b34575264c33e700008a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4028a5ef0e21c36eab8c9e4736619691?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5453b34575264c33e700008a'>Dan Micsa</a>
+</div>
+<a UTCms='1511123819000' class='quanto-date posted-at response-posted-at' href='#5a11eb6b837b9400160201ce'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Would be nice if US$ (UUP), Long term Bonds (TLT &amp; LQD) and Gold (GLD) will be added too.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a2291bad0062d6453175e18' id='5a2291bad0062d6453175e18'>
+<a href='#5a2291bad0062d6453175e18'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1512214970000' class='quanto-date posted-at response-posted-at' href='#5a2291bad0062d6453175e18'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Scott -</p>
+
+<p>Will the risk model factors be made available as Pipeline factors?  I&#39;d be curious how they look in Alphalens.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a3041094420aa049774649c' id='5a3041094420aa049774649c'>
+<a href='#5a3041094420aa049774649c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513111817000' class='quanto-date posted-at response-posted-at' href='#5a3041094420aa049774649c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant </p>
+
+<p>They added the feature as experimental: <a href="https://www.quantopian.com/help#risk-model-experimental">https://www.quantopian.com/help#risk-model-experimental</a> </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a3047434420aa04977464ee' id='5a3047434420aa04977464ee'>
+<a href='#5a3047434420aa04977464ee'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54dbb2869e83f6b922000607'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2e21590bc7f1dfff8ff3172a1ecf7f64?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54dbb2869e83f6b922000607'>Abhijeet Kalyan</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1513113411000' class='quanto-date posted-at response-posted-at' href='#5a3047434420aa04977464ee'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant - </p>
+
+<p>Like Luca said, the risk model factors are now available via pipeline. We have a function called <code>risk_loading_pipeline</code> which is an easy way to get access to all the risk model factors. Alternatively, there are some examples on <a href="https://www.quantopian.com/posts/quantopian-risk-model-in-algorithms">https://www.quantopian.com/posts/quantopian-risk-model-in-algorithms</a> of how to get access to a single factor (along with how to use the risk data in an algorithm).  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a30fbe96702b8254e6010ff' id='5a30fbe96702b8254e6010ff'>
+<a href='#5a30fbe96702b8254e6010ff'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513159657000' class='quanto-date posted-at response-posted-at' href='#5a30fbe96702b8254e6010ff'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Luca &amp; Abhi -</p>
+
+<p>Just curious - has the underlying code for any of this been published on Github yet?  For example, I&#39;m curious if the 
+<code>short_term_reversal</code> is actually simply the 14-day RSI.  One thing I&#39;d like to see is if the risk factors make sense at all as alpha factors.  I guess I&#39;m still confused regarding style risk factors that aren&#39;t really decent alpha factors anyway.  If they are just noise, then that would say any random factor that is just noise would be a risk.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a310449a7828a21b4eb2fca' id='5a310449a7828a21b4eb2fca'>
+<a href='#5a310449a7828a21b4eb2fca'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513161801000' class='quanto-date posted-at response-posted-at' href='#5a310449a7828a21b4eb2fca'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, I don&#39;t know if the code is publicly available, but it could be that Q buys the data for those risk factors and so there might be no code at all (the same as Morningstar data).</p>
+
+<p>Each risk factor is available as standalone pipeline factor, so you can run your analysis on each one if you like.</p>
+
+<p>I am puzzled as you are regarding risk factors that don&#39;t show any alpha, what s the point of having them in the analysis?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a3116fab8e31e48c753caa2' id='5a3116fab8e31e48c753caa2'>
+<a href='#5a3116fab8e31e48c753caa2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513166586000' class='quanto-date posted-at response-posted-at' href='#5a3116fab8e31e48c753caa2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Luca -</p>
+
+<p>I hadn&#39;t thought of Q buying the data for risk factors.  I&#39;m also curious how the risk model would be used to avoid over-weighting of legitimate factors in the fund (e.g. 
+<code>grants_awesome_algo</code>).  I guess some proxy would be developed for <code>grants_awesome_algo</code> that could be added to the risk model?  Or maybe the risk model is only intended to regulate exposure at the individual algo level, and bears no relation to the composition of the fund (e.g. only regulating well-known &quot;common&quot; risk factors)?  I also wonder if the risk model is purely linear or if risk factor interactions are included?  Lots of unanswered questions.  I guess I should list them in a stand-alone post and see if I can get them answered.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a31d8b67aa8c40019e99c3c' id='5a31d8b67aa8c40019e99c3c'>
+<a href='#5a31d8b67aa8c40019e99c3c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513216182000' class='quanto-date posted-at response-posted-at' href='#5a31d8b67aa8c40019e99c3c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What is the distinction between a risk model loading and a built-in factor?  Are they essentially the same beast?  For example, can I run 
+<code>ShortTermReversal</code> as a factor and compare it to the built-in factor <code>RSI</code>?  How would I run Alphalens on <code>ShortTermReveral</code> as a factor?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a32409d7aa8c47bf5e99cd9' id='5a32409d7aa8c47bf5e99cd9'>
+<a href='#5a32409d7aa8c47bf5e99cd9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513242781000' class='quanto-date posted-at response-posted-at' href='#5a32409d7aa8c47bf5e99cd9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>How would I run Alphalens on ShortTermReveral as a factor?</p>
+</blockquote>
+
+<p><a href="https://www.quantopian.com/help#risk-model-experimental">Here</a> you can see there are Pipeline builtin factors for each risk factor (e.g. ShortTermReversal, Momentum, Size, etc). So you can run them on Alphalens as you  would do with any other Pipeline factor. This would answer the question &quot;Is a specific risk factor an indicator of future returns&quot;? It would be interesting to know if there is correlation between  exposure to a certain risk factor and future returns. Let us know if you discover something :)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a324cfca6b813001c843973' id='5a324cfca6b813001c843973'>
+<a href='#5a324cfca6b813001c843973'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513245948000' class='quanto-date posted-at response-posted-at' href='#5a324cfca6b813001c843973'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Luca -</p>
+
+<p>Thanks, but I&#39;m still confused.  The help page makes a distinction between Pipeline Built-In <em>Factors</em> and Risk Model <em>Loadings</em>.  In the discussion of the Risk Model, the term &#39;risk <em>factors</em>&#39; was being used, not <em>loadings</em>, so naturally I thought new Pipeline built-in <em>factors</em> would be released, but we have <em>loadings</em>.  Are <em>factors</em> and <em>loadings</em> two names for exactly the same thing (i.e. a <em>loading</em> is just another name for a <em>factor</em>)?  But then why don&#39;t the loadings have the 
+<code>(*args, **kwargs)</code> on them?  I guess they don&#39;t take any arguments?  But then wouldn&#39;t they still have an empty <code>( )</code>?</p>
+
+<p>I guess I&#39;m still confused.  If Pipeline Built-In <em>Factors</em> and Risk Model <em>Loadings</em> are exactly the same, then why not introduce a set of additional Built-In <em>Factors</em> to be used in the Risk Model?  Also, adding Sector Loadings would also seem to be redundant, since we already have Fundamentals to classify by industry sector.  Are the Risk Model Sector loadings just a wrapper for classification by sector using Fundamentals?  If so, why release the loadings?</p>
+
+<p>By the way, I recall that it was you (Luca) who first showed how to run pipeline in chunks.  I&#39;d be interested in running Alphalens on the risk factors back to 2002.  Did the pipeline chunking make it into the Quantopian API?  Or would I need custom code?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a3259097aa8c4000de9a7fa' id='5a3259097aa8c4000de9a7fa'>
+<a href='#5a3259097aa8c4000de9a7fa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513249033000' class='quanto-date posted-at response-posted-at' href='#5a3259097aa8c4000de9a7fa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant -</p>
+
+<p>The pipeline chunking  mode if officially available. Have a look at <a href="https://www.quantopian.com/posts/announcement-research-api-additions">this post</a> </p>
+
+<p><strong>I believe</strong> the loading factor express how much an asset is &quot;exposed&quot; (regression I guess) to a risk. So when you use the pipeline builtins ShortTermReversal, Momentum, Size, etc. you can access the exposure of the assets to each risks factor (the factor loading).  We don&#39;t have access to the risk factors computation itself (as I said earlier it is possible that the data is not even computed in pipeline but it comes from an external source) but we can know how much we are exposed to those risks. Anyway it is possible to access the risk factors returns via experimental API 
+<code>get_factor_returns</code> and then run some computation on that, we still don&#39;t know how those risk factors are computed but we can access their values.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a339f4e1c73df1d9afad5bc' id='5a339f4e1c73df1d9afad5bc'>
+<a href='#5a339f4e1c73df1d9afad5bc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513332558000' class='quanto-date posted-at response-posted-at' href='#5a339f4e1c73df1d9afad5bc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Luca -</p>
+
+<p>For the style risk factors, it would be interesting to see them run through Alphalens over a long period.  I guess you are saying that since the individual risk factor returns are available via 
+<code>get_factor_returns</code> they can somehow be analyzed using Alphalens, without actually having access to the risk factors themselves?  The question in my mind is whether the style risk factors are legitimate in the first place, or if they are just noise.  If they look like gobbledygook in Alphalens, then they aren&#39;t really factors anyway, so attributing risk to them doesn&#39;t make sense (if I&#39;m thinking about this correctly).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a33a2a51c73df14c4face61' id='5a33a2a51c73df14c4face61'>
+<a href='#5a33a2a51c73df14c4face61'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513333413000' class='quanto-date posted-at response-posted-at' href='#5a33a2a51c73df14c4face61'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant, are those the performance you are interested in?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a33a35ca995c92742bff762' id='5a33a35ca995c92742bff762'>
+<a href='#5a33a35ca995c92742bff762'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513333596000' class='quanto-date posted-at response-posted-at' href='#5a33a35ca995c92742bff762'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Luca -</p>
+
+<p>Maybe.  I&#39;ll take a look.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a33b033355e3b1b4309a4e9' id='5a33b033355e3b1b4309a4e9'>
+<a href='#5a33b033355e3b1b4309a4e9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1513336883000' class='quanto-date posted-at response-posted-at' href='#5a33b033355e3b1b4309a4e9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant, I don&#39;t believe it makes sense to use Alphalens to evaluate the performance of the risk factors returns stream. Maybe you want to run the risk factor returns through pyfolio? That would work and it would tell you if the risk factor is legitimate or just noise (even though the cumulative returns plots in my previous NB should be enough to answer the question).</p>
+
+<p>If you used the risk factors available in Pipeline you would get the in output the risk loading for each asset in the universe and if you ran that through Alphalens you would have the answer to the question: &quot;Can I use the asset risk factor exposure as an alpha signal?&quot; That wouldn&#39;t tell you if the risk factor is legitimate or just noise itself, that would tell you if you can use that information to generate alpha  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a33e2de1c73df1db8facb3b' id='5a33e2de1c73df1db8facb3b'>
+<a href='#5a33e2de1c73df1db8facb3b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1513349854000' class='quanto-date posted-at response-posted-at' href='#5a33e2de1c73df1db8facb3b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I guess the sector risk factor returns are long-only, but the style risk factor returns are long-short (presumably the underlying alpha factor is demeaned, with equal long-short)?  Also, I guess this is for all stocks, and would need to be reduced to only the 
+<code>QTradableStocksUS</code>.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b0815fca0e2d048a0e7ca25' id='5b0815fca0e2d048a0e7ca25'>
+<a href='#5b0815fca0e2d048a0e7ca25'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/591ce7322aac5500104eca22'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6a17c05995e08789c341be9e8a6af947?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/591ce7322aac5500104eca22'>dyaz</a>
+</div>
+<a UTCms='1527256572000' class='quanto-date posted-at response-posted-at' href='#5b0815fca0e2d048a0e7ca25'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This may be a naive understanding of the risk model but, based on a review of the <a href="https://www.quantopian.com/papers/risk">white paper</a>, are the &quot;factor loadings&quot; that you provide for style estimated based on the regression of the epsilon as estimated by sector exposure against z-scored style_k returns (&quot;sub model (1b)&quot; in the white paper)? Or is it security returns against style returns? Or does it matter/produce the same result for trying to estimate alpha unattributed to those risks? Please clarify, thanks. </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b084277fd663f0047b242ba' id='5b084277fd663f0047b242ba'>
+<a href='#5b084277fd663f0047b242ba'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1527267959000' class='quanto-date posted-at response-posted-at' href='#5b084277fd663f0047b242ba'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@dyaz, In the regression for the style factor, I believe the parameters that are being estimated/solved for are the style factor returns themselves. In other words, they regress the sector residuals (dependent variable) against the standardized style metrics (independent variables). For example, for firm size, you would calculate the cross-sectional z-score of the log(Market Cap) for each day. This would be your independent variable for size, which would be used to calculate the coefficient in the regression, that represents the return for the size style factor.</p>
+
+<p>Note, the above applies to stocks in the estimation universe. For the complementary stocks, the opposite is true. It is the style factor returns that are being estimated.(See the Style Factor Calculation subheading in the Methodology section where it talks about the difference between estimation and complementary universes).</p>
+
+<p>This is only my interpretation, so I would look to see if others confirm this.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b0c775b283d1d405e934a48' id='5b0c775b283d1d405e934a48'>
+<a href='#5b0c775b283d1d405e934a48'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/591ce7322aac5500104eca22'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6a17c05995e08789c341be9e8a6af947?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/591ce7322aac5500104eca22'>dyaz</a>
+</div>
+<a UTCms='1527543643000' class='quanto-date posted-at response-posted-at' href='#5b0c775b283d1d405e934a48'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Just confused a little bit from reviewing the notebook posted above and then the white paper (especially with the fama-french model being thrown around in review). </p>
+
+<p>(1) Are the style factor returns (as provided by quantopian in research) for each day estimated based on the cross sectional regression of the sector epsilon of the securities in the universe against the z-scored style factors? Or are these something like an average return of the factor as in a fama-french model? </p>
+
+<p>(2) Are the style factor loadings (as provided by quantopian) for each security estimated based on a regression of the epsilon of the sector against the average portfolio of returns for each style factor (as one would in the fama-french model)? Or are these the z-scores based on the day t z-score for the estimation universe? Or are these a time-series regression of the sector epsilon for each security against the estimated factor returns (as discussed in question 1 and similar to the outlined process for &quot;complimentary stocks&quot; in the white paper)? </p>
+
+<p>Thanks for the help/clarification!  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/introduction-to-the-quantopian-risk-model-in-research'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/introduction-to-the-quantopian-risk-model-in-research'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#9cfaf9f9f8fefdfff7dcede9fdf2e8f3ecf5fdf2b2fff3f1">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

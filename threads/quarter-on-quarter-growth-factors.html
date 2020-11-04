@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Quarter on Quarter growth factors
+</title>
+<meta content='Hi All, I&#39;ve tried to create two quarter-on-quarter (QonQ) growth/change factors, based off a ttm (trailing twelve month) factor someone else had created and posted in the forum. If I&#39;ve made a mistake on either of them, please do let me know, as I&#39;m pretty new to python and Quantopian.  The first one is meant to calculate the growth/change between the current (most recently reported) quarter vs the same quarter last  year, in order to remove any seasonality effect, so mostly for cumulative...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="8YpBfsy99BzhtmQhhtHQqIEDK598qCeMdFTK1/d8nquN7Dczbksm/1irPRDJPnjcuY0I9gZkMpf2WxG9XTn8EA==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/quarter-on-quarter-growth-factors' property='og:url'>
+<meta content='Quarter on Quarter growth factors' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/quarter-on-quarter-growth-factors' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Quarter on Quarter growth factors' property='og:title'>
+<meta content='Hi All, I&#39;ve tried to create two quarter-on-quarter (QonQ) growth/change factors, based off a ttm (trailing twelve month) factor someone else had created and posted in the forum. If I&#39;ve made a mistake on either of them, please do let me know, as I&#39;m pretty new to python and Quantopian.  The first one is meant to calculate the growth/change between the current (most recently reported) quarter vs the same quarter last  year, in order to remove any seasonality effect, so mostly for cumulative...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/quarter-on-quarter-growth-factors">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5ae90e27b16b93767f0d363a'>
+<div class='post-container' data-post-id='5ae90e27b16b93767f0d363a' id='5ae90e27b16b93767f0d363a'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Quarter on Quarter growth factors</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1525222951000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Quarter on Quarter growth factors&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fquarter-on-quarter-growth-factors%3Futm_source%3Dwebsite_share%26utm_campaign%3Dquarter-on-quarter-growth-factors%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fquarter-on-quarter-growth-factors%3Futm_source%3Dwebsite_share%26utm_campaign%3Dquarter-on-quarter-growth-factors%26utm_medium%3Dlinkedin&amp;title=Quarter+on+Quarter+growth+factors+%28Joakim+Arvidsson+%28Cream+Mongoose%29%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Using Data' data-tag-id='55c50e7d8d4710ec6e000008' href='/posts/tag/Using-Data/newest'>Using Data</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seasonal Trends' data-tag-id='55c50e7d8d4710ec6e00000e' href='/posts/tag/Seasonal-Trends/newest'>Seasonal Trends</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Tools and Tips' data-tag-id='55c50e7d8d4710ec6e000011' href='/posts/tag/Tools-and-Tips/newest'>Tools and Tips</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pipeline' data-tag-id='561525bcf252a59171000001' href='/posts/tag/Pipeline/newest'>Pipeline</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/quarter-on-quarter-growth-factors?utm_source=website_share&amp;utm_campaign=quarter-on-quarter-growth-factors&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Joakim Arvidsson (Cream Mongoose)" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hi All,</p>
+
+<p>I&#39;ve tried to create two quarter-on-quarter (QonQ) growth/change factors, based off a ttm (trailing twelve month) factor someone else had created and posted in the forum. If I&#39;ve made a mistake on either of them, please do let me know, as I&#39;m pretty new to python and Quantopian. </p>
+
+<p>The first one is meant to calculate the growth/change between the current (most recently reported) quarter vs the same quarter last  year, in order to remove any seasonality effect, so mostly for cumulative time-series items on the income and cashflow statements.</p>
+
+<p>The second one is meant to calculate the growth/change between the current quarter and the direct previous (consecutive) quarter, and is meant mostly for balance sheet/point-in-time related items.</p>
+
+<p>Note that I added a few extra trading days to the standard 63 trading days / quarter, as perhaps not all companies issue their 10Qs exactly 63 trading days after the previous one. Maybe it&#39;s better to use a few more extra days for quarter length just to be safe? Or is there a better way of doing this?</p>
+
+<pre><code>import numpy as np  
+from quantopian.pipeline.factors import CustomFactor  
+from quantopian.pipeline.data import Fundamentals
+
+
+class QonQ_Growth(CustomFactor):  
+        &quot;&quot;&quot;  
+        Quarter on Quarter growth (current vs same quarter last year)  
+        Call from within Pipeline function, for example:  
+        ebit_growth = QonQ_Growth(inputs=[Fundamentals.ebit])  
+        &quot;&quot;&quot;  
+        # quarter_length = 65  
+        window_length = 3 * 66  
+        def compute(self, today, assets, out, data):  
+            q_on_q = np.array([-1, -3 * 66])  
+            out[:] = (data[q_on_q[0]] - data[q_on_q[1]]) / data[q_on_q[1]]
+
+
+class QonCQ_Growth(CustomFactor):  
+        &quot;&quot;&quot;  
+        Quarter on Consecutive Quarter Growth  
+        Call from within Pipeline function, for example:  
+        equity_growth = QonCQ_Growth(inputs=[Fundamentals.book_value_per_share])  
+        &quot;&quot;&quot;  
+        # quarter_length = 65  
+        window_length = 1 * 66  
+        def compute(self, today, assets, out, data):  
+            q_on_cq = np.array([-1, -66])  
+            out[:] = (data[q_on_cq[0]] - data[q_on_cq[1]]) / data[q_on_cq[1]]
+
+
+</code></pre>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>12 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5ae93768cfd424004c20761b' id='5ae93768cfd424004c20761b'>
+<a href='#5ae93768cfd424004c20761b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1525233512000' class='quanto-date posted-at response-posted-at' href='#5ae93768cfd424004c20761b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The issue deals with the fact that when you pull in trailing fundamental data using Pipeline, it uses the <code>asof_date</code> as opposed to the <code>timestamp</code> (i.e. the date that the data became available). </p>
+
+<p>For example, take a stock like AAPL that reported Q1 earnings today after the bell (i.e. <code>asof_date</code> would be 3/31/18 and <code>timestamp</code>  would be 5/2/2018) . So, if you pull the <strong>latest</strong> data using pipeline, you will not see this Q1 datapoint until 5/2/2018. However, if you try and pull trailing data by using a <code>CustomFactor</code>, pipeline populates the input array (which you called data) using the <code>asof_date</code> as opposed to the <code>timestamp</code>. </p>
+
+<p>What would this mean for the required <code>window_length</code>?<br>
+   - For a pipeline calculation ran on 4/30/2018, you would need a <code>window_length</code> of approximately 272 (83 + 63*3) (82 is the number of trading days from the beginning of the year to 4/30/2018)<br>
+   - The problem is that this required <code>window_length</code> will vary over time depending on the company and date in question. Therefore, a different method will need to be used. </p>
+
+<p>I am not sure of the best solution at the moment. I need to think through it to see if there is an efficient way to do it. If anyone else has any suggestions, please feel free to post. </p>
+
+<p>(My notebook I used to debug the problem is attached. However, it is  not super organized, as it is late. Let me know if you have any questions).</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ae95efecfd4242c2520674e' id='5ae95efecfd4242c2520674e'>
+<a href='#5ae95efecfd4242c2520674e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1525243646000' class='quanto-date posted-at response-posted-at' href='#5ae95efecfd4242c2520674e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Michael. Hopefully you or someone else smarter than I can figure out how to do this.</p>
+
+<p>Here&#39;s also to hoping that FactSet can provide better and cleaner fundamental datasets, so we can focus on research and strategy development, instead of wasting time trying to figure out how to get the correct data in the first place...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ae9c3f7cfd4242c2520722f' id='5ae9c3f7cfd4242c2520722f'>
+<a href='#5ae9c3f7cfd4242c2520722f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1525269495000' class='quanto-date posted-at response-posted-at' href='#5ae9c3f7cfd4242c2520722f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>A while back I shared a CustomFactor - <a href="https://www.quantopian.com/posts/faster-fundamental-data#59fd3bcc5efb363c71d00a83">LastFourQuarters</a> (in the attached notebook on that thread) - for getting the last 4 quarters of data. You might be able to use it to build QonQ factors more easily.</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ae9daf9cfd424595e2068d7' id='5ae9daf9cfd424595e2068d7'>
+<a href='#5ae9daf9cfd424595e2068d7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1525275385000' class='quanto-date posted-at response-posted-at' href='#5ae9daf9cfd424595e2068d7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Joakim,</p>
+
+<p>Jamie&#39;s solution works well. Try this (See Notebook for an example):  </p>
+
+<pre><code>class QonQ_Growth(CustomFactor):
+
+    window_length = 252 + 63
+
+    def compute(self, today, assets, out, asof_date, values):  
+        for column_ix in range(asof_date.shape[1]):  
+            _, unique_indices = np.unique(asof_date[:, column_ix], return_index=True)  
+            quarterly_values = values[unique_indices, column_ix]
+
+            # Fill empty values with NANs in output array  
+            if len(quarterly_values) &lt; 5:  
+                quarterly_values = np.hstack([  
+                    np.repeat([np.nan], 5 - len(quarterly_values)),  
+                    quarterly_values,  
+                ])  
+            quarterly_values = quarterly_values[-5:]  
+            out[column_ix] = quarterly_values[-1] / quarterly_values[-5] - 1  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeab86f162eac6f8a691ed7' id='5aeab86f162eac6f8a691ed7'>
+<a href='#5aeab86f162eac6f8a691ed7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1525332079000' class='quanto-date posted-at response-posted-at' href='#5aeab86f162eac6f8a691ed7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Awesome!! Works like a charm, thank you both!</p>
+
+<p>Perhaps you can help me with another factor as well, but I&#39;ll start a new thread for that one (days since 52 week hi/lo)</p>
+
+<p>Again, thank you so much! Any tips on how I can get better at the class object, numpy, and CustomFactor?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeb313fac7eaa4c8d6c3586' id='5aeb313fac7eaa4c8d6c3586'>
+<a href='#5aeb313fac7eaa4c8d6c3586'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57bcf8e194cdba3f02000188'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a38b0c01bf4db11e9e022f95f69899b8?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57bcf8e194cdba3f02000188'>Michael Matthews</a>
+</div>
+<a UTCms='1525363007000' class='quanto-date posted-at response-posted-at' href='#5aeb313fac7eaa4c8d6c3586'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Regarding Numpy (and other Scientific Python Packages), I have found the SciPy conference tutorials posted on YouTube to be helpful. See this link for the 2016 talk on Numpy <a href="https://www.youtube.com/watch?v=gtejJ3RCddE&t=3s">https://www.youtube.com/watch?v=gtejJ3RCddE&amp;t=3s</a>. </p>
+
+<p>Regarding classes, I used a couple courses from Udacity on Object Oriented Programming.</p>
+
+<ol>
+<li><a href="https://www.udacity.com/course/programming-foundations-with-python--ud036">Programming Foundations with Python</a><br></li>
+<li><a href="https://www.udacity.com/course/object-oriented-programming-in-java--ud283">Object Oriented Programming in Java</a> (Note: while this was in Java, it went into a bit more detail into the concepts of object oriented programming design). </li>
+</ol>
+
+<p>Regarding the CustomFactor class, I would recommend:</p>
+
+<ol>
+<li><a href="https://www.quantopian.com/help">The Quantopian API Documentation</a><br></li>
+<li><a href="https://www.quantopian.com/tutorials/pipeline">Quantopian&#39;s Pipeline Tutorial</a> (Lesson 10 deals with Custom Factors, but the whole tutorial is worth going through to get more familiar.)</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeb3872088c1b10a8a7c55c' id='5aeb3872088c1b10a8a7c55c'>
+<a href='#5aeb3872088c1b10a8a7c55c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1525364850000' class='quanto-date posted-at response-posted-at' href='#5aeb3872088c1b10a8a7c55c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Joakim: One of our senior engineers, Scott Sanderson, pointed me to this video a couple of years ago: <a href="https://www.youtube.com/watch?v=EEUXKG97YRw">https://www.youtube.com/watch?v=EEUXKG97YRw</a>. I remember finding it extremely helpful in terms of understanding vectorized computing in Python at the time.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aeb6068ac7eaa0ea36c3acf' id='5aeb6068ac7eaa0ea36c3acf'>
+<a href='#5aeb6068ac7eaa0ea36c3acf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1525375080000' class='quanto-date posted-at response-posted-at' href='#5aeb6068ac7eaa0ea36c3acf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Awesome! Thanks again! I&#39;ll check all of those out. Should keep me busy for a while.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c441b25344471003fbd08b0' id='5c441b25344471003fbd08b0'>
+<a href='#5c441b25344471003fbd08b0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5ae9fc7db16b9339bf0d4997'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/96d136f0830e9bd9d16be17119689cc0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5ae9fc7db16b9339bf0d4997'>Leo c</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1547967269000' class='quanto-date posted-at response-posted-at' href='#5c441b25344471003fbd08b0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi everybody,</p>
+
+<p>Does anyone getting pipeline time-out using @Jamie <strong>LastFourQuarters</strong> code?</p>
+
+<p>I feel the loading and processing is too high for using such function.</p>
+
+<p>Thank you<br>
+L  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e7c04a570e93d0046164656' id='5e7c04a570e93d0046164656'>
+<a href='#5e7c04a570e93d0046164656'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b7b0b31c64e7d0bc0001b7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f3fbec910795910efa5222d1a658c3a5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b7b0b31c64e7d0bc0001b7'>Jay Teguh Wijaya</a>
+</div>
+<a UTCms='1585185957000' class='quanto-date posted-at response-posted-at' href='#5e7c04a570e93d0046164656'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Leo,</p>
+
+<p>Yes,I have that problem.</p>
+
+<p>This part of the code takes too much time:</p>
+
+<pre><code>for column_ix in range(asof_date.shape[1]):  
+</code></pre>
+
+<p>The only alternative I know at the moment is by passing in <code>axis</code> parameter into <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.unique.html" rel="nofollow"><code>numpy.unique</code></a> but it needs at least Numpy 1.13.0 while Quantopian only supports Numpy 1.11.1.</p>
+
+<p>Have you solved the time-out issue?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e7d80e5f9967c0040ca55f7' id='5e7d80e5f9967c0040ca55f7'>
+<a href='#5e7d80e5f9967c0040ca55f7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b7b0b31c64e7d0bc0001b7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f3fbec910795910efa5222d1a658c3a5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b7b0b31c64e7d0bc0001b7'>Jay Teguh Wijaya</a>
+</div>
+<a UTCms='1585283301000' class='quanto-date posted-at response-posted-at' href='#5e7d80e5f9967c0040ca55f7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Omit my previous message i.e. the part where I suggested an alternative; The <code>axis</code> parameter does not work as I had expected.</p>
+
+<p>For now, I tried my best to avoid looping over the assets. I retrieved the data by first creating an array of indexes to get and then just extract the data from these indexes, like so:</p>
+
+<pre><code>def get_periodical(data, t=251, num_periods=None):  
+    &quot;&quot;&quot; Get data on a periodical basis  
+    For example, for annual data, get data every 251 working days,  
+    and num_periods is the number of years from the latest date.  
+    &quot;&quot;&quot;  
+    data = data[::t,:]  
+    if num_periods != None:  
+        data = data[-num_periods:]  
+    return data
+
+class CFOA(AnnualScale):  
+    inputs = [Fundamentals.free_cash_flow_asof_date,  
+              Fundamentals.free_cash_flow, Fundamentals.total_assets,  
+              Fundamentals.morningstar_sector_code]  
+    def compute(self, today, assets, out, asof_date, fcf, ta, groupby,  
+                num_years,  
+                clip_outliers, clip_threshold, scale_by):  
+        fcf_ann = get_periodical(fcf, num_periods=num_years)  
+        fcf_sum = np.sum(fcf_ann, axis=0)  
+        ta = ta[-1, :]  
+        ta[ta == 0] = 1  
+        result = fcf_sum/ta  
+        out[:] = result  
+</code></pre>
+
+<p><code>AnnualScale</code> is inherited from <code>CustomFactor</code>.</p>
+
+<p>It will run into problems when:<br>
+1. The number of trading days is not exactly 251 and the algorithm processes the dates at the edge of different asof_dates.<br>
+2. A company may have a varying length of asof_dates. This may cause us to get incorrect data, especially from earlier years.</p>
+
+<p>As you can see, this method is less robust than the one proposed by Jamie above. The larger the <code>num_periods</code>, the larger the drifts are going to be.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e7e872561739c37106f5060' id='5e7e872561739c37106f5060'>
+<a href='#5e7e872561739c37106f5060'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b7b0b31c64e7d0bc0001b7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f3fbec910795910efa5222d1a658c3a5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b7b0b31c64e7d0bc0001b7'>Jay Teguh Wijaya</a>
+</div>
+<a UTCms='1585350437000' class='quanto-date posted-at response-posted-at' href='#5e7e872561739c37106f5060'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Solved it. I used <code>numpy.roll</code> as a replacement for calling <code>np.unique</code> on each asset. The running time is stable now even for longer time windows and QTradableStocksUS filter.</p>
+
+<pre><code>def get_periodical(asof_date, values, period_skip=4, num_periods=2):  
+    # Prepare the mask, all True cells are unique values column-wise.  
+    # -------------  
+    asof_date_shifted = np.roll(asof_date, -1, axis=0)  
+    asof_date_diff = asof_date - asof_date_shifted  
+    mask = asof_date_diff.astype(bool)  
+    # Mask the values  
+    # -------------  
+    values[~mask] = np.nan  
+    # Delete rows with all nan values  
+    values = values[~np.isnan(values).all(axis=1)]  
+    # Reorder step  
+    # -------------  
+    # At this point we may have values like so:  
+    # [[ 0.52974        nan  0.616352  0.804157]  
+    #  [      nan       nan  0.601933  0.821267]  
+    #  [ 0.532081       nan  0.618076  0.834409]]  
+    #  
+    # We want to reorder the values so we have:  
+    # [[      nan       nan  0.616352  0.804157]  
+    #  [ 0.52974        nan  0.601933  0.821267]  
+    #  [ 0.532081       nan  0.618076  0.834409]]  
+    # Test value:  
+#     values[1,0] = np.nan  
+    values_bool = values.astype(bool)  
+    values_bool[np.isnan(values)] = False  
+    # Mergesort retains the ordering of unsorted elements  
+    sidx = values_bool.argsort(axis=0, kind=&#39;mergesort&#39;)  
+    values = values[sidx, np.arange(sidx.shape[1])]  
+#     values = values[sidx]  
+#     print(values)
+
+    # Gather the correct values  
+    # based on period_skip and num_periods  
+    # -------------  
+    # Let&#39;s say we have the following values:  
+    # [[      nan       nan  0.653645  0.834693]  
+    #  [ 0.522313       nan  0.575657  0.813225]  
+    #  [ 0.52974        nan  0.616352  0.804157]  
+    #  [ 0.534637       nan  0.601933  0.821267]  
+    #  [ 0.532081       nan  0.618076  0.834409]]  
+    #  
+    # For period_skip=2 and num_periods=2, we want to get the following result:  
+    # [[ 0.52974        nan  0.616352  0.804157]  
+    #  [ 0.532081       nan  0.618076  0.834409]]  
+    #  
+    # The code below does just that.  
+    values = np.flipud(values[:-num_periods*period_skip:-period_skip, :])  
+    return values
+
+
+def get_changes(data, t=1):  
+    data = pd.DataFrame(data)  
+    prev_data = data.shift(t, axis=0)  
+    return data/prev_data
+
+
+class GMean(CustomFactor):  
+    window_length = 252  
+    params={  
+        &#39;period_skip&#39;: 1, # 4 for annual  
+        &#39;num_periods&#39;: 2 # 2 years minimum  
+    }
+
+    def compute(self, today, assets, out,  
+                asof_date, values, period_skip, num_periods):  
+        periodic_values = get_periodical(asof_date, values,  
+                                         period_skip=period_skip,  
+                                         num_periods=num_periods)  
+        result = gmean(periodic_values+1, axis=0)-1  
+        out[:] = result
+
+
+class GMeanChanges(CustomFactor):  
+    window_length = 252  
+    params={  
+        &#39;period_skip&#39;: 1, # 4 for annual  
+        &#39;num_periods&#39;: 2 # 2 years minimum  
+    }
+
+    def compute(self, today, assets, out,  
+                asof_date, values, period_skip, num_periods):  
+        periodic_values = get_periodical(asof_date, values,  
+                                         period_skip=period_skip,  
+                                         num_periods=num_periods)  
+#         print(periodic_values.shape)  
+        changes = get_changes(periodic_values)[1:]  
+        result = gmean(changes+1, axis=0)-1  
+        out[:] = result  
+</code></pre>
+
+<p><code>GMean</code> calculates the geometric mean based on x quarters/years of data and <code>GMeanChanges</code> calculates the geometric mean of the growths of these data.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/quarter-on-quarter-growth-factors'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/quarter-on-quarter-growth-factors'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#4a2c2f2f2e282b29210a3b3f2b243e253a232b2464292527">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

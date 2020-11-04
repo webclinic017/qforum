@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Long/Short Earnings Sentiment Trading Strategy
+</title>
+<meta content='7/15/2016 Update: Access to the Estimize dataset will temporarily be shut down starting July 18th, 2016.We&#39;ve identified an issue with the manner in which we were processing the Estimize dataset that prevented updates to the data starting June, 2016. All subscribers have been notified and we are taking steps to implement a solution. The algorithm here has been updated to use analyst estimates from Zack&#39;s Earnings Surprises   This is similar to a  post-earnings announcement drift strategy I’ve...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="LB0YUza3t4P3G+TkDtMEN5VT8I28gxooZ36Wk+7PZwFQe24elEFlYE4GvdVBPKxDrd3T5MZPDzPlcU35RIoFug==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/long-slash-short-earnings-sentiment-trading-strategy' property='og:url'>
+<meta content='Long/Short Earnings Sentiment Trading Strategy' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/long-slash-short-earnings-sentiment-trading-strategy' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Long/Short Earnings Sentiment Trading Strategy' property='og:title'>
+<meta content='7/15/2016 Update: Access to the Estimize dataset will temporarily be shut down starting July 18th, 2016.We&#39;ve identified an issue with the manner in which we were processing the Estimize dataset that prevented updates to the data starting June, 2016. All subscribers have been notified and we are taking steps to implement a solution. The algorithm here has been updated to use analyst estimates from Zack&#39;s Earnings Surprises   This is similar to a  post-earnings announcement drift strategy I’ve...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/long-slash-short-earnings-sentiment-trading-strategy">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='571e4b06afc49488040001f7'>
+<div class='post-container' data-post-id='571e4b06afc49488040001f7' id='571e4b06afc49488040001f7'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Long/Short Earnings Sentiment Trading Strategy</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1468873579000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Long/Short Earnings Sentiment Trading Strategy&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Flong-slash-short-earnings-sentiment-trading-strategy%3Futm_source%3Dwebsite_share%26utm_campaign%3Dlong-slash-short-earnings-and-news-sentiment-trading-strategy%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Flong-slash-short-earnings-sentiment-trading-strategy%3Futm_source%3Dwebsite_share%26utm_campaign%3Dlong-slash-short-earnings-and-news-sentiment-trading-strategy%26utm_medium%3Dlinkedin&amp;title=Long%2FShort+Earnings+Sentiment+Trading+Strategy+%28Seong+Lee%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Using Data' data-tag-id='55c50e7d8d4710ec6e000008' href='/posts/tag/Using-Data/newest'>Using Data</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Pipeline' data-tag-id='561525bcf252a59171000001' href='/posts/tag/Pipeline/newest'>Pipeline</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/long-slash-short-earnings-sentiment-trading-strategy?utm_source=website_share&amp;utm_campaign=long-slash-short-earnings-and-news-sentiment-trading-strategy&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Seong Lee" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p><strong>7/15/2016 Update:</strong></p>
+
+<pre><code>Access to the Estimize dataset will temporarily be shut down starting July 18th, 2016.
+
+We&#39;ve identified an issue with the manner in which we were processing the Estimize dataset that prevented updates to the data starting June, 2016. All subscribers have been notified and we are taking steps to implement a solution. 
+
+The algorithm here has been updated to use analyst estimates from Zack&#39;s Earnings Surprises  
+</code></pre>
+
+<p>This is similar to a <a href="https://www.quantopian.com/posts/post-earnings-drift-trading-strategy-with-estimize-pead">post-earnings announcement drift strategy I’ve published a few months ago</a> that attempts to profit off the <a href="http://com.estimize.public.s3.amazonaws.com/papers/Estimize%20Whitepaper%20Executive%20Summary.pdf">difference between reported earnings and earnings estimates based off a white paper by Vinesh Jha</a>. Similar to that algorithm, I use crowdsourced earnings estimates as opposed to the Street’s consensus. The one crucial difference between this strategy and my previous one is that here, I  use news sentiment to determine my long/short positions. </p>
+
+<p>The idea is that we only trade on securities with a news sentiment that matches the direction of the earnings surprise. For example, only hold positions in securities with both a positive earnings surprise and a positive news sentiment. This also means that there are two crucial factors influence a trading decision after an earnings announcement and in my opinion, the new method provides a much more clear trading signal than earnings surprises alone. </p>
+
+<p>The inspiration for this algorithm came from Steven Hayes, one of our community members.</p>
+
+<p><strong>Strategy Details:</strong></p>
+
+<ul>
+<li>Data set: <a href="https://www.quantopian.com/data/eventvestor/earnings_calendar">Earnings calendar</a> by EventVestor, <a href="https://www.quantopian.com/data/estimize/revisions">crowdsourced earnings estimates by Estimize</a>, and <a href="https://www.quantopian.com/data/accern/alphaone">news sentiment by Accern</a><br></li>
+<li>Weights: The weight for each security is determined by the total number of longs and shorts we have in that current day. So if we have 2 longs and 2 shorts, the weight for each long will be 50% (1.0/number of securities) and the weight for each short will be -50%. This is a rolling rebalance at the beginning of each day according to the number of securities currently held and to order.<br></li>
+<li>Capital base: $1,000,000<br></li>
+<li>Profit and Loss limits are set to 6%<br></li>
+<li>Days held: Positions are currently held for 8 days but are easily changeable by modifying &#39;context.days_to_hold&#39;<br></li>
+<li>Percent threshold: Only surprises between 0% and 6% in absolute magnitude will be considered as a trading signal. These are adjustable using the minimum and maximum threshold variables in context.<br></li>
+<li>Earnings dates: All trades are made 1 business day AFTER an earnings announcement regardless of whether it was a Before Market Open or After Market announcement</li>
+</ul>
+
+<p><strong>Notes Since Release</strong></p>
+
+<blockquote>
+<p>Also as an observation (as of June 21, 2016), I&#39;ve been live trading<br>
+this example strategy for a few weeks now and it seems that in the<br>
+past 30~ days, it hasn&#39;t made any trades. From what I know it could be<br>
+for a few reasons:  </p>
+
+<ul>
+<li>The trading signal triggers are not being triggered by the earnings<br>
+announcements (perhaps the percent limits are too strict)<br></li>
+<li>Estimize&#39;s data coverage as compared to someone like Zack&#39;s is a<br>
+ lot smaller, so the mix of small coverage and the current time of year<br>
+ contribute to the lack of triggered trades<br></li>
+</ul>
+
+<p>Overall, the backtested strategy had relatively few trades and I would<br>
+suggest more work is needed to make it robust enough to be holding<br>
+positions consistently as opposed to all cash (similar to what Lyth<br>
+has worked on).  </p>
+
+<p>With analyst earnings surprises from Zacks available soon in pipeline<br>
+and estimates to follow, it&#39;ll be interesting to see how the two will<br>
+compare as the analyst surprises are more robust w/ much wider coverage</p>
+</blockquote>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>45 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='571e5098d516664d2300023b' id='571e5098d516664d2300023b'>
+<a href='#571e5098d516664d2300023b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/561ec468c22ba209f700015b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7aa0a3642af5478b863f7976b21254f6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/561ec468c22ba209f700015b'>Lovis Axon</a>
+</div>
+<a UTCms='1461604510000' class='quanto-date posted-at response-posted-at' href='#571e5098d516664d2300023b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong,</p>
+
+<p>I just want to clarify what I am reading.</p>
+
+<p>The following part here:  </p>
+
+<h1>On Long &amp; Profit</h1>
+
+<p>if price &gt;= cost_basis * 1.06 and current_position &gt; 0:<br>
+                order_target_percent(security, 0)<br>
+                log.info( str(security) + &#39; Sold Long for Profit&#39;)<br>
+                del context.stocks_held[security]  </p>
+
+<p>On Short &amp; Profit<br>
+            if price &lt;= cost_basis* 0.94 and current_position &lt; 0:<br>
+                order_target_percent(security, 0)<br>
+                log.info( str(security) + &#39; Sold Short for Profit&#39;)<br>
+                del context.stocks_held[security]</p>
+
+<p>The &quot;cost_basis*.94&quot; is the thing that  triggers the  6% profit trigger.... Right? It is this way, not 1.06, because this is a short position.</p>
+
+<p>So if I wanted to trigger every 3% I would just use the cost basis times the .97 for a short and the cost basis * 1.03 for the long.. right?</p>
+
+<p>Thank you Seong for posting this.</p>
+
+<p>Best regards,<br>
+Lovis  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='571e548052670be8560001d5' id='571e548052670be8560001d5'>
+<a href='#571e548052670be8560001d5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461605514000' class='quanto-date posted-at response-posted-at' href='#571e548052670be8560001d5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yep! If you wanted to you could simplify that like so:</p>
+
+<pre><code>def check_positions_for_loss_or_profit(context, data):  
+    # Sell our positions on longs/shorts for profit or loss  
+    profit_loss_limit = .03  
+    for security in context.portfolio.positions:  
+        is_stock_held = context.stocks_held.get(security) &gt;= 0  
+        if data.can_trade(security) and is_stock_held and not get_open_orders(security):  
+            current_position = context.portfolio.positions[security].amount  
+            cost_basis = context.portfolio.positions[security].cost_basis  
+            price = data.current(security, &#39;price&#39;)  
+            # On Long &amp; Profit  
+            if price &gt;= cost_basis * (1 + profit_loss_limit) and current_position &gt; 0:  
+                order_target_percent(security, 0)  
+                log.info( str(security) + &#39; Sold Long for Profit&#39;)  
+                del context.stocks_held[security]  
+            # On Short &amp; Profit  
+            if price &lt;= cost_basis* (1 - profit_loss_limit)  and current_position &lt; 0:  
+                order_target_percent(security, 0)  
+                log.info( str(security) + &#39; Sold Short for Profit&#39;)  
+                del context.stocks_held[security]  
+            # On Long &amp; Loss  
+            if price &lt;= cost_basis * (1 - profit_loss_limit) and current_position &gt; 0:  
+                order_target_percent(security, 0)  
+                log.info( str(security) + &#39; Sold Long for Loss&#39;)  
+                del context.stocks_held[security]  
+            # On Short &amp; Loss  
+            if price &gt;= cost_basis * (1 + profit_loss_limit)  and current_position &lt; 0:  
+                order_target_percent(security, 0)  
+                log.info( str(security) + &#39; Sold Short for Loss&#39;)  
+                del context.stocks_held[security]  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='571e8918909653cb04000492' id='571e8918909653cb04000492'>
+<a href='#571e8918909653cb04000492'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/561ec468c22ba209f700015b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7aa0a3642af5478b863f7976b21254f6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/561ec468c22ba209f700015b'>Lovis Axon</a>
+</div>
+<a UTCms='1461618972000' class='quanto-date posted-at response-posted-at' href='#571e8918909653cb04000492'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Seong,</p>
+
+<p>Cool! Thanks!<br>
+One question, how would I keep a single position rather than compounding a position? What is the code for that?</p>
+
+<p>Best regards,<br>
+Lovis  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='571f8d42123077f2170000b6' id='571f8d42123077f2170000b6'>
+<a href='#571f8d42123077f2170000b6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461685578000' class='quanto-date posted-at response-posted-at' href='#571f8d42123077f2170000b6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Lovis, I&#39;m not quite sure what you&#39;re asking. Is it related to the algorithm above? </p>
+
+<p>Here is an improved version that performs much better out-of-sample. </p>
+
+<p>The days held is set to 4 and the loss limit is set to 3%  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='571f924243f7a72ff50000da' id='571f924243f7a72ff50000da'>
+<a href='#571f924243f7a72ff50000da'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/570310bcd7137f70a000035c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fac9334eb979089dd464854c6bac8d58?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/570310bcd7137f70a000035c'>Steven Hayes</a>
+</div>
+<a UTCms='1461686859000' class='quanto-date posted-at response-posted-at' href='#571f924243f7a72ff50000da'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong </p>
+
+<p>I took your version and converted it to Long only and saw after adding PvR code that it was shorting and going into neg cash. I implemented Order Tracking, PvR and Queues into this and it no longer holds any neg cash and leverage never goes above 1.</p>
+
+<p>Credit goes to garyha on creating the PvR code, Order Tracking and Queues in other Algos.</p>
+
+<p>PvR - <a href="https://www.quantopian.com/posts/pvr-profit-vs-risk">https://www.quantopian.com/posts/pvr-profit-vs-risk</a></p>
+
+<p>Order Tracking - <a href="https://www.quantopian.com/posts/track-orders">https://www.quantopian.com/posts/track-orders</a></p>
+
+<p>Queue Logic from garyha&#39;s backtest - <a href="https://www.quantopian.com/posts/minimum-variance-w-slash-constraint#56b9683cc3c398a1c200053e">https://www.quantopian.com/posts/minimum-variance-w-slash-constraint#56b9683cc3c398a1c200053e</a></p>
+
+<p>Please let me know what you think and if you can improve further as well. This is looking like a good strategy.</p>
+
+<p>I changed the sell profit and loss limit to 5%, days to hold to 5.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57201ff5f893ae0b93000b8a' id='57201ff5f893ae0b93000b8a'>
+<a href='#57201ff5f893ae0b93000b8a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/561ec468c22ba209f700015b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7aa0a3642af5478b863f7976b21254f6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/561ec468c22ba209f700015b'>Lovis Axon</a>
+</div>
+<a UTCms='1461723136000' class='quanto-date posted-at response-posted-at' href='#57201ff5f893ae0b93000b8a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Whoa Steven!</p>
+
+<p>That is pretty tremendous!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572028837d121053c8000866' id='572028837d121053c8000866'>
+<a href='#572028837d121053c8000866'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461725322000' class='quanto-date posted-at response-posted-at' href='#572028837d121053c8000866'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a different version that only looks at earnings surprises with Estimize Consensus Estimates that are relevant for the previous quarter.</p>
+
+<p>The factor I use to determine that is here:</p>
+
+<pre><code>class DaysSinceRelease(CustomFactor):  
+    # Only getting the previous quarter&#39;s estimize surprise  
+    window_length = 1  
+    inputs = [EarningsCalendar.previous_announcement,  
+              ConsensusEstimizeEPS.previous_release_date]  
+    def compute(self, today, assets, out,  
+                earnings_announcement, estimize_release):  
+        days = estimize_release - earnings_announcement  
+        out[:] = abs(days.astype(&#39;timedelta64[D]&#39;).astype(int))  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572036e7f893ae0b93000c83' id='572036e7f893ae0b93000c83'>
+<a href='#572036e7f893ae0b93000c83'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5394bbbdeee25762d2000102'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0af1296044050e221f0e9a9593dee746?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5394bbbdeee25762d2000102'>Daniel C. Place</a>
+</div>
+<a UTCms='1461729012000' class='quanto-date posted-at response-posted-at' href='#572036e7f893ae0b93000c83'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Seong - this is a great algo! Good work! However, as I mentioned in my previous posts on some of your other algos, there is a problem with liquidity. Some of the tickers the algo trades would be too illiquid to trade. Is there a way to limit the algo to a certain volume? Aka, 1mm or more?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572036fac2a1c3d78f000875' id='572036fac2a1c3d78f000875'>
+<a href='#572036fac2a1c3d78f000875'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5394bbbdeee25762d2000102'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0af1296044050e221f0e9a9593dee746?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5394bbbdeee25762d2000102'>Daniel C. Place</a>
+</div>
+<a UTCms='1461729023000' class='quanto-date posted-at response-posted-at' href='#572036fac2a1c3d78f000875'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Seong - this is a great algo! Good work! However, as I mentioned in my previous posts on some of your other algos, there is a problem with liquidity. Some of the tickers the algo trades would be too illiquid to trade. Is there a way to limit the algo to a certain volume? Aka, 1mm or more?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720727ee688ad48c3000b3d' id='5720727ee688ad48c3000b3d'>
+<a href='#5720727ee688ad48c3000b3d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5692bcb6af4dbf78e8000279'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9f5023337790b2c05d36c516d43974dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5692bcb6af4dbf78e8000279'>Dmitry Kryuchkov</a>
+</div>
+<a UTCms='1461744263000' class='quanto-date posted-at response-posted-at' href='#5720727ee688ad48c3000b3d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Steven - the algo looks pretty impressive! I did run a backtest and a huge bump in returns around 2015/Feb/05 - 2015/Feb/06 got me curious, but I don&#39;t quite get what happened there. </p>
+
+<p>Analysing portfolio/transactions around those dates I have discovered that majority of that profit comes from selling 256 shares of HBI on Feb 6th, even though portfolio had only 64 shares the day before. </p>
+
+<p>@Seong does it look like a bug to you?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720b88143f7a77eea000135' id='5720b88143f7a77eea000135'>
+<a href='#5720b88143f7a77eea000135'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5720b2d7c2a1c3946a000d76'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/dbc530decd799e4b50d01f16f21888a7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5720b2d7c2a1c3946a000d76'>Jeremy Engholm</a>
+</div>
+<a UTCms='1461762184000' class='quanto-date posted-at response-posted-at' href='#5720b88143f7a77eea000135'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Dmitry - HBI (Hanesbrands) had a 4-1 stock split.</p>
+
+<p><a href="http://www.journalnow.com/business/business_news/local/hanesbrands-announces--for--stock-split-percent-dividend-increase/article_c6245048-a708-11e4-a866-13a2f3972e95.html">http://www.journalnow.com/business/business_news/local/hanesbrands-announces--for--stock-split-percent-dividend-increase/article_c6245048-a708-11e4-a866-13a2f3972e95.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720ca017d12101834000e4c' id='5720ca017d12101834000e4c'>
+<a href='#5720ca017d12101834000e4c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461766661000' class='quanto-date posted-at response-posted-at' href='#5720ca017d12101834000e4c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dmitry,</p>
+
+<p>That does look like a pricing bug to me. I&#39;ve filed the issue internally.</p>
+
+<p>Here&#39;s your version of the algorithm (which is different from mine as yours only goes long, includes PvR, diff capital base) without HBI included.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720cda743f7a77eea000217' id='5720cda743f7a77eea000217'>
+<a href='#5720cda743f7a77eea000217'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5394bbbdeee25762d2000102'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0af1296044050e221f0e9a9593dee746?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5394bbbdeee25762d2000102'>Daniel C. Place</a>
+</div>
+<a UTCms='1461767600000' class='quanto-date posted-at response-posted-at' href='#5720cda743f7a77eea000217'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Seong - thanks for the update! However, is there a way to keep it long/short without jeopardizing liquidity? Or is that due to the bug?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720d7348e937372520003d8' id='5720d7348e937372520003d8'>
+<a href='#5720d7348e937372520003d8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461770044000' class='quanto-date posted-at response-posted-at' href='#5720d7348e937372520003d8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Daniel, we already have liquidity filters in place. Please adjust that to what you&#39;re looking for.</p>
+
+<pre><code>    # Screen out penny stocks and low liquidity securities.  
+    dollar_volume = AverageDollarVolume(window_length=20)  
+    is_liquid = dollar_volume &gt; 10**7  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720dada4bae79cd3700000e' id='5720dada4bae79cd3700000e'>
+<a href='#5720dada4bae79cd3700000e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461770981000' class='quanto-date posted-at response-posted-at' href='#5720dada4bae79cd3700000e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I meant to reference @Dmitry in my reply this morning about HBI&#39;s pricing issue  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5720dbea8e9373725200040e' id='5720dbea8e9373725200040e'>
+<a href='#5720dbea8e9373725200040e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51dda99861406be3ed000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f8b2bd25cb49c26ebb20282e16df66eb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51dda99861406be3ed000001'>Martin Clasen</a>
+</div>
+<a UTCms='1461771249000' class='quanto-date posted-at response-posted-at' href='#5720dbea8e9373725200040e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@SEong - It&#39;s a very interesting strategy, congratulations!</p>
+
+<p>But I think it has a disadvantage:<br>
+In the case that just a single company fits the requirements, it will set 100% of the capital in this company.<br>
+This increases the volatility and exposure.</p>
+
+<p>Maybe, you can set a minimun percent for each asset:  </p>
+
+<p><code>order_target_percent(security, min(1.0 / len(positive_stocks), 0.5))</code></p>
+
+<p>And max() for short:<br>
+<code>order_target_percent(security, **max**(-1.0 / len(negative_stocks), -0.5))</code></p>
+
+<p>Thanks,  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5721a3c4147e8c84fe00064b' id='5721a3c4147e8c84fe00064b'>
+<a href='#5721a3c4147e8c84fe00064b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51dda99861406be3ed000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f8b2bd25cb49c26ebb20282e16df66eb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51dda99861406be3ed000001'>Martin Clasen</a>
+</div>
+<a UTCms='1461822412000' class='quanto-date posted-at response-posted-at' href='#5721a3c4147e8c84fe00064b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I cloned this(*) version and the max/min change reduces the drawdown (0.13 to 0.9) and the volatility (0.19 to 0.14) also the returns.</p>
+
+<p>(*) <a href="https://www.quantopian.com/posts/long-slash-short-earnings-sentiment-trading-strategy#572028837d121053c8000866">https://www.quantopian.com/posts/long-slash-short-earnings-sentiment-trading-strategy#572028837d121053c8000866</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572218d0042b971831000b15' id='572218d0042b971831000b15'>
+<a href='#572218d0042b971831000b15'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461852376000' class='quanto-date posted-at response-posted-at' href='#572218d0042b971831000b15'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Edit: Thanks for posting Martin, my previous reply was out of place. This is a great algorithm!</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572272ec95e86deee7000145' id='572272ec95e86deee7000145'>
+<a href='#572272ec95e86deee7000145'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/561ec468c22ba209f700015b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7aa0a3642af5478b863f7976b21254f6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/561ec468c22ba209f700015b'>Lovis Axon</a>
+</div>
+<a UTCms='1461875444000' class='quanto-date posted-at response-posted-at' href='#572272ec95e86deee7000145'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Seong,</p>
+
+<p>My previous question is a general question... In the source code above I am wondering what limits order execution. I know you can use the schedule function to limit the number of times it trades... however this doesn&#39;t seem to work very effectively. </p>
+
+<p>What I am trying to communicate is how do you tell the computer to enter a position and hold it rather than add to the position if the criteria is met?</p>
+
+<p>In the above example I see &quot;and current_position &gt; 0&quot; for a long profit and &quot;current_position &lt; 0&quot; for a short profit.... does this simple code tell the computer to take a position and hold it until the 3% profit is achieved? Or is there a different code in this algorithm that tells the computer to do this?</p>
+
+<p>What is the code in the above algorithm that says... ? &quot;Take a position and <em>hold it</em> until 3% profit is achieved.&quot; The holding part is what I am confused about, I want to understand this.</p>
+
+<p>Best,<br>
+Lovis  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5722743af61c42ea2e0000c0' id='5722743af61c42ea2e0000c0'>
+<a href='#5722743af61c42ea2e0000c0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1461875774000' class='quanto-date posted-at response-posted-at' href='#5722743af61c42ea2e0000c0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Lovis,</p>
+
+<p>We enter the positions in <code>order_positions</code>. These positions are held until either a 3% profit  or loss is achieved (<code>check_positions_for_loss_or_profit</code>) OR 4 days have passed since we&#39;ve entered that stock (<code>order_positions</code>). </p>
+
+<p>It seems like you are asking a general python and Quantopian question. Going through our tutorial (<a href="https://www.quantopian.com/tutorials/getting-started">https://www.quantopian.com/tutorials/getting-started</a>) will most certainly answer most of the questions you have about how Quantopian algorithms operate.</p>
+
+<p>Thanks!<br>
+Seong  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5726651e02dd629e9a000266' id='5726651e02dd629e9a000266'>
+<a href='#5726651e02dd629e9a000266'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5724c7bb05b24984fd000054'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/440357c2676c68ee09ca4f67c3a1b5c5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5724c7bb05b24984fd000054'>Koon Hua Lee</a>
+</div>
+<a UTCms='1462134051000' class='quanto-date posted-at response-posted-at' href='#5726651e02dd629e9a000266'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My first post here. </p>
+
+<p>I am not sure if I should post because I did nothing except tweaked the take profit and stop loss percent, as well as the weightage. Take profit at 7%, stop loss 4%. Weightage for long at 98%, weightage for short at 25%. A long only strategy (just comment out the line to short) would produce even better return at 108% over the same period, but it&#39;d have periods where it dips into the red region (i.e. dropping below starting capital) during November and December 2012. High weightage on shorts seems to produce poorer result during bull market. But without shorts the performance tanks when there is correction.</p>
+
+<p>I&#39;d say with more tweaking, and addition of other parameters the performance could be pushed further. I like high Sortino ratio for consistency, as well as low 6% max drawdown.</p>
+
+<p>Thanks for providing a framework for newcomers to learn.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57266f4e8536acdb110003cd' id='57266f4e8536acdb110003cd'>
+<a href='#57266f4e8536acdb110003cd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5724c7bb05b24984fd000054'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/440357c2676c68ee09ca4f67c3a1b5c5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5724c7bb05b24984fd000054'>Koon Hua Lee</a>
+</div>
+<a UTCms='1462136664000' class='quanto-date posted-at response-posted-at' href='#57266f4e8536acdb110003cd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is the long-only version, the other parameters should be the same as above.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57278d9443d39a05300003b2' id='57278d9443d39a05300003b2'>
+<a href='#57278d9443d39a05300003b2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1462209945000' class='quanto-date posted-at response-posted-at' href='#57278d9443d39a05300003b2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great algo Koon,</p>
+
+<p>Here&#39;s the out-of-sample results of your algorithm (long/short version) excluding HBI (due to the data issues addressed with Dmitry above).  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5728ab8fe32722718e000008' id='5728ab8fe32722718e000008'>
+<a href='#5728ab8fe32722718e000008'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5724c7bb05b24984fd000054'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/440357c2676c68ee09ca4f67c3a1b5c5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5724c7bb05b24984fd000054'>Koon Hua Lee</a>
+</div>
+<a UTCms='1462283158000' class='quanto-date posted-at response-posted-at' href='#5728ab8fe32722718e000008'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>How would it perform over a longer period of years? Like 10 years? I don&#39;t have the subscription to run longer test yet, would appreciate if you could post one.</p>
+
+<p>Thank you.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572a2ac7e9d1125121000080' id='572a2ac7e9d1125121000080'>
+<a href='#572a2ac7e9d1125121000080'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1462381266000' class='quanto-date posted-at response-posted-at' href='#572a2ac7e9d1125121000080'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Koon,</p>
+
+<p>I&#39;ve run this over the timeframe that the dataset is available for (Accern is available starting October 2012 ~ present day with full subscription). I&#39;ve also excluded HBI from the list of securities.</p>
+
+<p>Beta is a little high so if your goal is to enter this in the contest, it may need some work adjusting the weight on short positions.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572ac83fe3fe11ed9d000572' id='572ac83fe3fe11ed9d000572'>
+<a href='#572ac83fe3fe11ed9d000572'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5724c7bb05b24984fd000054'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/440357c2676c68ee09ca4f67c3a1b5c5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5724c7bb05b24984fd000054'>Koon Hua Lee</a>
+</div>
+<a UTCms='1462421578000' class='quanto-date posted-at response-posted-at' href='#572ac83fe3fe11ed9d000572'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi,</p>
+
+<p>Thanks Seong Lee.</p>
+
+<p>In make_pipeline, I tried to add the below line<br>
+b_profitable = morningstar.asset_classification.growth_grade == &quot;A&quot;</p>
+
+<p>The compiler returned:<br>
+NotPipelineCompatible: 0079 asset_classification.profitability_grade is not currently available in the Pipeline API</p>
+
+<p>How do I use get_fundamentals() alongside pipeline? get_fundamentals() has to be used inside before_trading_start. Below is the before_trading_start() in the code you provided.</p>
+
+<p>def before_trading_start(context, data):<br>
+results = pipeline_output(&#39;estimize&#39;)<br>
+    results = results[results[&#39;pe&#39;] == 1]<br>
+    assets_in_universe = results.index<br>
+    context.positive_surprise = assets_in_universe[results.longs]<br>
+    context.negative_surprise = assets_in_universe[results.shorts]</p>
+
+<p>Could you provide an example on how to use the get_fundamental() to create a filter in before_trading_start()?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='572b6c5592fccb3f90000b4a' id='572b6c5592fccb3f90000b4a'>
+<a href='#572b6c5592fccb3f90000b4a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54487203dc843663f2000123'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/439ba1adf33b808f2d50e3a31c3c7e28?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54487203dc843663f2000123'>Josh Payne</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1462463579000' class='quanto-date posted-at response-posted-at' href='#572b6c5592fccb3f90000b4a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Koon,</p>
+
+<p>We&#39;re actively working on a feature that will allow you to use profitability grade (and other string based fundamental data points) in pipeline. Keep your eyes on the forums for an announcement.</p>
+
+<p>Thanks<br>
+Josh  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5746f94d988c46b41f00074d' id='5746f94d988c46b41f00074d'>
+<a href='#5746f94d988c46b41f00074d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/567960529087fe25700000ba'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4ffc1f96a9e0bc26bacd5ed1309c8901?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/567960529087fe25700000ba'>Dennis Meinecke</a>
+</div>
+<a UTCms='1464269141000' class='quanto-date posted-at response-posted-at' href='#5746f94d988c46b41f00074d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I am trying to trade this Algo via Paper trade and it has not traded for the last week. When back testing I see trades however. I am subscripted to the datasets. Any help would be appreciated.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='574700ac99abb462d90007f5' id='574700ac99abb462d90007f5'>
+<a href='#574700ac99abb462d90007f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1464271025000' class='quanto-date posted-at response-posted-at' href='#574700ac99abb462d90007f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Dennis, here is a backtest during that same time period and it appears that none of the earnings announcements met the trade criteria:</p>
+
+<pre><code>2016-05-17 before_trading_start:140 INFO                       longs  pe shorts  
+Equity(110 [ACXM])    False   1  False  
+Equity(3496 [HD])     False   1  False  
+Equity(7457 [TJX])    False   1  False  
+Equity(8229 [WMT])    False   1  False  
+Equity(23904 [RRGB])  False   1  False  
+Equity(24789 [PLCE])  False   1  False  
+2016-05-18 before_trading_start:140 INFO                       longs  pe shorts  
+Equity(122 [ADI])     False   1  False  
+Equity(1900 [CSCO])   False   1  False  
+Equity(2876 [FLO])    False   1  False  
+Equity(3668 [HRL])    False   1  False  
+Equity(4521 [LOW])    False   1  False  
+Equity(6018 [PLAB])   False   1  False  
+Equity(6994 [SNPS])   False   1  False  
+Equity(7061 [SPLS])   False   1  False  
+Equity(7173 [STE])    False   1  False  
+Equity(11086 [AEO])   False   1  False  
+Equity(11120 [EXP])   False   1  False  
+Equity(16820 [TTWO])  False   1  False  
+Equity(21090 [TGT])   False   1  False  
+Equity(26401 [CRM])   False   1  False  
+Equity(27251 [CTRN])  False   1  False  
+Equity(40420 [BAH])   False   1  False  
+Equity(42738 [RXN])   False   1  False  
+Equity(47980 [BOOT])  False   1  False  
+2016-05-19 before_trading_start:140 INFO                       longs  pe shorts  
+Equity(337 [AMAT])    False   1  False  
+Equity(1078 [BRC])    False   1  False  
+Equity(3321 [GPS])    False   1  False  
+Equity(4794 [MENT])   False   1  False  
+Equity(4945 [MNRO])   False   1  False  
+Equity(6311 [QSII])   False   1  False  
+Equity(6546 [ROST])   False   1  False  
+Equity(6969 [SMRT])   False   1  False  
+Equity(7623 [TTC])    False   1  False  
+Equity(8229 [WMT])    False   1  False  
+Equity(8733 [SCVL])   False   1  False  
+Equity(13289 [TK])    False   1  False  
+Equity(20061 [BRCD])  False   1  False  
+Equity(20269 [PERY])  False   1  False  
+Equity(22889 [EGHT])  False   1  False  
+Equity(23175 [AAP])   False   1  False  
+Equity(23395 [SSI])   False   1  False  
+Equity(24070 [DKS])   False   1  False  
+Equity(26542 [ELOS])  False   1  False  
+Equity(27224 [TGP])   False   1  False  
+Equity(33041 [TOO])   False   1  False  
+Equity(34277 [HGG])   False   1  False  
+2016-05-22 before_trading_start:140 INFO                       longs  pe shorts  
+Equity(915 [BKE])     False   1  False  
+Equity(1795 [CPB])    False   1  False  
+Equity(8383 [FL])     False   1  False  
+Equity(15815 [HIBB])  False   1  False  
+2016-05-23 before_trading_start:140 INFO                      longs  pe shorts  
+Equity(5253 [NDSN])  False   1  False  
+2016-05-24 before_trading_start:140 INFO                       longs  pe shorts  
+Equity(693 [AZO])     False   1  False  
+Equity(1898 [CSC])    False   1  False  
+Equity(2385 [DY])     False   1  False  
+Equity(7530 [TOL])    False   1  False  
+Equity(7895 [VAL])    False   1  False  
+Equity(8655 [INTU])   False   1  False  
+Equity(16307 [VSAT])  False   1  False  
+Equity(23873 [KIRK])  False   1  False  
+Equity(27409 [DSW])   False   1  False  
+Equity(46002 [NMBL])  False   1  False  
+Equity(46777 [SPWH])  False   1  False  
+Equity(46876 [TOUR])  False   1  False  
+Equity(49506 [HPE])   False   1  False  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5755e7254af570ef88000385' id='5755e7254af570ef88000385'>
+<a href='#5755e7254af570ef88000385'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571f975d43f7a730c3000156'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c30f0c3570b0a382146ed76a5318589d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571f975d43f7a730c3000156'>Lyth Alobiedat</a>
+</div>
+<a UTCms='1465247529000' class='quanto-date posted-at response-posted-at' href='#5755e7254af570ef88000385'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Guys (this is my first post in the forums!),<br>
+So I put more work into this than I care to admit, but I&#39;ve corrected a few issues here:<br>
+-The issue of the algorithm entering short positions when you&#39;ve only weighted for long that Steven Hayes identified<br>
+-Fixed how surprise was calculated for negative earnings as it was providing incorrect information which caused shorts to enter incorrect positions<br>
+-Fixed an issue where it was investing too deeply into securities that it couldn&#39;t easily liquidate out of when portfolios got too large<br>
+-Optimized the days held and weightings</p>
+
+<p>I think investing into each valid position equally is not the best idea in the end, I&#39;m currently toying with the idea of adding a new signal into the pipeline to sort the strength of each position and weight our entries amounts by that signal. Hopefully someone else can build off this.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='575724054363f8cca90002ab' id='575724054363f8cca90002ab'>
+<a href='#575724054363f8cca90002ab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571f975d43f7a730c3000156'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c30f0c3570b0a382146ed76a5318589d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571f975d43f7a730c3000156'>Lyth Alobiedat</a>
+</div>
+<a UTCms='1465328653000' class='quanto-date posted-at response-posted-at' href='#575724054363f8cca90002ab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quick Update to previous algorithm, it actually needs even further reduction in investment with large portfolios so I pegged it down to a flat 1% (from 1.25%) of the mean trading volume over the past 30 days.</p>
+
+<p>I also added a couple lines to invest into SPY when not investing into any other long positions. Since earnings reports all come out generally around the same time and there&#39;s a lot of downtime for the algorithm, why not place the money somewhere more productive? This could be elaborated on.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57598d33d0744a8c98000132' id='57598d33d0744a8c98000132'>
+<a href='#57598d33d0744a8c98000132'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1465486648000' class='quanto-date posted-at response-posted-at' href='#57598d33d0744a8c98000132'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Lyth,</p>
+
+<p>Here&#39;s the same algorithm, but without the inclusion of HBI into your universe as there have been some data issues with that security.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5759928bd0744abc95000175' id='5759928bd0744abc95000175'>
+<a href='#5759928bd0744abc95000175'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1465488016000' class='quanto-date posted-at response-posted-at' href='#5759928bd0744abc95000175'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Koon,</p>
+
+<p>I do appreciate the request. In order to run that backtest you&#39;re able to subscribe to the premium sets during that time period. Or you may try and collaborate with other folks on this thread. </p>
+
+<p>Seong  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='575992ffc8d0b60285000185' id='575992ffc8d0b60285000185'>
+<a href='#575992ffc8d0b60285000185'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5724c7bb05b24984fd000054'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/440357c2676c68ee09ca4f67c3a1b5c5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5724c7bb05b24984fd000054'>Koon Hua Lee</a>
+</div>
+<a UTCms='1465488132000' class='quanto-date posted-at response-posted-at' href='#575992ffc8d0b60285000185'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong,</p>
+
+<p>Alright, thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5759d4adc8d0b6028500048e' id='5759d4adc8d0b6028500048e'>
+<a href='#5759d4adc8d0b6028500048e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571f975d43f7a730c3000156'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c30f0c3570b0a382146ed76a5318589d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571f975d43f7a730c3000156'>Lyth Alobiedat</a>
+</div>
+<a UTCms='1465504947000' class='quanto-date posted-at response-posted-at' href='#5759d4adc8d0b6028500048e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Seong, I actually didn&#39;t connect the HBI discussion to that line in code and must have taken it out because I didn&#39;t understand it. I&#39;ve placed it back in. Here&#39;s a new algorithm with the following changes</p>
+
+<p>-This algorithm now takes advantage of Accerns impact score<br>
+-Stocks with low impact score (lower than 20) are filtered out<br>
+-Weights are now determined by impact store<br>
+-Also I lowered the amount of downtime investment from 100% to 95% to match the long equity investment.</p>
+
+<p>At this point I&#39;m happy with where the algorithm is at so now I think it might be best to focus on the what the algorithm does when it&#39;s not actively trading the strategy. Currently it puts it all in SPY but this seems like a good opportunity to insert a different trading strategy!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5759d8d0d0744a8c980004b3' id='5759d8d0d0744a8c980004b3'>
+<a href='#5759d8d0d0744a8c980004b3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1465506007000' class='quanto-date posted-at response-posted-at' href='#5759d8d0d0744a8c980004b3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Nice work Lyth! </p>
+
+<p>That may be a helpful way to take your research as it seems that for the past few days very few earnings announcements have met the filter criteria.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='575aca69628da006930003ac' id='575aca69628da006930003ac'>
+<a href='#575aca69628da006930003ac'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1465567857000' class='quanto-date posted-at response-posted-at' href='#575aca69628da006930003ac'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quoting John Harper on this thread: <a href="https://www.quantopian.com/posts/news-and-blog-sentiment-pipeline-factors-with-accern#5759ec3b700321e3df000a47">https://www.quantopian.com/posts/news-and-blog-sentiment-pipeline-factors-with-accern#5759ec3b700321e3df000a47</a></p>
+
+<pre><code>http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2792559#%23
+
+Abstract:
+
+This paper uses a dataset of more than 900,000 news stories to test whether news can predict stock returns. We measure sentiment with a proprietary Thomson-Reuters neural network. We find that daily news predicts stock returns for only 1 to 2 days, confirming previous research. Weekly news, however, predicts stock returns for one quarter. Positive news stories increase stock returns quickly, but negative stories have a long delayed reaction. Much of the delayed response to news occurs around the subsequent earnings announcement.  
+</code></pre>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57618aa50e521ebdd9000257' id='57618aa50e521ebdd9000257'>
+<a href='#57618aa50e521ebdd9000257'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571f975d43f7a730c3000156'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c30f0c3570b0a382146ed76a5318589d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571f975d43f7a730c3000156'>Lyth Alobiedat</a>
+</div>
+<a UTCms='1466010284000' class='quanto-date posted-at response-posted-at' href='#57618aa50e521ebdd9000257'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong,<br>
+Is there a way to act on Earnings Reports the next market open after the information is available and not the market day after?<br>
+Setting pe to zero or adding an ne (for next earnings) and setting it to zero seems to not return any results in the algorithm.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5763f6d8578aafea7b00003a' id='5763f6d8578aafea7b00003a'>
+<a href='#5763f6d8578aafea7b00003a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1466169055000' class='quanto-date posted-at response-posted-at' href='#5763f6d8578aafea7b00003a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Lyth, that&#39;s a great question and I hope to do my best in answering it.</p>
+
+<p>I generally wouldn&#39;t advice on trying to act on Earnings Reports on the market open because of one main reason:</p>
+
+<ul>
+<li>At the moment, you do not have an accurate way of knowing whether or not an earnings announcement was before or after market open. In the case that it was after market open and your logic is testing for <code>nextearningsannouncement == 0</code>, you&#39;ll essentially miss all earnings reports that fall after 4:00PM.<br></li>
+<li>Because pipeline provides data on a daily basis, Estimize&#39;s consensus estimates and Accern&#39;s alphaone are both getting yesterday&#39;s data, today. This is why your algorithm is not making any trades, because the data present on <code>t==0</code> aren&#39;t meeting the necessary conditions for the algorithm to trade. </li>
+</ul>
+
+<p>Hope that helps and I&#39;m happy to help answer any questions</p>
+
+<p>Seong  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5768080924de7452d40000dc' id='5768080924de7452d40000dc'>
+<a href='#5768080924de7452d40000dc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1466435599000' class='quanto-date posted-at response-posted-at' href='#5768080924de7452d40000dc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Also as an observation, I&#39;ve been live trading this example strategy for a few weeks now and it seems that in the past 30~ days, it hasn&#39;t made any trades. From what I know it could be for a few reasons:</p>
+
+<ul>
+<li>The trading signal triggers are not being triggered by the earnings announcements (perhaps the percent limits are too strict)<br></li>
+<li>Estimize&#39;s data coverage as compared to someone like Zack&#39;s is a lot smaller, so the mix of small coverage and the current time of year  contribute to the lack of triggered trades</li>
+</ul>
+
+<p>Overall, the backtested strategy had relatively few trades and I would suggest more work is needed to make it robust enough to be holding positions consistently as opposed to all cash (similar to what Lyth has worked on).</p>
+
+<p><a href="https://www.quantopian.com/data/zacks/earnings_surprises">With analyst earnings surprises from Zacks available soon in pipeline and estimates to follow</a>, it&#39;ll be interesting to see how the two will compare. </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57851db0332c2ea8650007ee' id='57851db0332c2ea8650007ee'>
+<a href='#57851db0332c2ea8650007ee'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/567960529087fe25700000ba'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4ffc1f96a9e0bc26bacd5ed1309c8901?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/567960529087fe25700000ba'>Dennis Meinecke</a>
+</div>
+<a UTCms='1468341687000' class='quanto-date posted-at response-posted-at' href='#57851db0332c2ea8650007ee'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Has anyone modified the strategy to use Zacks yet?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='578929e8bf0d5be53d000175' id='578929e8bf0d5be53d000175'>
+<a href='#578929e8bf0d5be53d000175'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1468606958000' class='quanto-date posted-at response-posted-at' href='#578929e8bf0d5be53d000175'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>We&#39;ve recently found an issue with the Estimize Consensus Estimates dataset in how updates are being made. While we&#39;re still investigating the problem, what we know so far is that updates to the dataset are not properly being delivered to algorithms. This appears to have been happening since the beginning of June, 2016. </p>
+
+<p>To prevent algorithms from using this dataset until we&#39;ve addressed and implemented the solution, we&#39;re shutting down access to the Estimize Consensus Estimate starting Monday, July 18th.</p>
+
+<p>This algorithm has instead been modified to use analyst earnings surprises from Zacks  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='578d3b5b42af719b300001e4' id='578d3b5b42af719b300001e4'>
+<a href='#578d3b5b42af719b300001e4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51cbb24ab03fe0bc5500000e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12b8399e99c8eab21b6bf2ac1d1da84a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51cbb24ab03fe0bc5500000e'>Seong Lee</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1468873567000' class='quanto-date posted-at response-posted-at' href='#578d3b5b42af719b300001e4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Access to the Estimize dataset will temporarily be shut down starting today.</p>
+
+<p>We&#39;ve identified an issue with the Estimize dataset that prevented updates to the data starting June, 2016. All subscribers have been notified and we are taking steps to implement a solution. </p>
+
+<p>For an alternative version using Wall Street Consensus Estimates, please view this thread:  <a href="https://www.quantopian.com/posts/updated-long-slash-short-earnings-sentiment-trading-strategy-with-the-streets-consesus">https://www.quantopian.com/posts/updated-long-slash-short-earnings-sentiment-trading-strategy-with-the-streets-consesus</a>  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58bea46a3c13c0379624d9e9' id='58bea46a3c13c0379624d9e9'>
+<a href='#58bea46a3c13c0379624d9e9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58b2e548ddd4f2000d458b58'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4984bbb7b06e4cf38ad2cccbe3ea55b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58b2e548ddd4f2000d458b58'>Karen Xu</a>
+</div>
+<a UTCms='1488888938000' class='quanto-date posted-at response-posted-at' href='#58bea46a3c13c0379624d9e9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, Seong<br>
+Thanks for your strategy!<br>
+Could you recommend me some articles about how you get the surprise limitation ,the profit limitation and sentiment limitation? </p>
+
+<p>Karen  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58bf724ed4de1e416aa9c442' id='58bf724ed4de1e416aa9c442'>
+<a href='#58bf724ed4de1e416aa9c442'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/587e55d1ab3c4473b3b2393b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/44f1cc9fd81d26119a39723f4f64c37b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/587e55d1ab3c4473b3b2393b'>Neo Wong</a>
+</div>
+<a UTCms='1488941646000' class='quanto-date posted-at response-posted-at' href='#58bf724ed4de1e416aa9c442'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Seong,</p>
+
+<p>I do not quite understand why you set a maximum for surprise magnitude. After all, won&#39;t greater surprise generate greater momentum? Say in Case 1 the actual beats the estimate by 10% and in Case 2 the actual beats the estimate by 5%. I would expect more upward price movement in Case 1 than in Case 2. Why set a maximum to NOT trade Case 2? What is the rationale for setting the surprise range? Thanks!</p>
+
+<p>Neo  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/long-slash-short-earnings-sentiment-trading-strategy'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/long-slash-short-earnings-sentiment-trading-strategy'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#593f3c3c3d3b383a3219282c38372d3629303837773a3634">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

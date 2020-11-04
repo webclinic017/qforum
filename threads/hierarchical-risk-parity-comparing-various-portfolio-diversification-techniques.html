@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Hierarchical Risk Parity: Comparing various Portfolio Diversification Techniques
+</title>
+<meta content='Lopez de Prado recently published a paper titled &quot;Building Diversified Portfolios that Outperform Out-of-Sample&quot; on SSRN, you can download it here:  http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2708678 . In it, he describes a new portfolio diversification technique called &quot;Hierarchical Risk Parity&quot; (HRP). The main idea is to run hierarchical clustering on the covariance matrix of stock returns and then find a diversified weighting by distributing capital equally to each cluster...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="HmcNRT01eR3uSUKy8nu5ix/0WlR3ySkyz39G002dt9RiAXsIn8Or/ldUG4O9lBH/J3p5PQ0FPClNcJ2559jVbw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques' property='og:url'>
+<meta content='Hierarchical Risk Parity: Comparing various Portfolio Diversification Techniques' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Hierarchical Risk Parity: Comparing various Portfolio Diversification Techniques' property='og:title'>
+<meta content='Lopez de Prado recently published a paper titled &quot;Building Diversified Portfolios that Outperform Out-of-Sample&quot; on SSRN, you can download it here:  http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2708678 . In it, he describes a new portfolio diversification technique called &quot;Hierarchical Risk Parity&quot; (HRP). The main idea is to run hierarchical clustering on the covariance matrix of stock returns and then find a diversified weighting by distributing capital equally to each cluster...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='577faac3a0e29525b0000a3a'>
+<div class='post-container' data-post-id='577faac3a0e29525b0000a3a' id='577faac3a0e29525b0000a3a'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Hierarchical Risk Parity: Comparing various Portfolio Diversification Techniques</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1544543982000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Hierarchical Risk Parity: Comparing various Portfolio Diversification Techniques&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhierarchical-risk-parity-comparing-various-portfolio-diversification-techniques%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhierarchical-risk-parity-comparing-various-portfolio-diversification-techniques%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhierarchical-risk-parity-comparing-various-portfolio-diversification-techniques%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhierarchical-risk-parity-comparing-various-portfolio-diversification-techniques%26utm_medium%3Dlinkedin&amp;title=Hierarchical+Risk+Parity%3A+Comparing+various+Portfolio+Diversification+Techniques+%28Thomas+Wiecki%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Finance Theory' data-tag-id='55c50e7d8d4710ec6e000002' href='/posts/tag/Finance-Theory/newest'>Finance Theory</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Portfolio Optimization' data-tag-id='55d33f293f6ba10061000000' href='/posts/tag/Portfolio-Optimization/newest'>Portfolio Optimization</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Asset Allocation' data-tag-id='55d33f4f3f6ba10061000001' href='/posts/tag/Asset-Allocation/newest'>Asset Allocation</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='ETFs' data-tag-id='55d33f633f6ba10065000001' href='/posts/tag/ETFs/newest'>ETFs</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques?utm_source=website_share&amp;utm_campaign=hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Thomas Wiecki" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Lopez de Prado recently published a paper titled &quot;Building Diversified Portfolios that Outperform Out-of-Sample&quot; on SSRN, you can download it here: <a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2708678">http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2708678</a>. In it, he describes a new portfolio diversification technique called &quot;Hierarchical Risk Parity&quot; (HRP).</p>
+
+<p>The main idea is to run hierarchical clustering on the covariance matrix of stock returns and then find a diversified weighting by distributing capital equally to each cluster hierarchy (so that many correlated strategies will receive the same total allocation as a single uncorrelated one). This gets around the issue of inverting the covariance matrix to perform more classic Markowitz Mean-Variance optimization (for more detail, see this blog post: <a href="http://blog.quantopian.com/markowitz-portfolio-optimization-2/">http://blog.quantopian.com/markowitz-portfolio-optimization-2/</a>) which in turn should improve numerical stability. The author runs some simulation experiments to show that while Mean-Variance leads to the lowest volatility in-sample, it leads to very high volatility out-of-sample. The newly proposed HRP does best out-of-sample. For more details on HRP, see the original publication.</p>
+
+<p>While I like the approach of using simulations, it is of course also of interest to compare how these methods perform on actual stock-market data. Towards this goal I took 20 ETFs (the set was provided by Jochen Papenbrock) and compared various diversification methods in a walk-forward manner. Thus, the results presented below are all out-of-sample.</p>
+
+<p>Specifically, we will be comparing:</p>
+
+<ul>
+<li>Equal weighting<br></li>
+<li>Inverse Variance weighting<br></li>
+<li>Mean-Variance (classic Markowitz)<br></li>
+<li>Minimum-Variance (Markowitz which only takes correlations into account, not mean returns)<br></li>
+<li>Hierarchical Risk Parity (by Lopez de Prado)</li>
+</ul>
+
+<p>The HRP code was directly adapted from the Python code provided by Lopez de Prado.</p>
+
+<p>In addition to the above methods, I also add a &quot;Robust&quot; version of the last three weighting techniques. This uses the original technique but instead of computing the covariance matrix directly, we apply some regularization using <code>scikit-learn</code> and the Oracle Approximating Shrinkage Estimator (<a href="http://scikit-learn.org/stable/modules/generated/sklearn.covariance.OAS.html">http://scikit-learn.org/stable/modules/generated/sklearn.covariance.OAS.html</a>). In essence, this technique shrinks very large values in the covariance matrix to make the estimation more robust.</p>
+
+<p>There is whole lot of code to compute the weighting in the beginning, you can just skip directly to the results at the bottom.</p>
+
+<p>Disclaimer:<br>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory or other services by Quantopian.</p>
+
+<p>In addition, the content of the website neither constitutes investment advice nor offers any opinion with respect to the suitability of any security or any specific investment. Quantopian makes no guarantees as to accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.  </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>66 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='577fbebb4a786a0b07000b66' id='577fbebb4a786a0b07000b66'>
+<a href='#577fbebb4a786a0b07000b66'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1467989697000' class='quanto-date posted-at response-posted-at' href='#577fbebb4a786a0b07000b66'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Nice!  Is it fast enough to use in an algo?  I&#39;ve had best results with sample bootstrapping of mean-variance (or whatever), 100 draws of 6 months of data from the last two years, or whatever.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='577fcb3099bc5f9e81000cc9' id='577fcb3099bc5f9e81000cc9'>
+<a href='#577fcb3099bc5f9e81000cc9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1467992889000' class='quanto-date posted-at response-posted-at' href='#577fcb3099bc5f9e81000cc9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yes, should definitely be fast enough, there&#39;s really nothing fancy going on. I like the bootstrapping idea to add robustness.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='577fccb14a786a63f800003f' id='577fccb14a786a63f800003f'>
+<a href='#577fccb14a786a63f800003f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/514a23ed46a2329dd8000027'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f292ab7887c2e8698d013b40e1718e8b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/514a23ed46a2329dd8000027'>Suminda Dharmasena</a>
+</div>
+<a UTCms='1467993271000' class='quanto-date posted-at response-posted-at' href='#577fccb14a786a63f800003f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can you replace cvxopt with a library which is whitelisted in backtesting and not GPLed? Is there any equivalent functions in any of the whitelisted numerical libraries?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='577fcf03717f61f89d0005d9' id='577fcf03717f61f89d0005d9'>
+<a href='#577fcf03717f61f89d0005d9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1467993865000' class='quanto-date posted-at response-posted-at' href='#577fcf03717f61f89d0005d9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>cvxopt should be whitelisted in backtesting. In any case, what the results show though is that you definitely don&#39;t want to use Markowitz. The Hierarchical Risk Parity only needs numpy.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780c2a50b8ddbefbb000766' id='5780c2a50b8ddbefbb000766'>
+<a href='#5780c2a50b8ddbefbb000766'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468056239000' class='quanto-date posted-at response-posted-at' href='#5780c2a50b8ddbefbb000766'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>A couple of thoughts. The universe of 20 etfs have been chosen to be somewhat diversified:</p>
+
+<pre><code>symbols = [u&#39;EEM&#39;, u&#39;EWG&#39;, u&#39;TIP&#39;, u&#39;EWJ&#39;, u&#39;EFA&#39;, u&#39;IEF&#39;, u&#39;EWQ&#39;,  
+           u&#39;EWU&#39;, u&#39;XLB&#39;, u&#39;XLE&#39;, u&#39;XLF&#39;, u&#39;LQD&#39;, u&#39;XLK&#39;, u&#39;XLU&#39;,  
+           u&#39;EPP&#39;, u&#39;FXI&#39;, u&#39;VGK&#39;, u&#39;VPL&#39;, u&#39;SPY&#39;, u&#39;TLT&#39;, u&#39;BND&#39;,  
+           u&#39;CSJ&#39;, u&#39;DIA&#39;]  
+</code></pre>
+
+<p>This selection could put equal weighting at an advantage vs something which looks at correlations.</p>
+
+<p>Second thought is why use 1/var? I realise it has some mathematical purity, but a more common approach is to weight with 1/sqrt(var). For me, this has some practical logic to it. If broadly speaking most asset classes have the same sharpe ratio over the long run, then 1/sqrt(var) weighting normalises all assets so they have the same mean return over the long run.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780c7313009571485000816' id='5780c7313009571485000816'>
+<a href='#5780c7313009571485000816'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1468057398000' class='quanto-date posted-at response-posted-at' href='#5780c7313009571485000816'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for the comments, Dan.</p>
+
+<p>Regarding selection of the universe: Looking at the correlation matrix there definitely seem to be some very correlated clusters in there. And the equal weighting does not perform favorably at all either. Your point could be made about the inverse variance weighting, however, which also disregards correlations. Your general point of the universe selection introducing bias is well taken though. Would be interesting to test how these results generalize to different portfolios.</p>
+
+<p>Regarding 1/var: I used it because that&#39;s what LdP used in the paper. I don&#39;t know of a good theoretical reason to prefer one over the other, although your reasoning makes sense to me. Perhaps 1/var is more optimal in terms of Kelly betting which is mean / var vs the Sharpe Ratio of mean / std but that&#39;s just a guess.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780cd10a59f4b1940000692' id='5780cd10a59f4b1940000692'>
+<a href='#5780cd10a59f4b1940000692'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468058901000' class='quanto-date posted-at response-posted-at' href='#5780cd10a59f4b1940000692'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>There&#39;s a good excursion on the various weighting systems in Andrew Ang&#39;s Asset Management book (chapter 5.3). He explains how the different schemes relate to each other, and how parameter instability causes problems for the more complex schemes, and in particular an interesting counter-cyclical issue with risk parity. He uses just 4 asset classes: us and developed stocks, us treasury, us Corp bonds.</p>
+
+<p>Anyway, he explains easiest system is just hold market cap weighted (Cambria has a fund for this), as no rebalancing is needed. Next simplest is 1/N as you don&#39;t need to estimate any parameters, and it performs better than market cap for him. Next simplest is 1/var or 1/vol weighting as vol is relatively stable and easy to estimate. Then if you feel comfortable estimating correlations you can try minimum variance weighting (or this hierarchical clustering scheme). Finally if you are able to estimate mean returns as well you can go for full mean variance optimisation.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780ce1341fbdfb87f000785' id='5780ce1341fbdfb87f000785'>
+<a href='#5780ce1341fbdfb87f000785'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1468059161000' class='quanto-date posted-at response-posted-at' href='#5780ce1341fbdfb87f000785'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I have to say I have come to appreciate simplicity more and more in recent years. And come to adopt systems which can be operated without problems in a spreadsheet!  If only to demonstrate their simplicity and lack of fitting to data. So, Dan H, yes your post chimes with my thoughts.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780dbb6c6898235b600088d' id='5780dbb6c6898235b600088d'>
+<a href='#5780dbb6c6898235b600088d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468062657000' class='quanto-date posted-at response-posted-at' href='#5780dbb6c6898235b600088d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One thing I&#39;ve done for a contest entry is to size my portfolio of some fraction of the liquid s&amp;p 500 universe using risk parity (1/std). But even better was to size them as 1/n but then size the entire portfolio to (1 / std of SPY). In other words, cut down the number of parameters to estimate from N to 1. This is more stable. Even though some high beta stocks will be overweighted, the law of averages kicks in, and the aggregated effect is the same as individual risk parity sizing.</p>
+
+<p>It&#39;s something to consider for the Equal Weighting approach. You could still Equal Weight all those diverse ETF, but you could size the entire portfolio as 1/std(spy). This relies on cross asset volatilities being correlated: the &quot;contagion&quot; of volatility effect.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5780dc4b3009571b640008ad' id='5780dc4b3009571b640008ad'>
+<a href='#5780dc4b3009571b640008ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5707e024829bc5dae2000064'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/ff7931ca8733a8571ecea76999905df7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5707e024829bc5dae2000064'>Georges Bilan</a>
+</div>
+<a UTCms='1468062801000' class='quanto-date posted-at response-posted-at' href='#5780dc4b3009571b640008ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for the post! very interesting!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5781ec491d246103110008eb' id='5781ec491d246103110008eb'>
+<a href='#5781ec491d246103110008eb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56b00aea4339666f650001cb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5d8f88a1960d4cd79d20b17a2631df1e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56b00aea4339666f650001cb'>Peter Falter</a>
+</div>
+<a UTCms='1468132431000' class='quanto-date posted-at response-posted-at' href='#5781ec491d246103110008eb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thomas,<br>
+ I ran your Notebook with a different set of assets (removed most bonds, added other assets to increase diversity). The results are attached and show that for this set of assets the best performing methods are Inverse-Variance (of the two high yielding methods) and Min-Variance (of the four mid-yield methods). </p>
+
+<p>The two Hierarchical methods perform well, but fall well below Inverse-Variance in yield and Min-Variance in volatility.</p>
+
+<p>The improvement in Inverse-Variance performance was expected because this method and others were overly invested in bonds due to the very low variance of bond funds. One could argue that I rigged my set to the advantage of these methods, but that was not my purpose.</p>
+
+<p>I agree with Anthony G&#39;s appreciation of simplicity. Complexity must earn its way into algorithms as it costs time in development, in maintenance, and in interpreting the results.</p>
+
+<p>[edit 7/10] I should have mentioned that I really liked your notebook and am sure it will be instructive as I make some of my own.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57827a831d24610311000f70' id='57827a831d24610311000f70'>
+<a href='#57827a831d24610311000f70'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56b00aea4339666f650001cb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5d8f88a1960d4cd79d20b17a2631df1e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56b00aea4339666f650001cb'>Peter Falter</a>
+</div>
+<a UTCms='1468168841000' class='quanto-date posted-at response-posted-at' href='#57827a831d24610311000f70'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One of the frustrations of relative performance studies is that the performance of the methods is strongly affected by the asset set.<br>
+If you limit the assets to TLT plus the nine XL-series sector funds then the Sharpe ratios of each method is much improved, except for Robust Mean Variance which drops about 40%.<br>
+Once again Equal Weighting has the highest return and Min-Variance has the best Sharpe ratio (~1.15), but the two Hierarchical methods compete well.<br>
+Robust Hierarchical approaches Inverse-Variance in return (~0.8 vs ~0.85) but achieves better Sharpe ratio (~1.1 vs ~1.0)<br>
+Hierarchical closely tracks Min-Variance in return (~0.65 for both), but trails in Sharpe ratio (~0.95 vs ~1.15)</p>
+
+<p>Adding RWR and the three commodities strongly degrades the returns of the above methods. Only Min-Variance preserves a similar Sharpe ratio (~1.05). This is probably due to the fact that Min-Variance heavily weights a small set of assets (3 assets account for &gt;90% of portfolio weight), so adding volatile assets that will receive low weights is not a big factor. </p>
+
+<p>Question to the Q community: How can one fairly select asset sets for use with a particular method while avoiding a bias toward prior results?<br>
+I&#39;ve perused several backtesting papers that provide a compelling case that this is a big problem in asset weighting and/or rotation schemes. I&#39;ve not found one that provides an accessible solution.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57828a51571310af27000fb8' id='57828a51571310af27000fb8'>
+<a href='#57828a51571310af27000fb8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1468172885000' class='quanto-date posted-at response-posted-at' href='#57828a51571310af27000fb8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>As I mentioned elsewhere I have recently found great comfort in testing a few momentum / tactical allocation strategies  going back to 1900 and beyond on freely available monthly data. You can also get monthly data going back to 1972 on 10 or more MSCI indices.  B of E, Fred and the NBER have all this stuff including ancient commodity prices.</p>
+
+<p>If my simple techniques work on over 100 years of data including the Great Depression that is good enough for me to trade.</p>
+
+<p>Switching on a 12 month momentum look back between Robert Schiller&#39;s dividend adjusted S&amp;P 500 and the 10 year aaa Corporate bond since 1900 created a CAGR of 8.9% and max DD (in 1929) of 35%. Annualised monthly vol was just under 10%. </p>
+
+<p>Cut that back to a maximum allocation of 50% to equities at any one time and the risk adjusted return improves. CAGR 7.48%, max DD 17%, vol 5.62%.</p>
+
+<p>Hard to beat those sort of figures.  Makes me wonder, it really does. What in god&#39;s name are active fund managers paid for?</p>
+
+<p>No need to go too exotic especially since stock markets are so highly correlated.</p>
+
+<p>Over that sort of time scale the problem takes on a pleasingly robust solution.</p>
+
+<p>Diversify over equities and bonds in major markets and live with the uncertainty? 😃  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57829b430c2832ac07000f84' id='57829b430c2832ac07000f84'>
+<a href='#57829b430c2832ac07000f84'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468177230000' class='quanto-date posted-at response-posted-at' href='#57829b430c2832ac07000f84'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@peter</p>
+
+<p>You could start with something simple like stocks, bonds and gold (spy, Tlt and gld). Equal weighting should do ok, and you can see how the other methods compare. If a method doed something that looks very unstable or has a very low sharpe relative to equal weighting, then you can probably just chuck that method out. If it can&#39;t cope with such a simple problem, how&#39;s it going to cope with a more complex one?</p>
+
+<p>You can then add more variants on stocks. For example Nasdaq and mid caps. Equal weighting will then start to overweight equity and the sharpe should fall. Which methods correctly determine to cluster or otherwise allocate a smaller amount to each flavour of stocks?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57829cfc1d246103110010b4' id='57829cfc1d246103110010b4'>
+<a href='#57829cfc1d246103110010b4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56b00aea4339666f650001cb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5d8f88a1960d4cd79d20b17a2631df1e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56b00aea4339666f650001cb'>Peter Falter</a>
+</div>
+<a UTCms='1468177666000' class='quanto-date posted-at response-posted-at' href='#57829cfc1d246103110010b4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for the reply. Diversification with some modest weight tuning does seem to work most reliably in my testing.  I suppose that the young engineer in me hopes that better optimization is possible while the old engineer in me sees that poor signal/noise, observability and controllability are all acting to make this hard for portfolios.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5782a467571310af27001081' id='5782a467571310af27001081'>
+<a href='#5782a467571310af27001081'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1468179568000' class='quanto-date posted-at response-posted-at' href='#5782a467571310af27001081'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I picked the assets that I would choose for a diversified static portfolio, in weights that I would choose for a static portfolio, informed by past long term correlations, then layered alpha signals and risk parity on top of those static assets and weights.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5782a55139bd8bf83a000f3e' id='5782a55139bd8bf83a000f3e'>
+<a href='#5782a55139bd8bf83a000f3e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1468179799000' class='quanto-date posted-at response-posted-at' href='#5782a55139bd8bf83a000f3e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>To add, this gives you a natural benchmark as well, that static portfolio.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5782b012571310b9b60011a0' id='5782b012571310b9b60011a0'>
+<a href='#5782b012571310b9b60011a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56b00aea4339666f650001cb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5d8f88a1960d4cd79d20b17a2631df1e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56b00aea4339666f650001cb'>Peter Falter</a>
+</div>
+<a UTCms='1468182551000' class='quanto-date posted-at response-posted-at' href='#5782b012571310b9b60011a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Simon, baselining is another topic that could use a good group chat. I believe that we are currently limited to a single equity to serve as the comparative baseline. It would be interesting if we could define a separate baseline algo or could select from a set of simple predefined models.  </p>
+
+<p>Per your approach one such static portfolio would be the Equal Weight included in this study. That portfolio annoyingly had higher yields that the other methods over the 8 asset sets that I tried.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5782b9cfe247c61842000523' id='5782b9cfe247c61842000523'>
+<a href='#5782b9cfe247c61842000523'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54e159f70f3369eb9200019b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2a53f34ae7e99886508adf2b4d76bff2?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54e159f70f3369eb9200019b'>Vladimir</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1468185045000' class='quanto-date posted-at response-posted-at' href='#5782b9cfe247c61842000523'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dan H,</p>
+
+<p><em>You could start with something simple like stocks, bonds and gold (spy, Tlt and gld).</em></p>
+
+<p>I would start with more simple one - plane vanila: stocks and bonds (SPY-TLT or my favorite XLP-TLT) and add more one by one only if it improve my goal function.</p>
+
+<p><a href="https://www.quantopian.com/posts/help-me-i-dont-know-what-to-do#56aeb593e3f99b3aa900034a">https://www.quantopian.com/posts/help-me-i-dont-know-what-to-do#56aeb593e3f99b3aa900034a</a><br>
+<a href="https://www.quantopian.com/posts/etf-rebalance-monthly-based-on-momentum#56aff77af047b2048a000139">https://www.quantopian.com/posts/etf-rebalance-monthly-based-on-momentum#56aff77af047b2048a000139</a></p>
+
+<p>Plain vanilla fixed ratio stock-bond (XLP 0.55:TLT 0.45) portfolio re-balanced monthly<br>
+START<br>
+08/01/2002<br>
+END<br>
+07/08/2016</p>
+
+<p>Total Returns<br>
+200.99%<br>
+Benchmark Returns<br>
+202.1%<br>
+Alpha<br>
+0.11<br>
+Beta<br>
+0.18<br>
+Sharpe<br>
+1.63<br>
+Sortino<br>
+2.35<br>
+Information Ratio<br>
+-0.01<br>
+Volatility<br>
+0.08<br>
+Max Drawdown<br>
+15.8%</p>
+
+<p>It may be  a natural benchmark as well.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5782ca8cc636ec227400004d' id='5782ca8cc636ec227400004d'>
+<a href='#5782ca8cc636ec227400004d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57519ffd06b9abc0dd0000a7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fa8cd9deb3143e5156e9d2b2c213cba?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57519ffd06b9abc0dd0000a7'>Behavioral Trader</a>
+</div>
+<a UTCms='1468189328000' class='quanto-date posted-at response-posted-at' href='#5782ca8cc636ec227400004d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>&quot;Per your approach one such static portfolio would be the Equal Weight included in this study. That portfolio annoyingly had higher yields that the other methods over the 8 asset sets that I tried. &quot;</p>
+
+<p>Peter, this is something highly intelligent people will not accept, and will keep doing rocket science stuff to &quot;optimize&quot; their protfolios, when in the end, countless hours will have been wasted on coding/testing, and whoever proclaims the above will be treated as a heretic. It is the ultimate &quot;quant paradox&quot;.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57832829e247c618420008b3' id='57832829e247c618420008b3'>
+<a href='#57832829e247c618420008b3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5590c016248f1472ae000286'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1a2b21eaf54a819d57cb3044dba06888?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5590c016248f1472ae000286'>Tim Vidmar</a>
+</div>
+<a UTCms='1468213294000' class='quanto-date posted-at response-posted-at' href='#57832829e247c618420008b3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Are the strategies described and discussed in this thread all long only, or are there any that are actually suitable for the Q contest?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57835ee5e247c68105000ada' id='57835ee5e247c68105000ada'>
+<a href='#57835ee5e247c68105000ada'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468227308000' class='quanto-date posted-at response-posted-at' href='#57835ee5e247c68105000ada'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@BehaviourialTrader</p>
+
+<p>I totally agree on this point. It&#39;s easy to get sucked in and chase returns. The only one I think works well enough to justify the additional complexity is risk parity, which I define as 1/vol. In my view, it&#39;s sound, as it puts all asset classes on a level playing field, no matter what their internal leverage (e.g. stocks and commodities are levered whereas physical gold is not).</p>
+
+<p>It still leaves a decision on which assets to use, and whether to treat them all equally. For example, most people would put US equity and Developed Market Equity in the same bucket, but what about Emerging Equity? Or what about all the various commodity markets? If I stuck to 1/n and included all the commodity markets available, I might end up with a portfolio with a lot of exposure to commodities, which I may not want. I think at this point, the easy thing to do is revert to a manual system. For example, equities share one unit of risk, government bonds share one unit, corporate bonds and property one unit, commodities and index linked bonds one unit. Perhaps this is where correlation analysis comes in, but on a longer term basis to set fixed weights, rather than a dynamic allocation method.</p>
+
+<p>As an aside, this gives an interesting justification of risk parity:</p>
+
+<p><a href="https://www.panagora.com/assets/PanAgora-Risk-Parity-Portfolios-Efficient-Portfolios-Through-True-Diversification.pdf">https://www.panagora.com/assets/PanAgora-Risk-Parity-Portfolios-Efficient-Portfolios-Through-True-Diversification.pdf</a></p>
+
+<p>It uses &quot;loss contribution&quot; as a way to assess if a portfolio is tilted towards one asset.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57836998c636ec22740005d2' id='57836998c636ec22740005d2'>
+<a href='#57836998c636ec22740005d2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1468230046000' class='quanto-date posted-at response-posted-at' href='#57836998c636ec22740005d2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>As previously pointed out, the asset set strongly influence the performance of the methods. So I thought it might be worth citing this: <a href="https://predictivealpha.wordpress.com/2016/01/26/random-portfolios-correlation-clustering/">Random portfolios: correlation clustering</a>. </p>
+
+<p>They compare performance of random equity portfolios built in four different ways: min-variance,  k-means clustering,  hierarchical clustering and pure random.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57837f51063bd06c82000455' id='57837f51063bd06c82000455'>
+<a href='#57837f51063bd06c82000455'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57519ffd06b9abc0dd0000a7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fa8cd9deb3143e5156e9d2b2c213cba?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57519ffd06b9abc0dd0000a7'>Behavioral Trader</a>
+</div>
+<a UTCms='1468235606000' class='quanto-date posted-at response-posted-at' href='#57837f51063bd06c82000455'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dan H, I agree that 1/vol might produce smoother returns. But, if you rebalance a 60/40 stock bond portfolio, you NEED volatility to make money because you need to buy low and sell high. The paper ignores rebalancing, which is a key ingredient in maintaining a 60/40 to begin with. Right?</p>
+
+<p>Luca, nice try on the blogger&#39;s part - good research, however, random selection is only marginally outperformed. I do not think that people should spend time (to code/test/research) or money (for hedge fund advice) to obtain the additional 1% annual return, while paying 2/20 for it, makes no sense, right?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='578396b9063bd06c8200057a' id='578396b9063bd06c8200057a'>
+<a href='#578396b9063bd06c8200057a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468241598000' class='quanto-date posted-at response-posted-at' href='#578396b9063bd06c8200057a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Actually, don&#39;t think of 1/vol as reducing volatility, as you can set this at any level you like. In fact, you&#39;re likely to increase the vol of bonds to get them to parity with stocks. </p>
+
+<p>The return from risk parity comes from the rebalancing. By normalising the volatility you create more opportunities for rebalancing to buy at &quot;value&quot;. Without levering bonds to increase their volatility, you&#39;ll find the rebalance goes mostly just one way (bonds->stocks). With risk parity, you&#39;ll get the opposite as well (stocks->bonds).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5783ba60670f689a9600028e' id='5783ba60670f689a9600028e'>
+<a href='#5783ba60670f689a9600028e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57519ffd06b9abc0dd0000a7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fa8cd9deb3143e5156e9d2b2c213cba?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57519ffd06b9abc0dd0000a7'>Behavioral Trader</a>
+</div>
+<a UTCms='1468250725000' class='quanto-date posted-at response-posted-at' href='#5783ba60670f689a9600028e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Actually, you can &quot;set it at any level you like&quot; only by adding leverage to the less volatile assets, the way the author has done in that paper. Note that he is not rebalancing, which is a major drawback in the approach, that paper, and its real life applications. Just my 2 cents.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='578408acd7773eb4b5000353' id='578408acd7773eb4b5000353'>
+<a href='#578408acd7773eb4b5000353'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468270771000' class='quanto-date posted-at response-posted-at' href='#578408acd7773eb4b5000353'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve noted a lot of almost <a href="https://www.aqr.com/cliffs-perspective/risk-parity-why-we-fight-lever">ideological debate about leverage</a>, especially for bonds. Personally, I come out strongly in favour of using leverage, if managed properly. For me, there&#39;s no difference between investing in listed companies that lever their equity 2x or levering an investment in bonds 2x. </p>
+
+<p>Indeed, I put my money where my mouth is. My pension is in a risk parity fund that levers bonds.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57840d63d7773e37890003f9' id='57840d63d7773e37890003f9'>
+<a href='#57840d63d7773e37890003f9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1468271979000' class='quanto-date posted-at response-posted-at' href='#57840d63d7773e37890003f9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Black Swans and leverage make a potent and interesting combination.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57841108d7773e378900042a' id='57841108d7773e378900042a'>
+<a href='#57841108d7773e378900042a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1468272911000' class='quanto-date posted-at response-posted-at' href='#57841108d7773e378900042a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I can&#39;t see anything ideological about it. Leverage the wrong instrument at the wrong time and you are toast. As untold entities have found to their cost.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57841b91670f689bdc0001db' id='57841b91670f689bdc0001db'>
+<a href='#57841b91670f689bdc0001db'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1468275607000' class='quanto-date posted-at response-posted-at' href='#57841b91670f689bdc0001db'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The ideological part comes in when it turns from an argument of degree (how much leverage is too much) to a black-and-white argument (leverage is bad). At some point you have to accept risk -- black swans can exist in every asset class or situation, hence the reward. I don&#39;t think 2x leverage on bonds is too much risk, if it&#39;s well diversified and part of a wider portfolio. Same as it&#39;s OK that companies lever their equity with bank debt, as long as you (the equity investor) diversify across companies and sectors.</p>
+
+<p>Do you have any examples of any infamous blow ups with someone using 2x leverage? I often hear LTCM given as an example, but that is clearly a total different kettle of fish. They were something like 30x levered when they blew up.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57842494d7773eb4b5000461' id='57842494d7773eb4b5000461'>
+<a href='#57842494d7773eb4b5000461'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57519ffd06b9abc0dd0000a7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fa8cd9deb3143e5156e9d2b2c213cba?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57519ffd06b9abc0dd0000a7'>Behavioral Trader</a>
+</div>
+<a UTCms='1468277914000' class='quanto-date posted-at response-posted-at' href='#57842494d7773eb4b5000461'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I have great respect for Asness, but he like all other hedge fund managers, is trying to sell the sizzle. I agree with most of what he says, except what Anthony said, which is....that Greek bond fund you just levered X-times should be returning 30% per year, until it is not, and you lose your principal. And oh, by the way, that default just affected stuff you never thought it would, like your Irish bonds and some French bonds as well. And next week the contagion will spread to South America, and then you will have lost most of your investment.</p>
+
+<p>If I were Quantopian I would prevent leverage from being used in testing, contests, and qualifications for the hedge fund. They can apply leverage to the overall offering if they choose to - you don&#39;t need rocket scientists to add leverage.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5813279198239fc47d000343' id='5813279198239fc47d000343'>
+<a href='#5813279198239fc47d000343'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57af3f9d3f33d6636d000789'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7e406442e03ac600ea2be3160d3164de?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57af3f9d3f33d6636d000789'>Rainie Pan</a>
+</div>
+<a UTCms='1477650332000' class='quanto-date posted-at response-posted-at' href='#5813279198239fc47d000343'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Very interesting!</p>
+
+<p>Dumb questions to the experts (I&#39;m a newbie here) - </p>
+
+<p>1) how can I change rebalancing frequency?  I see it&#39;s &quot;1BM&quot; now standing for every month, what if I want to see quarterly/semi-annually/annually, what codes shall I change?</p>
+
+<p>2) If I want to add boundary constraints to the optimizations, say max 20% in each security, how can I do that?</p>
+
+<p>If someone could help write an example code, that will be super appreciated.  Many thanks!!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58179f44a5472b08880001f0' id='58179f44a5472b08880001f0'>
+<a href='#58179f44a5472b08880001f0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56a8196e384d0519150000cf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fc260316ff51383a8eb95a56353cf504?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56a8196e384d0519150000cf'>kamran sokhanvari</a>
+</div>
+<a UTCms='1477943116000' class='quanto-date posted-at response-posted-at' href='#58179f44a5472b08880001f0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great notebook Thomas. Thanks for the insightful work. </p>
+
+<p>My only two cents is that in the case of a portfolios containing high number of assets (example 100 long/100 short) the idiosyncratic risk of a single position entering a volatile period while having been very quite in the past is very high. So it seems that in these cases at least the risk of over-weighting by one asset vs. the other can or should be avoided regardless of the past data. It comes down to how much randomness we think exists in any single asset. In case of diversified ETFs I think these approaches become more relevant as the underlying is already somewhat diversified. Would be interesting to see how these perform in larger portfolios such as the S&amp;P500 list of stocks for example.</p>
+
+<p>I  personally have been struggling to see if any portfolio optimization can add value vs. risk of increased volatility in various market conditions -- compared to simple equal weighting. We know correlation is not necessarily causation and this does apply to measuring historical variances as well.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59407be2ddd837000d8db7de' id='59407be2ddd837000d8db7de'>
+<a href='#59407be2ddd837000d8db7de'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53ba2b0628da798bb5000120'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d75f19cc68e4d1bc388652be97a038d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53ba2b0628da798bb5000120'>Chad Gray</a>
+</div>
+<a UTCms='1497398242000' class='quanto-date posted-at response-posted-at' href='#59407be2ddd837000d8db7de'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Echoing others on this thread - thanks Thomas for an exceedingly useful notebook!  I saw LDP present his paper at Quantcon 2017 and was really impressed by the approach (which led me to this posting a bit late).  </p>
+
+<p>I have the same question (2) as Rainie Pan.  How would you approach adding constraints to the weightings?  A main benefit purported by something like HRP is better out of sample performance by avoiding the crazy &quot;optimal&quot; values returned by markowitz.  </p>
+
+<p>Some of the weightings implied by using this method would be anything by practical to implement.  </p>
+
+<p>Thanks again and thanks for any added suggestions on how to constrain  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='595495bc0d8ed3651db57b4c' id='595495bc0d8ed3651db57b4c'>
+<a href='#595495bc0d8ed3651db57b4c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54482d30af6f60cd37000009'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/15887c00c6782fe941d1796b0f62163e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54482d30af6f60cd37000009'>Jonathan Ng</a>
+</div>
+<a UTCms='1498715580000' class='quanto-date posted-at response-posted-at' href='#595495bc0d8ed3651db57b4c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thomas,</p>
+
+<p>I think I found a bug in your code.</p>
+
+<pre><code>def corr_robust(X):  
+    cov = cov_robust(X).values  
+    shrunk_corr = cov2cor(cov)  
+    return pd.DataFrame(shrunk_corr, index=X.columns, columns=X.columns)  
+</code></pre>
+
+<p>In the above method, X should be a covariance matrix, not a correlation matrix.</p>
+
+<p>But later in your code, you have this:</p>
+
+<pre><code> (&#39;Robust Hierarchical weighting (by LdP)&#39;, lambda returns, cov, corr: getHRP(cov_robust(cov), corr_robust(corr))),  
+</code></pre>
+
+<p>Seems like it should be:</p>
+
+<pre><code> (&#39;Robust Hierarchical weighting (by LdP)&#39;, lambda returns, cov, corr: getHRP(cov_robust(cov), corr_robust(cov))),  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='595ea55890ae0d001097b088' id='595ea55890ae0d001097b088'>
+<a href='#595ea55890ae0d001097b088'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5956d41926a128000d4680d8'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9b27764197c9f1c89ede6451f00d688b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5956d41926a128000d4680d8'>Will Z</a>
+</div>
+<a UTCms='1499374936000' class='quanto-date posted-at response-posted-at' href='#595ea55890ae0d001097b088'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas,</p>
+
+<p>Thank you for sharing this nice notebook. For the robust covariance matrix - OAS assumes that data is Gaussian. However, we know that returns are far from Gaussian in practice in pretty much every asset class. I wonder if <code>sklearn.covariance.LedoitWolf</code> could be a better option in practice?</p>
+
+<p>Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59678671130ccf001006d0c7' id='59678671130ccf001006d0c7'>
+<a href='#59678671130ccf001006d0c7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1499956849000' class='quanto-date posted-at response-posted-at' href='#59678671130ccf001006d0c7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Will Z: Good point, I did try LW before and I think it works just as well. </p>
+
+<p>@Jonathan Ng: Good catch, many thanks. Want to post a fixed version?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5968d35f9b33c8000d4d0073' id='5968d35f9b33c8000d4d0073'>
+<a href='#5968d35f9b33c8000d4d0073'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1500042079000' class='quanto-date posted-at response-posted-at' href='#5968d35f9b33c8000d4d0073'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>A noob question here. I am yet to read the paper and go through the implementation but is there a way, I could use HRP with maximize alpha signal? I don&#39;t see a way to set alphas in this method:</p>
+
+<pre><code>def getHRP(cov, corr):  
+    # Construct a hierarchical portfolio  
+    corr, cov = pd.DataFrame(corr), pd.DataFrame(cov)  
+    dist = correlDist(corr)  
+    link = sch.linkage(dist, &#39;single&#39;)  
+    sortIx = getQuasiDiag(link)  
+    sortIx = corr.index[sortIx].tolist()  
+    # recover labels  
+    hrp = getRecBipart(cov, sortIx)
+
+    return hrp.sort_index()  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='597c07b936c3e44b2df012bf' id='597c07b936c3e44b2df012bf'>
+<a href='#597c07b936c3e44b2df012bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/576ad77066779a31d5000444'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/dc214f3169484407146022523a0544b4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/576ad77066779a31d5000444'>George Ho</a>
+</div>
+<a UTCms='1501300665000' class='quanto-date posted-at response-posted-at' href='#597c07b936c3e44b2df012bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas I think there may be another bug in your code: when you have</p>
+
+<pre><code>    covs.loc[eom] = rets.loc[eom-pd.Timedelta(&#39;252d&#39;):eom].cov()  
+    corrs.loc[eom] = rets.loc[eom-pd.Timedelta(&#39;252d&#39;):eom].corr()  
+</code></pre>
+
+<p>you are not really finding the covariance/correlation matrices for the trailing year... <code>rets</code> has a frequency of business days, so <code>&#39;252D&#39;</code> gets you something less than a year. What you really want is either <code>&#39;365D&#39;</code> or <code>&#39;252B&#39;</code>.</p>
+
+<p>For what it&#39;s worth, there may be a succinct way to get the rolling covariance and correlation matrices, as you suspect. If you read closely though, it&#39;s quite wasteful, but such is the price of one-liners...</p>
+
+<pre><code>    covs = rets.rolling(252).cov().resample(&#39;1BM&#39;).apply(lambda window: window[-1])[12:]  
+    corrs = rets.rolling(252).corr().resample(&#39;1BM&#39;).apply(lambda window: window[-1])[12:]  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59c234ed499c7b00107e4622' id='59c234ed499c7b00107e4622'>
+<a href='#59c234ed499c7b00107e4622'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5361d8038eb65923690000ff'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/396818f61cb3730eea652fa641029c4d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5361d8038eb65923690000ff'>Tom Werth</a>
+</div>
+<a UTCms='1505899757000' class='quanto-date posted-at response-posted-at' href='#59c234ed499c7b00107e4622'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>How can weights for short positions be calculated correctly? Would the following be valid for a portfolio holding long/short positions?</p>
+
+<ol>
+<li>for short positions - invert the price history (ie a price series of 20$, 22$, 21$ would translate to 20$, 18$, 19$)<br></li>
+<li>for long positions use the price history as is<br></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59c8ff4c1bcb50485088fb06' id='59c8ff4c1bcb50485088fb06'>
+<a href='#59c8ff4c1bcb50485088fb06'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1506344780000' class='quanto-date posted-at response-posted-at' href='#59c8ff4c1bcb50485088fb06'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tom: I think that&#39;s correct. Alternatively, you could just flip the signs in the correlation matrix of the row and column of stock you want to short.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59c9315acbbb8100104fc674' id='59c9315acbbb8100104fc674'>
+<a href='#59c9315acbbb8100104fc674'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1506357594000' class='quanto-date posted-at response-posted-at' href='#59c9315acbbb8100104fc674'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Tom, let me try to put it delicately. Your first option ends up to be total nonsense.</p>
+
+<p>What would be your reverse price, for instance, if the original price series went up to 60 or higher?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59ca399f97939e329678e8af' id='59ca399f97939e329678e8af'>
+<a href='#59ca399f97939e329678e8af'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1506425247000' class='quanto-date posted-at response-posted-at' href='#59ca399f97939e329678e8af'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy: It&#39;s not nonsense, and please pay attention to a respectful tone. Essentially what he means is to invert the returns.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59ca5f71919b8942644306a5' id='59ca5f71919b8942644306a5'>
+<a href='#59ca5f71919b8942644306a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1506434929000' class='quanto-date posted-at response-posted-at' href='#59ca5f71919b8942644306a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas, there was no disrespect intended. I simply had no better word. A simple exercise would have demonstrated that. So, here it goes. </p>
+
+<p>The price series below was randomly generated. As such, there is no way to know where it is going next. I did not even extend the price series to see it fall close to zero. Nonetheless, the return inversion is far from smooth no matter how we would like to describe it.</p>
+
+<p><img src="https://image-proxy.quantopian.com/d7b0818d58e4c516b438bb9e85e29f66c2d33ccd/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f50726963655f4368616e67655f496e76657273696f6e2e706e67" /> </p>
+
+<p>The doubling in price renders the price inversion series negative, and you have no way to guarantee its return inversion behavior at this crossing. That you are going up or down, you are in for a shock. And the random price series selected, even though compressed to show the impact, was, could I say, subdued, almost tame. It does get worse the closer the price series oscillate near its doubling price.</p>
+
+<p>So, I maintain my previous conclusion: @Tom&#39;s option 1 is not a good idea. It will simply blow up and render whatever trading strategy he may design on this option not only unpredictable but also totally worthless. </p>
+
+<p>If @Tom, or you, have a different twist to this, be happy to hear it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='59ca6185685ab2167dd86754' id='59ca6185685ab2167dd86754'>
+<a href='#59ca6185685ab2167dd86754'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1506435461000' class='quanto-date posted-at response-posted-at' href='#59ca6185685ab2167dd86754'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yeah, it needs to happen in returns space.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a1bd19787162a00123f177f' id='5a1bd19787162a00123f177f'>
+<a href='#5a1bd19787162a00123f177f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53fd1f131b07422f5800027d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/acc9341987441870ee9beab8f05d69e0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53fd1f131b07422f5800027d'>tg tg</a>
+</div>
+<a UTCms='1511772567000' class='quanto-date posted-at response-posted-at' href='#5a1bd19787162a00123f177f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Anyone managed to put any extra allocation constaints in the algorithm, i.e. maximum allocation to a single asset of 10%?<br>
+I opened a <a href="https://quant.stackexchange.com/questions/37065/hierarchical-risk-parity-with-allocation-constraints"> stack exchange question </a> regarding this too.</p>
+
+<p>@Thomas Wiecki: I see the point in using a &#39;shrinked&#39; version of the covariance matrix (since the allocations are based on inverse-variance any extreme value can make your results explode), but what&#39;s the point in shrinking the correlation matrix too? If two of your assets are highly correlated it&#39;s better that they share the relevant allocation, no?</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a4318f4bb5a847f2ae3b87e' id='5a4318f4bb5a847f2ae3b87e'>
+<a href='#5a4318f4bb5a847f2ae3b87e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e6eb291f729f0dd900095d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8d635866c7735e7e30a82325ffdf975e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e6eb291f729f0dd900095d'>David D</a>
+</div>
+<a UTCms='1514346740000' class='quanto-date posted-at response-posted-at' href='#5a4318f4bb5a847f2ae3b87e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey guys, amazing job ! Admire your work !</p>
+
+<p>Did you base your analysis on price return or price level. You should use price return, right ?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b55bebc587b050048b26de7' id='5b55bebc587b050048b26de7'>
+<a href='#5b55bebc587b050048b26de7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54bfd4810192bd15080003c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bbf9d92ff7eb410a597cbdade46e4e43?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54bfd4810192bd15080003c9'>james rafco</a>
+</div>
+<a UTCms='1532346044000' class='quanto-date posted-at response-posted-at' href='#5b55bebc587b050048b26de7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That&#39;s interesting.  To my opinion the original paper has several drawbacks which make the results questionable.  First IVP totally ignore correlations which is not the case for HRP. So HRP has more degree of freedom to optimize. Second MVP  is definitely not design to optimize on assets with jumps. So using the wrong model yields the wrong results. If you are interested I can show you how to beat HRP with the correct model.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b55c18b85e1e234ccb49f6e' id='5b55c18b85e1e234ccb49f6e'>
+<a href='#5b55c18b85e1e234ccb49f6e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532346763000' class='quanto-date posted-at response-posted-at' href='#5b55c18b85e1e234ccb49f6e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@james rafco,</p>
+
+<p>I would be interested to see your corrected model. Please attach code, if possible.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b55c95d85e1e21f46b4a0b2' id='5b55c95d85e1e21f46b4a0b2'>
+<a href='#5b55c95d85e1e21f46b4a0b2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54bfd4810192bd15080003c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bbf9d92ff7eb410a597cbdade46e4e43?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54bfd4810192bd15080003c9'>james rafco</a>
+</div>
+<a UTCms='1532348765000' class='quanto-date posted-at response-posted-at' href='#5b55c95d85e1e21f46b4a0b2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>To be clear I meant a correct benchmark to use in order to make in his simulations fair. There is no way to show that one portfolio optimization will beat an other one in all market conditions.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b55d2446f1fd3004555dd63' id='5b55d2446f1fd3004555dd63'>
+<a href='#5b55d2446f1fd3004555dd63'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/558c9ea2e891351e5e0002c8'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b8a0dc6bd5a92e6ad3fa0c10ba408ffd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/558c9ea2e891351e5e0002c8'>Carl Wells</a>
+</div>
+<a UTCms='1532351044000' class='quanto-date posted-at response-posted-at' href='#5b55d2446f1fd3004555dd63'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;d certainly be interested to see that James.  This is on my to-do list: currently struggling with Black-Litterman, which does not always provide a solution (covariance matrix has to be invertible I believe, which is not always the case).  I would like to use something better for the (relatively) simple problem of sector rotation when one has an estimate of future returns, if not future sector covariances ...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b56181984a24e00413019a5' id='5b56181984a24e00413019a5'>
+<a href='#5b56181984a24e00413019a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54bfd4810192bd15080003c9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bbf9d92ff7eb410a597cbdade46e4e43?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54bfd4810192bd15080003c9'>james rafco</a>
+</div>
+<a UTCms='1532368921000' class='quanto-date posted-at response-posted-at' href='#5b56181984a24e00413019a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You can deal with covariance  invertible problem just  by shrinking a bit the diagonal.   But if the matrix of returns is invertible (p assets &gt; n observations) and you are using a diagonal matrix for uncertainty then you should be fine. At the end BL is just a mean variance optimization with a shrinkage on expected returns and the covariance matrix.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ba28f48b25f33004a62c04c' id='5ba28f48b25f33004a62c04c'>
+<a href='#5ba28f48b25f33004a62c04c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57120aa27c52353118000037'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b1127c9adcc3fc2cf878832732ac9210?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57120aa27c52353118000037'>Gabriele Pompa</a>
+</div>
+<a UTCms='1537380168000' class='quanto-date posted-at response-posted-at' href='#5ba28f48b25f33004a62c04c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi all,<br>
+thanks as usual for your extremely helpful notebooks. There is something I don&#39;t understand. I think the 
+<code>X</code> in input of  <code>cov_robust(X)</code> and <code>corr_robust(X)</code> should be returns data, no cov/corr matrices, since <code>OAS.fit(X)</code> expects data of size <code>(n_samples, n_features)</code>, returning the self, from which <code>oas.covariance_</code> is the <code>(n_features, n_features</code>) shaped covariance matrix. </p>
+
+<p>Am I wrong?<br>
+Thank you.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ba8b91d9da7eb0045c7e330' id='5ba8b91d9da7eb0045c7e330'>
+<a href='#5ba8b91d9da7eb0045c7e330'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1537784093000' class='quanto-date posted-at response-posted-at' href='#5ba8b91d9da7eb0045c7e330'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Gabriele,</p>
+
+<p>Good catch! I fixed the NB above. The results seem fairly consistent to before, which is a bit surprising as I don&#39;t see how it could really have worked before.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c0c59f4b8cbe70045ae3090' id='5c0c59f4b8cbe70045ae3090'>
+<a href='#5c0c59f4b8cbe70045ae3090'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5be3376e128586003e6da12d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f0e2eb4d067dbc58b992f9a3c4165d22?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5be3376e128586003e6da12d'>Rob Bird</a>
+</div>
+<a UTCms='1544313332000' class='quanto-date posted-at response-posted-at' href='#5c0c59f4b8cbe70045ae3090'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas Wiecki: This notebook has an off by one error in the results calculation, skewing the out of sample conclusions. Please <strong>shift(1)</strong> the weights forward before you ffill(), you are giving the EOM day the weight allocation calculated at the end of that day currently. As in:</p>
+
+<p>Current:  </p>
+
+<pre><code>port_returns[name] = w.loc[rets.index].ffill().multiply(rets).sum(axis=&#39;columns&#39;)  
+</code></pre>
+
+<p>Correct:<br>
+<code>
+port_returns[name] = w.loc[rets.index].shift(1).ffill().multiply(rets).sum(axis=&#39;columns&#39;)  
+</code></p>
+
+<p><strong>(or fix the core of the notebook, of course)</strong></p>
+
+<p>The risk is that if someone runs your notebook and changes the resolution of the &quot;eoms&quot; to be shorter e.g. daily or weekly, it rapidly leads to positively biased results and invalidates the conclusions you have made.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c0fdf07d58e287164bb76e8' id='5c0fdf07d58e287164bb76e8'>
+<a href='#5c0fdf07d58e287164bb76e8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1544544007000' class='quanto-date posted-at response-posted-at' href='#5c0fdf07d58e287164bb76e8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Rob: Good catch, should be fixed in the NB in the first post. Thanks!  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c2defa4fd28e2003f24d6da' id='5c2defa4fd28e2003f24d6da'>
+<a href='#5c2defa4fd28e2003f24d6da'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a3c6720f0e27500112f1537'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b37e5bb4d931db0f492f0b52d935c8ee?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a3c6720f0e27500112f1537'>mattory</a>
+</div>
+<a UTCms='1546514340000' class='quanto-date posted-at response-posted-at' href='#5c2defa4fd28e2003f24d6da'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas Wiecki,<br>
+       getHRP(cov, corr) return Series and be sorted,   but get_min_variance(returns, cov) 、get_mean_variance(returns, cov) 、getIVP(cov)  and  np.ones(cov.shape[0]) / len(cov.columns) return array and not be sorted .  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c37acaf8119020049b12e1c' id='5c37acaf8119020049b12e1c'>
+<a href='#5c37acaf8119020049b12e1c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/589c192986c559000d9005f9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/533dbbb7a1006495007ce920cb0aa121?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/589c192986c559000d9005f9'>Emin Temiz</a>
+</div>
+<a UTCms='1547152559000' class='quanto-date posted-at response-posted-at' href='#5c37acaf8119020049b12e1c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for sharing this.</p>
+
+<p>Can anyone share the stats for full market cycle? These are more suitable to compare including a bear market IMO and with different asset classes.. In a bull market diversification of stocks makes sense but in a bear market diversification between asset classes make more sense. </p>
+
+<p>Regarding the simple vs advanced techniques: If you are leveraged, Sortino makes more sense than total returns.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c3c5403c072ec004b00e397' id='5c3c5403c072ec004b00e397'>
+<a href='#5c3c5403c072ec004b00e397'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1547457539000' class='quanto-date posted-at response-posted-at' href='#5c3c5403c072ec004b00e397'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@mattory: Want to post a fixed version?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c5a6f4ea88f120040430e3f' id='5c5a6f4ea88f120040430e3f'>
+<a href='#5c5a6f4ea88f120040430e3f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5a3c6720f0e27500112f1537'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b37e5bb4d931db0f492f0b52d935c8ee?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5a3c6720f0e27500112f1537'>mattory</a>
+</div>
+<a UTCms='1549430606000' class='quanto-date posted-at response-posted-at' href='#5c5a6f4ea88f120040430e3f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas Wiecki,<br>
+getHRP(cov, corr) , getHRP1(cov,corr)return Series and be sorted, getHRP2(cov,corr) return array and not be sorted . port_returns show  that  the result is the same,  getHRP2(cov,corr)  may be more robust.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dc9d45451c524004646326a' id='5dc9d45451c524004646326a'>
+<a href='#5dc9d45451c524004646326a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5db452ab8792f50c753da3ba'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9533c1c1b32357b258dd76613aefc434?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5db452ab8792f50c753da3ba'>Junior Coelho</a>
+</div>
+<a UTCms='1573508180000' class='quanto-date posted-at response-posted-at' href='#5dc9d45451c524004646326a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Thomas Wiecki,</p>
+
+<p>Is it possible to do the same code without Panel() ? Thanks.</p>
+
+<p>eoms = rets.resample(&#39;1BM&#39;).index[13:-1]<br>
+covs = pd.Panel(items=eoms, minor_axis=rets.columns, major_axis=rets.columns)<br>
+corrs = pd.Panel(items=eoms, minor_axis=rets.columns, major_axis=rets.columns)<br>
+covs_robust = pd.Panel(items=eoms, minor_axis=rets.columns, major_axis=rets.columns)<br>
+corrs_robust = pd.Panel(items=eoms, minor_axis=rets.columns, major_axis=rets.columns)</p>
+
+<p>for eom in eoms:<br>
+    rets_slice = rets.loc[eom-pd.Timedelta(&#39;252d&#39;):eom]<br>
+    covs.loc[eom] = rets_slice.cov()<br>
+    corrs.loc[eom] = rets_slice.corr()<br>
+    covs_robust.loc[eom] = cov_robust(rets_slice)<br>
+    corrs_robust.loc[eom] = corr_robust(rets_slice)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e735a6cf23876004d908edd' id='5e735a6cf23876004d908edd'>
+<a href='#5e735a6cf23876004d908edd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5106bfa69d679b8bf7000005'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a2acaa53f994eddb928ea4c9bd45acb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5106bfa69d679b8bf7000005'>david cottrell</a>
+</div>
+<a UTCms='1584618092000' class='quanto-date posted-at response-posted-at' href='#5e735a6cf23876004d908edd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Anyone noticed there are a number of bugs in his code? I had to copy paste so maybe issues from that but I don&#39;t think so. If anyone has pulled this into a github repo I can update as I go.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e79db7da2405d5c8becb461' id='5e79db7da2405d5c8becb461'>
+<a href='#5e79db7da2405d5c8becb461'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1585044349000' class='quanto-date posted-at response-posted-at' href='#5e79db7da2405d5c8becb461'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@david: In this or the original code? Anyway, it&#39;s not on github currently but would be great if you wanted to put it there and post a link so that others can use the most recent version with your fixes.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5e79f31ba2405d0047ecb614' id='5e79f31ba2405d0047ecb614'>
+<a href='#5e79f31ba2405d0047ecb614'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5106bfa69d679b8bf7000005'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a2acaa53f994eddb928ea4c9bd45acb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5106bfa69d679b8bf7000005'>david cottrell</a>
+</div>
+<a UTCms='1585050395000' class='quanto-date posted-at response-posted-at' href='#5e79f31ba2405d0047ecb614'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@thomas In case it is useful have put it here. </p>
+
+<p><a href="https://github.com/cottrell/hrp" rel="nofollow">https://github.com/cottrell/hrp</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ebf702323ce930044910667' id='5ebf702323ce930044910667'>
+<a href='#5ebf702323ce930044910667'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56fd31734949cacd370008a4'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2f7727617497aacb13b1ce7be757a272?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56fd31734949cacd370008a4'>John Harper</a>
+</div>
+<a UTCms='1589604387000' class='quanto-date posted-at response-posted-at' href='#5ebf702323ce930044910667'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Anyone try the de-noising technique LdP describes here:</p>
+
+<p><a href="https://www.youtube.com/watch?v=EufRYULIkvA" rel="nofollow">https://www.youtube.com/watch?v=EufRYULIkvA</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f1eb980d72fce0017bc68ab' id='5f1eb980d72fce0017bc68ab'>
+<a href='#5f1eb980d72fce0017bc68ab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5f1d59cc5938ea0019423e0b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7fd9fcef47805b0d3a3b2e3bd66606fb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5f1d59cc5938ea0019423e0b'>Yoel Romero</a>
+</div>
+<a UTCms='1595849088000' class='quanto-date posted-at response-posted-at' href='#5f1eb980d72fce0017bc68ab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Guys ! @thomas : thanks for the notebook, very interesting to understand how HRP works. However I am very surprised by the erratic behavior of your standard MVO. How comes it does not allow proper diversification at all whereas Min-Variance performs correctly?  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/hierarchical-risk-parity-comparing-various-portfolio-diversification-techniques'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#0b6d6e6e6f696a68604b7a7e6a657f647b626a6525686466">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

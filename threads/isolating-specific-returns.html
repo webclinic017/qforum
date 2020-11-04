@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Isolating Specific Returns
+</title>
+<meta content='Quantopian Community, I have got something really special in this algorithm, unfortunately it is dragged down by it&#39;s common returns. Is there a way to isolate only the Specific Returns. If possible could you share a code snippet that achieves this using the risk model? A constraint etc? I have an annualised specific return of 33% (which gives a Sharpe of 7.2), with an annualised common return of -21%.' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="XUy+k4bb1iFrxldIWoNhxr+9xpZSPiLcCLcGhsUSv1whKsjeJC0EwtLbDnkVbMmyhzPl/yjyN8eKuN3sb1fd5w==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/isolating-specific-returns' property='og:url'>
+<meta content='Isolating Specific Returns' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/isolating-specific-returns' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Isolating Specific Returns' property='og:title'>
+<meta content='Quantopian Community, I have got something really special in this algorithm, unfortunately it is dragged down by it&#39;s common returns. Is there a way to isolate only the Specific Returns. If possible could you share a code snippet that achieves this using the risk model? A constraint etc? I have an annualised specific return of 33% (which gives a Sharpe of 7.2), with an annualised common return of -21%.' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/isolating-specific-returns">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5aa294f7a267a344cc6c9636'>
+<div class='post-container' data-post-id='5aa294f7a267a344cc6c9636' id='5aa294f7a267a344cc6c9636'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Isolating Specific Returns</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1520604407000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Isolating Specific Returns&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fisolating-specific-returns%3Futm_source%3Dwebsite_share%26utm_campaign%3Disolating-specific-returns%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fisolating-specific-returns%3Futm_source%3Dwebsite_share%26utm_campaign%3Disolating-specific-returns%26utm_medium%3Dlinkedin&amp;title=Isolating+Specific+Returns+%28Jamie+Veitch+%28Azure+Hawk%29%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Getting Started' data-tag-id='55c50e7d8d4710ec6e000004' href='/posts/tag/Getting-Started/newest'>Getting Started</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Tools and Tips' data-tag-id='55c50e7d8d4710ec6e000011' href='/posts/tag/Tools-and-Tips/newest'>Tools and Tips</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Collaboration Request' data-tag-id='55c50e7d8d4710ec6e000016' href='/posts/tag/Collaboration-Request/newest'>Collaboration Request</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Risk Model' data-tag-id='5a0269aa9cc8967fe39dd706' href='/posts/tag/Risk-Model/newest'>Risk Model</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/isolating-specific-returns?utm_source=website_share&amp;utm_campaign=isolating-specific-returns&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Jamie Veitch (Azure Hawk)" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Quantopian Community,</p>
+
+<p>I have got something really special in this algorithm, unfortunately it is dragged down by it&#39;s common returns. Is there a way to isolate only the Specific Returns. If possible could you share a code snippet that achieves this using the risk model? A constraint etc?</p>
+
+<p>I have an annualised specific return of 33% (which gives a Sharpe of 7.2), with an annualised common return of -21%.  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>78 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5aa299a3a267a34bfe6ca392' id='5aa299a3a267a34bfe6ca392'>
+<a href='#5aa299a3a267a34bfe6ca392'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520605603000' class='quanto-date posted-at response-posted-at' href='#5aa299a3a267a34bfe6ca392'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I know this has been asked before, but an answer wasn&#39;t really given  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa2ae3d5e5674571260f925' id='5aa2ae3d5e5674571260f925'>
+<a href='#5aa2ae3d5e5674571260f925'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54dbb2869e83f6b922000607'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2e21590bc7f1dfff8ff3172a1ecf7f64?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54dbb2869e83f6b922000607'>Abhijeet Kalyan</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1520610877000' class='quanto-date posted-at response-posted-at' href='#5aa2ae3d5e5674571260f925'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Quant Trader:</p>
+
+<p>A good starting point would be to check out the RiskModelExposure constraint, which you can pass in to <code>order_optimal_portfolio</code>. Here&#39;s an example of it in action:</p>
+
+<pre><code>from quantopian.pipeline.experimental import risk_loading_pipeline  
+import quantopian.optimize as opt
+
+def initialize(context):  
+    attach_pipeline(risk_loading_pipeline(), &#39;risk_loading_pipeline&#39;)
+
+def before_trading_start(context, data):  
+    context.risk_loading_pipeline = pipeline_output(&#39;risk_loading_pipeline&#39;)
+
+def place_orders(context, data):  
+    # Constrain our risk exposures. We&#39;re using the latest version of the default bounds.  
+    constrain_sector_style_risk = opt.experimental.RiskModelExposure(  
+        risk_model_loadings=context.risk_loading_pipeline,  
+        version=opt.Newest,  
+    )
+
+    order_optimal_portfolio(  
+        objective=some_objective,  
+        constraints=[constrain_sector_style_risk],  
+    )  
+</code></pre>
+
+<p>By default, <code>RiskModelExposure</code> will place an 18% constraint on sector exposures, and a 36% constraint on style exposures. You can tweak the exposure limits to provide a different exposure cap for certain factors - for example, if you pass <code>max_industrials=0.1</code> into the <code>RiskModelExposure</code> constructor, it&#39;ll cap your long industrial exposure at 10%. <a href="https://www.quantopian.com/posts/quantopian-risk-model-in-algorithms">This post</a> has a good example of the <code>RiskModelExposure</code> constraint in action.</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa2b321ef545a1e3be5b0cf' id='5aa2b321ef545a1e3be5b0cf'>
+<a href='#5aa2b321ef545a1e3be5b0cf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520612129000' class='quanto-date posted-at response-posted-at' href='#5aa2b321ef545a1e3be5b0cf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Abhijeet Kalyan,</p>
+
+<p>I have already applied these filters. What I don&#39;t understand is how my Average Factor exposures can be zero (or as close as makes no difference) but I am losing money consistently from these common style returns?</p>
+
+<p>Alternatively, is there a way I can view common returns on a chart by itself (or specific returns) so I can work out what the nature of the losses are to see if I can synthesize a hedge against my common return losses?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa2b438ef545a3a81e5b073' id='5aa2b438ef545a3a81e5b073'>
+<a href='#5aa2b438ef545a3a81e5b073'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520612408000' class='quanto-date posted-at response-posted-at' href='#5aa2b438ef545a3a81e5b073'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><pre><code> constrain_sector_style_risk = opt.experimental.RiskModelExposure(  
+        risk_model_loadings=context.risk_loading_pipeline,  
+        version=opt.Newest,  
+        min_momentum = -0.01,  
+        max_momentum = 0.01,  
+        min_short_term_reversal = -0.01,  
+        max_short_term_reversal = 0.01,  
+        min_value = -0.01,  
+        max_value = 0.01,  
+        min_size = -0.01,  
+        max_size = 0.01,  
+        min_volatility = -0.01,  
+        max_volatility = 0.01,  
+    )  
+</code></pre>
+
+<pre><code>order_optimal_portfolio(  
+        objective=objective,  
+        constraints=[  
+            constrain_gross_leverage,  
+            constrain_pos_size,  
+            market_neutral,  
+            sector_neutral,  
+            constrain_sector_style_risk,  
+        ],  
+    )  
+</code></pre>
+
+<p>Here in these two sections I should be limiting my factor risk. However, when I look at the notebook I generate off the back of this, I notice that I am still losing a lot of money in common returns. How can I stop this from happening?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa2e112879b3500126a9f65' id='5aa2e112879b3500126a9f65'>
+<a href='#5aa2e112879b3500126a9f65'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520623890000' class='quanto-date posted-at response-posted-at' href='#5aa2e112879b3500126a9f65'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Or, even better, is there a way to flat out exclude financial services from the mix? This would cut out the majority of my losses.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa32ebe879b355b8b6aa023' id='5aa32ebe879b355b8b6aa023'>
+<a href='#5aa32ebe879b355b8b6aa023'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54dbb2869e83f6b922000607'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2e21590bc7f1dfff8ff3172a1ecf7f64?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54dbb2869e83f6b922000607'>Abhijeet Kalyan</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1520643774000' class='quanto-date posted-at response-posted-at' href='#5aa32ebe879b355b8b6aa023'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Quant Trader,</p>
+
+<p>To view your specific returns (or common returns) in isolation, you could use the <code>attributed_factor_returns</code> property on the backtest object. This would get you a dataframe of your daily (not cumulative) attributed returns, which you can use to isolate a specific return stream - for example, <code>bt.attributed_factor_returns[&#39;specific_returns&#39;]</code>. We&#39;re also working on changes that will allow you to view your specific and common returns directly in the backtest UI, so stay tuned on that front! </p>
+
+<p>For limiting your financial services exposure, maybe adding in tighter-than-default <code>min_financial_services</code> and <code>max_financial_services</code> values to the <code>RiskModelExposure</code> constraint, like you did for the style factors, might help?  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa4f6ebff0236000f6b3585' id='5aa4f6ebff0236000f6b3585'>
+<a href='#5aa4f6ebff0236000f6b3585'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520760555000' class='quanto-date posted-at response-posted-at' href='#5aa4f6ebff0236000f6b3585'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>How is common returns calculated? Can financial common returns be hedged against with a long/short weighted XLF position, or is that not how the common returns work?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa674b464749f001ace6b3b' id='5aa674b464749f001ace6b3b'>
+<a href='#5aa674b464749f001ace6b3b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1520858292000' class='quanto-date posted-at response-posted-at' href='#5aa674b464749f001ace6b3b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>And if it is the case that common returns be hedged against with a long/short weighted XLF position, is there a way to see yesterdays financial common returns inside the algorithm and then use it to weight said position?</p>
+
+<p>i.e.</p>
+
+<p>order_target_percent(XLF, -financial_services_factor_exposure(1 day ago))  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa87b4fb7de5b0010086a62' id='5aa87b4fb7de5b0010086a62'>
+<a href='#5aa87b4fb7de5b0010086a62'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57e2b12557e9c947ce001019'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5dcb3defe1ec9651d858cf3e5ee79d9b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57e2b12557e9c947ce001019'>Rene Zhang</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1520991055000' class='quanto-date posted-at response-posted-at' href='#5aa87b4fb7de5b0010086a62'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader I took a look at the performance attribution of this algo. It has an alert,  &quot;This algorithm has a relatively high turnover of its positions. As a result, performance attribution might not be fully accurate.&quot; I suggest that you use return-based performance attribution instead of using this position-based performance attribution. </p>
+
+<p>For a return-based performance attribution, you could regress the algo daily returns on the daily common risk factor returns with combined L1 and L2 priors as regularizer.  (<a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet">http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet</a>)  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa8d3da972fe2001072f944' id='5aa8d3da972fe2001072f944'>
+<a href='#5aa8d3da972fe2001072f944'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521013722000' class='quanto-date posted-at response-posted-at' href='#5aa8d3da972fe2001072f944'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello @Rene Zhang,</p>
+
+<p>Thank you for your help, I managed to resolve the problem by making the algorithm run more than once per day.</p>
+
+<pre><code> for i in range(1, 300, 5):  
+        schedule_function(get_factor, date_rules.every_day(), time_rules.market_open(minutes=i))  
+        schedule_function(allocate, date_rules.every_day(), time_rules.market_open(minutes=i+1))  
+</code></pre>
+
+<p>This had a double benefit, it reduced the common returns losses and simultaneously increased specific returns. Unfortunately it isn&#39;t eligible for the Quantopian Open because it has a daily turnover of 1885.0%.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa93af9b7de5b54990866a1' id='5aa93af9b7de5b54990866a1'>
+<a href='#5aa93af9b7de5b54990866a1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521040121000' class='quanto-date posted-at response-posted-at' href='#5aa93af9b7de5b54990866a1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, those are really impressive numbers.</p>
+
+<p>Would you be so kind as to re-run your presented backtest full tear sheet with the round_trips option turned on, as in:</p>
+
+<p>bt.create_full_tear_sheet(round_trips=True)</p>
+
+<p>Interested in viewing a few of those numbers. Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa95ba0972fe2660f72f46a' id='5aa95ba0972fe2660f72f46a'>
+<a href='#5aa95ba0972fe2660f72f46a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521048480000' class='quanto-date posted-at response-posted-at' href='#5aa95ba0972fe2660f72f46a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Guy,</p>
+
+<p>Is there a way to do that without generating the entire rest of the backtest? The notebooks been running for the last hour and hasn&#39;t finished yet, maybe it&#39;s due to the high turnover?</p>
+
+<p>Alternatively, would you be happy for me to run the same backtest, but over a shorter time period (07-17 to 03-18) in order for the notebook to actually get somewhere?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa95e5ab7de5b73690865d8' id='5aa95e5ab7de5b73690865d8'>
+<a href='#5aa95e5ab7de5b73690865d8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521049178000' class='quanto-date posted-at response-posted-at' href='#5aa95e5ab7de5b73690865d8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, you do not need to regenerate the whole backtest, only the line supplied after loading the backtest in your notebook.</p>
+
+<p>Your strategy is generating alpha, it appears sustainable since your cumulative returns log-chart has an increasing spread above the SPY benchmark. And that is the alpha that one should be looking for.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa95f86972fe272bc72f44d' id='5aa95f86972fe272bc72f44d'>
+<a href='#5aa95f86972fe272bc72f44d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521049478000' class='quanto-date posted-at response-posted-at' href='#5aa95f86972fe272bc72f44d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>It&#39;s the processing which is taking the time, I&#39;ve just reused the same backtest I loaded in earlier, but the section where I pasted in </p>
+
+<pre><code>bt.create_full_tear_sheet(round_trips=True)  
+</code></pre>
+
+<p>has had the little star in the top left corner for the last hour and a bit.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa96035972fe212a77304da' id='5aa96035972fe212a77304da'>
+<a href='#5aa96035972fe212a77304da'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521049653000' class='quanto-date posted-at response-posted-at' href='#5aa96035972fe212a77304da'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Then, not enough memory !  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa96290b7de5b7613086615' id='5aa96290b7de5b7613086615'>
+<a href='#5aa96290b7de5b7613086615'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521050256000' class='quanto-date posted-at response-posted-at' href='#5aa96290b7de5b7613086615'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Memory peaked at 31% usage. I&#39;m just going to run a shorter backtest with a shorter refresh rate to try and slow it down. The returns may be slightly different, but the gist should still be the same</p>
+
+<p>That should allow the round-trip analysis to load in faster hopefully.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa99dfd48aa3a001976b93a' id='5aa99dfd48aa3a001976b93a'>
+<a href='#5aa99dfd48aa3a001976b93a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521065469000' class='quanto-date posted-at response-posted-at' href='#5aa99dfd48aa3a001976b93a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Guy,</p>
+
+<p>At long last (the thing has literally been running for the last 3 hours). Here is the round trip analysis of a simplified version of the algorithm (had to slightly reduce rebalance rate to get this thing to process it this side of 2018 : P)</p>
+
+<p>Hope it shows you what you want to see.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa9af4afcd5470012e2c2ad' id='5aa9af4afcd5470012e2c2ad'>
+<a href='#5aa9af4afcd5470012e2c2ad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521069898000' class='quanto-date posted-at response-posted-at' href='#5aa9af4afcd5470012e2c2ad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, those are fantastic numbers. Great job. Impressive.</p>
+
+<p>Who would ever want some 5-10% return after seeing numbers like those. </p>
+
+<p>Add a little leverage (5-10%), not much. Allow a slight positive market exposure (5-10%), and you should see your strategy fly even more. The added performance will cover the small leveraging fees. Doing this, your alpha will turn exponential.</p>
+
+<p>The chart of importance is the cumulative returns log-chart which sees the alpha spread smoothly increasing with time. Showing that your trading strategy does generate meaningful increasing positive alpha.</p>
+
+<p>The only question I have is: the Performance Relative to Common Risk Factors section gives positive results while all the cumulative return factors are negative. How could they add up to something positive?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaa202848aa3a576376bc28' id='5aaa202848aa3a576376bc28'>
+<a href='#5aaa202848aa3a576376bc28'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521098792000' class='quanto-date posted-at response-posted-at' href='#5aaa202848aa3a576376bc28'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy Fleury,</p>
+
+<blockquote>
+<p>The only question I have is: the Performance Relative to Common Risk Factors section gives positive results while all the cumulative return factors are negative. How could they add up to something positive?</p>
+</blockquote>
+
+<p>I&#39;m not entirely sure about this to be honest, you&#39;ll have to ask Quantopian how that works, I would assume it&#39;s something to do with the specific returns I&#39;m generating which are independent of common factors?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaa3c5648aa3a001976c369' id='5aaa3c5648aa3a001976c369'>
+<a href='#5aaa3c5648aa3a001976c369'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521106006000' class='quanto-date posted-at response-posted-at' href='#5aaa3c5648aa3a001976c369'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for your suggestion about leverage by the way, it would seem it disproportionately benefited the algorithm (not entirely sure how this is the case)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaa7304fcd547760fe2bfc3' id='5aaa7304fcd547760fe2bfc3'>
+<a href='#5aaa7304fcd547760fe2bfc3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521120004000' class='quanto-date posted-at response-posted-at' href='#5aaa7304fcd547760fe2bfc3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, the answer is simple. </p>
+
+<p>The real alpha illustrated in your cumulative returns log-chart is compounded over the entire period. And since you are using a percent of equity betting system, any extra money made available will be put to use by increasing the bet size.</p>
+
+<p>Which brings me to: would have liked to see:   round_trips=True   to compare the numbers.</p>
+
+<p>Somewhere in the Performance Relative to Common Risk Factors section there is something wrong. Someone from Q should provide answers.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaa9d0448aa3a001976c9b4' id='5aaa9d0448aa3a001976c9b4'>
+<a href='#5aaa9d0448aa3a001976c9b4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521130756000' class='quanto-date posted-at response-posted-at' href='#5aaa9d0448aa3a001976c9b4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Guy,</p>
+
+<p>I think this post from Quantopian answers your question.</p>
+
+<p><a href="https://www.quantopian.com/posts/new-tool-for-quants-the-quantopian-risk-model">https://www.quantopian.com/posts/new-tool-for-quants-the-quantopian-risk-model</a></p>
+
+<blockquote>
+<p>Components of the Quantopian Risk Model</p>
+
+<p>The deliberate, careful design of a risk model codifies a particular view of the market. The Quantopian Risk Model is designed to identify the particular risk exposures that are desired by our investor clients.</p>
+
+<p>The risk model consists of a series of cascading linear regressions on each asset. In each step in the cascade, we calculate a regression, and pass the residual returns for each asset to the next step.</p>
+
+<p>Sector returns - Our model has 11 sectors. A sector ETF is specified to represent each sector factor. Each stock is assigned to a sector. We perform a regression to calculate each stock&#39;s beta to its respective sector. A portion of each stock&#39;s return is attributable to its sector. The residual return is calculated and passed to the next step.</p>
+
+<p>Style risk - We start with the residual from the sector return, above. We then regress the stock against the 5 style factors together. The five styles in the Quantopian risk model:</p>
+
+<p>Momentum - The momentum factor captures return differences between stocks on an upswing (winner stocks) and the stocks on a downswing (loser stocks) over 11 months.<br>
+Company Size - The size factor captures return differences between big-cap stocks and small-cap stocks.<br>
+Value - The value factor captures return differences between expensive stocks and in-expensive stocks (measured by the ratio of book value of company to the price of the stock).<br>
+Short-term Reversal - The short-term reversal factor captures return differences between stocks with strong losses to reverse (recent loser stocks) and the stocks with strong gains (recent winner stocks) to reverse in a short time period.<br>
+Volatility - The volatility factor captures return differences between high volatility stocks and low volatility stocks in the market. The volatility can be measured in historical long term or near-term.<br>
+Once the sector and style components have all been removed, the residual is the specific return.</p>
+</blockquote>
+
+<p>From this I&#39;m pretty sure that the explanation for my returns is most of the returns I generate is independent of the common factors (i.e. it is all residual).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaaa13e8a91381e6ccb5858' id='5aaaa13e8a91381e6ccb5858'>
+<a href='#5aaaa13e8a91381e6ccb5858'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521131838000' class='quanto-date posted-at response-posted-at' href='#5aaaa13e8a91381e6ccb5858'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, I would think not. It would mean inversely correlated to all 16 factors.</p>
+
+<p>If such was the case, it would give your strategy an even much higher comparative value.</p>
+
+<p>Have you tried the:  round_trips=True  thing? Still curious to see the numbers.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaaae4748aa3a001976cad5' id='5aaaae4748aa3a001976cad5'>
+<a href='#5aaaae4748aa3a001976cad5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521135175000' class='quanto-date posted-at response-posted-at' href='#5aaaae4748aa3a001976cad5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here you go, same simplified algorithm I used earlier last time I showed you the round trips, but with 1.1x leverage this time  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaaca08fcd5470b42e2c20a' id='5aaaca08fcd5470b42e2c20a'>
+<a href='#5aaaca08fcd5470b42e2c20a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521142280000' class='quanto-date posted-at response-posted-at' href='#5aaaca08fcd5470b42e2c20a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The increase in returns I would still describe as disproportionate. The percent profitable figure has increased by 1% from 55% to 56%, which I don&#39;t understand considering it&#39;s the exact same strategy.</p>
+
+<p>I also don&#39;t understand why it can&#39;t be the case that my algorithm is inversely correlated to the 16 factors, does the evidence not point to this being the case?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaad0b9fcd547487fe2c192' id='5aaad0b9fcd547487fe2c192'>
+<a href='#5aaad0b9fcd547487fe2c192'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521143993000' class='quanto-date posted-at response-posted-at' href='#5aaad0b9fcd547487fe2c192'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, there is an explanation for this which you find in the notebook:</p>
+
+<blockquote>
+<p>Performance attribution is calculated based on end-of-day holdings and<br>
+does not account for intraday activity. Algorithms that derive a high<br>
+percentage of returns from buying and selling within the same day may<br>
+receive inaccurate performance attribution.  </p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaad38afcd5470b42e2c2b4' id='5aaad38afcd5470b42e2c2b4'>
+<a href='#5aaad38afcd5470b42e2c2b4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521144714000' class='quanto-date posted-at response-posted-at' href='#5aaad38afcd5470b42e2c2b4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That completely slipped my mind, thanks for pointing that out!</p>
+
+<p>I still don&#39;t understand how the leverage is influencing the percent profitable figure though?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aaae3bafcd5472a75e2c0be' id='5aaae3bafcd5472a75e2c0be'>
+<a href='#5aaae3bafcd5472a75e2c0be'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521148858000' class='quanto-date posted-at response-posted-at' href='#5aaae3bafcd5472a75e2c0be'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, like I said before, the alpha in your strategy is being compounded due to your method of play, albeit at a low rate, but still compounding. I have a formula for that somewhere. You have an expanding bet size which also help.</p>
+
+<p>My questions are now centered around feasibility and sustainability. </p>
+
+<p>Take your first notebook, its achieved CAGR rate is remarkable, outstanding.</p>
+
+<p>It had a 567% CAGR. At that rate, a $10M portfolio would grow to over $130 billion in 5 years. By year 10, it would reach over $1 million billion. So, sustainability and feasibility are now the proper questions to ask. And because of those questions, what could you do to make it doable anyway, even if it is to a lesser extent? Planning what you want your strategy to do over the next few years will help you compensate for those issues, and improve your trading strategy even further.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aab97530b17ad229c7409e1' id='5aab97530b17ad229c7409e1'>
+<a href='#5aab97530b17ad229c7409e1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521194835000' class='quanto-date posted-at response-posted-at' href='#5aab97530b17ad229c7409e1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The first thing to do is to do it with high market cap stocks only, at the moment it is running on the QTradableStocksUS() and simply picking the best stocks available, if the alpha remains it&#39;s still a viable strategy.</p>
+
+<p>No one expects it to be able to achieve the 567% number, that would be remarkable (and impossible). What I&#39;m going to do is live trade it with some demo money for a period of time to test it out of sample. I might also vary the base universes over an over again (small cap, mid cap, large cap, high pe, low pe etc) in order to test that there is actually something beyond over-fitting at play here. The logic behind the algorithm makes mathematical sense (in my mind at least) but it may just be a case of fortunate environments.</p>
+
+<p>If I really wanted to put it to the test, a Monte Carlo system with a completely randomised universe, full of randomly generated time series, which can be traded by the strategy could be very effective tool to test it, this works because it isn&#39;t actually trading the stocks .</p>
+
+<p>The one I ran with large cap stocks has been placed here, obviously something still exists, but the returns are far more realistic, it&#39;s still not something to be sniffed at though:  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aab9830310a572401d18606' id='5aab9830310a572401d18606'>
+<a href='#5aab9830310a572401d18606'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521195056000' class='quanto-date posted-at response-posted-at' href='#5aab9830310a572401d18606'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I would say the factor still exists. There are a few problems however, random leverage spikes. High negative factor exposure to size. Largely negative exposures to all daily sector factor exposures. Probably a more realistic backtest.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabb33b0b17ad3ec2740e31' id='5aabb33b0b17ad3ec2740e31'>
+<a href='#5aabb33b0b17ad3ec2740e31'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521201979000' class='quanto-date posted-at response-posted-at' href='#5aabb33b0b17ad3ec2740e31'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I also ran it over the 2008 GFC (just to see how it performed out of sample) although the drawdown was slightly larger, once again it performs well.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabbf701580d7336aa3cf84' id='5aabbf701580d7336aa3cf84'>
+<a href='#5aabbf701580d7336aa3cf84'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1521205104000' class='quanto-date posted-at response-posted-at' href='#5aabbf701580d7336aa3cf84'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Fantastic performance and returns! Just out of curiousity, is this a Machine Learning algorithm and did you make sure that there is no forward looking bias?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabc2630b17ad1369740d72' id='5aabc2630b17ad1369740d72'>
+<a href='#5aabc2630b17ad1369740d72'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521205859000' class='quanto-date posted-at response-posted-at' href='#5aabc2630b17ad1369740d72'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James Villa,</p>
+
+<p>This algorithm isn&#39;t based on Machine Learning, it makes use of a (as far as I am aware) self discovered factor. There is no forward looking bias to the best of my knowledge, it makes use of the QTradableStocksUS universe and doesn&#39;t make any attempt to access future data, so unless there&#39;s a problem with the Quantopian backtester I don&#39;t see how it could come in. </p>
+
+<p>A lot of the returns can however be attributed to small cap stocks, once those are removed the returns die off a bit, even then though it&#39;s still an acceptable algorithm (sharpe of 3 or higher depending on start date). It&#39;s returns really pick up when it&#39;s allowed to pick the best stocks in the universe it can.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabc4d60b17ad0d5c7407a0' id='5aabc4d60b17ad0d5c7407a0'>
+<a href='#5aabc4d60b17ad0d5c7407a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1521206486000' class='quanto-date posted-at response-posted-at' href='#5aabc4d60b17ad0d5c7407a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader,</p>
+
+<p>Thanks for your reply and info.  With small caps, you can run into problems with shorting and liquidity.  The one thing that strikes me the most, is how the returns are negatively correlated with all 16 factors.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabdb2e0b17ad55bb7407a9' id='5aabdb2e0b17ad55bb7407a9'>
+<a href='#5aabdb2e0b17ad55bb7407a9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521212206000' class='quanto-date posted-at response-posted-at' href='#5aabdb2e0b17ad55bb7407a9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James Villa</p>
+
+<p>I think what has caused that is the fact that this strategy is intraday. As @Guy Fluery pointed out:</p>
+
+<blockquote>
+<p>Performance attribution is calculated based on end-of-day holdings and<br>
+does not account for intraday activity. Algorithms that derive a high<br>
+percentage of returns from buying and selling within the same day may<br>
+receive inaccurate performance attribution.</p>
+</blockquote>
+
+<p>It may not be the case that it&#39;s actually negatively correlated with all factors. Of course, it would be great if it was : D  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aabe0be1580d719b1a3c991' id='5aabe0be1580d719b1a3c991'>
+<a href='#5aabe0be1580d719b1a3c991'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521213630000' class='quanto-date posted-at response-posted-at' href='#5aabe0be1580d719b1a3c991'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>did you make sure that there is no forward looking bias?</p>
+</blockquote>
+
+<p>I forgot to mention, I&#39;ve been live trading it for about a week now (demo cash) to see if it still works, it&#39;s performing to the same standard so I think we can rule out look ahead bias. Of course, 1 week isn&#39;t a large enough sample size.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aace11d8d9a3b5c21f664fa' id='5aace11d8d9a3b5c21f664fa'>
+<a href='#5aace11d8d9a3b5c21f664fa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521279261000' class='quanto-date posted-at response-posted-at' href='#5aace11d8d9a3b5c21f664fa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The major problem I&#39;ve been having is Quantopian&#39;s speed, when I increase the rebalance period (4893.2% vs ~1800% daily), I get significantly higher returns.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aad19d767382015ff94be8c' id='5aad19d767382015ff94be8c'>
+<a href='#5aad19d767382015ff94be8c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521293783000' class='quanto-date posted-at response-posted-at' href='#5aad19d767382015ff94be8c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, and you should. This would be confirmed with:</p>
+
+<p>bt.create_full_tear_sheet(round_trips=True)</p>
+
+<p>;)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aad1ca6d4fe9411e59b0154' id='5aad1ca6d4fe9411e59b0154'>
+<a href='#5aad1ca6d4fe9411e59b0154'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1521294502000' class='quanto-date posted-at response-posted-at' href='#5aad1ca6d4fe9411e59b0154'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy Fleury</p>
+
+<p>I would like to do that every time, but it takes (what feels like) a million years to run that notebook due to the sheer number of positions it takes : D  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aad1f5bd4fe943ed99aff84' id='5aad1f5bd4fe943ed99aff84'>
+<a href='#5aad1f5bd4fe943ed99aff84'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1521295195000' class='quanto-date posted-at response-posted-at' href='#5aad1f5bd4fe943ed99aff84'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, there were two words of importance in my post. The first: should, as if it was evident that it should do so. The second: confirm, as if in yes it does. I would go for the answers. You should want to know what are the limits. How far can you push it which in a way will set your limits. Then, you can pull back to a level where you feel more comfortable (risk wise that is).</p>
+
+<p>IMHO.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abbe89396c7b10015ed9543' id='5abbe89396c7b10015ed9543'>
+<a href='#5abbe89396c7b10015ed9543'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522264211000' class='quanto-date posted-at response-posted-at' href='#5abbe89396c7b10015ed9543'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve spent some time tinkering with the base algorithm, this is the final product. I&#39;m very happy with it, I&#39;ve sacrificed the outlandish returns for greater security, the greater security comes in the form of significantly reduced common returns losses, periods at which the factor exposures and style factor exposures are basically 0 and a (almost) consistent beta of 0.0.</p>
+
+<p>What I found particularly interesting though is that the Annual returns also seem to be increasing exponentially, implying this is not only a source of alpha, but is a source of alpha which is becoming far easier to exploit.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abbecf48a825038addd4e5c' id='5abbecf48a825038addd4e5c'>
+<a href='#5abbecf48a825038addd4e5c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ba54c5452189f2a10001eb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/57b77a8507c1b1df8b72e201834cb7ec?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ba54c5452189f2a10001eb'>Will van Es</a>
+</div>
+<a UTCms='1522265332000' class='quanto-date posted-at response-posted-at' href='#5abbecf48a825038addd4e5c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quant Trader,</p>
+
+<p>I am intrigued - would you be willing to share what stock universe you are using (QTradableStocksUS?) and what your assumptions are for trading costs / slippage? It has been highlighted on this forum previously that you have to be very careful with HFT algos on Quantopian owing to the difficulty of accurately modelling the bid/ask spread (and, indeed, that it is possible to write an algo which is seemingly astronomical but in reality is simply catching the bid/ask).</p>
+
+<p>If the algo is robust to universe changes (i.e. focusing on tradable and highly liquid stocks) and is scalable (produces a similar curve at $10m+ starting capital) whilst also incorporating conservative assumptions for slippage, you may just be on your way to becoming a billionaire.</p>
+
+<p>Also, just to note, I would imagine that the &quot;almost exponential&quot; profile of the curve is more likely a compounding effect than the alpha source becoming easier to exploit over time.</p>
+
+<p>Will  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abbf43ff028a077b20a2eb2' id='5abbf43ff028a077b20a2eb2'>
+<a href='#5abbf43ff028a077b20a2eb2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522267199000' class='quanto-date posted-at response-posted-at' href='#5abbf43ff028a077b20a2eb2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Will van Es</p>
+
+<p>Universe: QTradableStocksUS<br>
+Slippage: set_slippage(slippage.FixedBasisPointsSlippage())<br>
+Commission: (Nothing inputed here so the Quantopian default)</p>
+
+<p>Return Curve: Similar curve at $10m+ but begins to tail off at higher values ($100m+)</p>
+
+<p>When I was referring to the exponential growth in annual returns, I wasn&#39;t talking about the cumulative return curve, but the annual returns section lower down (between monthly returns and distribution of monthly returns).</p>
+
+<p>I have re-run the algorithm with only the top 100 most liquid stocks allowed (filtered daily), the returns stay, but not necessarily as smooth (4.9 Sharpe vs 11.4 Sharpe).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abbf555f028a055320a2f79' id='5abbf555f028a055320a2f79'>
+<a href='#5abbf555f028a055320a2f79'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522267477000' class='quanto-date posted-at response-posted-at' href='#5abbf555f028a055320a2f79'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Guy Fleury,</p>
+
+<p>As you&#39;ve always asked for round_trips, here&#39;s a notebook with that included.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abbfe8196c7b14443ed9537' id='5abbfe8196c7b14443ed9537'>
+<a href='#5abbfe8196c7b14443ed9537'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1522269825000' class='quanto-date posted-at response-posted-at' href='#5abbfe8196c7b14443ed9537'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, outstanding equity curve. I especially liked the 0.07 Gross Leverage. You have something valuable there. Hope Point72 sees the inherent benefits of adding your strategy to their mix.</p>
+
+<p>Again, well done.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abc11cf96c7b15a4ced95f0' id='5abc11cf96c7b15a4ced95f0'>
+<a href='#5abc11cf96c7b15a4ced95f0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52670e6a2763c5cfb70002c7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/da33ec858011a8fad211c7e0ae68160c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52670e6a2763c5cfb70002c7'>Alan Coppola</a>
+</div>
+<a UTCms='1522274767000' class='quanto-date posted-at response-posted-at' href='#5abc11cf96c7b15a4ced95f0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@QuantTrader,<br>
+Since you are doing intraday trading and the Q/Pyfolio  Backtester/Metrics tools are not really set up for that,<br>
+I believe you should run the tools pvr and<br>
+pvr_chart that are in the last algo of @Blue&#39;s thread:</p>
+
+<p><a href="https://www.quantopian.com/posts/pvr">https://www.quantopian.com/posts/pvr</a></p>
+
+<p>There he records max metric values on a minutely basis, and then reports the maxes daily.<br>
+Perhaps check out his other posts on the metrics subject also, as I&#39;ve always found them useful.<br>
+A while ago, we tried  some intraday algos, but always found measuring the results a problem on the Q platform.</p>
+
+<p>Your results are great!...so good luck!<br>
+alan  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abc9b4286a9f70013f781cd' id='5abc9b4286a9f70013f781cd'>
+<a href='#5abc9b4286a9f70013f781cd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522309954000' class='quanto-date posted-at response-posted-at' href='#5abc9b4286a9f70013f781cd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>2016-12-29 19:10 _pvr:108 INFO PvR 1.1042 %/day   cagr 0.156   Portfolio value 53750412   PnL 3750412<br>
+2016-12-29 19:10 _pvr:109 INFO   Profited 3750412 on 2695544 activated/transacted for PvR of 139.1%<br>
+2016-12-29 19:10 _pvr:110 INFO   QRet 7.50 PvR 139.13 CshLw 47508344 MxLv 0.05 MxRisk 2695544 MxShrt -2695544<br>
+2017-06-30 19:10 _pvr:108 INFO PvR 1.1024 %/day   cagr 0.162   Portfolio value 58075449   PnL 8075449<br>
+2017-06-30 19:10 _pvr:109 INFO   Profited 8075449 on 2907004 activated/transacted for PvR of 277.8%<br>
+2017-06-30 19:10 _pvr:110 INFO   QRet 16.15 PvR 277.79 CshLw 47508344 MxLv 0.05 MxRisk 2907004 MxShrt -2907005<br>
+2017-12-29 19:10 _pvr:108 INFO PvR 0.9560 %/day   cagr 0.149   Portfolio value 61567479   PnL 11567479<br>
+2017-12-29 19:10 _pvr:109 INFO   Profited 11567479 on 3200957 activated/transacted for PvR of 361.4%<br>
+2017-12-29 19:10 _pvr:110 INFO   QRet 23.13 PvR 361.38 CshLw 47508344 MxLv 0.06 MxRisk 3200957 MxShrt -3200957<br>
+2018-03-27 21:00 _pvr:108 INFO PvR 0.9970 %/day   cagr 0.154   Portfolio value 64116231   PnL 14116231<br>
+2018-03-27 21:00 _pvr:109 INFO   Profited 14116231 on 3240047 activated/transacted for PvR of 435.7%<br>
+2018-03-27 21:00 _pvr:110 INFO   QRet 28.23 PvR 435.68 CshLw 47508344 MxLv 0.06 MxRisk 3240047 MxShrt -3240047<br>
+2018-03-27 21:00 pvr:185 INFO 2016-07-01 to 2018-03-27  $50000000  2018-03-29 00:43 US/Pacific</p>
+
+<p>@Alan Coppola As far as I&#39;m aware there is nothing here I should be worried about. PvR significantly better than realised returns and no leverage spikes (like I was kind of worried about).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcad8033fc07001018d15b' id='5abcad8033fc07001018d15b'>
+<a href='#5abcad8033fc07001018d15b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522314624000' class='quanto-date posted-at response-posted-at' href='#5abcad8033fc07001018d15b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader, congratulations! And thank you for sharing your results. </p>
+
+<p>When you say &#39;live demo&#39; trading, do you mean Q&#39;s paper-trading environment, or an independent one via a broker? If it&#39;s Q&#39;s environment, there may not be any look-ahead bias, but do you think it&#39;s possible that you&#39;ve found a &#39;bug&#39; in their trading simulation, giving you unrealistic fills that you wouldn&#39;t necessarily get in the real live market (e.g. being able to buy the bid and sell the offer w/o any &#39;takers&#39; crossing the spread)? </p>
+
+<p>Also, you don&#39;t by any chance have a negative value for the &#39;commission&#39; and/or &#39;slippage&#39; costs? Sorry, but I had to ask. :)</p>
+
+<p>I do hope you&#39;ve found a true alpha factor that no-one else knows about, but it does seem a bit too good to be true in my view, and strange that market makers and other ultra low-latency HFT firms haven&#39;t already taken advantage of it. I hope I&#39;m wrong though!</p>
+
+<p>Congrats again and all the best!</p>
+
+<p>Joakim  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcb12b86a9f7085cf77ca0' id='5abcb12b86a9f7085cf77ca0'>
+<a href='#5abcb12b86a9f7085cf77ca0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522315563000' class='quanto-date posted-at response-posted-at' href='#5abcb12b86a9f7085cf77ca0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Joakim Arvidsson (Cream Mongoose)</p>
+
+<p>I&#39;m 100% sure that I&#39;ve not got a negative value for commission and slippage, as I said, I&#39;m using the default for commission,and FixedBasisPointsSlippage() for the slippage.</p>
+
+<p>There is a possibility that there&#39;s a bug in the backtesting environment, but it&#39;s also working in the Quantopian Live Trader (another one of their environments) so I think it&#39;s unlikely that the same error transfers across.</p>
+
+<p>With regards to it being a HFT strategy, I wouldn&#39;t describe it as that, the majority of the high turnover is caused by me actively have to hedge common factor exposures on a minutely basis. If you go back up to the top, my turnover was minimal, but I was leaking money everywhere from common factors. The turnover increase was my answer to that. I would describe it as a normal Quant strategy which I had to greatly increase the turnover of to hedge it&#39;s risks.</p>
+
+<p>Of course, it&#39;s hard to model market impact with a backtester, so it could be getting unrealistic fills, but even if it is, it&#39;s managing to still turn a profit trading only stocks with the highest liquidity, which should in theory allow the algorithm to trade in real life with very little impact.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abccecc86a9f7001cf78561' id='5abccecc86a9f7001cf78561'>
+<a href='#5abccecc86a9f7001cf78561'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522323148000' class='quanto-date posted-at response-posted-at' href='#5abccecc86a9f7001cf78561'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader,</p>
+
+<p>I&#39;m curious to find out if you can change your algo&#39;s frequency to a daily timeframe instead of intraday and see if the trading logic still holds. If it does, I&#39;ll be truly impressed. In my mind, a truly robust trading system will do well in various frequencies/timeframe. Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcd2a786a9f70016f785ef' id='5abcd2a786a9f70016f785ef'>
+<a href='#5abcd2a786a9f70016f785ef'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522324135000' class='quanto-date posted-at response-posted-at' href='#5abcd2a786a9f70016f785ef'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James Villa</p>
+
+<p>If you go right up to the top, that strategy was on the daily timeframe, still performs, but not as good, primarily because the reason I made it intraday was to hedge out common factor exposure.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcd37433fc07001018d46a' id='5abcd37433fc07001018d46a'>
+<a href='#5abcd37433fc07001018d46a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522324340000' class='quanto-date posted-at response-posted-at' href='#5abcd37433fc07001018d46a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve started getting an error though.</p>
+
+<blockquote>
+<p>No JSON object could be decoded</p>
+</blockquote>
+
+<p>What&#39;s going on with that? I&#39;m getting these errors on Notebooks I&#39;ve already run earlier with no problem.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcdb3286a9f7085cf77fad' id='5abcdb3286a9f7085cf77fad'>
+<a href='#5abcdb3286a9f7085cf77fad'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522326322000' class='quanto-date posted-at response-posted-at' href='#5abcdb3286a9f7085cf77fad'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader,</p>
+
+<p>Is your algo reading a json file from an external source?  The above error seem to imply that.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcde8455a7ef327b54899d' id='5abcde8455a7ef327b54899d'>
+<a href='#5abcde8455a7ef327b54899d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522327172000' class='quanto-date posted-at response-posted-at' href='#5abcde8455a7ef327b54899d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>It isn&#39;t I think the error is on Quantopian&#39;s end, it&#39;s not something that happened before and it even happens when re-running a notebook which has worked earlier.</p>
+
+<p>Even this algorithm throws a &#39;No JSON object could be decoded&#39; error when I run a Notebook on it&#39;s backtest.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcef5886a9f7442ef77c80' id='5abcef5886a9f7442ef77c80'>
+<a href='#5abcef5886a9f7442ef77c80'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54487203dc843663f2000123'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/439ba1adf33b808f2d50e3a31c3c7e28?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54487203dc843663f2000123'>Josh Payne</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1522331480000' class='quanto-date posted-at response-posted-at' href='#5abcef5886a9f7442ef77c80'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Quant Trader,</p>
+
+<p>Thanks for the heads up. We&#39;ve reproduced this error and are investigating further.</p>
+
+<p>Thanks,<br>
+Josh  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abd025455a7ef453f5481d9' id='5abd025455a7ef453f5481d9'>
+<a href='#5abd025455a7ef453f5481d9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522336340000' class='quanto-date posted-at response-posted-at' href='#5abd025455a7ef453f5481d9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I get this error too when running the &#39;Contest Criteria Check&#39; notebook:</p>
+
+<p>0% ETA:  --:--:--|                                                          |</p>
+
+<p>ValueErrorTraceback (most recent call last)<br>
+ in ()<br>
+      1 # Replace the string below with your backtest ID.<br>
+----&gt; 2 bt = get_backtest(&#39;[removed]&#39;)</p>
+
+<p>/build/src/qexec_repo/qexec/research/api.py in get_backtest(backtest_id)
+    116         client.get_sqlbacktest(backtest_id),<br>
+    117         progress_bar,<br>
+--&gt; 118         backtest_id,<br>
+    119     )<br>
+    120 </p>
+
+<p>/build/src/qexec_repo/qexec/research/results.py in from_stream(cls, result_iterator, progress_bar, algo_id)
+    591         risk_packet = None<br>
+    592<br>
+--&gt; 593         for msg in result_iterator:<br>
+    594             prefix, payload = msg[&#39;prefix&#39;], msg[&#39;payload&#39;]<br>
+    595 </p>
+
+<p>/build/src/qexec_repo/qexec/research/web/client.py in get_sqlbacktest(self, backtest_id)
+    132         with closing(resp):<br>
+    133             for msg in resp.iter_lines():<br>
+--&gt; 134                 yield loads(msg)<br>
+    135<br>
+    136     def _make_get_live_algo_request(self, live_algo_id):</p>
+
+<p>/usr/lib/python2.7/json/<strong>init</strong>.pyc in loads(s, encoding, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)
+    337             parse_int is None and parse_float is None and<br>
+    338             parse_constant is None and object_pairs_hook is None and not kw):<br>
+--&gt; 339         return _default_decoder.decode(s)<br>
+    340     if cls is None:<br>
+    341         cls = JSONDecoder</p>
+
+<p>/usr/lib/python2.7/json/decoder.pyc in decode(self, s, _w)
+    362<br>
+    363         &quot;&quot;&quot;<br>
+--&gt; 364         obj, end = self.raw_decode(s, idx=_w(s, 0).end())<br>
+    365         end = _w(s, end).end()<br>
+    366         if end != len(s):</p>
+
+<p>/usr/lib/python2.7/json/decoder.pyc in raw_decode(self, s, idx)
+    380             obj, end = self.scan_once(s, idx)<br>
+    381         except StopIteration:<br>
+--&gt; 382             raise ValueError(&quot;No JSON object could be decoded&quot;)<br>
+    383         return obj, end</p>
+
+<p>ValueError: No JSON object could be decoded  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abd085e33fc07658318cbcc' id='5abd085e33fc07658318cbcc'>
+<a href='#5abd085e33fc07658318cbcc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54487203dc843663f2000123'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/439ba1adf33b808f2d50e3a31c3c7e28?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54487203dc843663f2000123'>Josh Payne</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1522337886000' class='quanto-date posted-at response-posted-at' href='#5abd085e33fc07658318cbcc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, we&#39;ve shipped the fix that was causing the <code>get_backtest()</code> call to fail. These notebooks should run smoothly for you now.</p>
+
+<p>We&#39;ve sorry for the inconvenience.</p>
+
+<p>Thanks<br>
+Josh  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ac1348c41d24a00199cbea5' id='5ac1348c41d24a00199cbea5'>
+<a href='#5ac1348c41d24a00199cbea5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1522611340000' class='quanto-date posted-at response-posted-at' href='#5ac1348c41d24a00199cbea5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><a href="https://www.quantopian.com/posts/any-suggestions-for-isolating-a-specific-common-return">https://www.quantopian.com/posts/any-suggestions-for-isolating-a-specific-common-return</a></p>
+
+<p>Any suggestions? At this point I seem to be getting unbelievably lucky when it comes to my algorithms having some really impressive hidden features (it&#39;s not intentional)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ad1c5bf39394a50f3fcf2f6' id='5ad1c5bf39394a50f3fcf2f6'>
+<a href='#5ad1c5bf39394a50f3fcf2f6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1523697087000' class='quanto-date posted-at response-posted-at' href='#5ad1c5bf39394a50f3fcf2f6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Two weeks in to live trading, here are the results:</p>
+
+<blockquote>
+<p>2018-04-12 21:00 pvr: INFO 2018-03-29 to 2018-04-12  $10000000  2018-04-12 04:12 US/Pacific<br>
+Runtime 9 hr 2.2 min<br>
+2018-04-12 21:00 _pvr: INFO   QRet 0.97 PvR 23.44 CshLw 9708565 MxLv 0.05 MxRisk 412091 MxShrt -412092<br>
+2018-04-12 21:00 _pvr: INFO   Profited 96614 on 412091 activated/transacted for PvR of 23.4%<br>
+2018-04-12 21:00 _pvr: INFO PvR 2.3445 %/day   cagr 0.274   Portfolio value 10096614   PnL 96614<br>
+2018-04-11 21:00 pvr: INFO 2018-03-29 to 2018-04-11  $10000000  2018-04-11 04:23 US/Pacific<br>
+Runtime 8 hr 51.7 min<br>
+2018-04-11 21:00 _pvr: INFO   QRet 0.85 PvR 20.65 CshLw 9708565 MxLv 0.05 MxRisk 412091 MxShrt -412092<br>
+2018-04-11 21:00 _pvr: INFO   Profited 85111 on 412091 activated/transacted for PvR of 20.7%<br>
+2018-04-11 21:00 _pvr: INFO PvR 2.2948 %/day   cagr 0.268   Portfolio value 10085111   PnL 85111<br>
+2018-04-10 21:00 pvr: INFO 2018-03-29 to 2018-04-10  $10000000  2018-04-10 04:09 US/Pacific<br>
+Runtime 9 hr 5.2 min<br>
+2018-04-10 21:00 _pvr: INFO   QRet 0.76 PvR 18.35 CshLw 9708565 MxLv 0.05 MxRisk 412091 MxShrt -412092<br>
+2018-04-10 21:00 _pvr: INFO   Profited 75602 on 412091 activated/transacted for PvR of 18.3%<br>
+2018-04-10 21:00 _pvr: INFO PvR 2.2932 %/day   cagr 0.268   Portfolio value 10075602   PnL 75602<br>
+2018-04-09 21:00 pvr: INFO 2018-03-29 to 2018-04-09  $10000000  2018-04-09 04:27 US/Pacific<br>
+Runtime 8 hr 47.8 min<br>
+2018-04-09 21:00 _pvr: INFO   QRet 0.64 PvR 15.61 CshLw 9708565 MxLv 0.05 MxRisk 412091 MxShrt -412092<br>
+2018-04-09 21:00 _pvr: INFO   Profited 64339 on 412091 activated/transacted for PvR of 15.6%<br>
+2018-04-09 21:00 _pvr: INFO PvR 2.2304 %/day   cagr 0.260   Portfolio value 10064339   PnL 64339<br>
+2018-04-06 21:00 pvr: INFO 2018-03-29 to 2018-04-06  $10000000  2018-04-06 04:19 US/Pacific<br>
+Runtime 8 hr 55.2 min<br>
+2018-04-06 21:00 _pvr: INFO   QRet 0.55 PvR 13.40 CshLw 9708472 MxLv 0.05 MxRisk 412091 MxShrt -412092<br>
+2018-04-06 21:00 _pvr: INFO   Profited 55209 on 412091 activated/transacted for PvR of 13.4%<br>
+2018-04-06 21:00 _pvr: INFO PvR 2.2329 %/day   cagr 0.260   Portfolio value 10055209   PnL 55209<br>
+2018-04-05 21:00 pvr: INFO 2018-03-29 to 2018-04-05  $10000000  2018-04-05 04:26 US/Pacific<br>
+Runtime 8 hr 48.0 min<br>
+2018-04-05 21:00 _pvr: INFO   QRet 0.45 PvR 10.82 CshLw 9712598 MxLv 0.05 MxRisk 412023 MxShrt -412023<br>
+2018-04-05 21:00 _pvr: INFO   Profited 44562 on 412023 activated/transacted for PvR of 10.8%<br>
+2018-04-05 21:00 _pvr: INFO PvR 2.1631 %/day   cagr 0.251   Portfolio value 10044562   PnL 44562<br>
+2018-04-04 21:00 pvr: INFO 2018-03-29 to 2018-04-04  $10000000  2018-04-04 04:23 US/Pacific<br>
+Runtime 8 hr 51.3 min<br>
+2018-04-04 21:00 _pvr:INFO   QRet 0.35 PvR 8.66 CshLw 9712598 MxLv 0.05 MxRisk 402375 MxShrt -402375<br>
+2018-04-04 21:00 _pvr:INFO   Profited 34839 on 402375 activated/transacted for PvR of 8.7%<br>
+2018-04-04 21:00 _pvr:INFO PvR 2.1646 %/day   cagr 0.245   Portfolio value 10034839   PnL 34839<br>
+2018-04-03 21:00 pvr:INFO 2018-03-29 to 2018-04-03  $10000000  2018-04-03 04:22 US/Pacific<br>
+Runtime 8 hr 52.9 min<br>
+2018-04-03 21:00 _pvr:INFO   QRet 0.28 PvR 6.89 CshLw 9712598 MxLv 0.05 MxRisk 402375 MxShrt -402375<br>
+2018-04-03 21:00 _pvr:INFO   Profited 27710 on 402375 activated/transacted for PvR of 6.9%<br>
+2018-04-03 21:00 _pvr:INFO PvR 2.2955 %/day   cagr 0.262   Portfolio value 10027710   PnL 27710<br>
+2018-04-02 21:00 pvr:INFO 2018-03-29 to 2018-04-02  $10000000  2018-04-02 04:30 US/Pacific<br>
+Runtime 8 hr 44.2 min<br>
+2018-04-02 21:00 _pvr:INFO   QRet 0.18 PvR 4.58 CshLw 9695138 MxLv 0.05 MxRisk 401540 MxShrt -401540<br>
+2018-04-02 21:00 _pvr:INFO   Profited 18382 on 401540 activated/transacted for PvR of 4.6%<br>
+2018-04-02 21:00 _pvr:INFO PvR 2.2889 %/day   cagr 0.260   Portfolio value 10018382   PnL 18382<br>
+2018-03-29 21:00 pvr:INFO 2018-03-29 to 2018-03-29  $10000000  2018-03-29 07:13 US/Pacific<br>
+Runtime 6 hr 2.0 min<br>
+2018-03-29 21:00 _pvr:INFO   QRet 0.07 PvR 1.97 CshLw 9744756 MxLv 0.05 MxRisk 380081 MxShrt -380082<br>
+2018-03-29 21:00 _pvr:INFO   Profited 7488 on 380081 activated/transacted for PvR of 2.0%<br>
+2018-03-29 21:00 _pvr:INFO PvR 1.9702 %/day   cagr 0.208   Portfolio value 10007488   PnL 7488<br>
+2018-03-29 14:58 pvr:INFO 2018-03-29 to 2018-03-29  $10000000  2018-03-29 07:13 US/Pacific  </p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ad1f01f39394a589cfcf077' id='5ad1f01f39394a589cfcf077'>
+<a href='#5ad1f01f39394a589cfcf077'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1523707935000' class='quanto-date posted-at response-posted-at' href='#5ad1f01f39394a589cfcf077'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader,</p>
+
+<p>Had to dig in to my old notebooks and found an algo that had similar phenomena as yours, huge negative common returns with huge specific returns on a daily timeframe. Can you tell me how you hedge out those negative common returns? I know you had to change your timeframe from daily to intraday but how?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ad1fbd5007689001a2c8aee' id='5ad1fbd5007689001a2c8aee'>
+<a href='#5ad1fbd5007689001a2c8aee'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1523710933000' class='quanto-date posted-at response-posted-at' href='#5ad1fbd5007689001a2c8aee'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I dealt with the problem by greatly increasing the daily turnover, I think it depends on the nature of your alpha source though. My strategy benefited from reduced exposure to market movements and hence reducing the time I held positions for reduced my common return losses, I don&#39;t know the nature of your strategy though. Your returns could be tied to common returns however.</p>
+
+<p>The method I used was to call the rebalance function multiple time per day using:</p>
+
+<pre><code>for i in range(1, 300, 2):  
+        schedule_function(place_orders, date_rules.every_day(), time_rules.market_open(minutes=i))  
+        schedule_function(close_orders, date_rules.every_day(), time_rules.market_open(minutes=(i+1)))  
+</code></pre>
+
+<p>The other thing (which I was beginning to experiment with, but I haven&#39;t got to work yet) was to create a pipeline which returned the factor exposure for the stocks in the universe, then to attempt to negate the exposures by ensuring the sum of the exposures of the stocks in your portfolio was equal to 0 (or at least those that you want to be 0)</p>
+
+<p>e.g. </p>
+
+<pre><code>defensive_exposure = ConsumerDefensive()  
+    combined_factor = (  
+        -defensive_exposure.zscore()  
+        )  
+
+    pipe = Pipeline(  
+        columns = {  
+            &#39;combined_factor&#39;:combined_factor,  
+        },  
+        screen = QTradableStocksUS()  
+    )  
+    return pipe  
+</code></pre>
+
+<p>and then running with the output. (I haven&#39;t got very far with this yet because I&#39;ve been quite busy recently). I would assume this is how the Quantopian Risk Model works, but I&#39;m hoping you can make it more effective by running it more often.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ad2027e39394a18adfcf328' id='5ad2027e39394a18adfcf328'>
+<a href='#5ad2027e39394a18adfcf328'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1523712638000' class='quanto-date posted-at response-posted-at' href='#5ad2027e39394a18adfcf328'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I guess we&#39;ll understand better once the risk model white paper is published, but my impression is that the risk model constraint (and beta constraint) relies on trailing indicators, and assumes out-of-sample, there will be stability (but of course there isn&#39;t).  It works well for sectors, since stocks don&#39;t jump from sector to sector very much, but for style risks, it may work at a gross level, but there is no guarantee for a given slice of the universe and a specific algo that it will project forward correctly, based on trailing data.  It is better than nothing, though, I suppose.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5ad204446cf6857184edfb50' id='5ad204446cf6857184edfb50'>
+<a href='#5ad204446cf6857184edfb50'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1523713092000' class='quanto-date posted-at response-posted-at' href='#5ad204446cf6857184edfb50'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader,</p>
+
+<p>Thanks for your reply.  I think I want to keep my daily timeframe as I am not confident that intraday backtesting framework of Q would give a realistic outcome as @Joakim Arvidsson pointed out.  Maybe I&#39;ll try your experiment with negating factor exposures. Also, do you use MaximizeAlpha or TargetWeights construct for optimization?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afaaeb3e6b04a003f5d5123' id='5afaaeb3e6b04a003f5d5123'>
+<a href='#5afaaeb3e6b04a003f5d5123'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526378163000' class='quanto-date posted-at response-posted-at' href='#5afaaeb3e6b04a003f5d5123'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve looked into this a bit more and I <em>think</em> I&#39;ve worked it out:<br>
+Quantopian defines the momentum factors as:</p>
+
+<blockquote>
+<p>The difference in return between assets on an upswing and a downswing over 11 months.</p>
+</blockquote>
+
+<p>They do the same for all the other factors. What I am assuming is that they have created an algorithm for each factor and then calculate the correlation of your algorithm to the &#39;factor algorithms&#39; to generate your factor exposure.</p>
+
+<p>I am then assuming that your sector exposure is the stocks from each sector that you hold as a percentage of your total holdings.</p>
+
+<p>They define common returns as:</p>
+
+<blockquote>
+<p>Returns that are attributable to common risk factors. There are 11 sector and 5 style risk factors that make up these returns.</p>
+</blockquote>
+
+<p>So what I am guessing is, it&#39;s:</p>
+
+<p>Momentum Factor Algorithm = MF<br>
+Value Factor Algorithm = VF<br>
+Size... = SF<br>
+Volatility = VOF<br>
+Short-Term-Reversal = STF</p>
+
+<p>Daily Common Return = ß(Momentum)*MF + ß(Size)*SF + etc...<br>
+and Common Returns is just a summation of this calculation over the time period you ran the algorithm for.</p>
+
+<p>What I&#39;m pretty sure specific returns are are stocks which generate returns above the average basket. As (I believe) they&#39;ve created these algorithms based on the difference between two baskets of stocks, those which (using momentum as an example) are on an upswing and those that are on a downswing. As you&#39;re using a basket you&#39;re going to be getting an average difference. However, if you were to take the difference between the stock which is the most &#39;upswingy&#39; and the stock which is the most &#39;downswingy&#39; I think the difference in performance between this pairing (or any other non-basket pairing) and the &#39;momentum factor algorithm&#39; would be calculated as Specific Returns.</p>
+
+<p>This is just me trying working it out based on what Quantopian has given me, of course I&#39;m still not sure.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afaaf17ab3287004c9447e9' id='5afaaf17ab3287004c9447e9'>
+<a href='#5afaaf17ab3287004c9447e9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526378263000' class='quanto-date posted-at response-posted-at' href='#5afaaf17ab3287004c9447e9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>So what I reckon you could do, if you could find out the basket of stocks the &#39;factor algorithms&#39; are holding, you could tell your algorithm to buy these stocks in the weighting assigned by the overall logic of your original algorithm (i.e. if your factor exposure would have been 10% if you were running your algorithm, instead of doing that you buy a 10% exposure to the momentum factor algorithm) you could completely remove specific returns from the equation. Or if you wanted to completely remove common returns, you could find out what your factor exposure is, then take an opposite position the basket of stocks assigned to that factor and only get access to the difference in performance between the two (i.e. the specific returns).</p>
+
+<p>I assume this is what the Quantopian Risk Model does. I would appreciate someone from Quantopian weighing in though as I&#39;m still fairly uncertain as to how it works.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afab57ce6b04a003f5d51cd' id='5afab57ce6b04a003f5d51cd'>
+<a href='#5afab57ce6b04a003f5d51cd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1526379900000' class='quanto-date posted-at response-posted-at' href='#5afab57ce6b04a003f5d51cd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@QT,</p>
+
+<p>I have been experimenting with negating factor exposures and its combination to get optimal risk/return of my alpha logic. I think we are on the same page with regards to how Q is modeling the various risk components to form their common returns.   So, in theory, anything that is not accounted for by way of correlation to the various common returns routine is specific returns.  Still trying different weighing schemes but slowly getting there.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc074bc0ad4d0045945918' id='5afc074bc0ad4d0045945918'>
+<a href='#5afc074bc0ad4d0045945918'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526466379000' class='quanto-date posted-at response-posted-at' href='#5afc074bc0ad4d0045945918'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James Villa,</p>
+
+<p>I&#39;ve spent a bit of time writing an algorithm which attempts to eradicate the specific returns. I&#39;ve done this using my best interpretation of how the Quantopian risk model works.</p>
+
+<p>It&#39;s not perfect, but it works in my backtests, the problems are caused by me:<br>
+a) Not knowing the size of the basket Quantopian uses for calculating factor returns<br>
+b) The stocks in the basket have their own sector exposures which I haven&#39;t accounted for because it would end up being an infinite feedback loop if I kept on doing that  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc092ba116f500491edf7b' id='5afc092ba116f500491edf7b'>
+<a href='#5afc092ba116f500491edf7b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526466859000' class='quanto-date posted-at response-posted-at' href='#5afc092ba116f500491edf7b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p><img src="https://image-proxy.quantopian.com/70aeecb592ef83c1164d0b4fc36afa9b40411b9d/68747470733a2f2f696d6167652e6962622e636f2f6830773269792f53637265656e5f53686f745f323031385f30355f31365f61745f31315f33305f35342e706e67" />  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc19e5a37ba9004a9c0655' id='5afc19e5a37ba9004a9c0655'>
+<a href='#5afc19e5a37ba9004a9c0655'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1526471141000' class='quanto-date posted-at response-posted-at' href='#5afc19e5a37ba9004a9c0655'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@QT,</p>
+
+<blockquote>
+<p>I&#39;ve spent a bit of time writing an algorithm which attempts to <strong>eradicate the specific returns</strong>. </p>
+</blockquote>
+
+<p>Wouldn&#39;t you want to do the opposite and eradicate the common returns? Maybe just a typo on your part.  What I think Q is looking for are specific returns attributable to alpha factors that are not attributable to  common risks factors.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc1bc1a37ba900479c062a' id='5afc1bc1a37ba900479c062a'>
+<a href='#5afc1bc1a37ba900479c062a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526471617000' class='quanto-date posted-at response-posted-at' href='#5afc1bc1a37ba900479c062a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>If you can isolate only the common returns (the returns which Quantopian defines) you can then go long your underlying strategy and short this strategy and the performance is the isolated specific returns.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc1dbca37ba900479c064a' id='5afc1dbca37ba900479c064a'>
+<a href='#5afc1dbca37ba900479c064a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1526472124000' class='quanto-date posted-at response-posted-at' href='#5afc1dbca37ba900479c064a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Fine, if it works for you. I just see it the other way.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc2300c0ad4d0042945b42' id='5afc2300c0ad4d0042945b42'>
+<a href='#5afc2300c0ad4d0042945b42'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526473472000' class='quanto-date posted-at response-posted-at' href='#5afc2300c0ad4d0042945b42'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quantopian defines specific returns as the difference between the strategy returns and the common returns. The only way you can isolate specific returns is by eliminating the common returns (making the common returns curve flat).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc2f3bc0ad4d0048945bf7' id='5afc2f3bc0ad4d0048945bf7'>
+<a href='#5afc2f3bc0ad4d0048945bf7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526476603000' class='quanto-date posted-at response-posted-at' href='#5afc2f3bc0ad4d0048945bf7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For example,</p>
+
+<p>Common Returns Unconstrained<br>
+<img src="https://image-proxy.quantopian.com/b3246e34a4b3431230a0d963d7d5a564c69f3481/68747470733a2f2f696d6167652e6962622e636f2f624467666d4a2f53637265656e5f53686f745f323031385f30355f31365f61745f31345f31335f30362e706e67" /></p>
+
+<p>Common Returns Constrained<br>
+<img src="https://image-proxy.quantopian.com/e3ee8c3ddf57b59d8e9d2aad913203bbb4a64f57/68747470733a2f2f696d6167652e6962622e636f2f674b72566d4a2f53637265656e5f53686f745f323031385f30355f31365f61745f31345f31335f30322e706e67" /></p>
+
+<p>It would be better if the algorithm was good, but the constraint (when applied) does significantly impact common returns. Would be more effective if I had more knowledge regarding what Quantopian used to model the factors.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc3b32a37ba900479c0863' id='5afc3b32a37ba900479c0863'>
+<a href='#5afc3b32a37ba900479c0863'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1526479666000' class='quanto-date posted-at response-posted-at' href='#5afc3b32a37ba900479c0863'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@QT,</p>
+
+<blockquote>
+<p>The only way you can isolate specific returns is by <strong>eliminating the common returns</strong> (making the common returns curve flat).</p>
+</blockquote>
+
+<p>Isn&#39;t this exactly what I said, &quot;Wouldn&#39;t you want to do the opposite and <strong>eradicate the common returns</strong>?&quot;  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc3c23c0ad4d0045945cf3' id='5afc3c23c0ad4d0045945cf3'>
+<a href='#5afc3c23c0ad4d0045945cf3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5909c6e4798b510010a7fdbf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/bca6de69c125952fe658023b71cefea7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5909c6e4798b510010a7fdbf'>Jamie Veitch (Azure Hawk)</a>
+</div>
+<a UTCms='1526479907000' class='quanto-date posted-at response-posted-at' href='#5afc3c23c0ad4d0045945cf3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yes, but to do that you first need to find a way to isolate the common returns, which is what I tried to do in the algorithm above  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5afc4219c0ad4d0048945d71' id='5afc4219c0ad4d0048945d71'>
+<a href='#5afc4219c0ad4d0048945d71'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1526481433000' class='quanto-date posted-at response-posted-at' href='#5afc4219c0ad4d0048945d71'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You might as well wait till they release the whitepaper on Optimize API with risk loading constraints because you are assuming their computations of common returns based on their narrative which might not reveal everything. See this discussion on this thread ...<a href="https://www.quantopian.com/posts/new-tool-for-quants-the-quantopian-risk-model#5afc23dba116f500401ee265">new-tool-for-quants-the-quantopian-risk-model</a></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c18b833ca98cc0044824067' id='5c18b833ca98cc0044824067'>
+<a href='#5c18b833ca98cc0044824067'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/572297210865eef93a0001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/57f4f25317937ba54366c98fee48c4a6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/572297210865eef93a0001d2'>Warren Harding</a>
+</div>
+<a UTCms='1545123891000' class='quanto-date posted-at response-posted-at' href='#5c18b833ca98cc0044824067'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Quant Trader. Very nice. I have to wonder though, why would you settle for less than 10% annual returns when you have seen 12164.1% annual return with a 22.83 sharpe and only 1.5% drawdown? Was there something fundamentally wrong with the high-performance version? I&#39;ld go for it more and try and fix the problems without sacrificing all the returns. That&#39;s just me though. Good job anyways, that&#39;s the highest sharpe I can remember seeing.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5c353453785f7f004a5db7fa' id='5c353453785f7f004a5db7fa'>
+<a href='#5c353453785f7f004a5db7fa'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1546990675000' class='quanto-date posted-at response-posted-at' href='#5c353453785f7f004a5db7fa'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I didn&#39;t read the entire thread, but it seems built on a misunderstanding (or at least opposite understand from the one I have).</p>
+
+<p>Returns = Common returns + specific returns</p>
+
+<p>Common returns are things like beta, big minus small, momentum, etc. -- all the &quot;common&quot; risk factors. Therefore, specific returns are whatever is not accounted for by Quantopian&#39;s common risk factor models.</p>
+
+<p>Therefore, negative common returns doesn&#39;t mean that common returns is subtracting from your performance. It means that your returns go beyond simply no correlation to common returns but are rather inversely correlated to the common risk factor models, which is what you would expect if your returns come from a source unique to beta, big minus small, momentum, etc.</p>
+
+<p>Correct me if I&#39;m wrong.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/isolating-specific-returns'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/isolating-specific-returns'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#f39596969791929098b38286929d879c839a929ddd909c9e">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

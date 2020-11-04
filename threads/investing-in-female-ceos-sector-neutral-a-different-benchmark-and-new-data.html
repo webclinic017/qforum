@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Investing in Female CEOs - sector neutral, a different benchmark and new data
+</title>
+<meta content='Months ago, I shared my side project with the community. I&#39;ve continued looking at investing in Female CEOs and analyzing the data in different ways. I wanted to share some of the different ways in which I have looked at the data. This notebook includes the first version of my algorithm, but it also includes a sector weighted approach. There was a lot of feedback that I might have a large sector bias in the data. It turns out that 30% of the female CEOs in my data set were in the consumer...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="18GL+bIap9b2dRlCarnYMZAhytR7nG96QYJM8R1hY1qrp/20EOx1NU9oQHMlVnBFqK/pvQFQemHDjZebtyQB4Q==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=true;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data' property='og:url'>
+<meta content='Investing in Female CEOs - sector neutral, a different benchmark and new data' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Investing in Female CEOs - sector neutral, a different benchmark and new data' property='og:title'>
+<meta content='Months ago, I shared my side project with the community. I&#39;ve continued looking at investing in Female CEOs and analyzing the data in different ways. I wanted to share some of the different ways in which I have looked at the data. This notebook includes the first version of my algorithm, but it also includes a sector weighted approach. There was a lot of feedback that I might have a large sector bias in the data. It turns out that 30% of the female CEOs in my data set were in the consumer...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='560d217bbe53ae99430005d3'>
+<div class='post-container' data-post-id='560d217bbe53ae99430005d3' id='560d217bbe53ae99430005d3'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Investing in Female CEOs - sector neutral, a different benchmark and new data</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1443701722000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Investing in Female CEOs - sector neutral, a different benchmark and new data&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Finvesting-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data%3Futm_source%3Dwebsite_share%26utm_campaign%3Dinvesting-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Finvesting-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data%3Futm_source%3Dwebsite_share%26utm_campaign%3Dinvesting-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data%26utm_medium%3Dlinkedin&amp;title=Investing+in+Female+CEOs+-+sector+neutral%2C+a+different+benchmark+and+new+data+%28Karen+Rubin%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Show Q' data-tag-id='55c50e7d8d4710ec6e000010' href='/posts/tag/Show-Q/newest'>Show Q</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data?utm_source=website_share&amp;utm_campaign=investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Karen Rubin" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Months ago, I shared <a href="https://www.quantopian.com/posts/research-investing-in-women-led-fortune-1000-companies">my side project</a> with the community. I&#39;ve continued looking at investing in Female CEOs and analyzing the data in different ways. I wanted to share some of the different ways in which I have looked at the data. </p>
+
+<p>This notebook includes the first version of my algorithm, but it also includes a sector weighted approach. There was a lot of feedback that I might have a large sector bias in the data. It turns out that 30% of the female CEOs in my data set were in the consumer space. I created the sector weighted approach to understand how much of an impact that had on the overall performance.</p>
+
+<p>The female CEO data used to run this notebook is <a href="https://www.dropbox.com/sh/qb0qjhzhbbmoaxq/AACiXyN25R0QKg7Js6T2IDbra?dl=0">available here</a>. To use it, clone the notebook and then load the file titled FemaleCEOs_v6.csv into the data folder of your research environment. </p>
+</div>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>26 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='560d229156ba21eb310006b0' id='560d229156ba21eb310006b0'>
+<a href='#560d229156ba21eb310006b0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1443701396000' class='quanto-date posted-at response-posted-at' href='#560d229156ba21eb310006b0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Another piece of feedback that I got, was that the S&amp;P500 was the wrong benchmark to use. A better one would be all the companies of the Fortune 1000, but unfortunately getting the historical constituents was too pricey for me. </p>
+
+<p>Using a new universe ranking and filtering API (which isn&#39;t available to everyone yet, but which will be soon!) I was able to create a version of the Fortune 500, which I have nicknamed the Quanto500. Since the Fortune 500 is the top companies in the US by revenue, I used the new API sort the entire universe by revenue and then select the top 500 to invest in. I re-rank and select the stocks each month and then rebalance the portfolio.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560d23486bd1a18d3f000686' id='560d23486bd1a18d3f000686'>
+<a href='#560d23486bd1a18d3f000686'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1443701579000' class='quanto-date posted-at response-posted-at' href='#560d23486bd1a18d3f000686'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>With the addition of the new Quantopian Store, I&#39;m also able to access CEO gender in the EventVestor CEO Changes dataset. With the help of James Christopher, we analyzed this data in a variety of ways over the summer. Just a few of the different algorithms are shared here. </p>
+
+<p>This dataset is infinitely more interesting than the initial one I built. It not only includes all female CEOs changes, but also all male CEO changes, as well as the announcement date, the trade date and the effective date of the change. There are many more things to explore using this data set.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560d289a56ba2126c7000647' id='560d289a56ba2126c7000647'>
+<a href='#560d289a56ba2126c7000647'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d482e55cf3fb26a800099d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9bf4b6e80317a80ff803ccbc2896d34d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d482e55cf3fb26a800099d'>Sally Sanford</a>
+</div>
+<a UTCms='1443702942000' class='quanto-date posted-at response-posted-at' href='#560d289a56ba2126c7000647'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thank you Karen for sharing your notebook.  Not only does it highlight an important economic fact - women are better managers of large corporations than men, but the extensive notebook is a great template for anyone looking to do research using the Quantopian platform.</p>
+
+<p>I do have a couple of observations that I would share.  </p>
+
+<p>First, you compare an equal weighted portfolio, women-led companies where equal dollars are invested in each and rebalanced at random times (newly ascended women CEOs), to a capitalization-weighted portfolio, SPY.  Perhaps you might consider using an equal weighted SP500 ETF like RSP which has outperformed the SPY by 60% since inception since 2004.  That is a fairer comparison.  Generally, equal weighted portfolios have a small-cap bias.</p>
+
+<p>Some of the charts show discontinuities, e.g. Female CEOs in green around 2008 above.</p>
+
+<p>Finally, could you comment on the difference between your simulation which outperforms the SPY by a factor of 3X and the actual performance of funds that implemented similar strategies (PXWIX and WIL) where they have each significantly underpeformed the S&amp;P 500.</p>
+
+<p>Thank you for your work and go girl power!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560d40e539f8ad771d00005e' id='560d40e539f8ad771d00005e'>
+<a href='#560d40e539f8ad771d00005e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1443709161000' class='quanto-date posted-at response-posted-at' href='#560d40e539f8ad771d00005e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Looking at my algo vs RSP is a great suggestion. People are often saying &quot;use another benchmark&quot; but I haven&#39;t heard of this one. I&#39;ll be sure to look at it in the future. </p>
+
+<p>As for the differences in PXWIX and WIL, PXWIX doesn&#39;t share a ton of detail about how they select which companies to invest in, but one major difference is they are a global fund, not just limited to US equities. </p>
+
+<p>WIL tracks a weighted index of 85 U.S.-based companies that are listed on the NYSE or NASDAQ, have market capitalizations of at least $250 million, and have a woman CEO or a board of directors that’s at least 25% female. What I think is most interesting about this is the board of directors piece. I have not looked at board participation myself at all (I don&#39;t have the data). I did talk to a team of MBA students at Sloan who spent the semester researching this. They were unsuccessful at finding a link between performance and board participation. </p>
+
+<p>There was an <a href="http://www.bloomberg.com/news/articles/2015-09-11/women-focused-funds-are-making-money-and-creating-controversy">interesting article in Bloomberg</a> on this topic recently that showed a few other funds and indicated the returns are a bit all over the place. </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560e91032bccd0be12000807' id='560e91032bccd0be12000807'>
+<a href='#560e91032bccd0be12000807'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5238ec17d33ac9b935000022'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5b2a36599ff3000f5572a3ef4347fa4d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5238ec17d33ac9b935000022'>Tom Austin</a>
+</div>
+<a UTCms='1443795207000' class='quanto-date posted-at response-posted-at' href='#560e91032bccd0be12000807'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Karen,</p>
+
+<p>The &#39;Equal weight benchmark&#39; is a good suggestion.   You can also try to look directly at several comparison groups:<br>
+a)  Companies that replace women CEO&#39;s with male CEO&#39;s.  Do they then show worse performance?<br>
+b)  Companies that replace male CEO&#39;s with female CEO&#39;s. Do they show a bump?<br>
+c)  &#39;Matching peer companies.&#39;  Try to find a universe of similar companies (there are only 80 female CEO&#39;s here?).  Matched by industry and EBIT margin and trailing period stock price momentum.  Do the female led companies outperform a custom universe of equal weighted similar &#39;companies&#39; after the females are named to leadership positions?<br>
+d)  Fundamental analysis.  Don&#39;t look just at stock performance.  Look at 1,3 and 5 year sales growth and EBIT and Gross Margin levels.  Are female led companies outgrowing and/or improving bottom line margins more then &#39;matching companies&#39; without females?<br>
+e)  Introduce a &#39;random range&#39; for an 80 stock buy-and-hold universe.  An 80 stock universe is small and will have a huge range of &#39;random drift&#39; that is possible over time.  So, include probability estimates for &#39;chance outcomes&#39; to see how unlikely the observed result is after controlling for a) market cap and b) sector and c) industry and d) company type (sales growth rates and margin rates).</p>
+
+<p>It would be very interesting (and socially important) if you could show that women are better CEO&#39;s.  But, I would keep digging on the &#39;comparison&#39; group and the controls to eliminate all other variables as much as possible.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='560ea9c57d22e6ace3000842' id='560ea9c57d22e6ace3000842'>
+<a href='#560ea9c57d22e6ace3000842'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5238ec17d33ac9b935000022'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5b2a36599ff3000f5572a3ef4347fa4d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5238ec17d33ac9b935000022'>Tom Austin</a>
+</div>
+<a UTCms='1443801544000' class='quanto-date posted-at response-posted-at' href='#560ea9c57d22e6ace3000842'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Might also be interesting to look at &#39;sentiment&#39; and SMA30 and SMA100 sentiment over time after a female takes over.  Does avg. sentiments go up?  Fall?  Stay the same?  Does it stay up over time?  Or to see if you can untangle what types of companies women take over on average (hi growth or struggling)... and how the companies change.  i.e. does employee turnover fall or rise?  Does % of sales to marketing fall or rise?   Along with margins and revenues, might uncover some interesting stats in here.  But, I would still be careful about linking these too much to &#39;gender.&#39;  There is a way too small pool of female CEO&#39;s to really look at.  They may share underlying personality traits apart from gender, such as drive and motivation that are much higher then the &#39;averages&#39; for men because of the challenges of becoming a female CEO in the first place.  But, will be very interested to read what you find.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='563a790003466771c1000212' id='563a790003466771c1000212'>
+<a href='#563a790003466771c1000212'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1446672649000' class='quanto-date posted-at response-posted-at' href='#563a790003466771c1000212'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I finally got a chance to pull together an algo buying RSP and rebalancing monthly to use as a benchmark. </p>
+
+<p>Here are the returns of it vs. my algo vs. the SPY.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564a2ee4662ce69ac20000e6' id='564a2ee4662ce69ac20000e6'>
+<a href='#564a2ee4662ce69ac20000e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1447702248000' class='quanto-date posted-at response-posted-at' href='#564a2ee4662ce69ac20000e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Karen - it really looks like your quanto-500/quanto-1000 is getting hit by a data error in 2005/2006 - equal-weighted indices are unlikely to drop 50% in a week.</p>
+
+<p>EDIT: I suspect that would change those results quite a lot  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564b3e91cb0220ff9f0001cf' id='564b3e91cb0220ff9f0001cf'>
+<a href='#564b3e91cb0220ff9f0001cf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1447771801000' class='quanto-date posted-at response-posted-at' href='#564b3e91cb0220ff9f0001cf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Good point! I had wondered about that drop, but hadn&#39;t dug into it. Will make sure to do so.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564b58cb662ce643a5000861' id='564b58cb662ce643a5000861'>
+<a href='#564b58cb662ce643a5000861'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1447778513000' class='quanto-date posted-at response-posted-at' href='#564b58cb662ce643a5000861'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here is a revised version of the Quanto 500 graph above, you can see v1 and v2 of the Quanto 500 and Simon is correct, there was some kind of issue in the v1 version of it. </p>
+
+<p>Interestingly, when I did a code compare of these two algos, the code is actually quite different. This work was done while the API was in development, and there was a significantly modification to the API along the way. V1 was done during the first version of the API, and v2 was done during the second. Additionally, in the time span between these two backtests runs (which were run on 9/28 and 10/5 respectively) we also made some significant changes to how dividends were being handled by the API. </p>
+
+<p>I don&#39;t actually know which specific change impacted this algo.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564b594a5f808979bc0000de' id='564b594a5f808979bc0000de'>
+<a href='#564b594a5f808979bc0000de'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1447778639000' class='quanto-date posted-at response-posted-at' href='#564b594a5f808979bc0000de'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is the algorithm for the Quanto500_v2 in the chart above. Interestingly there is still a blip around July of 2005. It&#39;s much smaller, but you can see it in the leverage chart. </p>
+
+<p>I&#39;m hesitant to share the code for the Quanto500_v1 algo, because it will no longer run and I don&#39;t want anyone to get confused and use it as an example.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564b6c13ff649be1a2000249' id='564b6c13ff649be1a2000249'>
+<a href='#564b6c13ff649be1a2000249'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1447783447000' class='quanto-date posted-at response-posted-at' href='#564b6c13ff649be1a2000249'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Interesting!  Eyeballing it, the period of (female CEO) outperformance is concentrated in 2004-2007, particularly that dramatic spurt in 2004.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564db604dd8381e9cd0004b8' id='564db604dd8381e9cd0004b8'>
+<a href='#564db604dd8381e9cd0004b8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d482e55cf3fb26a800099d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9bf4b6e80317a80ff803ccbc2896d34d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d482e55cf3fb26a800099d'>Sally Sanford</a>
+</div>
+<a UTCms='1447933448000' class='quanto-date posted-at response-posted-at' href='#564db604dd8381e9cd0004b8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Karen,</p>
+
+<p>Thank you for investigating an equal-weighted benchmark for your equal-weighted strategy.  As your research shows, much of the performance difference between female led companies and the &quot;market&quot; disappears.  I am sure that if you also considered the sector weights between your strategy and the benchmark, any remaining out-performance would likewise narrow or even flip.</p>
+
+<p>The economic rationale, that female led companies have an advantage over male led companies seems flawed, to me.  Imagine if the thesis was flipped, that male dominated companies had an economic advantage.  I think it would take a lot of convincing to prove this assertion.</p>
+
+<p>IMHO, the funds that market this as an investment theme are doing a disservice to their investors.  Sure, investing in female led companies is a valid social investing meme, but to make claims of enhanced performance where size, sector and other biases explain the tracking error with benchmark returns strikes me as marketing over reach.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56555edf7807ea6e83000226' id='56555edf7807ea6e83000226'>
+<a href='#56555edf7807ea6e83000226'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f1edd0b03b228000d000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/81292895877c628963a3b56b408533e7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f1edd0b03b228000d000001'>Thomas Wiecki</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1448435430000' class='quanto-date posted-at response-posted-at' href='#56555edf7807ea6e83000226'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here is the tear sheet of this strategy using <a href="http://quantopian.github.io/pyfolio/">pyfolio</a>.</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='574cb820fd71b99f3c0001a7' id='574cb820fd71b99f3c0001a7'>
+<a href='#574cb820fd71b99f3c0001a7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1464645671000' class='quanto-date posted-at response-posted-at' href='#574cb820fd71b99f3c0001a7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve continued working on this strategy recently. Attached is my latest version, which uses the <a href="https://www.quantopian.com/data/eventvestor/ceo_change">Eventvestor CEO change data set</a> and the pipeline API to create my own version of the Fortune 1000 and the CEO change data to identify and invest in female CEOs when they start in the position. </p>
+
+<p>I presented on this version at Pycon 2016. This version runs until 5/1/2016. If you are using the free Eventvestor data, change your backtest end date to 5/29/2014. </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='574cb946f4c47509450001b0' id='574cb946f4c47509450001b0'>
+<a href='#574cb946f4c47509450001b0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1464645966000' class='quanto-date posted-at response-posted-at' href='#574cb946f4c47509450001b0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is an updated version of my initial algorithm. It included data from 2002 through May 2016 for all the female CEOs of the Fortune 1000, as given to me by Catalyst. </p>
+
+<p>In the code of the algo, you can see the shares spreadsheet of the data I have used.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5752d9826c4874223e000a6a' id='5752d9826c4874223e000a6a'>
+<a href='#5752d9826c4874223e000a6a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d6180c1339ec0106000920'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6bf00ee69cfc0232eba532a0e34f27eb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d6180c1339ec0106000920'>Deleted User</a>
+</div>
+<a UTCms='1465047431000' class='quanto-date posted-at response-posted-at' href='#5752d9826c4874223e000a6a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Karen,</p>
+
+<p>Thanks for the update. Sure seems like the differences between female and male risk aversion is something that should continue to be studied. Googled around for something to expand upon this thought, and found the following:</p>
+
+<p><a href="http://cdp.sagepub.com/content/21/1/36">http://cdp.sagepub.com/content/21/1/36</a></p>
+
+<p>Tried to implement in a few lines of code per attached. I figured this would be a good way to start tooling around with this concept. Thanks again for the data!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5752f15fae6605e39f000157' id='5752f15fae6605e39f000157'>
+<a href='#5752f15fae6605e39f000157'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5622a26f2b9a17dcbb0006fb'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d9746d1b6fe131e63f6965a92adec42b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5622a26f2b9a17dcbb0006fb'>Ann</a>
+</div>
+<a UTCms='1465053539000' class='quanto-date posted-at response-posted-at' href='#5752f15fae6605e39f000157'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is very cool.  Interesting area of research to follow. A question about the data. How many female CEO&#39;s have there been? Were there enough to get any kind of statistical confidence in the results? Also, have you checked to see if the results were driven by one or two particularly successful or unsuccessful companies?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57531767945d6b7d07000ce4' id='57531767945d6b7d07000ce4'>
+<a href='#57531767945d6b7d07000ce4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d6180c1339ec0106000920'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6bf00ee69cfc0232eba532a0e34f27eb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d6180c1339ec0106000920'>Deleted User</a>
+</div>
+<a UTCms='1465063279000' class='quanto-date posted-at response-posted-at' href='#57531767945d6b7d07000ce4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tar,</p>
+
+<p>Below is a mod to Karen&#39;s algo that displays the # of female led companies owned during the time series. The numbers start around 13 in 2004, and reaches about 50. Probably too small a sample to get statistical confidence. More interesting though is the steady and stable increase in the quantity over time. The question I contemplate is how this increase is being driven. Probably a combination of out performance of the CEOs, and a lowering of the historical barriers to entry. The steady incline makes a case for out performance. Interested to see what returns will look like when female CEOs constitute ~15% of the index.</p>
+
+<p>Big losers include: Rite Aid, Ann Taylor, and The Phoenix Companies and are all during the malarkey of 08-09<br>
+Big Winners are not very concentrated in terms of out sized gains or timing. Kraft and AMD are on the list.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57531985c80b126714000030' id='57531985c80b126714000030'>
+<a href='#57531985c80b126714000030'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d6180c1339ec0106000920'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6bf00ee69cfc0232eba532a0e34f27eb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d6180c1339ec0106000920'>Deleted User</a>
+</div>
+<a UTCms='1465063818000' class='quanto-date posted-at response-posted-at' href='#57531985c80b126714000030'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><ul>
+<li>the algo with the visual for quantity of female CEOs is below<br></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5761b390e751a2f0280001c2' id='5761b390e751a2f0280001c2'>
+<a href='#5761b390e751a2f0280001c2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53dfa27b197bbb2516000159'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/51e4ba51c431ce2b4373006a33ade2aa?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53dfa27b197bbb2516000159'>Karen Rubin</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1466020758000' class='quanto-date posted-at response-posted-at' href='#5761b390e751a2f0280001c2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tar,<br>
+I cover the number of CEOs and looked into some individual companies in my presentation here - <a href="https://www.youtube.com/watch?v=ll6Tq-wTXXw">https://www.youtube.com/watch?v=ll6Tq-wTXXw</a></p>
+
+<p>There are 80 female CEOs at 74 companies from 2002 - 2014. I think there was one more added between 2014 and May of 2016. </p>
+
+<p>I took a look previously at removing the outliers (the top 3 and the bottom 3 performers). This effected the returns, but didn&#39;t remove the outperformance.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='576794118be6097e8c0000ac' id='576794118be6097e8c0000ac'>
+<a href='#576794118be6097e8c0000ac'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55e602a002dd2432b00001d2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/706508819421d25d2dfb273421dc6887?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55e602a002dd2432b00001d2'>Burrito Dan</a>
+</div>
+<a UTCms='1466405917000' class='quanto-date posted-at response-posted-at' href='#576794118be6097e8c0000ac'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think this could be turned into an interesting market neutral strategy</p>
+
+<p>1) go long the 10 companies with the most recent male to female ceo announcement<br>
+2) go short the 10 companies with the most recent female to male ceo announcement<br>
+3) positions are kept to approx 5% of portfolio value  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5df7862bd9e29a0049768343' id='5df7862bd9e29a0049768343'>
+<a href='#5df7862bd9e29a0049768343'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5c3634f4094ad3004ad89976'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0783bce22c9b8ab7e995291e08d9aafc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5c3634f4094ad3004ad89976'>Bernino Lind</a>
+</div>
+<a UTCms='1576502827000' class='quanto-date posted-at response-posted-at' href='#5df7862bd9e29a0049768343'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Karent Rubin,</p>
+
+<p>Thank you very much for this. Do you have a latest CSV for female CEOs - I see a lot of their mandates ended 2014. Is there potentially an API for this?</p>
+
+<p>I&#39;d like to use female CEOs as a co-factor along with some value investing factors and see how it goes.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5df9006ce54b02004c74a7c4' id='5df9006ce54b02004c74a7c4'>
+<a href='#5df9006ce54b02004c74a7c4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1576599660000' class='quanto-date posted-at response-posted-at' href='#5df9006ce54b02004c74a7c4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Personally i like algos that make sense, in that they have some understandable underlying phenomenon driving their performance, rather than just a potentially spurious data mining result.  So i always like to ask WHY?  Well, here are my relevant observations and conjectures:<br>
+1) An essential attribute of senior management is the ability to keep track of a lot of different things.<br>
+2) After working for many years in the corporate world, i observed that most managers are actually far WORSE at multi-tasking than they imagine themselves to be. This has also been documented in studies.<br>
+3) I have  young kids and, notwithstanding the fact that some men are excellent parents, i note it is usually the Mother who manages to watch 10 things all at once (e.g. meal in the oven, while soup is nearly boiling over, while baby is trying to eat dirt from the flower-pot: &quot;Don&#39;t do that darling&quot;, while little boy is trying to swing cat by the tail &quot;Hey! Don&#39;t do that either, please&quot;, while another kid is missing: &quot;Hey, Sally, please go and find Billy and, whatever he is doing, tell him to stop it&quot;, etc, etc, while Dad is probably single-mindedly working away on his computer).</p>
+
+<p>I am a man, and i thought i could multi-task .... until i had kids ... and now i acknowledge that in general women are way better at multi-tasking than men are :-) </p>
+
+<p>So, although  i would previously have thought that men &amp; women should potentially be equally good as CEO&#39;s, now i concede that women really do seem to be better than men at multi-tasking, and i think i understand why from an evolutionary standpoint. So i&#39;m certainly open to the idea that women may, in general, other things equal, make better CEOs. The research here certainly seems to support the notion, doesn&#39;t it. Well done!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5df9d8d666b18448deeca184' id='5df9d8d666b18448deeca184'>
+<a href='#5df9d8d666b18448deeca184'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1576655062000' class='quanto-date posted-at response-posted-at' href='#5df9d8d666b18448deeca184'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I spoke with my wife, a professional psychologist, about this thread and about my comments above. Her response was that the notion of &quot;Women are better at multi-tasking&quot; is simply an urban myth, supposedly supported by not-very accurate pseudo-scientific commentaries about differences between male &amp; female brain structure, but in fact there is little or no genuine scientific evidence of significant gender-based as compared to individual differences in abilities to switch rapidly &amp; effectively between different tasks, or what is informally called &quot;multi-tasking&quot;. Oops, my mistake. </p>
+
+<p>So, if there are genuine differences in quality (and therefore productivity &amp; profitability) between companies with male vs female CEO&#39;s (as Karen Rubin&#39;s work seems to suggest), then the reason is not due to multi-tasking abilities, and so we must look elsewhere for the cause. My wife&#39;s professional viewpoint is that there are potentially two main contributing factors, as follows:</p>
+
+<p>1) Women ARE better than men at networking and at group communication, and this is likely to be far more significant in a corporate leadership context than my naieve notions about multi-tasking. My wife believes that differences between men &amp; women in their group communication skills &amp; styles is likely to have a significant impact on organizational dynamics, and in particular on the potential level of satisfaction of employees within organizations, and this may well be reflected in employee attrition rates as a potential (inverse) predictor of productivity and therefore profitability. </p>
+
+<p>2) There have been significant changes over the years in the way  that girls have been brought up as compared to boys. Specifically, back in the 1950&#39;s (corresponding to the older generation of current CEOs), boys were generally taught that potentially they could do anything, whereas girls had far more limited career opportunities. As this situation has improved over time, we see larger numbers of women in senior positions now, but generally there is not only an age difference, but also a generational outlook difference between &quot;typical&quot; male &amp; female CEOs.  </p>
+
+<p>Based on these suggestions &amp; comments, it is likely that in addition to just CEO gender, it would be worthwhile to look further at two other pieces of corporate data that should be easily available, namely:</p>
+
+<p>1) Employee satisfaction (or lack of), as measured by employee attrition rate (which might or might not be related to CEO gender), and<br>
+2) Year of birth of the CEO, as indicative of generational changes in outlook. </p>
+
+<p>By considering employee attrition rates and CEO&#39;s year of birth, it may be possible to reduce bias effects and thereby  significantly strengthen the findings of this study, as well as uncovering other hidden factors in addition to just the gender of the CEO.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5dfb5b76cf0490123f0fb661' id='5dfb5b76cf0490123f0fb661'>
+<a href='#5dfb5b76cf0490123f0fb661'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5c3634f4094ad3004ad89976'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0783bce22c9b8ab7e995291e08d9aafc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5c3634f4094ad3004ad89976'>Bernino Lind</a>
+</div>
+<a UTCms='1576754038000' class='quanto-date posted-at response-posted-at' href='#5dfb5b76cf0490123f0fb661'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is great and thanks for your thoughts @Tony!</p>
+
+<p>For me I just want the data and run the numbers and then we shall see who comes out first in terms of alpha, beta, sharpe in various scenarios and making sure to compare apples to apples (ie. keeping all other factors the same). The root cause of whatever may be the result - why one gender outperforms another; I will leave that to scholars of all the disciplines that may be able to explain that.</p>
+
+<p>My sole agenda: boost some alpha, sharpe and keep beta the same or less than SPY. If that means female CEOs - great! Then I found an edge.</p>
+
+<p>Challenges:<br>
+Karen&#39;s data is not up to date and it doesn&#39;t say the source -- anyone can help?</p>
+
+<p>The Quantopian method of:</p>
+
+<blockquote>
+<p>from quantopian.pipeline.data.eventvestor import CEOChangeAnnouncements</p>
+</blockquote>
+
+<p>Doesn&#39;t seem to work either ... I will now signup to eventvestor and see if I can get the data there, as a CSV and then load it the same way Karen does.</p>
+
+<p>I&#39;ve also tried to see if Quantopian offers core Company data including the name of the CEO and then I could derive the gender from the name except for exceptions such as Kim etc. - better than nothing. But - no luck...</p>
+
+<p>Hopefully someone can help with the data out there :-) ?  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/investing-in-female-ceos-sector-neutral-a-different-benchmark-and-new-data'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#b9dfdcdcdddbd8dad2f9c8ccd8d7cdd6c9d0d8d797dad6d4">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Welles Wilder&#39;s ADX - Average Directional Index (technical indicator implementation)
+</title>
+<meta content='An oldie but a goodie, I thought I&#39;d share my code for a popular technical indicator, the  ADX .   Introduced by  Welles Wilder  in his 1978 book  New Concepts in Technical Trading Systems , along with the Minus Directional Indicator and the Plus Directional Indicator, the ADX forms part of a family of technical indicators developed by Wilder to help classify trends and trend strength. Find out a little more about ADX  here  and  here . I&#39;ve followed Wilder and used a rolling window of 14...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="zQz7in69SXZD++PLHlYPZGHlp3BPRd2mgzu5Ttc90Fmxao3H3EublfrmuvpRuacQWWuEGTWJyL0BNGIkfXiy4g==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation' property='og:url'>
+<meta content='Welles Wilder&#39;s ADX - Average Directional Index (technical indicator implementation)' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Welles Wilder&#39;s ADX - Average Directional Index (technical indicator implementation)' property='og:title'>
+<meta content='An oldie but a goodie, I thought I&#39;d share my code for a popular technical indicator, the  ADX .   Introduced by  Welles Wilder  in his 1978 book  New Concepts in Technical Trading Systems , along with the Minus Directional Indicator and the Plus Directional Indicator, the ADX forms part of a family of technical indicators developed by Wilder to help classify trends and trend strength. Find out a little more about ADX  here  and  here . I&#39;ve followed Wilder and used a rolling window of 14...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='511226f187beb691f50000fa'>
+<div class='post-container' data-post-id='511226f187beb691f50000fa' id='511226f187beb691f50000fa'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Welles Wilder&#39;s ADX - Average Directional Index (technical indicator implementation)</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/506d4461bdf2aa0200000057'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4d5e1f6f952f91c911e285bb756e8750?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/506d4461bdf2aa0200000057'>Tim Meggs</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1360144113000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Welles Wilder&#39;s ADX - Average Directional Index (technical indicator implementation)&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fwelles-wilders-adx-average-directional-index-technical-indicator-implementation%3Futm_source%3Dwebsite_share%26utm_campaign%3Dwelles-wilders-adx-average-directional-index-technical-indicator-implementation%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fwelles-wilders-adx-average-directional-index-technical-indicator-implementation%3Futm_source%3Dwebsite_share%26utm_campaign%3Dwelles-wilders-adx-average-directional-index-technical-indicator-implementation%26utm_medium%3Dlinkedin&amp;title=Welles+Wilder%27s+ADX+-+Average+Directional+Index+%28technical+indicator+implementation%29+%28Tim+Meggs%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Show Q' data-tag-id='55c50e7d8d4710ec6e000010' href='/posts/tag/Show-Q/newest'>Show Q</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Asset Allocation' data-tag-id='55d33f4f3f6ba10061000001' href='/posts/tag/Asset-Allocation/newest'>Asset Allocation</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation?utm_source=website_share&amp;utm_campaign=welles-wilders-adx-average-directional-index-technical-indicator-implementation&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tim Meggs" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>An oldie but a goodie, I thought I&#39;d share my code for a popular technical indicator, the <a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx#calculation" rel="nofollow">ADX</a>.  </p>
+
+<p>Introduced by <a href="http://en.wikipedia.org/wiki/J._Welles_Wilder,_Jr." rel="nofollow">Welles Wilder</a> in his 1978 book <em>New Concepts in Technical Trading Systems</em>, along with the Minus Directional Indicator and the Plus Directional Indicator, the ADX forms part of a family of technical indicators developed by Wilder to help classify trends and trend strength.</p>
+
+<p>Find out a little more about ADX <a href="http://www.investopedia.com/articles/trading/07/adx-trend-indicator.asp#axzz2JwrHVrwN" rel="nofollow">here</a> and <a href="http://www.investopedia.com/terms/a/adx.asp#axzz2JwrHVrwN" rel="nofollow">here</a>.</p>
+
+<p>I&#39;ve followed Wilder and used a rolling window of 14 days for the calculation window, which is used in various parts to allow for the smoothing Wilder implements.  Changing the variable &#39;&#39;&#39;context.window_length&#39;&#39;&#39; should allow you to change this if you wish.</p>
+
+<p>Finally, at the end of the code I implement a very crude trading strategy based on the indicator - am sure you guys can do better and be more inventive with this. </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>45 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='51138eb9d4fda90a34000135' id='51138eb9d4fda90a34000135'>
+<a href='#51138eb9d4fda90a34000135'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4ec777fc345f20000e000008'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d1c340e13d187142fc34a5cff3a5eed5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4ec777fc345f20000e000008'>James Jack</a>
+</div>
+<a UTCms='1360236217000' class='quanto-date posted-at response-posted-at' href='#51138eb9d4fda90a34000135'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;m not familiar with how ADX is calculated but does line 97 and 98 need to have &quot;context.window_length&quot; instead of 14?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5113e5deaf5ad33b10000183' id='5113e5deaf5ad33b10000183'>
+<a href='#5113e5deaf5ad33b10000183'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/506d4461bdf2aa0200000057'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4d5e1f6f952f91c911e285bb756e8750?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/506d4461bdf2aa0200000057'>Tim Meggs</a>
+</div>
+<a UTCms='1360258527000' class='quanto-date posted-at response-posted-at' href='#5113e5deaf5ad33b10000183'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James - yep, absolutely  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='527f2d887f00986b2e00015d' id='527f2d887f00986b2e00015d'>
+<a href='#527f2d887f00986b2e00015d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527f246b7f00980c100001c2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/61bd9338e1eb25a825be88cacc967651?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527f246b7f00980c100001c2'>Michael Hoeft</a>
+</div>
+<a UTCms='1384066441000' class='quanto-date posted-at response-posted-at' href='#527f2d887f00986b2e00015d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I would like to code an ADX pattern that shows up on the weekly and/or the monthly charts.  I have a few really terrific patterns that I would like to share how to implement and backtest.  I am not overly technical, BUT I have done the research on the patterns and can explain them and share them in layman&#39;s terms.  Is it possible to connect with an interested party who is interested in collaboration?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='527f6a38150685e522000387' id='527f6a38150685e522000387'>
+<a href='#527f6a38150685e522000387'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384081977000' class='quanto-date posted-at response-posted-at' href='#527f6a38150685e522000387'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Michael,</p>
+
+<p>I would be interested. As a start I reproduced Tim&#39;s results using TA-Lib. There are differences in the timing of trades but the overall result is the same.</p>
+
+<p>A data window of 28 days is the minimum required. Returns vary with the window length:</p>
+
+<pre><code>28 days = 170.8%  
+29 days = 180.2%  
+30 days = 193.1%  
+31 days = 200.9%  
+</code></pre>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='527f7ae0cfbf7fa3920003bb' id='527f7ae0cfbf7fa3920003bb'>
+<a href='#527f7ae0cfbf7fa3920003bb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527f246b7f00980c100001c2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/61bd9338e1eb25a825be88cacc967651?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527f246b7f00980c100001c2'>Michael Hoeft</a>
+</div>
+<a UTCms='1384086243000' class='quanto-date posted-at response-posted-at' href='#527f7ae0cfbf7fa3920003bb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Peter,</p>
+
+<p>Pretty astounding returns.  I have a few patterns that are specific ADX patterns.  Perhaps we can discuss and develop and backtest our strategy on here?  I love this site and would like to collaborate as I have been in the markets for 13 years and might be interested in even launching a fund or a prop firm.  If it goes well, we could be a big success for this site!  And they could be a big boon for us as well.  My email is <a href="/cdn-cgi/l/email-protection#472a302f2822213307202a262e2b6924282a"><span class="__cf_email__" data-cfemail="98f5eff0f7fdfeecd8fff5f9f1f4b6fbf7f5">[email&#160;protected]</span></a>.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5280f2ede170ac2039000087' id='5280f2ede170ac2039000087'>
+<a href='#5280f2ede170ac2039000087'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527a8fe328336de4a9000137'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8f8095f68e4cc8d52c0e36269a6e81f9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527a8fe328336de4a9000137'>Chris Jay</a>
+</div>
+<a UTCms='1384182511000' class='quanto-date posted-at response-posted-at' href='#5280f2ede170ac2039000087'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for these, after reading this book I have been trying to replicate this strategy as well but have very little programming experience.  From my understanding of the text, the higher the ADX of any given security, the more profitable it is to trade this system.  That being said, is there a way to limit the universe to whatever stocks have the highest ADX at any given point in time?  In other words, instead of simply choosing one security (in this case sid(19920)) and limiting trades to when that security has an ADX higher than 20 or 25, could we add code that would loop through all stocks available, select whichever has the highest ADX and buy/short that stock (given that all the other conditions in the model are met)?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5280fce09343c835eb0000ab' id='5280fce09343c835eb0000ab'>
+<a href='#5280fce09343c835eb0000ab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384185059000' class='quanto-date posted-at response-posted-at' href='#5280fce09343c835eb0000ab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Chris,</p>
+
+<p>Please see attached. Note that there is no real position sizing or money management going on here. Also, it doesn&#39;t trade the highest ADX but just all ADX over a threshold.</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='52810814e170ac20390000c5' id='52810814e170ac20390000c5'>
+<a href='#52810814e170ac20390000c5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527a8fe328336de4a9000137'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8f8095f68e4cc8d52c0e36269a6e81f9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527a8fe328336de4a9000137'>Chris Jay</a>
+</div>
+<a UTCms='1384187925000' class='quanto-date posted-at response-posted-at' href='#52810814e170ac20390000c5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Peter,</p>
+
+<p>I appreciate the quick response.  If I&#39;m interpreting your source code correctly, this would limit the universe to stocks in the top 0.5 percentile in terms of trade volume, and trade any stocks in that universe with and ADX above 20 or 25, right?  I guess my question is whether we can further limit the universe to just the stock with the highest ADX?  As I mentioned, I am just starting to experiment with coding, but might this be achieved by looping through all stocks in the universe you limited it to, creating a dict of each stock name and its respective ADX, then pulling the max of this dict to pass through the ADX and DI based trading logic?  </p>
+
+<p>Thanks again for your help!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='52810b01e170ac20390000d0' id='52810b01e170ac20390000d0'>
+<a href='#52810b01e170ac20390000d0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384188675000' class='quanto-date posted-at response-posted-at' href='#52810b01e170ac20390000d0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Chris,</p>
+
+<p>Yes, you are correct on all points. The 0.5% universe is around 31 stocks but it is revised each quarter. I&#39;ll have a look at selecting the highest ADX with a view to having fewer, better trades.</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528cc44eb81b52b481000115' id='528cc44eb81b52b481000115'>
+<a href='#528cc44eb81b52b481000115'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384957008000' class='quanto-date posted-at response-posted-at' href='#528cc44eb81b52b481000115'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Chris,</p>
+
+<p>This version trades the securities with the top N ADX values.</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d1e84a40a625cb0000024' id='528d1e84a40a625cb0000024'>
+<a href='#528d1e84a40a625cb0000024'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528b912afd7c11466e000155'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/69d862d144ea6d96c3b8e704818a0e95?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528b912afd7c11466e000155'>Justin Davis</a>
+</div>
+<a UTCms='1384980103000' class='quanto-date posted-at response-posted-at' href='#528d1e84a40a625cb0000024'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi all,<br>
+Quick question.  I&#39;m new to python, so please excuse what I imagine is a stupid question.</p>
+
+<p>If I&#39;m trying to reference a changing value from one bar to the next, how would I code that?</p>
+
+<p>For example, (context.mDI &gt; context.mDI????) if I&#39;m setting the condition so that the current mDI is greater that the mDI from the previous bar, what would it look like?</p>
+
+<p>Thanks for humoring a newbie.</p>
+
+<p>Best,</p>
+
+<p>Justin Davis  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d217e50a3a9d5da00005d' id='528d217e50a3a9d5da00005d'>
+<a href='#528d217e50a3a9d5da00005d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527a8fe328336de4a9000137'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8f8095f68e4cc8d52c0e36269a6e81f9?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527a8fe328336de4a9000137'>Chris Jay</a>
+</div>
+<a UTCms='1384980866000' class='quanto-date posted-at response-posted-at' href='#528d217e50a3a9d5da00005d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Peter, this is extremely helpful.  Sorry for being a pain, but I have a few more questions that I would really appreciate if you could answer.  They are related to the code itself, so shouldn&#39;t require much effort on your part.</p>
+
+<p>1) Related to the checks you added (lines 28-37).  Maybe I&#39;m interpreting the first (lines 28-30) incorrectly, but my interpretation is that it is checking whether the date/time of the last trade in the given security is less than (and therefore before) the current time.  Assuming that there has been at least one trade in the given security at any point in the past, wouldn&#39;t this condition always be true?  For example, if 10 shares of XYZ were purchased in 2005, even if XYZ was taken off the market in 2006, this condition would still evaluate to true wouldn&#39;t it?</p>
+
+<p>As for the second and third checks that follow (lines 31-37), I&#39;m not sure I see their relevancy.  The second, as far as I can tell, just prints any open orders, but doesn&#39;t do anything with the printed list, correct?  The third (lines 35-37) limits the universe of stocks to only those with a current price over $500?  I must be interpreting that wrong, as I can&#39;t contemplate how this would benefit the strategy.</p>
+
+<p>2) Could you please just briefly explain what the code on line 41 does (if not np.isnan(ADX))?  </p>
+
+<p>3) In regard to the dayCount variable, is this just so any stock positions in the portfolio are automatically sold off (or purchased to close a short position) every 30 days?</p>
+
+<p>Thanks again for all of your help!  I plan on adding a few other elements to this strategy that should help minimize downside risk, and would be happy to share when finished.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d237aa40a625cb0000034' id='528d237aa40a625cb0000034'>
+<a href='#528d237aa40a625cb0000034'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384981373000' class='quanto-date posted-at response-posted-at' href='#528d237aa40a625cb0000034'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Justin,</p>
+
+<p>One way is to use a fixed-length queue. See: <a href="https://www.quantopian.com/posts/stock-price-30-days-ago">https://www.quantopian.com/posts/stock-price-30-days-ago</a></p>
+
+<pre><code>from collections import deque
+
+# in initialize  
+context.MDIvalues = deque(maxlen=2)  
+
+# append to window  
+context.MDIvalues.append(mDI)  
+# access where index 0 is yesterday and index 1 is today  
+if context.MDIvalues[1] &gt; context.MDIvalues[0]  
+</code></pre>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d2ddaa40a625cb000004a' id='528d2ddaa40a625cb000004a'>
+<a href='#528d2ddaa40a625cb000004a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384984028000' class='quanto-date posted-at response-posted-at' href='#528d2ddaa40a625cb000004a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Chris,</p>
+
+<p>Thanks for taking the time to have a look. To try to answer:</p>
+
+<p>1) &#39;if data[stock].datetime &lt; get_datetime():&#39; is checking if the price for a security is a &#39;new&#39; price. Prices are timestamped and prices and their timestamps are carried forward so that the data/price object always has a entry for each security at each time interval. This is a bit of a grey area. Some algos I&#39;ve written fail if this check is not made. Note that &#39;continue&#39; means &#39;don&#39;t continue but instead go to the next iteration of the for loop&#39;.</p>
+
+<p>With &#39;if get_open_orders(stock):&#39; please ignore the print statement which is leftover from debugging. What I&#39;m trying to do here is very inelegant but I want to avoid trading a security while I still have an open position caused by a partial fill in the last trade of that security. I&#39;ve had algos get into real problems where a long position is sold at time t, remains partially filled at t+1, and a short trade in the same security is entered also at t+1. [This is where I have a major conceptual problem with Quantopian which seems to be synchronous with minutely events whereas trading with Interactive Brokers via Trader Workstation or their FIX gateway would be asynchronous and would (mostly) avoid this issue. I wonder if this is because each algo running in Quantopian is single-threaded but, as I say, I have conceptual problems in this area.]</p>
+
+<p>With &#39;if data[stock].close_price &gt; 500.00:&#39; I&#39;m avoiding trading &#39;BRK &#39;A&#39;&#39; with a price per share sometimes around $170,000. Note that &#39;continue&#39; means &#39;don&#39;t continue&#39;.</p>
+
+<p>2) I changed the algo after the recent security issue. When service was first resumed I had problems importing zipline in order to use the TA-Lib library so I switched to the &#39;supported&#39; TA-Lib functions. For ADX based on 14 periods the first result is available at period 28 with the prior values all being NaNs i.e. Not A Number.</p>
+
+<p>3) For some reason I thought the best results with ADX might come from holding positions for a few days but that is not what I found so maybe the algo is defective. The best results often came by generating a new portfolio every day or after a much larger number of days than I would have guessed i.e. 30 trading days (~ 6 weeks).</p>
+
+<p>Please add some ideas. At the moment the algo does literally nothing with position sizing or handling margin. At times it goes so short that the $1 M starting cash becomes $4M.</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d3e0aa40a626d55000072' id='528d3e0aa40a626d55000072'>
+<a href='#528d3e0aa40a626d55000072'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528b912afd7c11466e000155'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/69d862d144ea6d96c3b8e704818a0e95?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528b912afd7c11466e000155'>Justin Davis</a>
+</div>
+<a UTCms='1384988172000' class='quanto-date posted-at response-posted-at' href='#528d3e0aa40a626d55000072'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Peter - I appreciate the quick response.  Thanks for your suggestion.<br>
+Best,<br>
+Justin  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d4d644055f91563000083' id='528d4d644055f91563000083'>
+<a href='#528d4d644055f91563000083'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528b912afd7c11466e000155'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/69d862d144ea6d96c3b8e704818a0e95?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528b912afd7c11466e000155'>Justin Davis</a>
+</div>
+<a UTCms='1384992101000' class='quanto-date posted-at response-posted-at' href='#528d4d644055f91563000083'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can anyone take a look at this?  I&#39;m having some issues that I identified through comments.  Any suggestions are appreciated.</p>
+
+<h1>implementation of Welles Wilder&#39;s ADX as given in spreadsheet form here</h1>
+
+<h1><a href="http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx#calculation">http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx#calculation</a></h1>
+
+<p>from collections import deque</p>
+
+<h1>Put any initialization logic here.  The context object will be passed to</h1>
+
+<h1>the other methods in your algorithm.</h1>
+
+<p>def initialize(context):<br>
+    #using the NASDAQ100 etf<br>
+    context.ndx = sid(19920)<br>
+    #container to count the number of event windows we have cycled through<br>
+    context.ticks = 0<br>
+    #Wilder uses a rolling window of 14 days for various smoothing within<br>
+    #the indicator calculation<br>
+    context.window_length = 14<br>
+    #a collection of data containers that will be used during steps of the calculation<br>
+    context.highs = deque([0] * 2, 2)<br>
+    context.lows = deque([0] * 2, 2)<br>
+    context.closes = deque([0] * 2, 2)<br>
+    context.true_range_bucket = deque([0] * context.window_length, context.window_length)<br>
+    context.pDM_bucket = deque([0] * context.window_length, context.window_length)<br>
+    context.mDM_bucket = deque([0] * context.window_length, context.window_length)<br>
+    context.dx_bucket = deque([0] * context.window_length, context.window_length)<br>
+    #not sure why I had to define these here, but to print them later when debuggin<br>
+    #I found that I had to declare them here<br>
+    context.av_true_range = 0<br>
+    context.av_pDM = 0<br>
+    context.av_mDM = 0<br>
+    context.di_diff = 0<br>
+    context.di_sum = 0<br>
+    context.dx = 0<br>
+    context.adx = 0<br>
+    context.pDI = 0<br>
+    context.mDI = 0<br>
+    context.mDIvalues = deque(maxlen=2)<br>
+    context.pDIvalues = deque(maxlen=2)<br>
+    context.adxvalues = deque(maxlen=2)  </p>
+
+<h1>Having A problem here</h1>
+
+<pre><code>context.mDIvalues.append(mDI)  
+context.pDIvalues.append(pDI)  
+context.adxvalues.append(adx)  
+
+pass
+</code></pre>
+
+<h1>Will be called on every trade event for the securities you specify.</h1>
+
+<p>def handle_data(context, data):<br>
+    #iterate event window counter<br>
+    context.ticks += 1<br>
+    #pass high, low, close prices to our rolling containers<br>
+    context.highs.appendleft(data[sid(19920)].high)<br>
+    context.lows.appendleft(data[sid(19920)].low)<br>
+    context.closes.appendleft(data[sid(19920)].close_price)  </p>
+
+<pre><code>#ensure no calculation on first window  
+if context.closes[0] == 0:  
+    high_less_low = 0  
+    high_less_prec_close = 0  
+    low_less_prec_close = 0  
+    high_less_prec_high = 0  
+    prec_low_less_low = 0  
+    pDM_one = 0  
+    mDM_one = 0  
+else:  
+    high_less_low = context.highs[0]-context.lows[0]  
+    high_less_prec_close = abs(context.highs[0]-context.closes[1])  
+    low_less_prec_close = abs(context.lows[0]-context.closes[1])  
+    high_less_prec_high = context.highs[0]-context.highs[1]  
+    prec_low_less_low = context.lows[1]-context.lows[0]  
+
+
+#calculate the Plus Directional Movement  
+if high_less_prec_high &gt; prec_low_less_low:  
+    pDM_one = max(high_less_prec_high,0)  
+else:  
+    pDM_one = 0
+
+#calculate the Minus Directional Movement  
+if prec_low_less_low &gt; high_less_prec_high:  
+    mDM_one = max(prec_low_less_low,0)  
+else:  
+    mDM_one = 0  
+
+#add the current pDM and mDM to the bucket to aid calculation of the first point in the  
+#smoothed statistic  
+context.pDM_bucket.appendleft(pDM_one)  
+context.mDM_bucket.appendleft(mDM_one)  
+
+#calculate the True Range and add to bucket  
+true_range = max(high_less_low,high_less_prec_close,low_less_prec_close)  
+context.true_range_bucket.appendleft(true_range)  
+
+#once we have collected enough data to have populated the rolling windows adequately  
+#we can start the meat of the calculation  
+if context.ticks &lt; (context.window_length + 1):  
+    context.av_true_range = 1  
+    context.av_pDM = 0  
+    context.av_mDM = 0  
+elif context.ticks == (context.window_length + 1):  
+    context.av_true_range = sum(context.true_range_bucket)  
+    context.av_pDM = sum(context.pDM_bucket)  
+    context.av_mDM = sum(context.mDM_bucket)  
+else:  
+    context.av_true_range = context.av_true_range - (context.av_true_range/context.window_length) + true_range  
+    context.av_pDM = context.av_pDM - (context.av_pDM/14) + pDM_one  
+    context.av_mDM = context.av_mDM - (context.av_mDM/14) + mDM_one
+
+if context.ticks &gt; context.window_length:  
+    context.pDI = 100 * context.av_pDM / context.av_true_range  
+    context.mDI = 100 * context.av_mDM / context.av_true_range  
+    context.di_diff = abs(context.pDI - context.mDI)  
+    context.di_sum = context.pDI + context.mDI  
+    context.dx = 100 * context.di_diff / context.di_sum  
+
+
+#add to bucket to provide an average of the DX figures that will  
+#act as a starting point for the rolling ADX calculation  
+context.dx_bucket.appendleft(context.dx)
+
+#the rolling ADX calculation  
+if context.ticks == (context.window_length * 2):  
+    context.adx = sum(context.dx_bucket) / context.window_length  
+elif context.ticks &gt; (context.window_length * 2):  
+    context.adx = ((context.adx * (context.window_length - 1)) + context.dx) / context.window_length  
+</code></pre>
+
+<p># Having TROUBLE with this Trading Logic<br>
+ #  access where index 0 is yesterday and index 1 is today<br>
+ #  Notice I used -1 for the day before yesterday b/c I wasn&#39;t sure what to do but I would like to include that in the buy condition  </p>
+
+<pre><code>if (context.mDIvalues[1] &gt; context.pDIvalues[1]) and (context.mDIvalues[1] &gt; context.adxvalues[1]) and (context.mDIvalues[1] &lt; context.mDIvalues[0]) and (context.mDIvalues[0] &lt; context.mDIvalues[-1]):  
+    order(sid(19920), 500)  
+    log.debug(&#39;buy&#39;)  
+
+
+elif (context.adxvalues[1] &gt; context.mDIvalues[1]) and (context.pDIvalues[1] &gt; context.mDIvalues[1]) and (context.pdivalues[1] &lt; context.pDIvalues[0]) and (context.adxvalues[1] &lt; context.adxvalues[0]):  
+    order(sid(19920), -500)  
+    log.debug(&#39;sell&#39;)  
+
+log.debug(&#39;adx&#39;)  
+log.debug(context.adx)  
+log.debug(&#39;pDI&#39;)  
+log.debug(context.pDI)  
+log.debug(&#39;mDI&#39;)  
+log.debug(context.mDI)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d6290a40a625cb00000c0' id='528d6290a40a625cb00000c0'>
+<a href='#528d6290a40a625cb00000c0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1384997521000' class='quanto-date posted-at response-posted-at' href='#528d6290a40a625cb00000c0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Justin,</p>
+
+<p>I see you&#39;ve put loads of work into this...but I thought it would be simpler to try your logic using the TA-Lib indicator library (see <a href="http://ta-lib.org/">http://ta-lib.org/</a>). To test current, day-1 and day-2 values I made the queue length 3.</p>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528d84abf30dd2dee0000015' id='528d84abf30dd2dee0000015'>
+<a href='#528d84abf30dd2dee0000015'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528b912afd7c11466e000155'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/69d862d144ea6d96c3b8e704818a0e95?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528b912afd7c11466e000155'>Justin Davis</a>
+</div>
+<a UTCms='1385006252000' class='quanto-date posted-at response-posted-at' href='#528d84abf30dd2dee0000015'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Ha! Peter, you&#39;re the best.  I know I&#39;m terrible at this, but I&#39;m obviously working through the process....  I appreciate your feedback and the indicator library resource. Very helpful.  Maybe with the support of this community there&#39;s hope for me yet.....</p>
+
+<p>Cheers,</p>
+
+<p>Justin  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528e74bb47c890c10400000b' id='528e74bb47c890c10400000b'>
+<a href='#528e74bb47c890c10400000b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528e614069615edbfd00001b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6c5689a28b8d09a90e90e81168ad0f68?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528e614069615edbfd00001b'>Josh Edwards</a>
+</div>
+<a UTCms='1385067708000' class='quanto-date posted-at response-posted-at' href='#528e74bb47c890c10400000b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello:</p>
+
+<p>I am new to Python, coding in general, and quant finance, but am finding this site really fascinating so far.  I watch commodity markets, and would like to try and run this algorithm on the continuous front month corn contract.  The data is located on quandl at: </p>
+
+<p><a href="http://www.quandl.com/OFDP-Open-Financial-Data-Project/FUTURE_C1-CBOT-Corn-Futures-Continuous-Contract-1-C1-Front-Month">http://www.quandl.com/OFDP-Open-Financial-Data-Project/FUTURE_C1-CBOT-Corn-Futures-Continuous-Contract-1-C1-Front-Month</a></p>
+
+<p>I read the section on importing quandl data, but was unable to figure out how to do this.  I am not sure how to run it without the sid code.  I know there is a corn etf, but I would rather not use that.  If anyone could provide some advice, I would appreciate it. </p>
+
+<p>Thanks, </p>
+
+<p>Josh  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528f465c85e7489bbd00011c' id='528f465c85e7489bbd00011c'>
+<a href='#528f465c85e7489bbd00011c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b24ec26d284c0200000088'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e238d8d7d6bb1f460ed27e0507045632?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b24ec26d284c0200000088'>Peter Cawthron</a>
+</div>
+<a UTCms='1385121373000' class='quanto-date posted-at response-posted-at' href='#528f465c85e7489bbd00011c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Josh,</p>
+
+<p>I struggle a bit with &#39;fetch_csv&#39;. I&#39;ve got as far as reading the data:</p>
+
+<pre><code>def initialize(context):  
+    context.sid = sid(8554)  
+    fetch_csv(&#39;http://www.quandl.com/api/v1/datasets/OFDP/FUTURE_C1.csv?&amp;trim_start=1959-07-01&amp;trim_end=2013-11-20&amp;sort_order=desc&#39;,  
+              symbol      = &#39;Corn&#39;,  
+              date_column = &#39;Date&#39;,  
+              date_format = &#39;%y/%m/%d&#39;,  
+              pre_func    =  show_df)
+
+def show_df(df):  
+    print df.head()  
+    return df
+
+def handle_data(context, data):  
+    pass  
+</code></pre>
+
+<p>P.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='528f6712a6d8be1504000147' id='528f6712a6d8be1504000147'>
+<a href='#528f6712a6d8be1504000147'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/528e614069615edbfd00001b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6c5689a28b8d09a90e90e81168ad0f68?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/528e614069615edbfd00001b'>Josh Edwards</a>
+</div>
+<a UTCms='1385129747000' class='quanto-date posted-at response-posted-at' href='#528f6712a6d8be1504000147'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Peter, I will play around with this over the weekend.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='54fb6f7c40151a68e7000203' id='54fb6f7c40151a68e7000203'>
+<a href='#54fb6f7c40151a68e7000203'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5475531dd65066c8be00b01a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/afffb4be7a2411ce4f1413a47d2ae81d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5475531dd65066c8be00b01a'>Joe Catanzaro</a>
+</div>
+<a UTCms='1425764223000' class='quanto-date posted-at response-posted-at' href='#54fb6f7c40151a68e7000203'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Reviving an old post here... this code is fantastic and has been a huge help to me. Does the OP or anyone else know why the summing on lines 92-94 of the original code are not divided by context.window_length? I would imagine these averages need to be divided by an N rather than just be a sum. </p>
+
+<p>Amending this produces a negligible difference in my backtest so I&#39;m just wondering if this summation is intentional for the subsequent moving average calculation?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e90f9434430231060000f4' id='55e90f9434430231060000f4'>
+<a href='#55e90f9434430231060000f4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d4810c5cf3fb39330009bc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8984891938aa5016a719ae1463c798b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d4810c5cf3fb39330009bc'>CP YEOH</a>
+</div>
+<a UTCms='1441337239000' class='quanto-date posted-at response-posted-at' href='#55e90f9434430231060000f4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, I have zero knowledge on algo program but I know well on DMI. </p>
+
+<p>DMI has its problems too. For example, when stock price gap up, +DI cross above -DI at a stock price that cannot be filled and therefore traders must carefully use DMI in backtesting that may give wrong results.  I wish I know how to read the algo program in collaborating a better DMI.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e982a83443023106000306' id='55e982a83443023106000306'>
+<a href='#55e982a83443023106000306'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5475531dd65066c8be00b01a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/afffb4be7a2411ce4f1413a47d2ae81d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5475531dd65066c8be00b01a'>Joe Catanzaro</a>
+</div>
+<a UTCms='1441366700000' class='quanto-date posted-at response-posted-at' href='#55e982a83443023106000306'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Is that really a problem though? Taking gaps into account is part of the advantage of DMI (and &quot;true&quot; range in general)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55efb8f9898c6437e2000004' id='55efb8f9898c6437e2000004'>
+<a href='#55efb8f9898c6437e2000004'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d4810c5cf3fb39330009bc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8984891938aa5016a719ae1463c798b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d4810c5cf3fb39330009bc'>CP YEOH</a>
+</div>
+<a UTCms='1441773821000' class='quanto-date posted-at response-posted-at' href='#55efb8f9898c6437e2000004'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>If a stock price is opened gap up, say closed 20 and open gap up 22, DMI may show buy signal at 20.80 but there is no 20.80 to buy since price already gap up at 22 opening. Thus, it will have a wrong result if not carefully track down the proper prices using DMI.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55f0731711266ce18f000422' id='55f0731711266ce18f000422'>
+<a href='#55f0731711266ce18f000422'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5475531dd65066c8be00b01a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/afffb4be7a2411ce4f1413a47d2ae81d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5475531dd65066c8be00b01a'>Joe Catanzaro</a>
+</div>
+<a UTCms='1441821466000' class='quanto-date posted-at response-posted-at' href='#55f0731711266ce18f000422'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think you&#39;re getting too granular if you&#39;re telling your algorithm to buy only at the exact price the DI lines cross (slippage would make that improbable in real trading anyway). The purpose of the ADX is to indicate a trend, thus if a price gaps up to 22 and the +DI line is now above the -DI line, I would take that as a valid entry signal because the trend has turned bullish (depending on ADX readings and other factors).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56dad14b410ca74d93000381' id='56dad14b410ca74d93000381'>
+<a href='#56dad14b410ca74d93000381'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/549014be9dd3327b05000464'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/d2f2ea358cc49546ce4a895b75cf507f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/549014be9dd3327b05000464'>Golam Sakline</a>
+</div>
+<a UTCms='1457181008000' class='quanto-date posted-at response-posted-at' href='#56dad14b410ca74d93000381'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Is there a way we can add to print the ROC and ADX below the backtest?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57b9fd6d72feb160bf0008f3' id='57b9fd6d72feb160bf0008f3'>
+<a href='#57b9fd6d72feb160bf0008f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5445d537ae79a971410002a2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/09181dbdc9b379152fc5f6b2e49e8599?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5445d537ae79a971410002a2'>Kiran</a>
+</div>
+<a UTCms='1471806841000' class='quanto-date posted-at response-posted-at' href='#57b9fd6d72feb160bf0008f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>has this strategy been ported to the Quantopian2 APIs?  I tried cloning it but it won&#39;t build in its current form  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57cf41e63675398fd9001438' id='57cf41e63675398fd9001438'>
+<a href='#57cf41e63675398fd9001438'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b857337abf12729500043e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4f177e9cf65b242db3241b1ce5ffb805?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b857337abf12729500043e'>BHASKAR s</a>
+</div>
+<a UTCms='1473200622000' class='quanto-date posted-at response-posted-at' href='#57cf41e63675398fd9001438'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can any one please post a working code for the ADX here. None of the previous codes are compiling. I tried cloning and not able to build it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57d06c990055db81d70003fe' id='57d06c990055db81d70003fe'>
+<a href='#57d06c990055db81d70003fe'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54b857337abf12729500043e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4f177e9cf65b242db3241b1ce5ffb805?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54b857337abf12729500043e'>BHASKAR s</a>
+</div>
+<a UTCms='1473277091000' class='quanto-date posted-at response-posted-at' href='#57d06c990055db81d70003fe'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Vladimir:  Thank you very much for so fast reply. I will try to use this code and probably will be asking you for more help as I am new to Python. Thanks  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596a48aa0fb1a40010b3b0cf' id='596a48aa0fb1a40010b3b0cf'>
+<a href='#596a48aa0fb1a40010b3b0cf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59607f42403f8c000d53db9a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/55786c3e2db538bf72944e0003266a05?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59607f42403f8c000d53db9a'>admin[3*3] %00 0x00  patel{cat etcpasswd}%00 0x00 admin</a>
+</div>
+<a UTCms='1500137642000' class='quanto-date posted-at response-posted-at' href='#596a48aa0fb1a40010b3b0cf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>dchdc&quot;&gt;&quot;njcd  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596d28106672841400824d85' id='596d28106672841400824d85'>
+<a href='#596d28106672841400824d85'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58794da090925a000abd5ca3'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/18f509f82da972d016ae90ca4489a17b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58794da090925a000abd5ca3'>jacob shrum</a>
+</div>
+<a UTCms='1500325904000' class='quanto-date posted-at response-posted-at' href='#596d28106672841400824d85'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Ok well number one: The post above me is ummm interesting. Also, given how many times the OG algorithm has been copied, I&#39;m surprised that <strong>no one has bothered to check the leverage of this algorithm... It&#39;s totally out of control.</strong>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596d2bc5a62d410b1fc56e2f' id='596d2bc5a62d410b1fc56e2f'>
+<a href='#596d2bc5a62d410b1fc56e2f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1500326853000' class='quanto-date posted-at response-posted-at' href='#596d2bc5a62d410b1fc56e2f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jacob it might be because of a difference between the Q platform 2013 and now.  The original gives 193% returns and yours 3347%.</p>
+
+<p>Anyways, I&#39;ve tried using ADX in my algos (the talib version, not this implementation) and was unimpressed with it.  Anybody gotten anything useful out of it?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596d2e780dc306001065c288' id='596d2e780dc306001065c288'>
+<a href='#596d2e780dc306001065c288'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58794da090925a000abd5ca3'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/18f509f82da972d016ae90ca4489a17b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58794da090925a000abd5ca3'>jacob shrum</a>
+</div>
+<a UTCms='1500327544000' class='quanto-date posted-at response-posted-at' href='#596d2e780dc306001065c288'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@atiredmachine<br>
+It is most likely due to the fact that the starting capital is 1,000,000 and it is trading every minute<br>
+ even when using :  </p>
+
+<pre><code>order_target_percent(stock, 1.0)  
+</code></pre>
+
+<p>it still over exposes.<br>
+IMO Indicators are inherently pretty useless... I use them to determine when to decrease leverage and or pull out of the market entirely - thats it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596d32855a81dc000d8822c1' id='596d32855a81dc000d8822c1'>
+<a href='#596d32855a81dc000d8822c1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1500328581000' class='quanto-date posted-at response-posted-at' href='#596d32855a81dc000d8822c1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jacob I believe Quantopian used to have a dropdown for daily or minute mode.  This algo was probably written for daily mode.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596e484fdb5465000dad4db5' id='596e484fdb5465000dad4db5'>
+<a href='#596e484fdb5465000dad4db5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/521f6eb90f498f6cfa0000db'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3aba27e368c1465587693d61d46c99d1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/521f6eb90f498f6cfa0000db'>Daniel Khalilov</a>
+</div>
+<a UTCms='1500399695000' class='quanto-date posted-at response-posted-at' href='#596e484fdb5465000dad4db5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>My results using Vladimir&#39;s code is nowhere near as good as the original post. Basically buy when adx&gt;25 and p&gt;n, sell when adx&gt;25 and n&gt;p  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='596ff30d6747ff000f283ff8' id='596ff30d6747ff000f283ff8'>
+<a href='#596ff30d6747ff000f283ff8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/521f6eb90f498f6cfa0000db'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3aba27e368c1465587693d61d46c99d1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/521f6eb90f498f6cfa0000db'>Daniel Khalilov</a>
+</div>
+<a UTCms='1500508941000' class='quanto-date posted-at response-posted-at' href='#596ff30d6747ff000f283ff8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Wow Vladimir, your version performed 2x better than the benchmark. I guess going 100% long or short on QQQ isn&#39;t the greatest approach (like I originally did), since it is such an uptrending stock. Definitely like your 80/20 split method more. Thank you for commenting  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5971fc23a58ff6000d6c66fb' id='5971fc23a58ff6000d6c66fb'>
+<a href='#5971fc23a58ff6000d6c66fb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55d4810c5cf3fb39330009bc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8984891938aa5016a719ae1463c798b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55d4810c5cf3fb39330009bc'>CP YEOH</a>
+</div>
+<a UTCms='1500642339000' class='quanto-date posted-at response-posted-at' href='#5971fc23a58ff6000d6c66fb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Can anyone help creating a sample source code for me to look into <strong>soybean oil futures 2nd continuous contract month</strong> using ADX technical trend indicator? If can, please include the stop and reverse trades with minimum 1 lot, a 15-minute high low close data with ADX lines -- +DI, -DI and ADX lines. Many thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eea1283a6c927004380168c' id='5eea1283a6c927004380168c'>
+<a href='#5eea1283a6c927004380168c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5d189929ac0382004988e936'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1e006a867fdabee20b0b513cddd99189?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5d189929ac0382004988e936'>Dave od</a>
+</div>
+<a UTCms='1592398467000' class='quanto-date posted-at response-posted-at' href='#5eea1283a6c927004380168c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Is it already the ADX a built-in function?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eea1c3b9d5ba671d125dc3b' id='5eea1c3b9d5ba671d125dc3b'>
+<a href='#5eea1c3b9d5ba671d125dc3b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb4fc8571ef9572db85c0af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a8d078cb83e513809bab0e31eabfa4fc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb4fc8571ef9572db85c0af'>Dan Whitnable</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1592400955000' class='quanto-date posted-at response-posted-at' href='#5eea1c3b9d5ba671d125dc3b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The ADX indicator is currently not &#39;built-in&#39; as a factor. However, one can create a custom factor. Something like this</p>
+
+<pre><code>class ADX(CustomFactor):  
+    &quot;&quot;&quot;  
+    Average Directional Movement Index  
+    Momentum indicator. Smoothed DX  
+    **Default Inputs:** USEquityPricing.high, USEquityPricing.low, USEquitypricing.close  
+    **Default Window Length:** 29
+
+    https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/DMI  
+    &quot;&quot;&quot;     
+
+    inputs = [USEquityPricing.high, USEquityPricing.low, USEquityPricing.close]  
+    window_length = 29
+
+    def compute(self, today, assets, out, high, low, close):
+
+        # positive directional index  
+        plus_di = 100 * np.cumsum(plus_dm_helper(high, low) / trange_helper(high, low, close), axis=0)
+
+        # negative directional index  
+        minus_di = 100 * np.cumsum(minus_dm_helper(high, low) / trange_helper(high, low, close), axis=0)
+
+        # full dx with 15 day burn-in period  
+        dx_frame = (np.abs(plus_di - minus_di) / (plus_di + minus_di) * 100.)[14:]
+
+        # 14-day EMA  
+        span = 14.  
+        decay_rate = 2. / (span + 1.)  
+        weights = weights_long = np.full(span, decay_rate, float) ** np.arange(span + 1, 1, -1)
+
+        # return EMA  
+        out[:] = np.average(dx_frame, axis=0, weights=weights)
+
+</code></pre>
+
+<p>The code above relies on several helper functions.</p>
+
+<pre><code>def plus_dm_helper(high, low):  
+    &quot;&quot;&quot;  
+    Returns positive directional movement. Abstracted for use with more complex factors
+
+    https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/DMI
+
+    Parameters  
+    ----------  
+    high : np.array  
+        matrix of high prices  
+    low : np.array  
+        matrix of low prices
+
+    Returns  
+    -------  
+    np.array : matrix of positive directional movement
+
+    &quot;&quot;&quot;  
+    # get daily differences between high prices  
+    high_diff = (high - np.roll(high, 1, axis=0))[1:]
+
+    # get daily differences between low prices  
+    low_diff = (np.roll(low, 1, axis=0) - low)[1:]
+
+    # matrix of positive directional movement  
+    return np.where(((high_diff &gt; 0) | (low_diff &gt; 0)) &amp; (high_diff &gt; low_diff), high_diff, 0.)
+
+def minus_dm_helper(high, low):  
+    &quot;&quot;&quot;  
+    Returns negative directional movement. Abstracted for use with more complex factors
+
+    https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/DMI
+
+    Parameters  
+    ----------  
+    high : np.array  
+        matrix of high prices  
+    low : np.array  
+        matrix of low prices
+
+    Returns  
+    -------  
+    np.array : matrix of negative directional movement
+
+    &quot;&quot;&quot;  
+    # get daily differences between high prices  
+    high_diff = (high - np.roll(high, 1, axis=0))[1:]
+
+    # get daily differences between low prices  
+    low_diff = (np.roll(low, 1, axis=0) - low)[1:]
+
+    # matrix of megative directional movement  
+    return np.where(((high_diff &gt; 0) | (low_diff &gt; 0)) &amp; (high_diff &lt; low_diff), low_diff, 0.)
+
+
+def trange_helper(high, low, close):  
+    &quot;&quot;&quot;  
+    Returns true range
+
+    http://www.macroption.com/true-range/
+
+    Parameters  
+    ----------  
+    high : np.array  
+        matrix of high prices  
+    low : np.array  
+        matrix of low prices  
+    close: np.array  
+        matrix of close prices
+
+    Returns  
+    -------  
+    np.array : matrix of true range
+
+    &quot;&quot;&quot;  
+    # define matrices to be compared  
+    close = close[:-1]  
+    high = high[1:]  
+    low = low[1:]
+
+    # matrices for comparison  
+    high_less_close = high - close  
+    close_less_low = close - low  
+    high_less_low = high - low
+
+    # return maximum value for each cel  
+    return np.maximum(high_less_close, close_less_low, high_less_low)
+
+</code></pre>
+
+<p>There is a great post which provides custom factors for many technical signals. Check it out <a href="https://www.quantopian.com/posts/ta-lib-for-pipeline">https://www.quantopian.com/posts/ta-lib-for-pipeline</a>.</p>
+
+<p>Good luck.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5eea20089a42231c06699e28' id='5eea20089a42231c06699e28'>
+<a href='#5eea20089a42231c06699e28'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527f246b7f00980c100001c2'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/61bd9338e1eb25a825be88cacc967651?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527f246b7f00980c100001c2'>Michael Hoeft</a>
+</div>
+<a UTCms='1592401928000' class='quanto-date posted-at response-posted-at' href='#5eea20089a42231c06699e28'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is awesome.  Thank you so much.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f7207d26766fe000d8c2a52' id='5f7207d26766fe000d8c2a52'>
+<a href='#5f7207d26766fe000d8c2a52'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5f6f53cbeb0dab000e7b37cf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9612dec2de3b67984eaa80a9a88f5813?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5f6f53cbeb0dab000e7b37cf'>chuan zhang</a>
+</div>
+<a UTCms='1601308626000' class='quanto-date posted-at response-posted-at' href='#5f7207d26766fe000d8c2a52'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Where does the SID (19920) data map come from？ Thanks！  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f76a3302b9777000ed24d6c' id='5f76a3302b9777000ed24d6c'>
+<a href='#5f76a3302b9777000ed24d6c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5f6f53cbeb0dab000e7b37cf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9612dec2de3b67984eaa80a9a88f5813?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5f6f53cbeb0dab000e7b37cf'>chuan zhang</a>
+</div>
+<a UTCms='1601610544000' class='quanto-date posted-at response-posted-at' href='#5f76a3302b9777000ed24d6c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The order function used in the source code is from the zipline library. Why is there no import zipline in the source code? thanks  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f77311437799709c7cf387c' id='5f77311437799709c7cf387c'>
+<a href='#5f77311437799709c7cf387c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5cb4fc8571ef9572db85c0af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a8d078cb83e513809bab0e31eabfa4fc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5cb4fc8571ef9572db85c0af'>Dan Whitnable</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1601646868000' class='quanto-date posted-at response-posted-at' href='#5f77311437799709c7cf387c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@chuan zhang   I&#39;ll try to answer your questions above.</p>
+
+<p><em>&quot;Where does the SID (19920) data map come from?&quot;</em>  That equity is QQQ and is mapped (rather arbitrarily) to the internal Quantopian Security ID (SID) of 19920. That is valid when using the online platform both in the IDE and in notebooks. If one loads zipline locally then QQQ will more than likely be a different SID based upon the data bundle one uploads.</p>
+
+<p><em>&quot;Why is there no import zipline in the source code?&quot;</em>  When running an algo online on the Quantopian platform, all the actual zipline code (and associated imports) is loaded and run automatically behind the scenes. This allows users to focus on simply writing scheduled functions and other functions which zipline calls. There are a few cases where one may want to import zipline to access specific modules but this is typically not necessary.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5f78b881427b450011c8e575' id='5f78b881427b450011c8e575'>
+<a href='#5f78b881427b450011c8e575'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5f6f53cbeb0dab000e7b37cf'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/9612dec2de3b67984eaa80a9a88f5813?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5f6f53cbeb0dab000e7b37cf'>chuan zhang</a>
+</div>
+<a UTCms='1601747073000' class='quanto-date posted-at response-posted-at' href='#5f78b881427b450011c8e575'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thank you very much for your answer .<br>
+I have two more questions that I haven&#39;t found in the official documents .<br>
+How many times a day does the program run when the website self tests back?<br>
+Why does every transaction of 500 shares generate such a large leverage return?  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/welles-wilders-adx-average-directional-index-technical-indicator-implementation'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#8debe8e8e9efeceee6cdfcf8ece3f9e2fde4ece3a3eee2e0">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

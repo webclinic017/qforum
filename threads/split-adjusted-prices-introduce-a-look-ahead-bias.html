@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Split-Adjusted Prices Introduce A Look-Ahead Bias
+</title>
+<meta content='Perhaps the topic has already been discussed, but... Why aren&#39;t unadjusted prices available in the backtester?I see some problems with the current implementation: 1. Look-ahead biasBy restricting its users to split-adjusted prices only, Quantopian introduces a systematic look-ahead bias. Indeed, when using split-adjusted stock prices, low priced stocks tend to do better than high priced stocks just because, by definition, stocks that did well over the years are more likely to experience...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Mh2F6uKgIMfXCPXtlOZCAGjxvU3qhZd7Hn4gb9zlbqJOe/OnQFbyJG4VrNzbCep0UH+eJJBJgmCccfsFdqAMGQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/split-adjusted-prices-introduce-a-look-ahead-bias' property='og:url'>
+<meta content='Split-Adjusted Prices Introduce A Look-Ahead Bias' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/split-adjusted-prices-introduce-a-look-ahead-bias' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Split-Adjusted Prices Introduce A Look-Ahead Bias' property='og:title'>
+<meta content='Perhaps the topic has already been discussed, but... Why aren&#39;t unadjusted prices available in the backtester?I see some problems with the current implementation: 1. Look-ahead biasBy restricting its users to split-adjusted prices only, Quantopian introduces a systematic look-ahead bias. Indeed, when using split-adjusted stock prices, low priced stocks tend to do better than high priced stocks just because, by definition, stocks that did well over the years are more likely to experience...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/split-adjusted-prices-introduce-a-look-ahead-bias">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='55b1f7ce10d92a81190001d8'>
+<div class='post-container' data-post-id='55b1f7ce10d92a81190001d8' id='55b1f7ce10d92a81190001d8'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Split-Adjusted Prices Introduce A Look-Ahead Bias</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1437726670000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Split-Adjusted Prices Introduce A Look-Ahead Bias&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsplit-adjusted-prices-introduce-a-look-ahead-bias%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsplit-adjusted-prices-introduce-a-look-ahead-bias%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fsplit-adjusted-prices-introduce-a-look-ahead-bias%3Futm_source%3Dwebsite_share%26utm_campaign%3Dsplit-adjusted-prices-introduce-a-look-ahead-bias%26utm_medium%3Dlinkedin&amp;title=Split-Adjusted+Prices+Introduce+A+Look-Ahead+Bias+%28Alexis+P.%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Q Meta' data-tag-id='55c50e7d8d4710ec6e000013' href='/posts/tag/Q-Meta/newest'>Q Meta</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/split-adjusted-prices-introduce-a-look-ahead-bias?utm_source=website_share&amp;utm_campaign=split-adjusted-prices-introduce-a-look-ahead-bias&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Alexis P." />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Perhaps the topic has already been discussed, but... </p>
+
+<p><strong>Why aren&#39;t unadjusted prices available in the backtester?</strong></p>
+
+<p>I see some problems with the current implementation: </p>
+
+<p><strong>1. Look-ahead bias</strong></p>
+
+<p>By restricting its users to split-adjusted prices only, Quantopian introduces a <strong>systematic look-ahead bias</strong>. </p>
+
+<p>Indeed, when using split-adjusted stock prices, low priced stocks tend to do better than high priced stocks just because, by definition, stocks that did well over the years are more likely to experience splits than stocks that didn&#39;t. Thus, their split-adjusted prices converge to zero going back in time and the result is an artificial predictive power of stock prices (i.e., low &gt; high). </p>
+
+<p><strong>2. Unrealistic filled prices in the blotter</strong></p>
+
+<p>In the transaction details I realized that filled prices are actually split-adjusted prices and not raw prices. Since I&#39;m using IB&#39;s default commission model (price per share with a minimum of $1 per order), I guess I&#39;m getting different results than in real life. Things add up quickly. </p>
+
+<p><strong>3. Filtering by actual prices is vital for some strategies</strong></p>
+
+<p>Generally, commission costs decrease with stock prices for the same dollar position. For strategies with a low average return per trade, it is important to avoid trading certain stocks when their prices are too low. E.g., at $0.005 per share, buying $100,000 of a $10 stock results in a $50 broker commission. It doubles for a $5 stock. The ability to filter out low priced stocks is vital for certain strategies. </p>
+
+<p><strong>A better approach?</strong></p>
+
+<p>In backtesting, using split-adjusted prices is fine as long as one is using the current price at the time when the decision was made. For example, the backtester should see the price of AAPL as $645.57 on 2014-06-06 and data prior to that date would be split-adjusted. On 2014-06-16, the price seen by the backtester should be $92.20 and at that time the price of 2014-06-06 would be split-adjusted (i.e., the initial price of $645.57 divided by 7).  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>28 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='55b21b0310d92a81190002e2' id='55b21b0310d92a81190002e2'>
+<a href='#55b21b0310d92a81190002e2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1437735685000' class='quanto-date posted-at response-posted-at' href='#55b21b0310d92a81190002e2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In addition, the API documentation is misleading since we can read: </p>
+
+<blockquote>
+<p>Our US equity set is point-in-time, which is important for backtest accuracy. Since our event-based system sends trading events to you serially, your algorithm receives accurate historical data without any bias towards the present. </p>
+</blockquote>
+
+<p>This statement is false - there is a bias. </p>
+
+<blockquote>
+<p>In a backtest, the split is already applied retroactively to all data. </p>
+</blockquote>
+
+<p>This is true, but incomplete. You should stipulate that in a backtest, future splits are also applied to the current price.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b25f1f36b37f3adc0005d6' id='55b25f1f36b37f3adc0005d6'>
+<a href='#55b25f1f36b37f3adc0005d6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1437753122000' class='quanto-date posted-at response-posted-at' href='#55b25f1f36b37f3adc0005d6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alexis, thanks for the post.  I think you&#39;re right about a couple of the limitations, but I don&#39;t agree that there is lookahead bias.</p>
+
+<p>1 Lookahead bias</p>
+
+<p>There is clearly lookahead bias if you can look at a price and know that there is a split coming.  For instance, if you during a simulation you have an as-traded price and a dividend adjusted price and they are different, you know there is a split coming.  That concept gets some <a href="https://www.quantopian.com/posts/version-2-proposal-for-dividend-adjusted-prices">discussion here</a>.  You&#39;re suggesting something a lot more subtle: &quot;In a split-adjusted world, lower prices tend to go up, because they indicate pending splits.&quot;  I have two thoughts in reaction to that.  The first is, I don&#39;t see a lot of quants who are using the actual price and only the price to make purchase decisions - they&#39;re looking at market cap, or price movements, or more broadly, the price as it relates to some other factor.  My second thought is that low prices are also what you see just before a company goes out of business.  You can&#39;t look at a low price and expect a dividend.</p>
+
+<p>2 Prices at execution</p>
+
+<p>You&#39;re right, for stocks that split a lot, we&#39;re overstating commission costs in the early years of backtests.  It&#39;s on the list of improvements to be made, though we haven&#39;t done it yet.  The good news is that it&#39;s generally an error on the conservative side, rather than than aggressive.</p>
+
+<p>3 Filtering on actual prices</p>
+
+<p>I agree, this is a limitation.  I don&#39;t see it too often, though.  I see people using market cap, or changes in price, or gaps, or price baskets, but I don&#39;t see a lot of strategies that simply look at the naked price.  </p>
+
+<p>If you think #2 or #3 is limiting your strategy choices, one option is to set the commission to zero while you&#39;re doing your initial testing.  You can then add it back in during later testing. </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b349e622f496eee600021b' id='55b349e622f496eee600021b'>
+<a href='#55b349e622f496eee600021b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1437813224000' class='quanto-date posted-at response-posted-at' href='#55b349e622f496eee600021b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dan, </p>
+
+<p>Thanks for your comments and the link on dividend-adjusted prices. That was actually the next topic I wanted to discuss! :) </p>
+
+<p>Regarding splits... </p>
+
+<blockquote>
+<p>There is clearly lookahead bias if you can look at a price and know that there is a split coming. </p>
+</blockquote>
+
+<p>It&#39;s a statistical bias - low priced stocks <strong>tend</strong> to do better than average when prices are split-adjusted vs. unadjusted. </p>
+
+<p>Here is a link to a chart that comes from a DB Market Research paper: <a href="https://drive.google.com/file/d/0B8_Z8sOYe7c2aG50Y0hsZUJzYmc/view?usp=sharing">here</a>. It illustrates the bias I am talking about that <strong>&quot;the adjusted price has future information&quot;</strong>. </p>
+
+<blockquote>
+<p>For instance, if you during a simulation you have an as-traded price and a split adjusted price and they are different, you know there is a split coming. </p>
+</blockquote>
+
+<p>Correct, but this problem is only the result of how Quantopian handles splits. You adjust prices for splits once for all. For example, prices in 2003 are adjusted for splits coming in the years 2004-2015 and are fed to the backtester. This is the source of the look-ahead bias. In a true point-in-time database, it should not be possible. Splits should be treated as events (like dividends) and handled when they happen. That way, at any point in time, the backtester only sees the current price at that time (which is the unadjusted price) and all prices prior to that time are adjusted for splits and/or dividends. This is what happens in real life. The price I&#39;m getting today is not adjusted for splits coming in 2018. </p>
+
+<blockquote>
+<p>I don&#39;t see a lot of quants who are using the actual price and only the price to make purchase decisions - they&#39;re looking at market cap, or price movements, or more broadly, the price as it relates to some other factor. </p>
+</blockquote>
+
+<p>I identified a look-ahead bias and am reporting it here. When it comes to backtesting, I believe it is important to remove as many biases as possible as there are just so many ways to get unreliable results out of a backtest (without even knowing it, of course). </p>
+
+<p>Looking at what other quants are doing is sometimes dangerous. For example, I&#39;m glad to hear that Quantopian is going to make dividend-adjusted prices available in the history function. Because how many quants do you think have been comparing apples to oranges without complaining (or acknowledging) about it for about 3 years since Quantopian launched its platform? Many, I believe: </p>
+
+<p>When you compute returns on split-adjusted prices of a stock that pays no dividend, you get a total return stream. Not paying dividends is equivalent to reinvesting dividends for a company that pays dividends. But when you compute returns on split-adjusted prices of a company that pays dividends, but do not include them in your calculation, you don&#39;t get a total return stream. Comparing both streams is like comparing apples to oranges and that&#39;s what some quants have been doing here for a couple of years. This is especially important for momentum-based strategies that require total return streams. So it&#39;s great that this issue will be fixed in the future. </p>
+
+<p>The question remains: <strong>why is the unadjusted (close) price not available?</strong> Making it available would at least solve problem #3. </p>
+
+<p>Thanks! </p>
+
+<p>PS: I hope all of this makes sense, but as English is not my first language if a passage is not clear please let me know! </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b353fc05921009e70006c4' id='55b353fc05921009e70006c4'>
+<a href='#55b353fc05921009e70006c4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1437815806000' class='quanto-date posted-at response-posted-at' href='#55b353fc05921009e70006c4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You can get a rough unadjusted price by dividing fundamentals market cap by fundamentals shares outstanding.  FYI.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b71d4927871fee7e0006d9' id='55b71d4927871fee7e0006d9'>
+<a href='#55b71d4927871fee7e0006d9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1438063948000' class='quanto-date posted-at response-posted-at' href='#55b71d4927871fee7e0006d9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>You can get a rough unadjusted price by dividing fundamentals market cap by fundamentals shares outstanding. FYI.</p>
+</blockquote>
+
+<p>Thanks for the idea. Unfortunately, fundamental data is not available for all securities, I believe, so that is a rather limiting option. </p>
+
+<p>Why not just add an unadjusted_close column to the pricing data? It doesn&#39;t fix the look-ahead bias but allows a better evaluation of commission costs.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b7d2fec0ede394590001c8' id='55b7d2fec0ede394590001c8'>
+<a href='#55b7d2fec0ede394590001c8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1438110468000' class='quanto-date posted-at response-posted-at' href='#55b7d2fec0ede394590001c8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That link to the DB Market image is interesting.  I&#39;d like to find that full paper to see what else was being considered in there.</p>
+
+<p>Alexis, the &quot;why&quot; question is one of those hard ones because the answer isn&#39;t straightforward.  Why use split-adjusted prices?  Because it makes a lot of the computation and simulation easier, at least when we started writing Zipline.  Why not provide unadjusted prices, in addition?  Because that leads to a worse look-ahead problem (as we both noted) that occurs when you compare adjusted and unadjusted prices.  </p>
+
+<p>One path, perhaps, is to do as you suggest and process splits as events.  That may be something we will do in the future.  It&#39;s definitely something we&#39;re doing in our forthcoming <a href="https://www.quantopian.com/posts/how-to-build-a-stat-arb-strategy-on-quantopian">trading universe selection framework</a>.  However, rewriting the backtester to use unadjusted prices hasn&#39;t been a highly requested feature at this point.</p>
+
+<p>As a side note - fundamental data is available for all companies, just not available for ETFs.</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55b7e7abd74f40db7b000297' id='55b7e7abd74f40db7b000297'>
+<a href='#55b7e7abd74f40db7b000297'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1438115758000' class='quanto-date posted-at response-posted-at' href='#55b7e7abd74f40db7b000297'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I agree that handling split and dividend adjustments is not straightforward. There are multiple ways to adjust prices with different jobs in mind: total return stream assuming reinvestment of dividends, total return assuming no reinvestment of dividends, etc. </p>
+
+<p>I understand that a decision that made sense at some point doesn&#39;t necessarily so later. But adding an unadjusted close column doesn&#39;t seem too hard and make things easier than using fundamental data. If someone is crazy enough to build a predictive factor out of the adjusted/unadjusted prices, please raise your hand! </p>
+
+<blockquote>
+<p>As a side note - fundamental data is available for all companies, just not available for ETFs.</p>
+</blockquote>
+
+<p>That&#39;s cool. I thought I&#39;ve read somewhere that they were available for 5,000 companies <em>only</em>. I&#39;ll try Simon&#39;s suggestion. Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55d8a3492129e8f06f0004e6' id='55d8a3492129e8f06f0004e6'>
+<a href='#55d8a3492129e8f06f0004e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/550b97655b83ee32fd000132'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1f9775d029ff45e78e133f3379a9299a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/550b97655b83ee32fd000132'>Tristan Rhodes</a>
+</div>
+<a UTCms='1440260940000' class='quanto-date posted-at response-posted-at' href='#55d8a3492129e8f06f0004e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I had my first realization of the impact of split adjusted prices when I was backtesting a VXX strategy.  I was using a small portfolio of $10,000 and quickly discovered that I could only buy 1 share of VXX in 2009 for ~$7,000 (current price is ~$20).</p>
+
+<p>I agree that there is a statistical look-ahead bias for split adjusted prices.  For instance, any strategy that filters out high prices will remove all &quot;lemon&quot; stocks (like VXX) that are going to drop severely and reverse split over the next years.  Additionally, &quot;superstar&quot; stocks that are going to zoom ahead with large splits in the future will ALWAYS have a low price (Apple has a split-adjusted price of $0.91 in 2003)</p>
+
+<p>At the same time, I can see how this is a complex subject.   How will our algo logic handle price changes during splits?  How about quantities of shares changing outside of our orders?  How are indicators going to work with the drastically changing non-split adjusted prices?</p>
+
+<p>So what can we do about this?  At this point in time, all we can do is be aware of this bias and try to not make any decisions based on price.  Commissions will be wrong as well (&quot;lemons&quot; will underpay commissions, and &quot;superstars&quot; will pay too much).  We can choose to remove commission costs, but that also gives us imperfect results.</p>
+
+<p>Any other ideas?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55da3ea8e15f40e4ae00066c' id='55da3ea8e15f40e4ae00066c'>
+<a href='#55da3ea8e15f40e4ae00066c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1440366251000' class='quanto-date posted-at response-posted-at' href='#55da3ea8e15f40e4ae00066c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One option is to model trading as it happens in real life (ie, events stream). Splits are events. When they occur, the backtester needs to adjust open positions accordingly. If the history function is to return split-adjusted prices, then adjustments need to be made on the fly using only information available at the time (ie, no future splits). It would also make sense to adjust for dividends in the history function so that it returns a total return stream and eliminates the current bias which favors stocks that pay no dividend.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55dae7c724bb35e33d00036e' id='55dae7c724bb35e33d00036e'>
+<a href='#55dae7c724bb35e33d00036e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1440409546000' class='quanto-date posted-at response-posted-at' href='#55dae7c724bb35e33d00036e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>From Dan&#39;s response above, it sounds like more information will be available once the &quot;trading universe selection framework&quot; API is released.  It remains to be seen, but maybe the database (which I think is what it&#39;ll amount to) will contain the split info. as events so that one could &quot;unadjust&quot; the historical prices.  Similarly, there would be data for dividends, I&#39;m figuring.</p>
+
+<p>Would it help if the backtester allowed fractional shares to be transacted, as an option?  This would seem to be another unrealistic element to the simulation, since if I&#39;m thinking about it correctly, there is an artificial &quot;digitization&quot; of transactions, if prices have been adjusted.  I think that if the simulator uses adjusted prices, then you lose fidelity if only integer shares can be transacted (and for small amounts of capital, can end up with unrealistic &quot;corner cases&quot;).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5617153ea8e03d398e00023b' id='5617153ea8e03d398e00023b'>
+<a href='#5617153ea8e03d398e00023b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444353346000' class='quanto-date posted-at response-posted-at' href='#5617153ea8e03d398e00023b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I stumbled across this problem inadvertently while working on a trading strategy that seemed to be producing very good results in backtests with starting dates from circa 2002 through 2006.  After a while I began to suspect that my returns were not the result of any brilliance in my strategy, but were, rather, due to some type of look-ahead bias I couldn&#39;t quite understand.  Eventually I narrowed it down to the problem described here.  (in fact, searching to see if anyone else had come across it is how I found this article.)</p>
+
+<p>I have a relatively short algorithm that demonstrates the potentially huge effect this problem has on the outcomes of various backtests.  Being new to Quantopian, I do not know if it appropriate to post source code in this forum.  If anyone can advise me as to the &quot;how&quot; and &quot;where&quot; of posting it, I would be glad to do so.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5617200b0566e80ff400026f' id='5617200b0566e80ff400026f'>
+<a href='#5617200b0566e80ff400026f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444356112000' class='quanto-date posted-at response-posted-at' href='#5617200b0566e80ff400026f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi John, you can post the backtest (together with the code)  you like to share simply clicking on the &quot;Attach&quot; button in the upper right corner, visible when you post a reply.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561731f40566e80ff40002d6' id='561731f40566e80ff40002d6'>
+<a href='#561731f40566e80ff40002d6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444360695000' class='quanto-date posted-at response-posted-at' href='#561731f40566e80ff40002d6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks, Luca.</p>
+
+<p>The attached algorithm does that which, in my opinion, should not be possible.  It randomly selects 12 stocks and invests about 90% of the Day 1 cash, divided equally among them.  After that it just waits for any accumulated dividends to appear and when they exceed $2400 it allots equal dollar amounts of the dividends toward the purchase of more shares of the originally chosen 12.  If one runs this algorithm against a backtest that starts circa 2002 it almost always beats the SPY total returns benchmark.  I put some comments in the code to indicate what I think is going on.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5617365aa8e03d398e000305' id='5617365aa8e03d398e000305'>
+<a href='#5617365aa8e03d398e000305'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1444361822000' class='quanto-date posted-at response-posted-at' href='#5617365aa8e03d398e000305'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That&#39;s a very well commented and explained example.  Quite fascinating.</p>
+
+<p>The good news is that the new <a href="https://www.quantopian.com/posts/introducing-the-pipeline-api">Pipeline API</a> makes the point moot.  Pipeline uses only as-traded prices.  If a split/dividend happens later, that adjustment is applied historically.  But on the day you&#39;re setting your universe, there is no adjustment - it&#39;s as traded.</p>
+
+<p>There are a few exclusions that you added - share classes and industry template code - that I&#39;m not familiar enough with.  I&#39;m somewhat curious to know if they introduced some signal, too.  I think it would be very interesting to reproduce this example using Pipeline and see if the result holds up.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56173a29a8e03d398e00031b' id='56173a29a8e03d398e00031b'>
+<a href='#56173a29a8e03d398e00031b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444362801000' class='quanto-date posted-at response-posted-at' href='#56173a29a8e03d398e00031b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks for sharing this John,   it is really worth to spend some time looking at your test (by the way, great explanation in your code comments).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56173f0ea8e03d398e000328' id='56173f0ea8e03d398e000328'>
+<a href='#56173f0ea8e03d398e000328'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444364053000' class='quanto-date posted-at response-posted-at' href='#56173f0ea8e03d398e000328'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Dan:  Could you please clarify why Pipeline API should make the algorithm perform differently?</p>
+
+<p>In the Pipeline announcement post we can read &quot;All price data available to the pipeline API is split and dividend adjusted. &quot;, so why should the result be different using the Pipeline API?</p>
+
+<p>You say &quot;Pipeline uses only as-traded prices.&quot; Does this mean that Pipeline itself use  as-traded prices for internal calculation and then it converts them to  split and dividend adjusted prices? So what kind of price does the user see?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='56183bcfe9afc7970b0000c3' id='56183bcfe9afc7970b0000c3'>
+<a href='#56183bcfe9afc7970b0000c3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4fe8beb792a029000200000d'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fe3ffe502559d05f16eb9fe41ab7e9a1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4fe8beb792a029000200000d'>Dan Dunn</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1444428754000' class='quanto-date posted-at response-posted-at' href='#56183bcfe9afc7970b0000c3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Luca, check out this <a href="https://www.quantopian.com/posts/the-pipeline-api-dividends-and-splits-what-you-need-to-know">new post here</a>.  I think it has much more precise language than I used above, and should do a better job than my explanation.</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5619539fffa5511ce800067e' id='5619539fffa5511ce800067e'>
+<a href='#5619539fffa5511ce800067e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444500386000' class='quanto-date posted-at response-posted-at' href='#5619539fffa5511ce800067e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello, all.  A friend of mine, Chris D., was kind enough to recast my non-Pipeline code into a Pipeline version (and also humorously called my findings &quot;the Lake Wobegon Effect&quot; because &quot;all the children are above average.&quot;)  The results are essentially the same as before.  I now realize that my &quot;explanation&quot; for the effect was faulty -- it does not appear to have anything directly to do with the price quotations.  The anomalous results, though, indicate there is probably either something terribly wrong with the backtest results themselves or with the parameters of my experiment.  It seems to me I should not be able to regularly (85% of the time) trounce the SPY total returns by randomly selecting 12 stocks and holding them forever.</p>
+
+<p>Can anyone offer an explanation for what is going on here?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561be8f6e2fd0e7b2f0005dc' id='561be8f6e2fd0e7b2f0005dc'>
+<a href='#561be8f6e2fd0e7b2f0005dc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444669690000' class='quanto-date posted-at response-posted-at' href='#561be8f6e2fd0e7b2f0005dc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@John, I don&#39;t believe the Pipeline version of your algorithm proves your thesis wrong. It correctly uses pipeline api to rank the stocks by market capital to simulate spy500, but it keeps using the spit-adjusted prices to decide how many shares to buy for each secority. That&#39;s the reason why you didn&#39;t see any different result.</p>
+
+<p>I believe you are still right in the explanation of the great performance of the algorithm and thus the bias.</p>
+
+<p>I modified (again) your algorithm to use Pipeline API  but this time I get the security price from the Pipeline API (so they are not split-adjusted on the date we buy the stocks) and I calculate how many shares to buy using this not-adjusted price instead of the one provided from &#39;data&#39;. </p>
+
+<p>After some backtests I can see that the algorithm doesn&#39;t outperform SPY all the time. Also, note that the code prints the price obtained from Pipeline and the ones from &#39;data&#39;. In this way, it is possible to see that when the random selection selects many stocks with pipeline price higher than price in &#39;data&#39; then the algorithm outperform SPY.  When there are not so many of this stocks or when the  randomly selected ones have a lower pipeline price than the price in &#39;data&#39;,  the algorithm doesn&#39;t perform better than SPY.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561c061fbe7b76509e000248' id='561c061fbe7b76509e000248'>
+<a href='#561c061fbe7b76509e000248'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444677159000' class='quanto-date posted-at response-posted-at' href='#561c061fbe7b76509e000248'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Luca, thank you so much for clearing this up!  My most recent post will be removed once I am back in my office.  I must have posted without refreshing the page first -- I didn&#39;t see your post until a couple of minutes ago.</p>
+
+<p>This is a huge load off my mind.  I can&#39;t thank you enough!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561c070a4a3ea441cd0003bf' id='561c070a4a3ea441cd0003bf'>
+<a href='#561c070a4a3ea441cd0003bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b9b56c02cabe5dae000143'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e9388ae5102f3b152fa6225f955a29d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b9b56c02cabe5dae000143'>Alisa Deychman</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1444677391000' class='quanto-date posted-at response-posted-at' href='#561c070a4a3ea441cd0003bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You unfortunately ran into a common confusion in the backtester. There can be a big difference between daily mode and minute-mode backtesting. Daily mode is used to check the general trends of an algo, and to see if the code compiles. Minute mode is used to closely develop your strategy and ready it for live trading. I&#39;d recommend to always use this setting. </p>
+
+<p>The key difference is how often the data is sampled. In daily mode, an order is submitted one day at 4PM and filled the next day at 4PM. In minute mode, an order is submitted in one minute and filled in the next minute. This is a more accurate simulation and leaves less room for price movement. For a more detailed explanation take a look at this <a href="https://www.quantopian.com/posts/differences-between-minute-and-daily-backtests">thread</a>. I cloned your algo and without making any changes ran the strategy in minute mode. The results are below. </p>
+
+<p>As you continue to develop strategies, consider your correlation to the general market. For the <a href="https://www.quantopian.com/open">contest</a> and <a href="https://www.quantopian.com/fund">hedge fund</a> your beta should be between 0.3 and -0.3, so your algo is steady in all market conditions. </p>
+
+<p>Cheers,<br>
+Alisa</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561c6196dc3e8653fd0001dc' id='561c6196dc3e8653fd0001dc'>
+<a href='#561c6196dc3e8653fd0001dc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444700569000' class='quanto-date posted-at response-posted-at' href='#561c6196dc3e8653fd0001dc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Ah ah ah, a lot of digging in to split-adjusted vs as-trade price theory and then it was only a matter of daily vs minute backtesting? :)</p>
+
+<p>Thanks Alisa, I&#39;ll run some more tests in minute mode to compare the results.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561c89debe7b76509e0005d0' id='561c89debe7b76509e0005d0'>
+<a href='#561c89debe7b76509e0005d0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444710886000' class='quanto-date posted-at response-posted-at' href='#561c89debe7b76509e0005d0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi, Alisa.</p>
+
+<p>Firstly, thank you very much for taking an interest in this issue!  Any light you can shed is greatly appreciated.</p>
+
+<p>I am still terribly confused about this, though.  My algorithm (the version you ran, which preceded Luca&#39;s fix) is essentially a &quot;buy once and hold forever&quot; strategy with the only other buying being the re-investment of any accrued dividends, as they occur, apportioned in (roughly) equal dollar allocations toward additional purchases of shares of the original set of randomly chosen stocks.  Even if the fills are occurring on a one day delay, doesn&#39;t it still boil down to the same experiment?  I am not using any selection criteria at all in picking the stocks.  I&#39;m just randomly buying 12 different stocks.  The price differential between the time of the dollar allocation (Day 1) and the purchase (Day 2) would generate some error in terms of the actual number of shares purchased, but I keep an approximate  $100K (10%) cash reserve as a buffer to accommodate modest miscalculations. The actual magnitude of the errors would depend on the one-day price fluctuations, of course, but even a significant error would still give me a completely random starting point with the only consequence being that I might inadvertently be &quot;borrowing&quot; money (which is why I plot the leverage).  Irrespective of the magnitude of such an error, though, it still seems like it results in a randomized selection, and so I wouldn&#39;t expect to be able to consistently beat the SPY total returns by making those kinds of random picks, investing about 90% of my cash (on Day 2, it turns out) and just holding those positions forever.</p>
+
+<p>The example results you got from the &quot;minute data&quot; run above shows 12 randomly picked stocks beating the SPY at the outset and holding a lead throughout the entire backtest -- eventually besting it by an impressive 213% in returns versus 173% in returns.  These results typify what was driving me to distraction; I never expected to regularly get such a result.</p>
+
+<p>To be clear, I am not trying to be contradictory or argumentative.  I truly don&#39;t understand why the results should be expected to be significantly different using minute bars as opposed to daily bars.  (And I am fully prepared to believe that I have missed something completely obvious!)</p>
+
+<p>Important note:  I&#39;ve been running Luca&#39;s fix to the Pipeline version for several hours now (still using daily bars) and so far it seems like he has indeed cracked the problem.   I am seeing the kinds of varied results and crossovers between the algorithm&#39;s returns and the SPY&#39;s returns that I would expect to occur in reality.  In the 10 trials I have run so far, only 5 have beaten the benchmark.  (This is still a higher percentage than I would normally expect but 10 trials is a small sampling -- more to come.)</p>
+
+<p>In any case, Luca&#39;s change has made a dramatic difference in the results.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561cc5fcdc3e8606c8000399' id='561cc5fcdc3e8606c8000399'>
+<a href='#561cc5fcdc3e8606c8000399'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444726271000' class='quanto-date posted-at response-posted-at' href='#561cc5fcdc3e8606c8000399'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@John, while I was checking my code again and running backtests in minute mode I digged the forum and found this: <a href="https://www.quantopian.com/posts/why-random-portfolios-appear-to-outperform-benchmarks-dot-dot-dot">https://www.quantopian.com/posts/why-random-portfolios-appear-to-outperform-benchmarks-dot-dot-dot</a></p>
+
+<p>It seems related to what we see in the algo.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561cd83abe7b76509e00073c' id='561cd83abe7b76509e00073c'>
+<a href='#561cd83abe7b76509e00073c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51e55a023d55a39977000031'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8530ea59812d00290f84a73420b86a22?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51e55a023d55a39977000031'>Richard Prokopyshen</a>
+</div>
+<a UTCms='1444730942000' class='quanto-date posted-at response-posted-at' href='#561cd83abe7b76509e00073c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This may be a question for Josh at Quantopian, but I wonder if the fundamentals/morningstar data that is being  sampled from in 2002/2003 is complete.   Say for example morningstar data has a 2010 existence cutoff.  This meaning only  if the company existed in 2010 then there is data available for that company in 2002/2003 and forwards.  I am thinking your sample may have survivorship  bias.  If you get to pick companies in 2002/2003 from a sample of those  that are still around in 2010 that would explain your findings.   And would also explain why you need such long runs.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561d0d2a3f8a8c52dc000017' id='561d0d2a3f8a8c52dc000017'>
+<a href='#561d0d2a3f8a8c52dc000017'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54487203dc843663f2000123'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/439ba1adf33b808f2d50e3a31c3c7e28?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54487203dc843663f2000123'>Josh Payne</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1444744495000' class='quanto-date posted-at response-posted-at' href='#561d0d2a3f8a8c52dc000017'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Richard,</p>
+
+<p>We&#39;ve taken care to try to avoid look-ahead-bias as you&#39;ve described here. If the company goes out of business in 2010 but was public as early as 2002, we&#39;d have data for that company from 2002-2010 in the fundamentals database.</p>
+
+<p>One simple test that we ran on the database was something like the algo below which just checks the total number of available companies on any particular day. If you run it, you&#39;ll see the number of companies in fundamentals tends to grow over time but there are trends where the overall count reduces as well.</p>
+
+<pre><code>def initialize(context):  
+    foo = sid(24)  
+    pass
+
+def before_trading_start(context):  
+    # Import any fundamental areas you want.  
+    val = fundamentals.valuation  
+    inc = fundamentals.income_statement
+
+    # Query the fundmental database - the result is a pandas datapanel  
+    # The first several lines are defining WHICH fields we are requesting  
+    df3 = get_fundamentals(query(val.sid, # this is the Quantopian security id  
+                                   val.sid.label(&#39;ce_sid&#39;), # this is how you relabel a field  
+                                   val.market_cap,  
+                                   inc.net_income,  
+                                   inc.net_income_as_of, # by adding _as_of to a field  
+                                   # name, you can see which period the main field is reporting  
+                                   )  
+                                   )  
+    context.df3 = df3  
+    log.info(len(list(df3.columns.values)))  
+    context.company_count=len(list(df3.columns.values))
+
+# Will be called on every trade event for the securities you specify.  
+def handle_data(context, data):
+
+    if context.company_count &gt; 0:  
+        record(count=context.company_count)  
+    pass  
+</code></pre>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561dad9517008d9ca500017d' id='561dad9517008d9ca500017d'>
+<a href='#561dad9517008d9ca500017d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55ee0b54464ec7b2670004df'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f99fd8dab542ea69dd35ab83b14d1829?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55ee0b54464ec7b2670004df'>John Nh</a>
+</div>
+<a UTCms='1444785559000' class='quanto-date posted-at response-posted-at' href='#561dad9517008d9ca500017d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello, all.</p>
+
+<p>Luca&#39;s post from earlier today cracked the puzzle of the out-sized returns wide open for me.  The forum he mentioned (<a href="https://www.quantopian.com/posts/why-random-portfolios-appear-to-outperform-benchmarks-dot-dot-dot">https://www.quantopian.com/posts/why-random-portfolios-appear-to-outperform-benchmarks-dot-dot-dot</a>) in turn pointed me to an astounding article that explained why I should have expected to regularly stomp the SPY benchmark using random picks.  It is primarily the result of a difference in weighting methods; SPY is market cap weighted, my experiments were unweighted equal allocations.  </p>
+
+<p>At this juncture I no longer think my original results were either anomalous  or due to a look-ahead bias.  I simply had no concept at the time that the SPY was so easily beaten.   (Since 75% of the professional mutual fund managers can&#39;t seem to beat it, I now think I&#39;ll open my own mutual fund, the Randomly Selected Unweighted Equal Allocation Large Cap Index Fund  -- catchy. ;-)</p>
+
+<p>The attached algorithm is a cap-weighted variant of my original, pre-Pipeline, &quot;Fool&#39;s Gold&quot; program.  It now tries to provide a crude approximation of the weighting inherent in the SPY benchmark, and the 17 backtests I&#39;ve run seem to provide the kind of lackluster performance I was originally expecting.  (I have provided some expanded details about the algorithm&#39;s construction in the opening comments of the source code.  BTW, the current &quot;Wobehere&quot; moniker was suggested by Chris D., who dubbed my original findings the &quot;Wobegon Effect.&quot;)</p>
+
+<p>Many thanks to all of you who took an interest in this, and very special thanks to Luca!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='561db187e0b8fcf331000111' id='561db187e0b8fcf331000111'>
+<a href='#561db187e0b8fcf331000111'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1444786571000' class='quanto-date posted-at response-posted-at' href='#561db187e0b8fcf331000111'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ John, I would have hoped you had called your fund &quot;Lake Wobegon Fund&quot;  but that&#39;s ok anyway ;) </p>
+
+<p>Eventually It was a very interesting discovery, both the Journal of Portfolio Management&#39;s article and the Lake Wobengon effect ;) and It was worth digging to the end (if this is the final explanation).</p>
+
+<p>So much to learn...so much to learn.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/split-adjusted-prices-introduce-a-look-ahead-bias'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/split-adjusted-prices-introduce-a-look-ahead-bias'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#7f191a1a1b1d1e1c143f0e0a1e110b100f161e11511c1012">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

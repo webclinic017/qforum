@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+How to create function that returns &quot;time since last crossover&quot;?
+</title>
+<meta content='I want to find out how long it has been since a cross-over of two moving averages.  Inputs would be (data, context, ma_short, ma_long) where the last two are each a series of moving averages.  Here is an example of what I want to accomplish, but I think it can be written a whole lot better.     # Gather historical prices (last 400 days)      prices = history(400, &#39;1d&#39;, &#39;price&#39;)      # Calculate moving averages      ma_short = talib.EMA(prices[context.stock], timeperiod=20)      ma_long =...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="wJswHRpHsaWBUe70ZIeZTejRQNWB5IMBauIXjTjFU+O8/UZQuLFjRjhMt8UraDE50F9jvPsolhro7cznkoAxWA==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/how-to-create-function-that-returns-time-since-last-crossover' property='og:url'>
+<meta content='How to create function that returns &quot;time since last crossover&quot;?' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/how-to-create-function-that-returns-time-since-last-crossover' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='How to create function that returns &quot;time since last crossover&quot;?' property='og:title'>
+<meta content='I want to find out how long it has been since a cross-over of two moving averages.  Inputs would be (data, context, ma_short, ma_long) where the last two are each a series of moving averages.  Here is an example of what I want to accomplish, but I think it can be written a whole lot better.     # Gather historical prices (last 400 days)      prices = history(400, &#39;1d&#39;, &#39;price&#39;)      # Calculate moving averages      ma_short = talib.EMA(prices[context.stock], timeperiod=20)      ma_long =...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/how-to-create-function-that-returns-time-since-last-crossover">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='55dd2d2f97f17fba88000019'>
+<div class='post-container' data-post-id='55dd2d2f97f17fba88000019' id='55dd2d2f97f17fba88000019'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>How to create function that returns &quot;time since last crossover&quot;?</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/550b97655b83ee32fd000132'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1f9775d029ff45e78e133f3379a9299a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/550b97655b83ee32fd000132'>Tristan Rhodes</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1440558383000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=How to create function that returns &quot;time since last crossover&quot;?&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhow-to-create-function-that-returns-time-since-last-crossover%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhow-to-create-function-that-returns-time-since-last-crossover%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fhow-to-create-function-that-returns-time-since-last-crossover%3Futm_source%3Dwebsite_share%26utm_campaign%3Dhow-to-create-function-that-returns-time-since-last-crossover%26utm_medium%3Dlinkedin&amp;title=How+to+create+function+that+returns+%22time+since+last+crossover%22%3F+%28Tristan+Rhodes%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/how-to-create-function-that-returns-time-since-last-crossover?utm_source=website_share&amp;utm_campaign=how-to-create-function-that-returns-time-since-last-crossover&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tristan Rhodes" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>I want to find out how long it has been since a cross-over of two moving averages.  Inputs would be (data, context, ma_short, ma_long) where the last two are each a series of moving averages.  Here is an example of what I want to accomplish, but I think it can be written a whole lot better.</p>
+
+<pre><code>    # Gather historical prices (last 400 days)  
+    prices = history(400, &#39;1d&#39;, &#39;price&#39;)  
+    # Calculate moving averages  
+    ma_short = talib.EMA(prices[context.stock], timeperiod=20)  
+    ma_long = talib.EMA(prices[context.stock], timeperiod=50)
+
+    # Determine how many days since the last cross-over  
+    last_crossover_time_difference = time_since_last_crossover(context,data,ma_short,ma_long)
+
+def last_crossover_days(data, context, ma_short, ma_long):  
+    for i in range[1,399]:  
+        if ma_short[-i] &gt; ma_long[-i] and ma_short[-(i+1) &lt; ma_long[-(i+1)]:  
+            # Return time difference from today to the last crossover  
+            return ma_short[-1] - i.index  
+        elif ma_short[-i] &lt; ma_long[-i] and ma_short[-(i+1) &gt; ma_long[-(i+1)]:  
+            # Return time difference from today to the last crossover  
+            return ma_short[-1] - i.index  
+        else:  
+            continue  
+</code></pre>
+
+<p>BTW, with the help of James, I created a similar time-based <a href="https://www.quantopian.com/posts/q-tip-how-many-days-since-a-higher-high-or-lower-low">function that returned &quot;time since price was higher&quot;</a>.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>15 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='55dd3f7c424a8b54b500008c' id='55dd3f7c424a8b54b500008c'>
+<a href='#55dd3f7c424a8b54b500008c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1440563071000' class='quanto-date posted-at response-posted-at' href='#55dd3f7c424a8b54b500008c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Interesting hmm.  Lemme try.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55dd41b9ba7b9253ef0000b4' id='55dd41b9ba7b9253ef0000b4'>
+<a href='#55dd41b9ba7b9253ef0000b4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1440563644000' class='quanto-date posted-at response-posted-at' href='#55dd41b9ba7b9253ef0000b4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><pre><code>sign_changes = np.sign(ma_short - ma_long).diff()  
+only_sign_changes = sign_changes[sign_changes != 0]  
+time_since = sign_changes.index[-1] - only_sign_changes.index[-1]  
+</code></pre>
+
+<p>There may yet be a better way, but that is probably quite a lot quicker than looping, which I try to avoid...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e107a4a520cb868800026c' id='55e107a4a520cb868800026c'>
+<a href='#55e107a4a520cb868800026c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/550b97655b83ee32fd000132'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1f9775d029ff45e78e133f3379a9299a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/550b97655b83ee32fd000132'>Tristan Rhodes</a>
+</div>
+<a UTCms='1440810919000' class='quanto-date posted-at response-posted-at' href='#55e107a4a520cb868800026c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I discovered what &quot;sign()&quot; does, it simply returns a (-1, 1, or 0) based on the original number.</p>
+
+<p>&quot;diff()&quot; is kinda neat, in that it returns the difference between consecutive numbers in a series.</p>
+
+<p>How does Python select what order these operations are done?  Is it left to right?  &quot;sign() first, then diff()&quot;?  That must be the case, since your function does this logic:</p>
+
+<p>1) Find the difference between the two moving averages, on all periods in the series<br>
+2) Use the sign() function to only save the sign of the difference (positive, negative, or 0)<br>
+3) Use the diff() function to compare the signs (1,-1,0).  If the signs stay the same, the moving averages didn&#39;t swap positions, and the difference is 0.<br>
+4) Create a new series that only contains periods when the moving averages swap position (difference != 0)<br>
+5) Find the time difference from the current time to the time of the latest moving average cross-over.</p>
+
+<p>@Simon: This solution is 100x more elegant than mine, so thanks for teaching me by example!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e115d4d64c04179b00028c' id='55e115d4d64c04179b00028c'>
+<a href='#55e115d4d64c04179b00028c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/550b97655b83ee32fd000132'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/1f9775d029ff45e78e133f3379a9299a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/550b97655b83ee32fd000132'>Tristan Rhodes</a>
+</div>
+<a UTCms='1440814551000' class='quanto-date posted-at response-posted-at' href='#55e115d4d64c04179b00028c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Simon:  I think we need to troubleshoot your function (or at least my implementation of it)</p>
+
+<p>1) I got an &quot;numpy.ndarray object has no attribute .diff()&quot; error, so I split the sign() and diff() function into two steps, which seemed to work fine:</p>
+
+<pre><code>    only_signs = np.sign(ma_short - ma_long)  
+    sign_changes = np.diff(only_signs)
+
+    # Calculate how long since the latest crossover  
+    # NOTE: This is the step that breaks  
+    time_since = only_signs.index[-1] - only_sign_changes.index[-1]  
+</code></pre>
+
+<p>2) But then I get a similar error that &quot;numpy.ndarray&quot; object has no attribute &quot;index&quot;.  Did we flatten and lose the date information when we ran sign() or diff()?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e221ec4b2eeea9f40000ec' id='55e221ec4b2eeea9f40000ec'>
+<a href='#55e221ec4b2eeea9f40000ec'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1440883184000' class='quanto-date posted-at response-posted-at' href='#55e221ec4b2eeea9f40000ec'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I tested it in isolation assuming ma_short/ma_long were pandas Series/DataFrames.  If they are numpy arrays, you could put them into pandas structures with an index.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e34a29dcb07dc42b000761' id='55e34a29dcb07dc42b000761'>
+<a href='#55e34a29dcb07dc42b000761'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5258725aa09fa7ebaa000024'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7734b86e32e834268bee6749eb322fb4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5258725aa09fa7ebaa000024'>David Edwards</a>
+</div>
+<a UTCms='1440959020000' class='quanto-date posted-at response-posted-at' href='#55e34a29dcb07dc42b000761'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This should work for you, just pass in the series/dataframe that&#39;s already differenced (centered around 0), and it returns the timedeltas from one cross to the next.</p>
+
+<pre><code>def get_sign_change_timedeltas(timeseries):  
+    sign_changes = np.sign(timeseries).diff()  
+    only_sign_changes = sign_changes[sign_changes != 0]  
+    return pd.DataFrame(only_changes.index).diff()  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e34bda4b2eeea9f4000759' id='55e34bda4b2eeea9f4000759'>
+<a href='#55e34bda4b2eeea9f4000759'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1440959453000' class='quanto-date posted-at response-posted-at' href='#55e34bda4b2eeea9f4000759'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I figured out how to do it for all stocks at once as well:</p>
+
+<pre><code>    # Calculate moving averages  
+    # operate on all prices at once, and stay in pandas so we don&#39;t have to keep  
+    # wrapping talib numpy arrays into pandas stuff  
+    ma_short = pd.ewma(prices, span=20)  
+    ma_long = pd.ewma(prices, span=50)
+
+    # Find the difference between moving averages  
+    # Only save the sign() of these differences (-1,1)  
+    only_signs = np.sign(ma_short - ma_long)  
+    sign_changes = only_signs.diff().abs()  
+    # floating point test  
+    true_if_sign_changed = sign_changes &gt; 0.5  
+    # this applies the function to each column (stock) in turn  
+    # the little function&#39;s return value is the last element of the index intersected  
+    # with the truth of whether that date had a sign change  
+    times_of_last_sign_change = true_if_sign_changed.apply(lambda s: s.index[s][-1])  
+    last_row_time = prices.index[-1]  
+    time_since = last_row_time - times_of_last_sign_change  
+</code></pre>
+
+<p>If anyone can get rid of the <code>.apply</code>, that would speed things up.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e34fd9368dc59091000722' id='55e34fd9368dc59091000722'>
+<a href='#55e34fd9368dc59091000722'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5258725aa09fa7ebaa000024'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7734b86e32e834268bee6749eb322fb4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5258725aa09fa7ebaa000024'>David Edwards</a>
+</div>
+<a UTCms='1440960477000' class='quanto-date posted-at response-posted-at' href='#55e34fd9368dc59091000722'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hmm, this is a bit odd, I don&#39;t know how you&#39;d get rid of the apply. The function I posted above should be changed to return a series because it doesn&#39;t work for DataFrames. The fact that the size of the frame changes is what throws it off.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55e36e29d1d5443d75000185' id='55e36e29d1d5443d75000185'>
+<a href='#55e36e29d1d5443d75000185'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/518adef0ac9d8e67a000000a'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2114608fe0c1969868c3db6b76e511d1?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/518adef0ac9d8e67a000000a'>Michael Van Kleeck</a>
+</div>
+<a UTCms='1440968236000' class='quanto-date posted-at response-posted-at' href='#55e36e29d1d5443d75000185'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You can eliminate the &quot;.apply&quot; by replacing that line with this one:</p>
+
+<pre><code>    times_of_last_sign_change = true_if_sign_changed[::-1].idxmax()  
+
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a19d78f837b94001bafb961' id='5a19d78f837b94001bafb961'>
+<a href='#5a19d78f837b94001bafb961'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ddbe6fe6a9594c950000ab'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12ac205888153040f01dc2748ff7634d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ddbe6fe6a9594c950000ab'>Dan Sullivan</a>
+</div>
+<a UTCms='1511643023000' class='quanto-date posted-at response-posted-at' href='#5a19d78f837b94001bafb961'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;d like to calculate &quot;days_since_cross&quot; for all stocks in my universe.  Can anyone help to adapt this for use in a pipeline / dataframe?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a1b2f539160490013875462' id='5a1b2f539160490013875462'>
+<a href='#5a1b2f539160490013875462'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1511731027000' class='quanto-date posted-at response-posted-at' href='#5a1b2f539160490013875462'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>There may be a faster and more concise solution, but here is custom factor which returns the trading days since the last time the 20 day ewma crossed over the 50 day ewma. I didn&#39;t check what would happen if there never was a crossover (my hunch is it will return 252 days ago). Anyway, a place to start.</p>
+
+<pre><code>class Last_Crossover(CustomFactor):  
+    # Define inputs  
+    inputs = [USEquityPricing.close]
+
+
+    # Set window_length to the lookback days. 252 (a year) may be a good value.  
+    window_length = 252  
+
+
+    def compute(self, today, assets, out, close):  
+        # First lets turn the numpy array &#39;close&#39; into a pandas dataframe  
+        # We can then use the pandas ewm method  
+        closes_df = pd.DataFrame(  
+                        data = close,  
+                        columns = assets)  
+
+
+        # Make two new dataframes with short and long ewma  
+        ma_short = closes_df.ewm(span=20).mean()  
+        ma_long = closes_df.ewm(span=50).mean()  
+
+
+        # Find where the short ewma is greater than the long ewma  
+        # All we really care about is the sign (ie is the short ewma above or below the long)  
+        # Need to go back to numpy for an easy sign method  
+        delta = np.sign(ma_short - ma_long)  
+
+
+        # Almost there.. lets just find the changes or crossovers. This is where the diff is &lt;&gt; 0  
+        crossovers = delta.diff(axis = 0)  
+
+
+        # A crossover from below (-1) to above (+1) will have a diff of +2 (+1 - -1)  
+        # Lets find last index where this occurs (ie find the last +2)  
+        # Use the fact that +2 is the max value so use the idxmax method  
+        # However, this finds the first occurance, so first reverse our data using a loc trick  
+        crossovers_rev = crossovers.loc[::-1].reset_index(drop=True)  
+        last_crossover_up_index = crossovers_rev.idxmax(axis=0)  
+
+
+        # Output the indexes. 0 will be yesterday. 1 will be the day before yesterday etc.  
+        # If you want yesterday to be 1 then simply add one below (out[:] = last_crossover_up_index+1)  
+        out[:] = last_crossover_up_index
+
+
+</code></pre>
+
+<p>I&#39;ve also attached a notebook with the code in action.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a1e374987162a4cc4d7eafd' id='5a1e374987162a4cc4d7eafd'>
+<a href='#5a1e374987162a4cc4d7eafd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ddbe6fe6a9594c950000ab'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12ac205888153040f01dc2748ff7634d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ddbe6fe6a9594c950000ab'>Dan Sullivan</a>
+</div>
+<a UTCms='1511929673000' class='quanto-date posted-at response-posted-at' href='#5a1e374987162a4cc4d7eafd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Dan - thank you for the response on this. I have been stuck for weeks trying to figure out how (and why)  the close prices needed to be turned into a dataframe.  Great notes in the explanation as well.  I suspect I&#39;lll be back with more questions.  </p>
+
+<p>Thanks again.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a2145594fe0530011f5ef6b' id='5a2145594fe0530011f5ef6b'>
+<a href='#5a2145594fe0530011f5ef6b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ddbe6fe6a9594c950000ab'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/12ac205888153040f01dc2748ff7634d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ddbe6fe6a9594c950000ab'>Dan Sullivan</a>
+</div>
+<a UTCms='1512129881000' class='quanto-date posted-at response-posted-at' href='#5a2145594fe0530011f5ef6b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I am having trouble using this CustomFactor in additional calculations.  My beginner Python skills are exposed here..</p>
+
+<p>This is what I am trying to accomplish, working off the code that Dan W. provided above:</p>
+
+<ol>
+<li> Identify the closing price on the day of the moving average cross<br></li>
+<li> Calculate the price change from the day of the cross until the most recent close</li>
+</ol>
+
+<p>I have attached my current notebook, with some changes I made to expand the universe of stocks and notes where I am stuck.  Most of this code looks pretty similar to what Dan W. presented, but I have been through a lot of unsuccessful efforts in the meantime.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a21c8a1d0062d7c1c175b8c' id='5a21c8a1d0062d7c1c175b8c'>
+<a href='#5a21c8a1d0062d7c1c175b8c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1512163489000' class='quanto-date posted-at response-posted-at' href='#5a21c8a1d0062d7c1c175b8c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One handy feature of CustomFactors is they can return multiple outputs. It sounds like you want not only the days since a crossover but the price at the crossover and then the price change since. Since you&#39;re doing a lot of the calculations inside the existing CustomFactor it makes sense to tack on these values as additional outputs.</p>
+
+<p>See the attached notebook. It looks like the main problem was how to get the price at the crossover. This can be neatly done using the pandas &#39;lookup&#39; method (<a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.lookup.html">https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.lookup.html</a>). Something like this.</p>
+
+<pre><code>    # Assume the crossovers are in a numpy array called &#39;last_crossover_index&#39; and prices in &#39;closes_df&#39;.  
+    # Now lookup all the close prices at each crossover  
+    # One little issue is that the crossovers are indexed from the end.  
+    # To lookup the close prices we need to get the index from the beginning.  
+    # This is easily done by simply subtracting those indexes from the length.  
+    # Then subtract 1 because of 0 based indexing  
+    length = closes_df.shape[0]  
+    last_crossover_index_from_begin = length - last_crossover_index - 1  
+
+    # Now simply &#39;lookup&#39; the close price at each index. This handy lookup method returns a series.  
+    crossing_close = closes_df.lookup(last_crossover_index_from_begin.values, last_crossover_index_from_begin.index)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a21c94b6088dd290a91a047' id='5a21c94b6088dd290a91a047'>
+<a href='#5a21c94b6088dd290a91a047'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571d1bab2616ef09ce0002b6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/a69e9457dd2832a76875bcae334d5baf?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571d1bab2616ef09ce0002b6'>Dan Whitnable</a>
+</div>
+<a UTCms='1512163659000' class='quanto-date posted-at response-posted-at' href='#5a21c94b6088dd290a91a047'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For some reason the notebook didn&#39;t attach. Here it is.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/how-to-create-function-that-returns-time-since-last-crossover'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/how-to-create-function-that-returns-time-since-last-crossover'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#325457575650535159724347535c465d425b535c1c515d5f">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

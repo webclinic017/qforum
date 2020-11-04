@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Recursive Function calls for Price data series (... python help please)
+</title>
+<meta content='Hi python experts. I know that for many of you this will be a trivially (and probably laughably)  easy question, but i am forced to admit that my own python skills are just not up to it, and so i need to reach out for your help, with all due humility on my part.  Here&#39;s my problem... In my own trading outside of Q, i make a lot of use of digital signal processing (DSP) methods in which recursive function calls are applied to price data series. I&#39;m sure you know the sort of stuff; Ehler&#39;s...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="KGI8f6UpXY9hqFEAGIC9jW1F0KIS55U3MjzbTf3H9h5UBEoyB9+PbNi1CDFXbxX5Vcvzy2grgCywMwAnV4KUpQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please' property='og:url'>
+<meta content='Recursive Function calls for Price data series (... python help please)' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Recursive Function calls for Price data series (... python help please)' property='og:title'>
+<meta content='Hi python experts. I know that for many of you this will be a trivially (and probably laughably)  easy question, but i am forced to admit that my own python skills are just not up to it, and so i need to reach out for your help, with all due humility on my part.  Here&#39;s my problem... In my own trading outside of Q, i make a lot of use of digital signal processing (DSP) methods in which recursive function calls are applied to price data series. I&#39;m sure you know the sort of stuff; Ehler&#39;s...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5b8fbcac3a13f1003c4913a1'>
+<div class='post-container' data-post-id='5b8fbcac3a13f1003c4913a1' id='5b8fbcac3a13f1003c4913a1'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Recursive Function calls for Price data series (... python help please)</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1536148399000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Recursive Function calls for Price data series (... python help please)&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Frecursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please%3Futm_source%3Dwebsite_share%26utm_campaign%3Dpython-help-please-recursive-function-calls-for-price-series%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Frecursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please%3Futm_source%3Dwebsite_share%26utm_campaign%3Dpython-help-please-recursive-function-calls-for-price-series%26utm_medium%3Dlinkedin&amp;title=Recursive+Function+calls+for+Price+data+series+%28...+python+help+please%29+%28Tony+Morland%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Using Data' data-tag-id='55c50e7d8d4710ec6e000008' href='/posts/tag/Using-Data/newest'>Using Data</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Tools and Tips' data-tag-id='55c50e7d8d4710ec6e000011' href='/posts/tag/Tools-and-Tips/newest'>Tools and Tips</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='numpy/pandas' data-tag-id='56d0b541f8f0e57992000002' href='/posts/tag/numpy_pandas/newest'>numpy/pandas</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please?utm_source=website_share&amp;utm_campaign=python-help-please-recursive-function-calls-for-price-series&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Tony Morland" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hi python experts. I know that for many of you this will be a trivially (and probably laughably)  easy question, but i am forced to admit that my own python skills are just not up to it, and so i need to reach out for your help, with all due humility on my part.  Here&#39;s my problem...</p>
+
+<p>In my own trading outside of Q, i make a lot of use of digital signal processing (DSP) methods in which recursive function calls are applied to price data series. I&#39;m sure you know the sort of stuff; Ehler&#39;s books are full of these types of things. In general mathematical (not pythonic) notation, at each price data point P(i) for i = 0, 1, 2,...   the result, Result(i) = some algebraic function of the previous result, Result(i-1).  Including the initialization condition, this is easy for me to write and execute in most languages as something like the following pseudo-code:</p>
+
+<p>function (PriceArray, parameter(s) e.g. Nperiod)<br>
+{ 
+   result[0] = Price[0] ... or some other function of initial price<br>
+   define my_function coefficients here ... for example k = 2/(Nperiod +1) in the case of N-period EMA of Price.<br>
+   loop for i = 1 to imax<br>
+         result[i] = my_function (result[i-1])   ... for example result[i] = k*Price[i] + (1-k)*result[i-1] .... in the case of EMA.<br>
+}   </p>
+
+<p>Its easy for me to do in OTHER languages, but I am embarrassed to say that I have not been successful in implementing this type of recursive function here in the Q / python context. I&#39;m not sure, but i think it requires 2 steps, namely a &quot;class&quot; function to handle the data array part,  preceded by a &quot;helper&quot; function to define the actual user function itself.  The following is my attempt (illustrated by the standard &quot;hello world&quot; example of an EMA), but i have not been able to get it to work. My aim here is NOT actually that i want to get an EMA (yes, i know its available in TAlib) but rather to understand the correct mechanics of &quot;pythonizing&quot; these sorts of functions.  Please, without re-writing it all completely, can someone show me what corrections are required to make THE FOLLOWING = my attempted Q / python code snippet workable?  (Apologies about the non-visibility of the indentation which is not showing up here).</p>
+
+<p># the &quot;helper&quot; function<br>
+recursionStarted = False<br>
+previousResult = 0.0<br>
+def my_recursive_function (priceArray, periodN):<br>
+    global recursionStarted<br>
+    global previousResult<br>
+    if not recursionStarted:<br>
+        initialResult = priceArray[0]<br>
+        previousResult = initialResult<br>
+        recursionStarted = True<br>
+   # else if recursionStarted<br>
+    k = 2.0 / (periodN + 1)   # Using EMA here as an example only.<br>
+    result = (k* priceArray[-1]) + (1-k)* previousResult<br>
+    previousResult = result<br>
+    return result</p>
+
+<p># the main &quot;class&quot; function as required in Q algos<br>
+class deltaClosePct_vsRecursivePrice (CustomFactor):<br>
+    inputs= [USEquityPricing.close]<br>
+    window_length = 252<br>
+    global Nbars<br>
+    Nbars = 21<br>
+    def compute(self, today, assets, out, close):<br>
+        functionVal = my_recursive_function(close, Nbars)<br>
+        out[:] = 100*(close[-1]/functionVal[-1] -1)   # calculating % difference between closing price and the &quot;filter function&quot; value (here EMA).  </p>
+
+<p>Thanks in anticipation, best regards, TonyM.  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>10 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5b9152c33aaa0f3862cbbeea' id='5b9152c33aaa0f3862cbbeea'>
+<a href='#5b9152c33aaa0f3862cbbeea'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1536250563000' class='quanto-date posted-at response-posted-at' href='#5b9152c33aaa0f3862cbbeea'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, i know you have done something like this. Can you give me a little guidance? Anyone else?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b91ab4c86a25a37ea85da07' id='5b91ab4c86a25a37ea85da07'>
+<a href='#5b91ab4c86a25a37ea85da07'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536273228000' class='quanto-date posted-at response-posted-at' href='#5b91ab4c86a25a37ea85da07'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tony -</p>
+
+<p>I tried it outside of Pipeline. I’ll take a look at what you posted.  You may not need to do the recursive stuff.  One potential issue is that it will have a start-up period before reaching steady state, which you could avoid by grabbing a trailing window of data and operating on it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b91c3928e350c0041f9b916' id='5b91c3928e350c0041f9b916'>
+<a href='#5b91c3928e350c0041f9b916'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52670e6a2763c5cfb70002c7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/da33ec858011a8fad211c7e0ae68160c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52670e6a2763c5cfb70002c7'>Alan Coppola</a>
+</div>
+<a UTCms='1536279442000' class='quanto-date posted-at response-posted-at' href='#5b91c3928e350c0041f9b916'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Tony,<br>
+Nice to see you back!</p>
+
+<p>Even though the Python mavens say that the way you&#39;re using recursion in this application is slow (use arrays)...see @Grant above...here you go...<br>
+I&#39;ve enclosed a notebook.</p>
+
+<p>The main problem is that close is a window_length x len(assets) array of numbers for each day.<br>
+Your recursive function needs to work on a 1d-array. So, see cell [2] array_recursive_function, and check that it gives you what you want.</p>
+
+<p>Then, when putting it into the pipeline, it needs to apply to a 1d-array, unless it is vectorized to apply over all the assets at once( out[:] = ...)<br>
+I didn&#39;t do that, you probably could.</p>
+
+<p>I also needed to reset your global variables between each run of the recursive function on each window_length of data.<br>
+Finally, I restricted it to just a few assets, as it takes too long, and sometimes produces &quot;Nan&quot;&#39;s. I didn&#39;t check any of the &quot;answers&quot; for this exercise, so buyer-beware.</p>
+
+<p>Also, check out: <a href="https://www.quantopian.com/posts/pipeline-mask-equals-marketcap-top-500" rel="nofollow">https://www.quantopian.com/posts/pipeline-mask-equals-marketcap-top-500</a></p>
+
+<p>alan  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b923a890f69eb0045d519db' id='5b923a890f69eb0045d519db'>
+<a href='#5b923a890f69eb0045d519db'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536309897000' class='quanto-date posted-at response-posted-at' href='#5b923a890f69eb0045d519db'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Note that there is a built-in EWMA function in Pandas:</p>
+
+<p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.ewm.html#pandas.DataFrame.ewm" rel="nofollow">http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.ewm.html#pandas.DataFrame.ewm</a></p>
+
+<p>If you are just needing to smooth price data, this should do the trick (although I&#39;m not quite sure how to use Pandas functions within Pipeline, but there must be a way).</p>
+
+<p>I don&#39;t see any advantage to trying to do things recursively in this context.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b92b9d3086e2a3120aeb46e' id='5b92b9d3086e2a3120aeb46e'>
+<a href='#5b92b9d3086e2a3120aeb46e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1536342483000' class='quanto-date posted-at response-posted-at' href='#5b92b9d3086e2a3120aeb46e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi  @Grant,<br>
+Thanks for your reply. However the point I&#39;m trying to make (although evidently unsuccessfully so far) is that it is NOT specifically EMAs that I care about at all, but rather that<br>
+a) Digital Filters of various kinds are extremely useful in Signal Processing applications in general,<br>
+b) There exists an extensive body of Engineering literature regarding DSP functions and their filter characteristics, and many of these are also usefully applicable to price series analysis in general, not only low-pass filter smoothing (such as EMA),<br>
+c) Such recursive filters are very useful in practice and can not only accomplish smoothing but also remove phase lag (which is the bugbear of EMA&#39;s and most conventional smoothers), as well as facilitating all sorts of other  calculations such as Hurst exponents, and various types of efficient adaptive filters.<br>
+d) Filters based on recursive functions are easy to write in other languages but I am finding the conversion to python to be non-trivial (for me, even though it is probably quite easy for a python expert).</p>
+
+<p>Your comment that you: &quot;<em>don&#39;t see any advantage to trying to do things recursively in this context</em>&quot; is applicable in the special case of (simple) moving average filters that can also be defined non-recursively, but is not applicable to more general classes of filters where the output response depends not only on the input but also on previous values of output, i.e. inherently involves recursion. </p>
+
+<p>Regarding your comment about potential for problems of the initial start-up before steady state, yes indeed that is true, but is easily taken care of simply by appropriate choice of the initialization value and is not really part of the &quot;python&quot; problem per se.</p>
+
+<p>Hi @Alan good to see you again and thanks for your comments.<br>
+Yes, other &quot;Python mavens&quot; have also told me that the way that I want to use recursion is slow, and no doubt that is true, but at the moment I am still at the &quot;baby steps&quot; stage of trying to take something that I know works well in a non-python context and now get it to work (slowly or not) in a python context. In this way I want to effectively translate some useful ideas from elsewhere  into python/Q  and get them working here, even if I&#39;m not yet doing it the most &quot;efficient&quot; way. </p>
+
+<p>I&#39;m taking a look at your notebook now and will return comment ASAP.</p>
+
+<p>@Grant, @Alan,<br>
+In the meantime, to get this right away from the topic of EMA and onto to something  more general, but nevertheless still using a simple concrete example, imagine you wanted to create a filter such as a simple 2-pole bandpass filter with transfer function which can be written to express the output as:</p>
+
+<p>Output(N) = C1*(Price(N) - Price(N-2)) + C2*Output(N-1) + C3*Output(N-2)</p>
+
+<p>where C1, C2, C3 are constants, Price(N) is the latest Price input, Price(N-2) is the price 2 bars earlier, and Output(N) is the output at latest bar (N) and this depends on earlier values of input Price and also on the previous values of Output from 1 and 2 bars earlier.<br>
+How would you do this in python / Q context?</p>
+
+<p>Best regards,<br>
+TonyM.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b92d3358e350c003ef9beb2' id='5b92d3358e350c003ef9beb2'>
+<a href='#5b92d3358e350c003ef9beb2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536348981000' class='quanto-date posted-at response-posted-at' href='#5b92d3358e350c003ef9beb2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tony -</p>
+
+<p>I&#39;ll see if I can cook up a Pipeline custom factor for:</p>
+
+<pre><code>Output(N) = C1*(Price(N) - Price(N-2)) + C2*Output(N-1) + C3*Output(N-2)  
+</code></pre>
+
+<p>I think the easiest thing to do would be to roll through a trailing window of price deltas, every time the custom Pipeline factor is called.  This means writing a loop, but it avoids having to deal with globals and drop/add of securities.  It also avoids the start-up issue.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b92e58c31fb0d003da5b470' id='5b92e58c31fb0d003da5b470'>
+<a href='#5b92e58c31fb0d003da5b470'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536353676000' class='quanto-date posted-at response-posted-at' href='#5b92e58c31fb0d003da5b470'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s what I came up with (not sure it is correct yet, but it is a start).  I&#39;ve attached an Alphalens notebook, showing it doesn&#39;t barf.</p>
+
+<pre><code>       class recursive(CustomFactor):  
+            inputs = [USEquityPricing.close]  
+            window_length = 252  
+            def compute(self, today, assets, out, close):  
+                c1 = 1  
+                c2 = 0.1  
+                c3 = 0.1  
+                p = close  
+                p_lag = np.roll(p,2,axis=0)  
+                delta_p = p - p_lag  
+                delta_p = delta_p[2:,:]  
+                output = np.zeros_like(delta_p)  
+                for k in range(0,len(delta_p[:,0])):  
+                    if k == 0:  
+                        output[k,:] = c1*delta_p[k,:]  
+                    elif k == 1:  
+                        output[k,:] = c1*delta_p[k,:] + c2*output[k-1,:]  
+                    else:  
+                        output[k,:] = c1*delta_p[k,:] + c2*output[k-1,:] + c3*output[k-2,:]  
+                out[:] = output[-1,:]  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b9481e19ad4a00045038097' id='5b9481e19ad4a00045038097'>
+<a href='#5b9481e19ad4a00045038097'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1536459233000' class='quanto-date posted-at response-posted-at' href='#5b9481e19ad4a00045038097'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Grant, thanks for your efforts on this, which I am just going through now and will get back to you about ASAP</p>
+
+<p>@Grant, @Alan, I very much appreciate the fact that you both made the effort in doing this to help me, perhaps without fully understanding why I wanted it. I trust the following will adequately explain the practical application the example, as well as giving you an appetite for what else is possible.</p>
+
+<p>There are many very useful digital filters that can be constructed, some of which have excellent characteristics that are potentially applicable to trading, including for example a)  VERY short lags, thereby overcoming the usual problem inherent in long-period (i.e. very smooth) moving averages, b) minimizing phase distortion (which occurs with EMA&#39;s), and c) the ability to generate ZERO-lag smoothing of data that contains known cyclical components, e.g. for oscillators, etc. Electrical Engineering literature is rich with examples of all sorts of applications, some of which can be extended to trading.  The example I have given:<br>
+  Output(N) = C1*(Price(N) - Price(N-2)) + C2*Output(N-1) + C3*Output(N-2)<br>
+is in fact a band-pass filter (BPF) which has the following interesting characteristics: Sharp attenuation both of high frequency (= short-period, i.e. noise) components above the passband and also of low frequency (= long-period, i.e. trend or drift) components below the passband. The values of coefficients C1, C2, C3 depend of the chosen period for the filter, as well as its &quot;Q-factor&quot; = ratio of pass-band width to dominant period. In the frequency domain, the BPF works a lot better than simply concatenating a low-pass filter and a high pass filter, and has the added benefit of minimal distortion within the passband itself and sharp rolloff (attenuation) on either side. If there are dominant frequency (i.e. periodicity) components in the input data (price series) and the BPF is tuned to that periodicity, then with the BPF we potentially have an almost ideal oscillator (in the TA sense of that word) with no lag, and without the usual oscillator problems of saturating during trends. The problem of course is that for actual price data series the frequency spectrum is non-stationary and so the dominant frequency (if any) and phase drifts with time. However there are also a number of ways to construct  digital filters, as well as some python scientific library tools to extract the dominant frequency information itself, and this can be fed as input the BPF.  A few decades ago, John Ehlers made a name for himself (and plenty of money) with his Maximum Entropy Spectral Analysis (MESA) work, which was originally based on ideas from digital signal processing (DSP) as used in geophysical exploration. Ehlers also did a lot of work in other forms of DSP applied to trading, which is reasonably well documented in his books which are quite easy to understand although most of them do contain some typo errors in his formulas. Ehlers work is conceptually sound from an Engineering / Signal Processing perspective. Ehlers coded up his filters in TradeStation Easy Language, which is  identical to that used nowadays in MultiCharts, fairly similar to AmiBroker&#39;s AFL array processing language, and also easy to translate into the syntax &amp; structure of any C-type languages.  An Internet search reveals that for several years now there have been quite a large number of people asking how to translate these codes into python, but (to date) almost no satisfactory answers.  Hence my questions now about writing these types of functions in pythonic / Q form. There exists a wealth of interesting tools available, if one can correctly &quot;pythonize&quot; them. This is a potentially rewarding area!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b948b684ba7f60043fdab0d' id='5b948b684ba7f60043fdab0d'>
+<a href='#5b948b684ba7f60043fdab0d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5469bca83ab3de7bff000334'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4c4ecac20f2ccee61491516e54b67f72?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5469bca83ab3de7bff000334'>Tony Morland</a>
+</div>
+<a UTCms='1536461672000' class='quanto-date posted-at response-posted-at' href='#5b948b684ba7f60043fdab0d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Alan,<br>
+In your notebook, line as shown below<br>
+myPipe=run_pipeline(pipe, start_date=start, end_date=end).dropna()</p>
+
+<p>i notice the .dropna() that you have added at the end in order to omit any NaNs.<br>
+As a separate question (unrelated to this filter example and in a different context), in another of my algos I have been trying to replace NaNs with some default value (e.g. zero) but I keep getting error messages as apparently there is something I don&#39;t understand about the required syntax. Please can you show me, in your notebook example, how you would replace NaNs with some default value, rather than omitting those entries?  Thanks in advance, TonyM.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b951a099ad4a0004e03834f' id='5b951a099ad4a0004e03834f'>
+<a href='#5b951a099ad4a0004e03834f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536498185000' class='quanto-date posted-at response-posted-at' href='#5b951a099ad4a0004e03834f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Tony -</p>
+
+<p>Note that Scipy has a entire library devoted to this topic:</p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/signal.html" rel="nofollow">https://docs.scipy.org/doc/scipy/reference/signal.html</a></p>
+
+<p>Specifically, see:</p>
+
+<p><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lfilter.html" rel="nofollow">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lfilter.html</a></p>
+
+<p>This can be used to do the same thing I did above, since:</p>
+
+<p><em>The filter function is implemented as a direct II transposed structure. This means that the filter implements:</em></p>
+
+<p>a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M]<br>
+                      - a[1]*y[n-1] - ... - a[N]*y[n-N]</p>
+
+<p>So, as an exercise, you could try applying <code>scipy.signal.lfilter</code> and compare it to what I posted above.  You should be able to get the same result, and then the question would be which is more computationally efficient.  My guess is that <code>scipy.signal.lfilter</code> will be faster.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#187e7d7d7c7a797b7358696d79766c7768717976367b7775">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

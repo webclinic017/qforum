@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Feature Request: before_trading_start/after_trading_end events
+</title>
+<meta content='Hello, My understanding of the current implementation of the method before_trading_start() is that it is rather limited since it can only be used to update the instruments universe. In actual trading, it is common to update portfolio metrics and send orders to a broker overnight (i.e., between 4 pm EST and 9:30 am EST the next day). Basically, what I&#39;d like to see implemented is: The ability to run the methods after_trading_end() and before_trading_start() at a specific time between the end...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="KfNQiqCuUqmqivGm7+s8yL0eGueA89BHCIFgsr/LZnlVlSbHAliAShOXqJegBJS8hZA5jvo/xVyKjrvYFY4Ewg==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/feature-request-before-trading-start-slash-after-trading-end-events' property='og:url'>
+<meta content='Feature Request: before_trading_start/after_trading_end events' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/feature-request-before-trading-start-slash-after-trading-end-events' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Feature Request: before_trading_start/after_trading_end events' property='og:title'>
+<meta content='Hello, My understanding of the current implementation of the method before_trading_start() is that it is rather limited since it can only be used to update the instruments universe. In actual trading, it is common to update portfolio metrics and send orders to a broker overnight (i.e., between 4 pm EST and 9:30 am EST the next day). Basically, what I&#39;d like to see implemented is: The ability to run the methods after_trading_end() and before_trading_start() at a specific time between the end...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/feature-request-before-trading-start-slash-after-trading-end-events">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5595035f432a2b358d00056a'>
+<div class='post-container' data-post-id='5595035f432a2b358d00056a' id='5595035f432a2b358d00056a'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Feature Request: before_trading_start/after_trading_end events</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1435829087000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Feature Request: before_trading_start/after_trading_end events&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Ffeature-request-before-trading-start-slash-after-trading-end-events%3Futm_source%3Dwebsite_share%26utm_campaign%3Dfeature-request-before-trading-start-slash-after-trading-end-events%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Ffeature-request-before-trading-start-slash-after-trading-end-events%3Futm_source%3Dwebsite_share%26utm_campaign%3Dfeature-request-before-trading-start-slash-after-trading-end-events%26utm_medium%3Dlinkedin&amp;title=Feature+Request%3A+before_trading_start%2Fafter_trading_end+events+%28Alexis+P.%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Feature Request' data-tag-id='55c50e7d8d4710ec6e000015' href='/posts/tag/Feature-Request/newest'>Feature Request</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/feature-request-before-trading-start-slash-after-trading-end-events?utm_source=website_share&amp;utm_campaign=feature-request-before-trading-start-slash-after-trading-end-events&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Alexis P." />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hello, </p>
+
+<p>My understanding of the current implementation of the method before_trading_start() is that it is rather limited since it can only be used to update the instruments universe. </p>
+
+<p>In actual trading, it is common to update portfolio metrics and send orders to a broker overnight (i.e., between 4 pm EST and 9:30 am EST the next day). </p>
+
+<p>Basically, what I&#39;d like to see implemented is: </p>
+
+<ul>
+<li>The ability to run the methods after_trading_end() and before_trading_start() at a specific time between the end of the current day&#39;s session and the beginning of the next day&#39;s trading session. For example, if I get custom data outside of Quantopian at 2 am EST I could run after_trading_end() at 2:30 am EST: </li>
+</ul>
+
+<pre><code>def after_trading_end(run_at=datetime.time(2, 30)):  
+    # Get my custom data into Quantopian at 2:30 am EST  
+    fetch_csv(url=my_url)  
+    # do some other stuff  
+</code></pre>
+
+<ul>
+<li><p>Access to the same data as during the trading day (i.e., pricing data, fundamentals, account, orders, etc.). For example, I would need to get the open orders in order to calculate the distance to stops and see where I stand for each position or strategy and my total portfolio risk. These methods should be similar to a data event. The only difference is that the trader chooses when these events are triggered. </p></li>
+<li><p>The possibility to send orders to IB in after_trading_end() and before_trading_start() exactly like what I&#39;m doing in real life. It is not doable in Quantopian at the moment and this is very unfortunate. One reason is to be found in a related topic where Alisa Deychman wrote (<a href="https://www.quantopian.com/posts/why-orders-cant-be-placed-in-before-trading-start-method">see discussion here</a>): </p></li>
+</ul>
+
+<blockquote>
+<p>Why do orders get cancelled at the end of the trading day, automatically?<br>
+This was built as a precautionary measure to protect live traders against wild price swings overnight. </p>
+</blockquote>
+
+<p>I don&#39;t understand this choice. I know that Quantopian is a social platform, but socialist? If some traders don&#39;t know what they&#39;re doing, please let them learn it the hard way and do not limit those who&#39;ve done their homework. </p>
+
+<p>In IB, traders can specify the time in force and whether to allow the order to be filled outside of regular trading hours, or during the pre-open session. Is this a feature Quantopian is going to implement? </p>
+
+<p>I know that we - the traders - are very picky when it comes to our trading tools. You folks at Quantopian get many requests and need to prioritize, I totally understand that. Adding support for futures, stats-arb and expanding the research platform is really cool. But closing the gap between what Quantopian can do and what we can do in real trading is IMHO the top priority. Quantopian&#39;s limitations are: </p>
+
+<ul>
+<li>can&#39;t trade on the first minute bar<br></li>
+<li>can&#39;t send market-on-open (MOO) and market-on-close (MOC) orders<br></li>
+<li>need to cancel all open orders at 4 pm EST/can&#39;t specify time-in-force (e.g., DAY, GTC, pre-open/after-trading-hours)<br></li>
+<li>can&#39;t run overnight events </li>
+</ul>
+
+<p>That said, I do find Quantopian amazing for many more reasons not cited here. :) </p>
+
+<p>I&#39;d love to have your thoughts on this. </p>
+
+<p>Cheers!</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>19 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5595642ca92d233f660000ec' id='5595642ca92d233f660000ec'>
+<a href='#5595642ca92d233f660000ec'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b9b56c02cabe5dae000143'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e9388ae5102f3b152fa6225f955a29d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b9b56c02cabe5dae000143'>Alisa Deychman</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1435853870000' class='quanto-date posted-at response-posted-at' href='#5595642ca92d233f660000ec'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Alexis, thanks for your thoughtful comments. There are so many directions the platform can grow, and many of them are very exciting. The opportunities are pretty much endless - ordering mechanisms (MOO, MOC, overnight etc), data sources (sentiment, indicator, custom, etc), asset classes, IDE features, research features, additional brokerages, information discovery and more. Of course, we&#39;d love to pursue all of these directions. But we need to focus, and our focus is on building our <a href="https://www.quantopian.com/fund">hedge fund</a>. Our current work (as you mentioned, adding futures, stat-arb and expanding the research platform) is headed in that direction. Afterward, we&#39;ll re-evaluate and select the next group of priorities as we seek to build a complete platform to unlock your creative algos for the fund. </p>
+
+<p>Cheers,<br>
+Alisa</p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='559576af2deee30e9c000051' id='559576af2deee30e9c000051'>
+<a href='#559576af2deee30e9c000051'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1435858609000' class='quanto-date posted-at response-posted-at' href='#559576af2deee30e9c000051'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Alisa, </p>
+
+<p>Hmm... apparently you&#39;re not getting my point, probably because I wasn&#39;t clear enough. </p>
+
+<p>I am not asking you to go in every direction - quite the opposite actually. All I&#39;m saying is that because of a flaw in its current design, the backtester behind Quantopian doesn&#39;t allow the trader to make overnight decisions and forces him to skip the first minute of every trading day. </p>
+
+<p>Here&#39;s what the Quantopian would do everyday. He would:  </p>
+
+<ul>
+<li>wake up and start trading US equities at 9:31 am<br></li>
+<li>stop trading and close all his open orders at 4 pm<br></li>
+<li>sleep from 4 pm to 9:31 am on the following trading day </li>
+</ul>
+
+<p>Does it look right to you? To me it doesn&#39;t. And adding futures and stat-arbs strategies won&#39;t help, because they are all built on top of this flaw. </p>
+
+<p>Is there something wrong with my interpretation? I feel like I&#39;m the only one raising this - major - issue! </p>
+
+<p>Thanks!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5595c258bd327bc4ef0000a9' id='5595c258bd327bc4ef0000a9'>
+<a href='#5595c258bd327bc4ef0000a9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1435877978000' class='quanto-date posted-at response-posted-at' href='#5595c258bd327bc4ef0000a9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello Alexis,</p>
+
+<p>My interpretation is that your request ain&#39;t gonna even get looked at until they get some other things done that hopefully will get them on a path toward revenue (or there will be no Quantopian--keep in mind that it is a start-up with $0 of revenue, to the best of my knowledge).</p>
+
+<p>So unless you have an incredibly compelling argument that leads to scalable revenue, it ain&#39;t goin&#39; nowhere.  For example, I&#39;ve been asking for a full implementation of a sorta supported module, CVXOPT, for awhile now (it was released 6 months ago), and they are just full out vectored in a certain direction (which could be a really great thing, since I&#39;d like to see them succeed).</p>
+
+<p>What, exactly, are you after here?  Do you need a MOO order?  Or something else?</p>
+
+<p>Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55962e8aaa9bbf588d00010b' id='55962e8aaa9bbf588d00010b'>
+<a href='#55962e8aaa9bbf588d00010b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1435905676000' class='quanto-date posted-at response-posted-at' href='#55962e8aaa9bbf588d00010b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant, </p>
+
+<p>My argument would lead to a better backtesting/live trading engine, one that is closer to reality. </p>
+
+<p>I&#39;m not asking them to implement fancy stuff like CVXOPT, just fixing the initial flaws of the engine. Not making money isn&#39;t an acceptable justification, in my opinion, for not fixing the flaws of the product. What I&#39;m after: </p>
+
+<ul>
+<li>trading on the first minute bar<br></li>
+<li>not cancelling orders overnight automatically<br></li>
+<li>access to pricing data/portfolio/orders and ability to send orders in before_trading_start() method </li>
+</ul>
+
+<p>Quite the basics, don&#39;t you think? Let&#39;s wait for Alisa&#39;s answer. </p>
+
+<p>Thanks guys.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='559671215067901efb0001d7' id='559671215067901efb0001d7'>
+<a href='#559671215067901efb0001d7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1435922724000' class='quanto-date posted-at response-posted-at' href='#559671215067901efb0001d7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an example work-around, but there isn&#39;t much of an advantage.  It illustrates that analysis can be done in before_trading_start(), but the resulting orders aren&#39;t processed until after the first minute of trading.  The potential advantage is that if the computation takes awhile (but less than 50 seconds), it can be done ahead of time.  Then, when the orders hit at 9:31, they&#39;ll be processed immediately by Interactive Brokers (since orders are sent asynchronously).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5596a284448754c6310002cb' id='5596a284448754c6310002cb'>
+<a href='#5596a284448754c6310002cb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5259397aa09fa7a87d00011e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b988ce14b6cc9090b0ac4a33ac70b2c0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5259397aa09fa7a87d00011e'>André Pajak</a>
+</div>
+<a UTCms='1435935366000' class='quanto-date posted-at response-posted-at' href='#5596a284448754c6310002cb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Alexis - I&#39;ve been thinking of requesting a function like your proposed <code>after_trading_end</code> for quite some time now.  You have gone much further here.  I second everything you&#39;ve said.</p>
+
+<p>There is a clear need for functions that would run after the end of each trading day, week, month, quarter, year, etc. - to readjust algorithm parameters for the next period, and to produce and print summaries.  (There should also be a function that would run at the end of everything, ie. after a backtest ends or the algo is stopped by an error or manually.  C++ has constructors and destructors, Java <code>init</code> and <code>destroy</code>, Python has <code>__init__</code> and <code>__del__</code>, Quantopian has <code>initialize</code> and should have <code>finalize</code>, with the <code>context</code> object as an argument.)</p>
+
+<p>We should also be able to send orders, via the <code>order*</code> functions, at any time (even from <code>initialize</code>), as we do in real life.  These orders should then be <em>processed</em> during market hours, starting at 9:30:00.000 EST/EDT on the next trading day if the market is currently closed.  MOO and MOC orders would be nice, but will require Q to write, test, and approve new code; removing unnecessary restrictions on when <code>order</code> can be called should be pretty easy.</p>
+
+<p>Similarly, the (undocumented!) restrictions on when <code>history</code> can be called should be relaxed or abolished.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5596ae7e338735c48e0002d8' id='5596ae7e338735c48e0002d8'>
+<a href='#5596ae7e338735c48e0002d8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1435938432000' class='quanto-date posted-at response-posted-at' href='#5596ae7e338735c48e0002d8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think that handle_data() gets called at 4 pm, after the market has closed, so in this sense, we already have after_trading_end(), but it is only 50 seconds long.  See the attached backtest as an example.</p>
+
+<p>You should be able to get pretty darn close to a MOC order by delaying your order within the last trading minute (e.g. 40 seconds or 10 seconds before the time-out).</p>
+
+<p>Hacking a MOO order (I think) is impossible.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5596c2feb6d0d7c9d2000384' id='5596c2feb6d0d7c9d2000384'>
+<a href='#5596c2feb6d0d7c9d2000384'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53d46cdb75f57a2832005a6b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/62b39881ee19f936224017339779d9d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53d46cdb75f57a2832005a6b'>Market Tech</a>
+</div>
+<a UTCms='1435943681000' class='quanto-date posted-at response-posted-at' href='#5596c2feb6d0d7c9d2000384'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The obvious alternative is to use a different trading platform. If you got the money and the strategy(s) then the IB API is well known and straightforward to code against.  Otherwise, we&#39;ve all read the writing on the wall, Quantopian is looking for very specific, narrowly defined set of algorithms with which to pad their strict ideas of an ultra-conservative hedge fund. Although your requests make sense in the actual world of an open trading platform, they have no bearing on what the Q supports or delivers.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5597a32d9572c89af00000f5' id='5597a32d9572c89af00000f5'>
+<a href='#5597a32d9572c89af00000f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1436001071000' class='quanto-date posted-at response-posted-at' href='#5597a32d9572c89af00000f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>We should also be able to send orders, via the order* functions, at any time (even from initialize), as we do in real life. These orders should then be processed during market hours, starting at 9:30:00.000 EST/EDT on the next trading day if the market is currently closed. MOO and MOC orders would be nice, but will require Q to write, test, and approve new code; removing unnecessary restrictions on when order can be called should be pretty easy. </p>
+</blockquote>
+
+<p>If orders sent overnight (i.e., when market is closed) are processed at 9:30 am (and not at 9:31 am), then it is close enough to a MOO for me. </p>
+
+<blockquote>
+<p>You should be able to get pretty darn close to a MOC order by delaying your order within the last trading minute (e.g. 40 seconds or 10 seconds before the time-out). </p>
+</blockquote>
+
+<p>Quite likely. When I get the chance, I will compare these filled prices to an actual strategy I&#39;m trading that has over 600 fills using MOC in IB. That&#39;s my point of reference, I&#39;ll keep you posted. </p>
+
+<blockquote>
+<p>The obvious alternative is to use a different trading platform. </p>
+</blockquote>
+
+<p>True, but despite its current flaws, I find the Quantopian platform really fantastic and very flexible.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5597a8e32984ddade4000175' id='5597a8e32984ddade4000175'>
+<a href='#5597a8e32984ddade4000175'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1436002534000' class='quanto-date posted-at response-posted-at' href='#5597a8e32984ddade4000175'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>If orders sent overnight (i.e., when market is closed) are processed at 9:30 am (and not at 9:31 am), then it is close enough to a MOO for me.</p>
+</blockquote>
+
+<p>Did you mean &quot;processed at 9:31 am (and not at 9:30 am)&quot;?</p>
+
+<p>Aside from using fetcher, I&#39;m not aware of any way to send in orders overnight.  And with fetcher, the orders wouldn&#39;t be sent to IB; they&#39;d just sit in your external file until it gets uploaded automatically, with the orders going out to IB at 9:31 am at the earliest.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5597dc829572c89af00001cf' id='5597dc829572c89af00001cf'>
+<a href='#5597dc829572c89af00001cf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1436015749000' class='quanto-date posted-at response-posted-at' href='#5597dc829572c89af00001cf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>No, I was assuming that this flaw was fixed.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5597e5c2c3255bb9fe00022d' id='5597e5c2c3255bb9fe00022d'>
+<a href='#5597e5c2c3255bb9fe00022d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1436018117000' class='quanto-date posted-at response-posted-at' href='#5597e5c2c3255bb9fe00022d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I see.  So it sounds like if you miss the first minute of trading, it would be bad for your strategy?  Hmm.  Well, maybe there is a crazy hack whereby you would stop your Quantopian algo, enter the orders overnight (manually or automatically), and then restart the Quantopian algo?  The automated approach would probably require writing a script to click the stop button, scraping the algo log to capture the orders, submitting the orders to IB using your own code, and then re-launching, using more automated browser navigating &amp; clicking.</p>
+
+<p>When the algo is stopped, I&#39;m not sure that the log output persists.  If not, you&#39;d need to scrape it while the algo is still running.</p>
+
+<p>I&#39;m assuming that the Quantopian algo doesn&#39;t reach out to IB overnight and cancel all open orders when it is re-started.</p>
+
+<p>One would have to wonder if the Q folks have a Python API to hook up to IB, but just haven&#39;t published it?  It would make all of this hacking a lot easier (but maybe security would be an issue and there&#39;d be more of a risk of licensed data being stolen?).</p>
+
+<p>Just some thoughts...I know they are far from ideal.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='559c2e9ec98a2733ed00072c' id='559c2e9ec98a2733ed00072c'>
+<a href='#559c2e9ec98a2733ed00072c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1436298913000' class='quanto-date posted-at response-posted-at' href='#559c2e9ec98a2733ed00072c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I really appreciate your efforts to help Grant, but it just doesn&#39;t make sense to even consider such a complicated approach IMO. It is the platform that must adapt to trading reality, not the other way around; these arbitrary limitations need to be removed. </p>
+
+<p>Let&#39;s wait for Alisa&#39;s answer about all this.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='559c6202436b54e6f1000060' id='559c6202436b54e6f1000060'>
+<a href='#559c6202436b54e6f1000060'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53d46cdb75f57a2832005a6b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/62b39881ee19f936224017339779d9d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53d46cdb75f57a2832005a6b'>Market Tech</a>
+</div>
+<a UTCms='1436312070000' class='quanto-date posted-at response-posted-at' href='#559c6202436b54e6f1000060'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Wait? Why wait when we can speculate. Hmmm, Quantopian altering the basic operation of their trading mechanics... Someday. Maybe. Not.</p>
+
+<p>Alisa... Alexis is knocking... maybe you should private message her, you know, cuz all this errant public forum speculation is just, well, speculation.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='559da097fed2b29da8000203' id='559da097fed2b29da8000203'>
+<a href='#559da097fed2b29da8000203'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b9b56c02cabe5dae000143'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e9388ae5102f3b152fa6225f955a29d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b9b56c02cabe5dae000143'>Alisa Deychman</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1436393626000' class='quanto-date posted-at response-posted-at' href='#559da097fed2b29da8000203'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Alexis, sorry about the wait, I had missed your earlier reply and thanks for the ping. And it looks like I read your reply with a different understanding :) You&#39;re right that:</p>
+
+<blockquote>
+<p>the backtester behind Quantopian doesn&#39;t allow the trader to make overnight decisions and forces him to skip the first minute of every trading day. </p>
+</blockquote>
+
+<p>This would require a significant rework of our current architecture, to support overnight trading  and within the first minute. It&#39;s not a simple task. As I mentioned, our current prioritization is to build tools to support better algos for the fund. We are comfortable with this current structure because there are many minutes in the market hours to make decisions and derive signals.  And we&#39;ve seen many algos with success. Of these two requests, MOO will likely be the first candidate built. We&#39;re not there yet, but perhaps further down the road.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55a120865d1907bc71000595' id='55a120865d1907bc71000595'>
+<a href='#55a120865d1907bc71000595'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/515ffb88bf5d7b1117000083'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/c7c495769229a4fbd6fd3601c3b8fac0?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/515ffb88bf5d7b1117000083'>Alexis P.</a>
+</div>
+<a UTCms='1436622984000' class='quanto-date posted-at response-posted-at' href='#55a120865d1907bc71000595'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Alisa:  </p>
+
+<blockquote>
+<p>We are comfortable with this current structure because there are many minutes in the market hours to make decisions and derive signals. </p>
+</blockquote>
+
+<p>Wow, wow, and wow! This is worrisome that Quantopian was built on shaky ground and that no effort is going to be made to fix it. What else are you guys willing to compromise? </p>
+
+<blockquote>
+<p>And we&#39;ve seen many algos with success. </p>
+</blockquote>
+
+<p>Of course. You can probably skip a Monday or two per month and still find working algos. It is failed logic. </p>
+
+<p>@Market Tech:  </p>
+
+<blockquote>
+<p>The obvious alternative is to use a different trading platform. </p>
+</blockquote>
+
+<p>Any suggestion? QuantConnect seems to be an interesting alternative. Apparently the platform doesn&#39;t suffer from the arbitrary flaws that Quantopian finds legitimate to keep. But it&#39;s in C#...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='55a1435de2568b5ef30005dc' id='55a1435de2568b5ef30005dc'>
+<a href='#55a1435de2568b5ef30005dc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/53d46cdb75f57a2832005a6b'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/62b39881ee19f936224017339779d9d4?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/53d46cdb75f57a2832005a6b'>Market Tech</a>
+</div>
+<a UTCms='1436631904000' class='quanto-date posted-at response-posted-at' href='#55a1435de2568b5ef30005dc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Alexis P., Some passing advice; you might want to unsaddle from the high-horse you seem to be riding around upon. There&#39;s room for only so many indignant personas here and we, myself being one, do not care for competition (roguish grin here). </p>
+
+<p>As I mentioned above, depending on your bank and time availability, there are some great alternatives. Primarily IB TWS connectivity has some solid options. Join the Yahoo group TWSAPI and find out. There&#39;s more than a decade of experience in that group. If you&#39;ve got specific execution ideas and need information and help that&#39;s where to find it. I don&#39;t know which members are attached to the Q, but I&#39;m sure they&#39;re there. Most developers in the group have written their own trading systems; lots of useful advice there. So ground up coding using the TWS API is your first option. Pick your language, they&#39;re all available.  </p>
+
+<p>Don&#39;t want to code your own system? Have a gander at this list:</p>
+
+<p><a href="http://www.ampfutures.com/platforms/">http://www.ampfutures.com/platforms/</a></p>
+
+<p>Probably half or more of those support IB. And if you&#39;ve got other brokers in mind, well, you&#39;ll find many of those platforms are broker sponsored systems.</p>
+
+<p>And of course if IB is your broker of choice you can check out their list of optional platforms...</p>
+
+<p><a href="https://gdcdyn.interactivebrokers.com/Universal/servlet/MarketPlace.MarketPlaceServlet">https://gdcdyn.interactivebrokers.com/Universal/servlet/MarketPlace.MarketPlaceServlet</a> (center click, follow the buttons).</p>
+
+<p>Lastly, suffer with the Q&#39;s inadequate offering, so as to leverage their free data. Build your system using their platform, and in the mean time construct a parallel system using zipline,  IbPy and a platform proxy of your design. When you&#39;re done you can take your Q strats and run them in your own system with all the extended functionality you chose to add. I&#39;ve predicted that someone is already doing this and will soon offer their solution to the community -- soon. But that&#39;s just more speculation...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='564e37077fac8500c0000002' id='564e37077fac8500c0000002'>
+<a href='#564e37077fac8500c0000002'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52d4e9014e763f3892000016'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/5ca8ae1dc7829c636ab6e2e74928586d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52d4e9014e763f3892000016'>James F</a>
+</div>
+<a UTCms='1447966482000' class='quanto-date posted-at response-posted-at' href='#564e37077fac8500c0000002'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Quantopian, when will you support trading at the market open (9:30am) instead of 9:31am, which is currently the case?</p>
+
+<p>There is significant opportunity lost by not allowing to execute at the market open as prices can change tremendously during the first minute. In addition, evaluating pre-open prices (extended trading hours) of various instruments prior to market open is important.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5862153d3700870012000a10' id='5862153d3700870012000a10'>
+<a href='#5862153d3700870012000a10'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58620706ad8d3c275b0000af'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/28990cbb9c6613190c910e8d0d30f042?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58620706ad8d3c275b0000af'>Jas Chimni</a>
+</div>
+<a UTCms='1482822982000' class='quanto-date posted-at response-posted-at' href='#5862153d3700870012000a10'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>folks, I read through some of the comments on this post. I wanted to know if there is a way to execute orders() during pre-market or after-hours.</p>
+
+<p><strong>use case</strong>: LinkedIn stock price surged 49% pre market after Microsoft acquisition. is it possible for me to buy the stock right after the announcement?</p>
+
+<p>Please let me know. If we want to level the playing field with big wall street hedge funds, we should be able to execute trading orders anytime of the day.<br>
+With regards to sourcing the signal, I will need to either subscribe to one of the data feeds available on this platform or build a custom one on my own.</p>
+
+<p>I am personally willing to place a bet on the stock market that the moment acquisition news hits the &quot;news wire&quot;, buy the stock or stock options with the hopes that the algorithm will beat the market before the bid/ask jumps from $135 to $190 (in LinkedIn&#39;s case)  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/feature-request-before-trading-start-slash-after-trading-end-events'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/feature-request-before-trading-start-slash-after-trading-end-events'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#d3b5b6b6b7b1b2b0b893a2a6b2bda7bca3bab2bdfdb0bcbe">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

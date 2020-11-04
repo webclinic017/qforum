@@ -1,0 +1,2964 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Stat Arb - 11 year backtest notebook
+</title>
+<meta content='Sunday afternoon and waiting for the Superbowl, I thought I&#39;d run an algo that is one of the most common techniques employed by hedge fund quants on equity market neutral strategies, Statisical Artbitrage.   To be complete and fair, I must mentioned that it is actually a two part process.  The first part is a carefully crafted stock selection filtering process using fundamental data that focuses on, among other things, company valuation, earnings quality, price momentum, etc. In this example,...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="TcmnO5QyxKJPcGECAuXAKOBLXpWWuqPHtOku+dQkDuExr9F2NsQWQfZtODNNCmhc2MV9/Ox2ttw25vWTfmFsWg==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/stat-arb-11-year-backtest-notebook' property='og:url'>
+<meta content='Stat Arb - 11 year backtest notebook' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/stat-arb-11-year-backtest-notebook' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Stat Arb - 11 year backtest notebook' property='og:title'>
+<meta content='Sunday afternoon and waiting for the Superbowl, I thought I&#39;d run an algo that is one of the most common techniques employed by hedge fund quants on equity market neutral strategies, Statisical Artbitrage.   To be complete and fair, I must mentioned that it is actually a two part process.  The first part is a carefully crafted stock selection filtering process using fundamental data that focuses on, among other things, company valuation, earnings quality, price momentum, etc. In this example,...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/stat-arb-11-year-backtest-notebook">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5a77707977712b001704d317'>
+<div class='post-container' data-post-id='5a77707977712b001704d317' id='5a77707977712b001704d317'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Stat Arb - 11 year backtest notebook</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1518649170000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Stat Arb - 11 year backtest notebook&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fstat-arb-11-year-backtest-notebook%3Futm_source%3Dwebsite_share%26utm_campaign%3Dstat-arb-11-year-backtest-notebook%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fstat-arb-11-year-backtest-notebook%3Futm_source%3Dwebsite_share%26utm_campaign%3Dstat-arb-11-year-backtest-notebook%26utm_medium%3Dlinkedin&amp;title=Stat+Arb+-+11+year+backtest+notebook+%28James+Villa%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/stat-arb-11-year-backtest-notebook?utm_source=website_share&amp;utm_campaign=stat-arb-11-year-backtest-notebook&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="James Villa" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Sunday afternoon and waiting for the Superbowl, I thought I&#39;d run an algo that is one of the most common techniques employed by hedge fund quants on equity market neutral strategies, Statisical Artbitrage.   To be complete and fair, I must mentioned that it is actually a two part process.  The first part is a carefully crafted stock selection filtering process using fundamental data that focuses on, among other things, company valuation, earnings quality, price momentum, etc. In this example, I just did a very simple fundamental filtering, QTU as base universe filtered for profitable and market cap to focus more on the second part of the process which is Stat Arb. The purpose of Stat Arb is to exploit mispricings. There are several mathematical routines that does different flavors of Stat Arb but almost always does some sort of regression to determine mispricings.  From simple distance measure linear regression to more complex ones such as dimension reduction (PCA), cointegration or copulas. The one I used here is my own proprietary routine (aka secret sauce).  The implementation is quite simple, long undervalued stocks and short overvalued stocks which is in a way a mean reversion strategy.</p>
+
+<p>I ran an 11 year backtest to illustrate what kind of risk adjusted returns are to be expected with this kind of approach and to see if it passes Q stress tests through its contest constraints and thresholds requirements.</p>
+
+<p>I just want to highlight that it did pass all requirements except for this:<br>
+<strong>Checking investment in tradable universe...<br>
+FAIL: Investment in QTradableStocksUS (2nd percentile) of 94.70% is &lt; 95.0%</strong>.<br>
+This one baffles me because my base universe is  QTradableStocksUS, so I&#39;m assuming it is a bug or something in QTU that is not captured during the early years.  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>68 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5a785ecf5c7f6463e3969456' id='5a785ecf5c7f6463e3969456'>
+<a href='#5a785ecf5c7f6463e3969456'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517838031000' class='quanto-date posted-at response-posted-at' href='#5a785ecf5c7f6463e3969456'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi James,</p>
+
+<p>What&#39;s the rebalance frequency of this algorithm? The QTradableStocksUS can change from day to day, so if an algorithm doesn&#39;t rebalance frequently, it can hold a few names that have fallen out of the QTU. That said, your turnover looks to be a in a good spot, and your position concentration is very low, so I don&#39;t think it&#39;s likely that this is the problem.</p>
+
+<p>To debug this, I&#39;d recommend finding the date which drops to 94.7%, and look at the names held which aren&#39;t in the QTU to see if there&#39;s a pattern. Unfortunately, I can&#39;t do this by cloning the notebook since the backtest wasn&#39;t publicized. If you&#39;d like, you can create a support ticket with permission to see your notebooks (you don&#39;t have to give permission on the algo/backtest), and I can try to figure out what&#39;s happening.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7862ba5c7f6463e39694a2' id='5a7862ba5c7f6463e39694a2'>
+<a href='#5a7862ba5c7f6463e39694a2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517839034000' class='quanto-date posted-at response-posted-at' href='#5a7862ba5c7f6463e39694a2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie, thanks for the prompt response. I just posted a question on this at  @Alisa thread and copy below:</p>
+
+<blockquote>
+<p>I want to ask, based on your above statement, if I had an open position on IBM and the next day it was dropped from the QTU list, the algo will then try and close that position, how will the algo account for this transaction, as IBM now as in or out of the QTU list? I assume that a new QTU is updated before start of trading day and therefore has precedence over subsequent transaction during the day. Question is how a dropped stock from QTU list accounted for as it closes its postion during the day? This could be part of the problem if not accounted for properly, I think. Can you please check this.</p>
+</blockquote>
+
+<p>This algo has daily rebalance. I am wondering if it is an accounting problem?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7866645c7f646241968d03' id='5a7866645c7f646241968d03'>
+<a href='#5a7866645c7f646241968d03'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517839972000' class='quanto-date posted-at response-posted-at' href='#5a7866645c7f646241968d03'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@James: The QTU % metric is checked at the end of each day, so that <em>shouldn&#39;t</em> be the issue. This really sounds odd. Any chance you&#39;d be willing to share the notebook? If not, I can try to send you a modified version of the notebook you shared to give a helpful report about non-QTU positions held. Let me know.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a786d0c5c7f643765968e96' id='5a786d0c5c7f643765968e96'>
+<a href='#5a786d0c5c7f643765968e96'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517841676000' class='quanto-date posted-at response-posted-at' href='#5a786d0c5c7f643765968e96'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie, I understand that QTU % metric is checked at the end of each day but you didn&#39;t answer my question on how the closing transaction of a dropped stock accounted for , is it still in the QTU list when it closed its position? If it is then this is the proper accounting. If not , this is where the problem is. So you have to check the precedence logic first and then check the accounting of the closing transaction.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a78822ec25e40024bbf3dd7' id='5a78822ec25e40024bbf3dd7'>
+<a href='#5a78822ec25e40024bbf3dd7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517847086000' class='quanto-date posted-at response-posted-at' href='#5a78822ec25e40024bbf3dd7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>James, the QTU is updated in the pipeline each morning. </p>
+
+<blockquote>
+<p>I assume that a new QTU is updated before start of trading day </p>
+</blockquote>
+
+<p>This is a correct assumption. The QTU is updated every day.</p>
+
+<blockquote>
+<p>... and therefore has precedence over subsequent transaction during the day. Question is how a dropped stock from QTU list accounted for as it closes its postion during the day?</p>
+</blockquote>
+
+<p>This question is harder to answer. In theory, the answer is &#39;yes&#39;, but dropping non-QTU stocks from the portfolio is ultimately controlled by the algorithm. If an algorithm checks the result of the pipeline each day, and the pipeline screens based on the QTU, the algorithm should close out of positions that fall out of the QTU.</p>
+
+<p>Let me know if I&#39;m misunderstanding the question.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a788ad1c25e4026f8bf3db2' id='5a788ad1c25e4026f8bf3db2'>
+<a href='#5a788ad1c25e4026f8bf3db2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517849297000' class='quanto-date posted-at response-posted-at' href='#5a788ad1c25e4026f8bf3db2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie, I think you are misunderstanding my question. Let me try to put it in simple terms, a complete trade transaction cycle involves opening a trade and closing a trade. Say I open a trade on Monday to buy 100 shares of IBM which is on QTU list that day. On Tuesday before trading starts, QTU updates its list and IBM is taken off that list. At start of trading day, Tuesday, since IBM is off the list, algo will try to close that position ASAP. When it closes the position, how is IBM accounted for, it is still in the QTU list ? If it is, then it is acounted for correctly. If the closing transaction of IBM is accounted  for as Non-QTU then the accounting is incorrect and this is reflected incorrectly also in the tally of QTU% metric at the end of the day.  Hope this clarifies the question better.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a788d04c25e407d65bf3ea4' id='5a788d04c25e407d65bf3ea4'>
+<a href='#5a788d04c25e407d65bf3ea4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517849860000' class='quanto-date posted-at response-posted-at' href='#5a788d04c25e407d65bf3ea4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>James, that helps, thank you. Transactions are not accounted for in the QTU% metric. That metric only looks at <strong>positions</strong> held at the end of the day. In your example, if all 100 shares of IBM are closed on on the Tuesday, then they will not be included in the QTU% metric on Tuesday. </p>
+
+<p>One issue could be partial fills. Going back to the example you provided, if only 90 of the 100 shares were closed out by EOD Tuesday, then you&#39;d have 10 shares of IBM counted as non-QTU on Tuesday EOD.</p>
+
+<p>That said, based on the position concentrations reported in your tearsheet, I don&#39;t think this is the problem. A QTU% of 94.7 suggests that there are 25+ tickers (at ~0.20% of the portfolio each) being held on a particular day outside of the QTU, which seems unlikely. I say &#39;unlikely&#39; instead of &#39;impossible&#39; because I really can&#39;t say for sure what&#39;s happening here without more data. If you don&#39;t feel comfortable sharing your notebook with our support team, I&#39;ll start working on a notebook for you to run that might help gather some data on what&#39;s happening.</p>
+
+<p>(As always, let me know if I&#39;m misunderstanding still!)</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a788f6477712b1a7804cf80' id='5a788f6477712b1a7804cf80'>
+<a href='#5a788f6477712b1a7804cf80'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517850469000' class='quanto-date posted-at response-posted-at' href='#5a788f6477712b1a7804cf80'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie, I&#39;m OK to share the notebook. How do I do that? Just email support and attach notebook?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7896a0c56272000c5a6297' id='5a7896a0c56272000c5a6297'>
+<a href='#5a7896a0c56272000c5a6297'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1517852321000' class='quanto-date posted-at response-posted-at' href='#5a7896a0c56272000c5a6297'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks, James. You&#39;ll have to open a ticket by clicking &#39;Help&#39; &gt; &#39;Contact Support&#39; at  the top of the website. A modal will pop up where you can choose to grant permission for us to view your notebooks (grants temporary access).  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a78e8bb458837469ba34fae' id='5a78e8bb458837469ba34fae'>
+<a href='#5a78e8bb458837469ba34fae'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517873339000' class='quanto-date posted-at response-posted-at' href='#5a78e8bb458837469ba34fae'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi James -</p>
+
+<p>I note your specific returns are negative.  While this algo would be valid for the contest (once you fix the QTU error), my understanding is you&#39;ll need positive specific returns to be eligible for a Q Fund allocation.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a79128d92df2c000dec8cec' id='5a79128d92df2c000dec8cec'>
+<a href='#5a79128d92df2c000dec8cec'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517884045000' class='quanto-date posted-at response-posted-at' href='#5a79128d92df2c000dec8cec'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Thanks for the info.  I&#39;m wondering what constitutes common returns.  If it is the equivalent to the buy and hold returns of SPY, then that will be a very tall order for an equity market neutral strategy in a long term backtest analysis . It&#39;s possible for a market neutral strategy to beat market returns for one or two years but have yet to see one that consistently beat it in a 10-15 year evaluation period, Most industry reports I&#39;ve seen on equity market neutral strategies use the 3 month Treasury Bills as their benchmark which is consistent and more in line with the strategy&#39;s expected returns and purpose.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7978cb4588377a19a353f3' id='5a7978cb4588377a19a353f3'>
+<a href='#5a7978cb4588377a19a353f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517910219000' class='quanto-date posted-at response-posted-at' href='#5a7978cb4588377a19a353f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>I&#39;m wondering what constitutes common returns.</p>
+</blockquote>
+
+<p>My understanding is that any returns attributable to the Q risk factors will be categorized as &quot;common&quot;--what&#39;s left is called &quot;specific.&quot;  It&#39;s not a matter of beating SPY or referencing 3-month T-Bills as a benchmark, but rather steering clear of whatever set of formulae Q is using to attribute returns to what they consider common sources, versus unexplained sources (to get an allocation, you would still need to provide an explanation, in words, not code).</p>
+
+<p>Since presumably Jamie is listening, I will whine that they have not published enough details on the risk model and its implementation.  Namely, the underlying code should be published, along with a &quot;white paper&quot; describing the theoretical underpinnings and empirical evidence for its ability to control risk and generate profit for the Q fund.</p>
+
+<p>The irony here is that all of this &quot;risk management&quot; may be irrelevant if too much leverage is applied.  I just finished a book that discusses <a href="https://en.wikipedia.org/wiki/Long-Term_Capital_Management">LTCM</a> in one of its chapters.  If the &quot;risk management&quot; is just a story so that excessive leverage can be applied, then it is just smoke-and-mirrors.</p>
+
+<p>Regarding the Q version of the Sharpe ratio and using 3-month Treasury Bills as a benchmark, there is an extensive discussion <a href="https://www.quantopian.com/posts/risk-free-rate-on-quantopian">here</a> which lead nowhere, so I won&#39;t repeat it.  I will note that this <a href="https://www.quantopian.com/posts/enhancing-short-term-mean-reversion-strategies-1">Q-sponsored example</a> does use SHY as a benchmark:</p>
+
+<pre><code> # Set benchmark to short-term Treasury note ETF (SHY) since strategy is dollar neutral  
+    set_benchmark(sid(23911))  
+</code></pre>
+
+<p>This, I think, is an isolated example.  Generally, I have not seen Q reference SHY or any other risk-free rate benchmark.  It does seem that if the goal is to generate uncorrelated returns, then using SPY as a benchmark would not make sense (&quot;beating the market&quot; is not the game here).</p>
+
+<p>It would be interesting to understand if this type of hedge fund historically has a significant edge over SHY or if individual funds tend to &quot;mean revert&quot; to the risk-free rate.  Of course, what really matters is what the return is to the investor, so the return should be the ratio of money returned to the investor divided by money put up by the investor (i.e. accounting for any 2/20 type expenses).</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a79a82292df2c661bec9783' id='5a79a82292df2c661bec9783'>
+<a href='#5a79a82292df2c661bec9783'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517922338000' class='quanto-date posted-at response-posted-at' href='#5a79a82292df2c661bec9783'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Thanks for enlightening me on common returns. So common returns, correct me if I&#39;m wrong, is the sum of their <strong>assumed style returns</strong>, i.e., short term reversal + size + value + momentum + volatility = common returns.  Anything over or under the common returns of the algo&#39;s total returns is specific returns.  What could specific returns then be, anything? If you noticed I bolded assumed style returns because that is what it is, a modeling assumption.  I read somewhere that for short term reversal, Q uses the 14 day RSI. The above notebook example is an interesting case because the Stat Arb is a pure mean reversion strategy that would fall under the short term reversal category.  Before I ran this strategy, I thought it would not pass this short term reversal constraint of no more than 40% but it did! As I am trying to understand how a pure mean reversion strategy like Stat Arb can pass the short term reversal constraint, it occured to me that could this faster pace mean reversion strategy stealthly gone under the radar of a much slower pace RSI14? Something to ponder upon. And here is where your call for code and whitepaper can come in handy for better understanding and testing its rationale and validity.</p>
+
+<p>Also as I&#39;ve mentioned before the traditional use of equity market neutral strategies by industry is as a 5-10% allocation to a multi-asset portfolio to temper overall market risks and based on empirical reports, it does its purpose effectively. However, I read somewhere that Q&#39;s intended use of this strategy is to leverage it 5-6 times in its Q hedge fund.    While this may work in a low interest environment, it can quickly fall apart in a high interest environment as not only does the cost of borrowing increases but also the disparity in the spread on income from cash and interest in borrowing becomes wider. The last two days of market correction is attributable to two main factors: perceived overpriced market and perceived increase in interest rates, a lethal combination. A prelude to the perfect storm? Another LTCM?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7a38f9e9f07d5657ade544' id='5a7a38f9e9f07d5657ade544'>
+<a href='#5a7a38f9e9f07d5657ade544'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517959417000' class='quanto-date posted-at response-posted-at' href='#5a7a38f9e9f07d5657ade544'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think common returns also include the sector exposures, but I&#39;m not entirely sure.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ac68e38eced2c602a3a8b' id='5a7ac68e38eced2c602a3a8b'>
+<a href='#5a7ac68e38eced2c602a3a8b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1517995662000' class='quanto-date posted-at response-posted-at' href='#5a7ac68e38eced2c602a3a8b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi James -</p>
+
+<p>Just curious - did you use the Optimize API to control the risk?  You&#39;d have something like this in your code:</p>
+
+<pre><code>    risk_model_exposure = opt.experimental.RiskModelExposure(  
+        context.risk_loading_pipeline,  
+        version=opt.Newest,  
+    )  
+    constraints.append(risk_model_exposure)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ad322e9f07d15b1adeb11' id='5a7ad322e9f07d15b1adeb11'>
+<a href='#5a7ad322e9f07d15b1adeb11'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1517998882000' class='quanto-date posted-at response-posted-at' href='#5a7ad322e9f07d15b1adeb11'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>No, didn&#39;t use any of that. As I mentioned to you before, I use Occam Razor&#39;s methodology which gives it  a minimalist list of constraints to use in order to  pass all contest requirements.  The pitfall of using optimization with too many constraints is the uncertainties of its behavior due to too many degrees of freedom.  It gets confused and ends up with suboptimal results !</p>
+
+<p>FYI, there is an ongoing issue with the QTU constraint and I&#39;m still sorting it out with Jamie. Hopefully, we can get it sorted out before Feb. 16 contest.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ada30e9f07d3981adeabf' id='5a7ada30e9f07d3981adeabf'>
+<a href='#5a7ada30e9f07d3981adeabf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518000688000' class='quanto-date posted-at response-posted-at' href='#5a7ada30e9f07d3981adeabf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well, you are pretty close on the 
+<code>short_term_reversal</code> and so you might want to put in some risk control if you are planning this to be a contest entry.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7d29778c9614000f233a48' id='5a7d29778c9614000f233a48'>
+<a href='#5a7d29778c9614000f233a48'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5851e14c1ca9de530c000437'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/df95405690f5e70f726b114aa8eea380?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5851e14c1ca9de530c000437'>Neil MacAloney</a>
+</div>
+<a UTCms='1518152055000' class='quanto-date posted-at response-posted-at' href='#5a7d29778c9614000f233a48'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think I&#39;m having the same issue, but from a different angle.  I have an algorithm has a weekly rebalance using a pipeline screened by QTradableStocksUS().  And the one test that fails in the check is the same tradable universe check.<br>
+&quot;FAIL: Minimum investment in QTradableStocksUS of 81.40% on 2016-07-26 is &lt; 90.0%.&quot;</p>
+
+<p>I have two ideas for other ways to go about this if others are having the same issue.<br>
+1) Lower the threshold to account for the daily removal in stocks from the daily-changing QTradableStocksUS, or;<br>
+2) Make this filter only apply to the buying of stocks (i.e. 90+% stocks bought or shorted must be from the QTradeableStocksUS).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7d6663d2af3f5d674a18b4' id='5a7d6663d2af3f5d674a18b4'>
+<a href='#5a7d6663d2af3f5d674a18b4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518167651000' class='quanto-date posted-at response-posted-at' href='#5a7d6663d2af3f5d674a18b4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One problem may be that the backtester can&#39;t always exit positions.  For example, even though I&#39;m using a &quot;tradable&quot; universe, I still get a lot of messages like:</p>
+
+<pre><code>Your order for 49603 shares of CSTM has been partially filled. 48247 shares were successfully purchased. 1356 shares were not filled by the end of day and were canceled.  
+</code></pre>
+
+<p>This suggests that even if one is desperate to close a position, due to the risk of it not being in the QTradableStocksUS, the backtester may choke (unrealistically, as I understand, since there should always be a price at which a position could be closed, I&#39;d think).</p>
+
+<p>The risk should be measured in dollars, not count of stock tickers.  Is the constraint applied by counting the number of tickers held?  If so, perhaps the constraint definition should be changed to measure the exposure in dollars?</p>
+
+<p>The other weirdness here is that this rule kinda forces one to run a scrub every day to dump positions of stocks that are no longer in the QTradableStocksUS, but I&#39;m not clear if this can be done without rebalancing the entire portfolio.  Is there a way with <code>order_optimal_portfolio</code> to execute trades on individual stocks?</p>
+
+<p>I understand the intent behind the &quot;Trade Within QTradableStocksUS:  &gt;= 95%&quot; but the implementation seems a bit of a hack at this point.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ec867770b7717f6d18d0e' id='5a7ec867770b7717f6d18d0e'>
+<a href='#5a7ec867770b7717f6d18d0e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518258279000' class='quanto-date posted-at response-posted-at' href='#5a7ec867770b7717f6d18d0e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jamie -</p>
+
+<p>Perhaps you could shed some light on how one can close positions of stocks that are no longer in the QTU, without re-balancing the entire portfolio.  It would seem that for algos that trade less frequently than daily, it would be a good idea to schedule a daily function that checks for QTU inclusion, and drops stocks that are no longer in it (without re-balancing the portfolio).  Since the only way to place orders is through 
+<code>order_optimal_portfolio</code> it is not clear how to accomplish this.  Is the trick to use:</p>
+
+<pre><code>calculate_optimal_portfolio(objective, constraints, current_portfolio=None)  
+</code></pre>
+
+<p>and define <code>current_portfolio</code> to be only the stocks that are to be dropped?  With target weights of zero for all of the stocks in <code>current_portfolio</code> would a set of market orders go in to close the positions, without generating other orders?</p>
+
+<p>Of course, when the QTU inclusion management orders go through, the leverage will drop, but that would be fixed the next time the whole portfolio is re-balanced.  In theory, I suppose that the QTU inclusion management scheme could include a constraint/check on leverage, but your 0.8X minimum is pretty generous, so I wouldn&#39;t expect a problem (unless the QTU is turning over a lot...how much does it change?).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ed6f1d1f41c0014da891b' id='5a7ed6f1d1f41c0014da891b'>
+<a href='#5a7ed6f1d1f41c0014da891b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518262001000' class='quanto-date posted-at response-posted-at' href='#5a7ed6f1d1f41c0014da891b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Let&#39;s wait for Jamie&#39;s official answers. In the meantime, I have been trying to resolve this problem with Jamie via support channel and at least for my case in above Stat Arb algo I was able to find a workaround although it is not 100% foolproof, it worked in shorter runs (2-3years) but still falters in the 11 year backtest that is why I was hestitant to share this workaround right way till I found the absolute solution.</p>
+
+<p>Here&#39;s what Jamie and I agreed on, for MaximizeAlpha construct, the closing routine on order_optimal_portfolio for newly dropped stocks works fine but for the TargetWeights construct, which is used by my algo, somehow does not work properly. My solution was to create code that ensures that newly dropped stocks from QTU list are closed first before the new set of weights is pass on to  order_optimal_portfolio for rebalancing. The code is inserted before opt.TargetWeights:</p>
+
+<pre><code>    # Sell any positions in assets that are no longer in QTU list.  
+    for security in context.portfolio.positions:  
+        if data.can_trade(security):  # Work around inability to close de-listed stocks for QTU.  
+            if security not in context.stocks:  
+                to_close = [security]   # securities to be changed  
+                ids = order_optimal_portfolio(  
+                    objective   = opt.TargetWeights(  
+                    pd.Series(0, index = to_close)  # the 0 means close them  
+                ),  
+                constraints = [  
+                    opt.Frozen(  
+                        set(context.portfolio.positions.keys()) - set(to_close)  
+                    )  
+                ]  
+            )  
+</code></pre>
+
+<p>This code solved my problem on my latest 3 year backtest, however when I ran it through the 11year backtest above, it faltered sometime in 2015 and gave me the following errors:</p>
+
+<blockquote>
+<p>InfeasibleConstraints: The attempted optimization failed because no portfolio could be found that<br>
+satisfied all required constraints.</p>
+</blockquote>
+
+<p>The following special portfolios were spot checked and found to be in violation<br>
+of at least one constraint:</p>
+
+<p>Target Portfolio (as provided to TargetWeights):</p>
+
+<p>Would violate Frozen([Equity(32770 [DEI]), Equity(16389 [NCR]), ...]) because:<br>
+New weight for Equity(32770 [DEI]) (0.0) would not equal old weight (-0.00124713995777).<br>
+New weight for Equity(16389 [NCR]) (0.0) would not equal old weight (0.00127471453249).<br>
+New weight for Equity(38921 [LEA]) (0.0) would not equal old weight (-0.0012673465914).<br>
+New weight for Equity(2 [ARNC]) (0.0) would not equal old weight (0.00124764231739).<br>
+New weight for Equity(6161 [PRGO]) (0.0) would not equal old weight (0.0012355562442).<br>
+New weight for Equity(4117 [JCI]) (0.0) would not equal old weight (0.00114328492707).<br>
+New weight for Equity(4118 [JCP]) (0.0) would not equal old weight (0.00120445963172).<br>
+New weight for Equity(2071 [D]) (0.0) would not equal old weight (0.00110161134441).<br>
+New weight for Equity(4120 [JEC]) (0.0) would not equal old weight (0.0011990730669).<br>
+New weight for Equity(14372 [EIX]) (0.0) would not equal old weight (-0.00124497410696).<br>
+... (841 more)</p>
+
+<p>Current Portfolio (at the time of the optimization):</p>
+
+<p>Would violate Frozen([Equity(32770 [DEI]), Equity(16389 [NCR]), ...]) because:<br>
+New weight for Equity(49458 [MSG]) (nan) would not equal old weight (nan).</p>
+
+<p>Empty Portfolio (no positions):</p>
+
+<p>Would violate Frozen([Equity(32770 [DEI]), Equity(16389 [NCR]), ...]) because:<br>
+New weight for Equity(32770 [DEI]) (0.0) would not equal old weight (-0.00124713995777).<br>
+New weight for Equity(16389 [NCR]) (0.0) would not equal old weight (0.00127471453249).<br>
+New weight for Equity(38921 [LEA]) (0.0) would not equal old weight (-0.0012673465914).<br>
+New weight for Equity(2 [ARNC]) (0.0) would not equal old weight (0.00124764231739).<br>
+New weight for Equity(6161 [PRGO]) (0.0) would not equal old weight (0.0012355562442).<br>
+New weight for Equity(4117 [JCI]) (0.0) would not equal old weight (0.00114328492707).<br>
+New weight for Equity(4118 [JCP]) (0.0) would not equal old weight (0.00120445963172).<br>
+New weight for Equity(2071 [D]) (0.0) would not equal old weight (0.00110161134441).<br>
+New weight for Equity(4120 [JEC]) (0.0) would not equal old weight (0.0011990730669).<br>
+New weight for Equity(14372 [EIX]) (0.0) would not equal old weight (-0.00124497410696).<br>
+... (841 more)
+There was a runtime error on line 144.</p>
+
+<p>I am still trying to find the source of this error and when I do, I&#39;ll share the complete fix.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7ee521770b771428d190e6' id='5a7ee521770b771428d190e6'>
+<a href='#5a7ee521770b771428d190e6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518265633000' class='quanto-date posted-at response-posted-at' href='#5a7ee521770b771428d190e6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>for MaximizeAlpha construct, the closing rountine on order_optimal_portfolio for newly dropped stocks works fine but for the TargetWeights construct, which is used by my algo, somehow does not work properly.</p>
+</blockquote>
+
+<p>I&#39;ve seen some evidence of this, as well, but haven&#39;t dug into it.  So is there officially a &quot;bug&quot; with 
+<code>TargetWeights</code>?  And is it in conjunction with <code>order_optimal_portfolio</code> or <code>calculate_optimal_portfolio</code> (or both)?</p>
+
+<p>For what it&#39;s worth, below is the code I&#39;m playing with.  It includes a recursive exponential portfolio smoothing function, which incorporates the entire portfolio history, from the start of the backtest.  So, it needs to be able to drop tickers that are no longer in the QTU.  I&#39;m not entirely sure it is doing this, given that I don&#39;t code for it explicitly.</p>
+
+<p>I find the Optimize API documentation to be a bit abstract and convoluted, frankly.  I&#39;ve read it over a number of times, and I keep saying &quot;Now what does that do, again?&quot;</p>
+
+<p>For example, say I use <code>objective = opt.MaximizeAlpha(pipeline_data.combined_alpha)</code> followed by:</p>
+
+<pre><code>weights = opt.calculate_optimal_portfolio(  
+        objective=objective,  
+        constraints=constraints,  
+        )  
+objective = opt.TargetWeights(weights)  
+order_optimal_portfolio(  
+    objective=objective,  
+    constraints=[],  
+    )  
+</code></pre>
+
+<p>Is it equivalent to <code>objective = opt.MaximizeAlpha(pipeline_data.combined_alpha)</code> followed by:</p>
+
+<pre><code>order_optimal_portfolio(  
+        objective=objective,  
+        constraints=constraints,  
+        )  
+</code></pre>
+
+<p>Here&#39;s the code I&#39;m toying with, that includes a turnover constraint and the exponential portfolio vector smoothing:</p>
+
+<pre><code>    if context.init:  
+        weights = opt.calculate_optimal_portfolio(  
+        objective=objective,  
+        constraints=constraints,  
+        )  
+        context.init = False  
+        context.weights = weights  
+        objective = opt.TargetWeights(weights)  
+        order_optimal_portfolio(  
+        objective=objective,  
+        constraints=[],  
+        )  
+        return  
+    constraints.append(opt.MaxTurnover(MAX_TURNOVER))  
+    try:  
+        weights = opt.calculate_optimal_portfolio(  
+        objective=objective,  
+        constraints=constraints,  
+        )  
+    except:  
+        constraints = constraints[:-1]  
+        print &#39;Turnover constraint dropped.&#39;  
+        weights = opt.calculate_optimal_portfolio(  
+        objective=objective,  
+        constraints=constraints,  
+        )  
+    context.weights = context.weights.loc[pipeline_data.combined_alpha.keys()]  
+    context.weights = context.weights - context.weights.mean()  
+    context.weights = context.weights/context.weights.abs().sum()  
+    weights *= ALPHA  
+    weights = weights.add((1-ALPHA)*context.weights,fill_value=0)  
+    weights = weights - weights.mean()  
+    weights = weights/weights.abs().sum()  
+    context.weights = weights  
+    objective = opt.TargetWeights(weights)  
+    order_optimal_portfolio(  
+        objective=objective,  
+        constraints=[],  
+        )  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7f25a8770b77725fd184b9' id='5a7f25a8770b77725fd184b9'>
+<a href='#5a7f25a8770b77725fd184b9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1518282153000' class='quanto-date posted-at response-posted-at' href='#5a7f25a8770b77725fd184b9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Until the InfeasibleConstraints mystery above is resolved, to keep the backtest running, just wrap my first example you&#39;re utilizing (and added to) with try except <a href="https://www.quantopian.com/posts/modifying-individual-positions-using-order-optimal-portfolio-frozen">here</a> like the third example, that works for me. Decided to put that together below. <em>By the way in fixing that error, would be good to remove the duplicate content and add more decimal points beyond 0.0. Maybe you can apply this to both of them for 5 decimal points:</em> 
+`<code>%.5f&#39; % the_float_variable</code></p>
+
+<p>If data.can_trade(stock) is false, is that always a delist when operating on pipeline output when not using sid() etc? I think so.<br>
+Then the context.stocks check handles any stocks that have simply fallen out of QTU without being delisted I guess.</p>
+
+<pre><code>    # Close any positions no longer in QTU list.  
+    to_close = []   # securities to be changed  
+    for security in context.portfolio.positions:  
+        if data.can_trade(security):   continue   # delists only?  
+        if security in context.stocks: continue   # assuming all are QTU  
+        to_close.append(security)  
+    try:  
+        ids = order_optimal_portfolio(  
+            objective   = opt.TargetWeights(  
+                pd.Series(0, index = to_close)  # the 0 means close them  
+            ),  
+            constraints = [  
+                opt.Frozen(  
+                    set(context.portfolio.positions.keys()) - set(to_close)  
+                )  
+            ]  
+        )  
+        for i in ids:  # log any ordered to close  
+            o = get_order(i)    # order object  
+            s = o.sid   # including filled as a head&#39;s up in case partial  
+            log.info(&#39;{} {} {}&#39;.format(s.symbol, o.filled, o.amount))  
+    except Exception as e:  
+        log.info(e)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7f2c431bd2a000107015d1' id='5a7f2c431bd2a000107015d1'>
+<a href='#5a7f2c431bd2a000107015d1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518283843000' class='quanto-date posted-at response-posted-at' href='#5a7f2c431bd2a000107015d1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @Blue Seahawk,</p>
+
+<p>Yes, the inspiration for the code came from you, sorry if I forgot to mention to it in my above post. I will try your suggestions and see what happens.  I also think Q team should come out with an official fix for TargetWeights construct. Thanks again, Gary!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7f33bed1f41c4051da81bf' id='5a7f33bed1f41c4051da81bf'>
+<a href='#5a7f33bed1f41c4051da81bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518285758000' class='quanto-date posted-at response-posted-at' href='#5a7f33bed1f41c4051da81bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>I also think Q team should come out with an official fix for TargetWeights construct.</p>
+</blockquote>
+
+<p>What is the problem, precisely?  I&#39;ll see if I can reproduce it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7f70bed1f41c43fbda871b' id='5a7f70bed1f41c43fbda871b'>
+<a href='#5a7f70bed1f41c43fbda871b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518301374000' class='quanto-date posted-at response-posted-at' href='#5a7f70bed1f41c43fbda871b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Grant,</p>
+
+<p>Checking investment in tradable universe...<br>
+FAIL: Investment in QTradableStocksUS (2nd percentile) of 94.70% is &lt; 95.0%.</p>
+
+<p>If you useTargetWeights construct in Optimize API, sometimes it doesn&#39;t close out the open positions of newly delisted stocks off the QTU list which ultimately leads to failure in this test.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a7f74e1d1f41c0011da95dc' id='5a7f74e1d1f41c0011da95dc'>
+<a href='#5a7f74e1d1f41c0011da95dc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1518302433000' class='quanto-date posted-at response-posted-at' href='#5a7f74e1d1f41c0011da95dc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>For testing scenarios I think we need some security examples that are fine with MaximizeAlpha and not TargetWeights. I&#39;m editing, removing some that I thought were like that but may have been mere delists (&quot;expired assets&quot;).</p>
+
+<p>By the way thanks James for pointing this out.<br>
+And for your comment, I edited mine to make it more clear that my code was only part of what you were doing there.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a803176fb806d000bfadbd4' id='5a803176fb806d000bfadbd4'>
+<a href='#5a803176fb806d000bfadbd4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518350710000' class='quanto-date posted-at response-posted-at' href='#5a803176fb806d000bfadbd4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s an example, with a switch to toggle between two different, but presumably equivalent ways of applying the Optimize API.  At first-glance, I don&#39;t see a major difference:</p>
+
+<pre><code>ORDER_OPTIMAL = True # True for order_optimal_portfolio, False for calculate_optimal_portfolio  
+</code></pre>
+
+<pre><code>2013-07-01 16:00 WARN Your order for 241 shares of FOXA failed to fill by the end of day and was canceled.  
+2014-10-20 09:35 WARN Dropping expired assets from optimization universe:  
+[&#39;Equity(36628 [GTAT])&#39;]
+End of logs.  
+</code></pre>
+
+<p>Total Returns<br>
+21.39%<br>
+Benchmark Returns<br>
+74.36%<br>
+Alpha<br>
+0.06<br>
+Beta<br>
+-0.08<br>
+Sharpe<br>
+1.12<br>
+Sortino<br>
+1.69<br>
+Volatility<br>
+0.05<br>
+Max Drawdown<br>
+-5.5%</p>
+
+<pre><code>ORDER_OPTIMAL = False # True for order_optimal_portfolio, False for calculate_optimal_portfolio  
+</code></pre>
+
+<pre><code>2013-07-01 16:00 WARN Your order for 242 shares of FOXA failed to fill by the end of day and was canceled.  
+2014-10-20 09:35 WARN Dropping expired assets from optimization universe:  
+[&#39;Equity(36628 [GTAT])&#39;]
+2014-10-20 09:35 WARN Dropping expired assets from optimization universe:  
+[&#39;Equity(36628 [GTAT])&#39;]
+End of logs.  
+</code></pre>
+
+<p>Total Returns<br>
+21.38%<br>
+Benchmark Returns<br>
+74.36%<br>
+Alpha<br>
+0.06<br>
+Beta<br>
+-0.08<br>
+Sharpe<br>
+1.12<br>
+Sortino<br>
+1.69<br>
+Volatility<br>
+0.05<br>
+Max Drawdown<br>
+-5.5%  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a803a5e5161d60dfca3a438' id='5a803a5e5161d60dfca3a438'>
+<a href='#5a803a5e5161d60dfca3a438'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518352990000' class='quanto-date posted-at response-posted-at' href='#5a803a5e5161d60dfca3a438'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>The issue is not with <strong>ORDER_OPTIMAL = True # True for order_optimal_portfolio, False for calculate_optimal_portfolio</strong> </p>
+
+<p>but with <strong>objective = opt.MaximizeAlpha(pipeline_data.alpha) versus objective = opt.TargetWeights(pipeline_data.alpha)</strong> </p>
+
+<p>With MaximizeAlpha, the closing of recently dropped stocks is handled properly by  order_optimal_portfolio. However with TargetWeights, order_optimal_portfolio does not ensure closing therefore it ultimately leads to a failure in the QTU test.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a807f845161d6000ca3ac74' id='5a807f845161d6000ca3ac74'>
+<a href='#5a807f845161d6000ca3ac74'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518370692000' class='quanto-date posted-at response-posted-at' href='#5a807f845161d6000ca3ac74'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ James -</p>
+
+<p>O.K.  I&#39;ve attached an algo in which I compute the inclusion in the QTU every day:</p>
+
+<pre><code>def recording_statements(context, data):  
+    num_positions = len(context.portfolio.positions)
+
+    record(num_positions=num_positions)  
+    record(leverage=context.account.leverage)  
+    n_QTU = 0  
+    for stock in context.portfolio.positions.keys():  
+        if stock in context.QTU[&#39;beta&#39;].keys():  
+            n_QTU += 1  
+    if num_positions &gt; 0:  
+        pct_QTU = n_QTU/num_positions  
+    else:  
+        pct_QTU = 0  
+    record(pct_QTU = pct_QTU)  
+</code></pre>
+
+<p>This algo is trading weekly, and shows that one can end up with no stocks in the QTU, in the days between portfolio updates.  Next, I&#39;ll post the same algo, except trading daily, to show that the problem goes away, mostly (at least with the standard <code>MaximizeAlpha</code> constraint, and using <code>order_optimal_portfolio</code> directly). Note that there is still one drop-out...</p>
+
+<p>What this says, I think, is:</p>
+
+<ol>
+<li>The QTU is turning over a lot--whew!<br></li>
+<li>Algos need a separate check on QTU inclusion, to drop stocks not in it, between portfolio rebalancing (which won&#39;t necessarily work anyway, as the algo below illustrates...)<br></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a807fca5161d62505a3a5a0' id='5a807fca5161d62505a3a5a0'>
+<a href='#5a807fca5161d62505a3a5a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518370762000' class='quanto-date posted-at response-posted-at' href='#5a807fca5161d62505a3a5a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s the version that re-balances daily.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a80a4fc5161d6000ca3afcc' id='5a80a4fc5161d6000ca3afcc'>
+<a href='#5a80a4fc5161d6000ca3afcc'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518380284000' class='quanto-date posted-at response-posted-at' href='#5a80a4fc5161d6000ca3afcc'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>I ran a tearsheet and evaluate algo notebook on the weekly rebalance and it passed the QTU test.<br>
+<strong>Checking investment in tradable universe...<br>
+PASS: Investment in QTradableStocksUS is &gt;= 95.0%.</strong></p>
+
+<p>Your calculation of daily pct_QTU is probably out of sync with the weekly rebalancing. Try weekly pct_QTU instead.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a80aa6a80c659001765ddbb' id='5a80aa6a80c659001765ddbb'>
+<a href='#5a80aa6a80c659001765ddbb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518381674000' class='quanto-date posted-at response-posted-at' href='#5a80aa6a80c659001765ddbb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ James -</p>
+
+<p>I thought the QTU check is to be performed daily, regardless of transaction frequency?  Every day after the close, the composition of the portfolio will be checked, to see that &gt;= 95% of the stocks are within the QTU, as defined prior to the open that same trading day (i.e. the current QTU).  I could do the calculation differently in my algo, but it wouldn&#39;t be consistent with my understanding of the rule.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a80aefafb806d0017fae607' id='5a80aefafb806d0017fae607'>
+<a href='#5a80aefafb806d0017fae607'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518382842000' class='quanto-date posted-at response-posted-at' href='#5a80aefafb806d0017fae607'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yes, Grant, your understanding regarding daily calculation of QTU is consistent with the rules. Your formula to calculate daily pct_QTU seems correct, so I don&#39;t really know where the error in results of daily pct_QTU is emanating from.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a80f45c3d1f460017028ae5' id='5a80f45c3d1f460017028ae5'>
+<a href='#5a80f45c3d1f460017028ae5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/527612eb2de84d52740000d5'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873c5860f8b916285b474f56cbd6f135?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/527612eb2de84d52740000d5'>Deleted User</a>
+</div>
+<a UTCms='1518400604000' class='quanto-date posted-at response-posted-at' href='#5a80f45c3d1f460017028ae5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Why don&#39;t you combine the weights with to_close on every iteration? So you call TargetWeights only once but set the weights of to_close to zero.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8139c1430326001736b935' id='5a8139c1430326001736b935'>
+<a href='#5a8139c1430326001736b935'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518418369000' class='quanto-date posted-at response-posted-at' href='#5a8139c1430326001736b935'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Aqua Rooster,</p>
+
+<p>Supposedly, order_optimal_portfolio should handle closing out newly dropped stocks from QTU in one call as it is updated daily. Put another way, any stocks not in the algo&#39;s new order list including those that were recently dropped by the updated QTU list will have an order 0 to close  out its position. For MaximizeAlpha construct this seems to work fine but for TargetWeights construct it doesn&#39;t seem to work properly, i.e, sometimes it closes same day, sometimes it closes x days after, sometimes it doesn&#39;t close at all and just left hanging in the portfolio as an inactive position and sometimes it is ignored as a non QTU and acts as if is tradeable although it is classified as a non QTU. In other words, the behavior of TargetWeights as it handles the QTU updates is unpredictable and the source of this unpredictability is still unknown. I have supplied @Jamie the notebooks and code (minus secret sauce) to try and figure it out.</p>
+
+<p>In the meantime, my workaround code inspired by @BlueSeahawk in <a href="https://www.quantopian.com/posts/modifying-individual-positions-using-order-optimal-portfolio-frozen">modifying-individual-positions-using-order-optimal-portfolio-frozen</a> above although crude seem to fix the issue for short runs but still falters in very long runs.</p>
+
+<p>@Blue Seahawk, your suggested try and except code works great at keeping the backtest running and logging errors as it goes. Great work, thanks again. But like you said until these InfeasibleConstraints are resolved, it is still unstable.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a81724c430326001436bd71' id='5a81724c430326001436bd71'>
+<a href='#5a81724c430326001436bd71'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518432844000' class='quanto-date posted-at response-posted-at' href='#5a81724c430326001436bd71'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>So what is the requirement?  It looks to me like the notebook may be calculating the investment, versus the count of stock names.  I thought the requirement was to have &gt;= 95% of the stocks in the portfolio, after trading closes for the day, in the QTU.  The total investment in dollars doesn&#39;t matter.  Have I misinterpreted?</p>
+
+<pre><code># Tradable Universe  
+    print &#39;&#39;  
+    print &#39;Checking investment in tradable universe...&#39;  
+    positions_wo_cash = positions.drop(&#39;cash&#39;, axis=1)  
+    positions_wo_cash = positions_wo_cash.abs()  
+    total_investment = positions_wo_cash.fillna(0).sum(axis=1)  
+    daily_qtu_investment = universe.multiply(positions_wo_cash).fillna(0).sum(axis=1)  
+    percent_in_qtu = daily_qtu_investment / total_investment  
+    percent_in_qtu = percent_in_qtu[5:].fillna(0)  
+    percent_in_qtu_0 = percent_in_qtu.min()  
+    percent_in_qtu_2 = percent_in_qtu.quantile(0.02)  
+    if percent_in_qtu_0 &lt; TRADABLE_UNIVERSE_0TH_MIN:  
+        min_percent_in_qtu_date = percent_in_qtu.argmin()  
+        print &#39;FAIL: Minimum investment in QTradableStocksUS of %.2f%% on %s is &lt; %.1f%%.&#39; % (  
+            percent_in_qtu_0*100,  
+            min_percent_in_qtu_date.date(),  
+            TRADABLE_UNIVERSE_0TH_MIN*100  
+        )  
+    elif percent_in_qtu_2 &lt; TRADABLE_UNIVERSE_2ND_MIN:  
+        print &#39;FAIL: Investment in QTradableStocksUS (2nd percentile) of %.2f%% is &lt; %.1f%%.&#39; % (  
+            percent_in_qtu_2*100,  
+            TRADABLE_UNIVERSE_2ND_MIN*100  
+        )  
+    else:  
+        print &#39;PASS: Investment in QTradableStocksUS is &gt;= %.1f%%.&#39; % (  
+            TRADABLE_UNIVERSE_2ND_MIN*100  
+        )  
+        constraints_met += 1  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a818466ea51ea00127d0936' id='5a818466ea51ea00127d0936'>
+<a href='#5a818466ea51ea00127d0936'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518437478000' class='quanto-date posted-at response-posted-at' href='#5a818466ea51ea00127d0936'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Excellent point! My understanding of the requirement is, as you stated, by the count as opposed to what Q code is calculating:  </p>
+
+<pre><code>    daily_qtu_investment = universe.multiply(positions_wo_cash).fillna(0).sum(axis=1)  
+    percent_in_qtu = daily_qtu_investment / total_investment  
+</code></pre>
+
+<p>This may well be the source of  where the instability of the TargetWeights construct is emanating from.<br>
+The requirement  was to have &gt;= 95% of the stocks in the portfolio  after each daily update of the QTU list.<br>
+I agree with you, Grant, it should be measured more accurately with the count vis a vis the requirement.<br>
+As to why, Q chose to measure it in dollar terms, they have to explain because I suspect that the instability is<br>
+coming from this inconsistency. </p>
+
+<p>I have seen this operational flaw before in the beta neutral vs. dollar neutral redundancy argument as articulated here <a href="https://www.quantopian.com/posts/beta-constraint-in-risk-model-totally-unnecessary">beta-constraint-in-risk-model-totally-unnecessary</a>. Two different constraints with similar purpose trying to achieve the same objective gives rise to the question of which has precedence  and/or dominance? Occam&#39;s razor solution will shave off, the one that is unnecessary.</p>
+
+<p>In the above case, you have two different calculations of measurement of the requirement, &gt;= 95%. There are both correct depending on what perspective you&#39;re looking at. What would Occam do? Occam will choose the by the count measure because it is the simplest calculation to make!</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a81a051ea51ea00187d0cc1' id='5a81a051ea51ea00187d0cc1'>
+<a href='#5a81a051ea51ea00187d0cc1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1518444625000' class='quanto-date posted-at response-posted-at' href='#5a81a051ea51ea00187d0cc1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, @James: The QTU% is measured in terms of portfolio value. As stated in the <a href="https://www.quantopian.com/contest/rules">official contest rules</a>, an algorithm must have &gt;= 95% of its capital invested in stocks in the QTU. Portfolio value is used because the rule is meant to measure how much of an algorithm&#39;s capital is invested in the QTU.</p>
+
+<p>Regarding the <code>TargetWeights</code> objective, as James mentioned, we discovered that he needed to apply Blue&#39;s solution to close out of positions that drop out of the QTU. This is unrelated to how the QTU% is measured - non-QTU names were not being dropped no matter which way you measure it. I don&#39;t yet have a better answer as to why this is happening, but I will try to get one. I don&#39;t expect to have an answer this week, but I&#39;ll see if I can get some answers soon.</p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a81c7753d1f4649e302899b' id='5a81c7753d1f4649e302899b'>
+<a href='#5a81c7753d1f4649e302899b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518454645000' class='quanto-date posted-at response-posted-at' href='#5a81c7753d1f4649e302899b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie,</p>
+
+<p>My interpretation of the QTU universe rule was based on here <a href="https://www.quantopian.com/posts/a-new-contest-is-coming-more-winners-and-a-new-scoring-system">a-new-contest-is-coming-more-winners-and-a-new-scoring-system</a></p>
+
+<blockquote>
+<p>Constraint                                                                Threshold                                                       Computation Window              Tool<br>
+Use order_optimal_portfolio to Order    Must use.   Every day.  Optimize API<br>
+Trade Within QTradableStocksUS  &gt;= 95%  Every day.  QTradableStocksUS</p>
+</blockquote>
+
+<p>Apparently, this threshold was not explicitly stated above as opposed to the that of official contest rules. So Occam apologizes for misunderstanding and not reading the official contest rules:) Is there any compelling reason why Q chose dollar value vs. number of count ? </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a81cbd23d1f461c90028ad1' id='5a81cbd23d1f461c90028ad1'>
+<a href='#5a81cbd23d1f461c90028ad1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1518455762000' class='quanto-date posted-at response-posted-at' href='#5a81cbd23d1f461c90028ad1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The wording in the post was vague. Occam is most certainly forgiven.</p>
+
+<p>The QTU% rule is meant to encourage algorithms to invest the vast majority of their capital in QTU stocks. If the QTU% were measured as number of stocks held that are in the QTU instead of as % of portfolio value, it would be possible for a contest algorithm to invest the majority of its portfolio value in non-QTU names. For example, I could hold 2000 single-share positions in the QTU, and then 100 names outside the QTU to take up my remaining portfolio value. This would result in my algorithm being 95% invested in the QTU (by name count), when in reality, the majority of my investment is outside of the QTU.</p>
+
+<p>The portfolio-value based measurement can also be thought of as a position-weighted value (position_in_QTU_boolean * weight_in_portfolio), which is consistent with the other criteria in the contest.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a81d0bd4303261bcf36b94b' id='5a81d0bd4303261bcf36b94b'>
+<a href='#5a81d0bd4303261bcf36b94b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518457021000' class='quanto-date posted-at response-posted-at' href='#5a81d0bd4303261bcf36b94b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie,</p>
+
+<p>Thanks for the clarification.  Will wait for further updates on the TargetWeights issue. I am thinking of switching to MaximizeAlpha construct for upcoming contest as even my supposed workaround fix still seem unstable and might crash in the middle of a good run.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8227e1ea51ea494d7cfec9' id='5a8227e1ea51ea494d7cfec9'>
+<a href='#5a8227e1ea51ea494d7cfec9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1518479329000' class='quanto-date posted-at response-posted-at' href='#5a8227e1ea51ea494d7cfec9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Used @Grant&#39;s algo above. # Backtest ID: 5a802f48f20a9e4118d01037</p>
+
+<p>The following chart shows a relatively subdued equity line. Nonetheless, the outcome is more than double @Grant&#39;s results. Only changed numbers seen as pressure points. No alteration to the program logic was made. Switched to daily rebalancing instead of weekly.</p>
+
+<p><img src="https://image-proxy.quantopian.com/be7216c2d56da641488f19d7fd7e8abe547bbfbd/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f537461745f4172675f4772616e745f7665722e706e67" /></p>
+
+<p>This strategy trades too much (43,680 trades), even if the turnover is recorded as less than 5%. All I see is account churning. Everyday, it rebalances almost all of its inventory on what should be considered mostly market noise.</p>
+
+<p>It does shorts, but is very poor at it: 42% success rate. Whatever was thought to be predictive for shorts might definitely need some re-engineering. </p>
+
+<p>Evidently, and the word is not used haphazardly, it will break down going forward. This strategy is not designed to have a sustainable CAGR.</p>
+
+<p>If the test was done weekly as in @Grant&#39;s version, what would be the outcome? Easy to answer:</p>
+
+<p><img src="https://image-proxy.quantopian.com/1b4e135306d99ba3fc79a1716032eb575d619e79/687474703a2f2f616c706861706f77657274726164696e672e636f6d2f7175616e746f7069616e2f537461745f4172675f4772616e745f7665725f776b6c792e706e67" /> </p>
+
+<p>This should raise more questions. One of which is: is it really worth it to do it that way?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a84009cd1d7da1e57562954' id='5a84009cd1d7da1e57562954'>
+<a href='#5a84009cd1d7da1e57562954'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518600348000' class='quanto-date posted-at response-posted-at' href='#5a84009cd1d7da1e57562954'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Is there a simple algo that illustrates the potential problem with the 
+<code>TargetWeights</code> objective and maintaining the a portfolio that is &gt;= 95% in the QTU (by dollar value...thanks for the clarification)?  For example, say one just held all stocks in the QTU equal weight, and updated the portfolio daily.  Would the problem manifest itself?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a844577d1d7da6b76562efe' id='5a844577d1d7da6b76562efe'>
+<a href='#5a844577d1d7da6b76562efe'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518617975000' class='quanto-date posted-at response-posted-at' href='#5a844577d1d7da6b76562efe'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Here&#39;s an algo that illustrate the problem in TargetWeights objective and maintaining the a portfolio that is &gt;= 95% in the QTU.<br>
+The notebook that follows gives you the details. Hope this helps.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a844693d1d7da5bd256272a' id='5a844693d1d7da5bd256272a'>
+<a href='#5a844693d1d7da5bd256272a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518618259000' class='quanto-date posted-at response-posted-at' href='#5a844693d1d7da5bd256272a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>And here&#39;s the notebook on above algo...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a86ac3de3fa7f0440acf274' id='5a86ac3de3fa7f0440acf274'>
+<a href='#5a86ac3de3fa7f0440acf274'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518775357000' class='quanto-date posted-at response-posted-at' href='#5a86ac3de3fa7f0440acf274'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks James -</p>
+
+<p>Well, I guess the question is why would one expect to stay within the QTU, point-in-time?  I can see several potential impediments:</p>
+
+<ol>
+<li>Turnover constraint.  It depends on how it is implemented, but if the 
+<code>TargetWeights</code> objective doesn&#39;t ignore the turnover constraint when exiting stocks that are no longer in the QTU, then it will be a problem.  In the limit that the turnover constraint dictates a minuscule change in the portfolio, stocks will linger.  Given that the turnover in the QTU on a daily basis is significant, one could end up holding stocks that would need to be dropped to maintain the QTU inclusion level for the portfolio.<br></li>
+<li>The backtester doesn&#39;t realistically handle closing positions, as I understand.  Even when trading within the QTU, and within the 5% position constraint, I still see orders being cancelled at the end of the day, not being filled.<br></li>
+<li>There is no explicit prioritization in exiting positions for stocks no longer in the QTU--it is all mixed up with the optimize API.  To make it a priority, for example, at the open, one could submit orders solely to clear the portfolio of the non-QTU stocks.  A strict priority would be for all of those orders to close, prior to running the optimize API, such that it is only dealing with a current portfolio of QTU stocks.  One could also set a more forgiving threshold, cancelling any unfilled orders, and then running the optimize API (which I guess would again attempt to close out the non-QTU positions).<br></li>
+<li>Conceivably, there could be an optimize API QTU participation constraint, which would result in a failed optimize result, if it could not be met.  Not sure if this is doable within the mechanics of the optimize API, but it would give explicit control over this algo constraint.</li>
+</ol>
+
+<p>Of course, if Q continues on their trend of releasing closed-source, black-box key API modules (e.g. QTU, optimize API, risk model), it&#39;ll become increasingly difficult for users to aid in understanding and troubleshooting such problems.  I guess open-sourcing code hasn&#39;t been all that helpful to them over the years...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a86bed5188d1641c3f81fa5' id='5a86bed5188d1641c3f81fa5'>
+<a href='#5a86bed5188d1641c3f81fa5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518780117000' class='quanto-date posted-at response-posted-at' href='#5a86bed5188d1641c3f81fa5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Regarding your points (2) &amp; (3), code below is the temporary workaround fix. It is placed before the objective function TargetWeights to give precedence in closing newly dropped stocks from QTU list before being passed to Optimize API:  </p>
+
+<pre><code>    # Sell any positions in assets that are no longer in our target portfolio.  
+    for security in context.portfolio.positions:  
+        if data.can_trade(security):  # Work around inability to sell de-listed stocks.  
+            if security not in context.stocks: #QTradableStocksUS():  
+                to_close = [security]   # securities to be changed  
+                try:  
+                    ids = order_optimal_portfolio(  
+                        objective   = opt.TargetWeights(  
+                        pd.Series(0, index = to_close)  # the 0 means close them  
+                    ),  
+                    constraints = [  
+                        opt.Frozen(  
+                            set(context.portfolio.positions.keys()) - set(to_close)  
+                        )  
+                    ]  
+                )  
+                #for i in ids:  # log any ordered to close  
+                    #o = get_order(i)    # order object  
+                    #s = o.sid   # including filled as a head&#39;s up in case partial  
+                    #log.info(&#39;{} {} {}&#39;.format(s.symbol, o.filled, o.amount))  
+                except Exception as e:  
+                    log.info(e)  
+</code></pre>
+
+<p>I said <strong>temporary workaround</strong> because in a long backtest run I encountered point (4) and received this error:</p>
+
+<blockquote>
+<p>InfeasibleConstraints: The attempted optimization failed because no portfolio could be found that<br>
+satisfied all required constraints.</p>
+</blockquote>
+
+<p>The following special portfolios were spot checked and found to be in violation<br>
+of at least one constraint:</p>
+
+<p>Target Portfolio (as provided to TargetWeights):</p>
+
+<p>Would violate Frozen([Equity(32770 [DEI]), Equity(16389 [NCR]), ...]) because:<br>
+New weight for Equity(32770 [DEI]) (0.0) would not equal old weight (-0.00124713995777).<br>
+New weight for Equity(16389 [NCR]) (0.0) would not equal old weight (0.00127471453249).<br>
+New weight for Equity(38921 [LEA]) (0.0) would not equal old weight (-0.0012673465914).<br>
+New weight for Equity(2 [ARNC]) (0.0) would not equal old weight (0.00124764231739).<br>
+New weight for Equity(6161 [PRGO]) (0.0) would not equal old weight (0.0012355562442).<br>
+New weight for Equity(4117 [JCI]) (0.0) would not equal old weight (0.00114328492707).<br>
+New weight for Equity(4118 [JCP]) (0.0) would not equal old weight (0.00120445963172).<br>
+New weight for Equity(2071 [D]) (0.0) would not equal old weight (0.00110161134441).<br>
+New weight for Equity(4120 [JEC]) (0.0) would not equal old weight (0.0011990730669).<br>
+New weight for Equity(14372 [EIX]) (0.0) would not equal old weight (-0.00124497410696).<br>
+... (841 more)</p>
+
+<p>To make the backtest continue to the end, I added  &quot; except Exception as e:   log.info(e) &quot; , to ignore error and just log it.</p>
+
+<p>I am with you on your frustrations with closed-source modules. The above case clearly illustrates that there are still &quot;holes&quot; in their framework implementation. If this were truly a &quot;crowd-source&quot; effort, it would help if everything is open source as the &quot;crowd&quot; themselves would help sort out and resolve issues like these.</p>
+
+<p>I am particularly not sold on the idea of &quot;style risks&quot; as they are unnecessary risks that neither needs to be mitigated nor diversified because the market as a whole is non-stationary and non-linear, exposed to all kinds of imagineable risks.  There is also the matter of wrong measurement of these conceived risks specially if they are static.  Take the case of short term reversal risk which is measured by a 14 day RSI, a static measurement in a non stationary series of returns. Clearly, it is flawed because in high volatility periods, the phase of returns are fast while in low volatility periods which implies an ensuing trend, the phase of returns are slower.  If the measurement were adaptive and in tuned to the phase of returns (period of RSI is adaptive in reponse to current phase), then there might be some validility to the measurement of short term reversal. Again, on the bigger picture, are all these risks factors actually achieving their desired and designed objective or are they, in fact, churning out sub optimal results because it is overly choking potentially higher returns  in exchange for a very rigid and stringent desire to contain risks?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a86c4541b4f9771401f5e24' id='5a86c4541b4f9771401f5e24'>
+<a href='#5a86c4541b4f9771401f5e24'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518781524000' class='quanto-date posted-at response-posted-at' href='#5a86c4541b4f9771401f5e24'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>There are many &quot;Mysteries of the Q&quot; (to be elucidated in an upcoming YouTube series).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a88344f08be396170f96f0a' id='5a88344f08be396170f96f0a'>
+<a href='#5a88344f08be396170f96f0a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518875727000' class='quanto-date posted-at response-posted-at' href='#5a88344f08be396170f96f0a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Regarding the risk model and style risks, since it&#39;s introduction, there has been almost complete radio silence on the topic of how it works in detail, why it is a net good thing, and if this particular formulation is effective.  I&#39;m guessing this may be what is used under the hood:</p>
+
+<p><a href="https://www.quantopian.com/lectures/factor-risk-exposure">https://www.quantopian.com/lectures/factor-risk-exposure</a></p>
+
+<p>Part of the motivation, as I&#39;ve heard it, is that Q wants to filter out less-profitable &quot;common&quot; factors (i.e. not something sophisticated customers would pay a premium for).  It was noted by the author on <a href="https://www.quantopian.com/posts/enhancing-short-term-mean-reversion-strategies-1">https://www.quantopian.com/posts/enhancing-short-term-mean-reversion-strategies-1</a> that short-term reversal is very common, and so I guess it makes sense that it is not the sort of strategy that one would want if the goal is to show that the crowd is finding alpha gems, over what a traditional brick-and-mortar hedge fund would be finding.  In the long run, if the 1337 Street Fund is correlated with every other hedge fund out there, then it will not have differentiated itself.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a88654fac7fa351cf675eb5' id='5a88654fac7fa351cf675eb5'>
+<a href='#5a88654fac7fa351cf675eb5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518888271000' class='quanto-date posted-at response-posted-at' href='#5a88654fac7fa351cf675eb5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>So I gather that Q wants to offer sophisticated investors a unique product in the equity market neutral strategy space. This &quot;product&quot; differentiates itself from others by design through a strategy framework with a desired objective that has been subjected to different kinds of returns / risks thresholds with the intent of extracting uncorrelated returns while at the same time containing different types of identifiable risks through risk mitigation and diversification techniques. Q designed the &quot;product&quot; but the crowd sourced authors &quot;produced&quot; it through Q&#39;s allocation scheme extracted primarily through its contests winners. </p>
+
+<p>Bottom line,  we are but mere &quot;worker bees&quot; and must bow to the Queen Bee. We can drop something in their suggestion box or  give out constructive criticisms with the intent of improving the product and just see how it goes. Is the lure of getting an allocation worth the effort given this kind of relationship?</p>
+
+<p>I would like to see Q post a notebook of their model algo, preferably one that had received an allocation with a long backtest such as the one above that has passed all their contest requirements. At least this would give us some guidance as to what kind of long term returns and risk levels are to be expected with this unique &quot;product&quot;.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8955be6d622e10472ac7d8' id='5a8955be6d622e10472ac7d8'>
+<a href='#5a8955be6d622e10472ac7d8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1518949822000' class='quanto-date posted-at response-posted-at' href='#5a8955be6d622e10472ac7d8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well, somebody must know something we don&#39;t, since Q has gotten a boatload of money from VCs over the years--at least $50 M, if not more, from its inception in 2011, has been invested (e.g. see <a href="https://angel.co/quantopian">https://angel.co/quantopian</a>).  Not sure how these VCs think, but I have to wonder if they look for some sort of decent pay-back in a finite amount of time (e.g. X% in 5 years), but maybe sometimes it is more of a long-term strategic investment.</p>
+
+<p>As far as I can tell, Q has completely shut the door on any relationship with users other than for them to be worker bees.  The fundamental problem, of course, is that the business would need to be completely restructured from the ground up, for the crowd to have any role in running the show.  This was never in the cards from the get-go, despite all of the initial &quot;let&#39;s take on Wall Street together&quot; hoopla.</p>
+
+<p>Q has never posted anything remotely feasible as a viable algo--I wouldn&#39;t hold your breath for an example.  My guess is that anyone in the industry familiar with the sort of long-short equity algos Q is cultivating knows the answer.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a895fa5339c3f4ed6c90c58' id='5a895fa5339c3f4ed6c90c58'>
+<a href='#5a895fa5339c3f4ed6c90c58'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1518952357000' class='quanto-date posted-at response-posted-at' href='#5a895fa5339c3f4ed6c90c58'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>VC&#39;s make a lot of bets and it&#39;s bet on Q is just a drop in the bucket in the overall scheme of VC&#39;s business model. There are normally contract covenants to comply with on a time bound basis and also exit clauses normally attached to these investments that is shrouded with confidentiality agreements which includes among other things, non disclosure to the public or media.  Having said that, we may never know if a VC pulled out their investments or not.  </p>
+
+<p>I don&#39;t want to pre empt judgement, that would be speculative on my part but reading between the lines, I see signs that not everything is hanky dory.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8dd0f04867d0752b9e8001' id='5a8dd0f04867d0752b9e8001'>
+<a href='#5a8dd0f04867d0752b9e8001'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1519243504000' class='quanto-date posted-at response-posted-at' href='#5a8dd0f04867d0752b9e8001'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>] feasible as a viable algo</p>
+
+<p><a href="https://www.quantopian.com/posts/quantopian-risk-model-in-algorithms">Quantopian Risk Model In Algorithms</a> is the best that I know of right now but if started six months ago is -2.5%.</p>
+
+<p>I wonder if it might be possible to build stops limits into optimize, I was able to greatly improve the algos in the lecture series in part using those. Would my improvements have held up with different start dates?  That&#39;s the thing facing all of us. </p>
+
+<p>One of the challenges is the $10M requirement so we often gravitate into large dollar volume stocks and many of us are focusing on the same stocks to some degree. Then we also necessarily extend our trading into stocks with far weaker signals for less investment in each, more neutral. I could be wrong but my impression is that we could find a lot of alpha in factors at a threshold that screens down to 50 stocks and then need to change that threshold bringing in an additional 100 stocks with weaker signals to pass constraints.</p>
+
+<p>Fairly confident we&#39;ll eventually get there somehow, with adaptability, I admire the hero investors backing Quantopian.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8fd95f0014292ea724eac0' id='5a8fd95f0014292ea724eac0'>
+<a href='#5a8fd95f0014292ea724eac0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1519376735000' class='quanto-date posted-at response-posted-at' href='#5a8fd95f0014292ea724eac0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Lots going on in this thread, but as I recall, there was a potential bug found in the 
+<code>TargetWeights</code> objective, correct?  If so, was there ever a help ticket/bug report logged?  If so, what is the status?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8fde3dd09e2348d3333d8c' id='5a8fde3dd09e2348d3333d8c'>
+<a href='#5a8fde3dd09e2348d3333d8c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1519377981000' class='quanto-date posted-at response-posted-at' href='#5a8fde3dd09e2348d3333d8c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Yes, I filed a help ticket/bug report about two weeks ago. Worked with Jamie on this issue via pm and he confirmed the existence of the problem. I submitted a temporary fix but not stable in long runs. Jamie is still working on the possible source of the problem. Here&#39;s the latest feedback from Jamie about a week ago:</p>
+
+<blockquote>
+<p>Regarding the TargetWeights objective, as James mentioned, we discovered that he needed to apply Blue&#39;s solution to close out of positions that drop out of the QTU. This is unrelated to how the QTU% is measured - non-QTU names were not being dropped no matter which way you measure it. I don&#39;t yet have a better answer as to why this is happening, but I will try to get one. I don&#39;t expect to have an answer this week, but I&#39;ll see if I can get some answers soon.  </p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a8fe254d04fd7131e8cb80a' id='5a8fe254d04fd7131e8cb80a'>
+<a href='#5a8fe254d04fd7131e8cb80a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1519379028000' class='quanto-date posted-at response-posted-at' href='#5a8fe254d04fd7131e8cb80a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jamie/Q support -</p>
+
+<p>Obvious, but if you&#39;d open-sourced the Optimize API from the get-go, users could simply have a look for themselves and help identify the source of bugs (as they have over the years).  Is there a reason it is not open source?  There would seem to be only upside.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5a9925a11f0f02001ba8bb51' id='5a9925a11f0f02001ba8bb51'>
+<a href='#5a9925a11f0f02001ba8bb51'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1519986081000' class='quanto-date posted-at response-posted-at' href='#5a9925a11f0f02001ba8bb51'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Checking back on the status of a potential bug in 
+<code>TargetWeights</code>.  Is there, in fact, a verified bug?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aa1238936ac88000d42734b' id='5aa1238936ac88000d42734b'>
+<a href='#5aa1238936ac88000d42734b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1520509833000' class='quanto-date posted-at response-posted-at' href='#5aa1238936ac88000d42734b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Following up yet again...is there a bug?  If so, is it being worked?</p>
+
+<p>Sorry for being obnoxious, but I do have a potential use case...</p>
+
+<p>Anyone?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abb44d8bad61a3b56e6ea14' id='5abb44d8bad61a3b56e6ea14'>
+<a href='#5abb44d8bad61a3b56e6ea14'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522222296000' class='quanto-date posted-at response-posted-at' href='#5abb44d8bad61a3b56e6ea14'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I got feedback from Q that there is no &quot;bug&quot; in the implementation of 
+<code>TargetWeights</code>.  My interpretation is that there won&#39;t be any changes on their end, so I&#39;ll dig into the work-arounds described above.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abb7e8abeb3c147b46a5bf0' id='5abb7e8abeb3c147b46a5bf0'>
+<a href='#5abb7e8abeb3c147b46a5bf0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522237066000' class='quanto-date posted-at response-posted-at' href='#5abb7e8abeb3c147b46a5bf0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant,</p>
+
+<p>That&#39;s quite an unsettling feedback from Q. I filed the help ticket/&quot;bug&quot; report and last response I got was they are still trying to figure out the source of the problem. I guess if their engineers can&#39;t find the source and/or solution to the problem, they mark it as a &quot;no bugger&quot;! It&#39;s probably in the low end of their priority list considering their new challenge with regards to Morningstar&#39;s major revamp of fundamental data. I think they should do more in the area of checking for data integrity / consistency of feed from their data vendors particularly in composing and filtering QTradableStocksUS. I noticed a few threads popping up questioning the integrity / consistency of some fundamental data coming from Morningstar. While not directly Q&#39;s fault, it is incumbent upon them to do due diligence of data received from data vendors before they release to us &quot;worker bees&quot;. As the old computer addage says, GIGO - garbage in, garbage out.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abc11aef028a044320a2ef9' id='5abc11aef028a044320a2ef9'>
+<a href='#5abc11aef028a044320a2ef9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522274734000' class='quanto-date posted-at response-posted-at' href='#5abc11aef028a044320a2ef9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ James -</p>
+
+<p>Yeah, I&#39;m not sure what happened here.  Looking above, it sounded like Jamie would look into it, and report back.  Maybe I&#39;ll write a dirt-simple algo (e.g. equal weight QTU, updated daily) to see to 
+<code>TargetWeights</code> misbehaves.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abc14e28a82507decdd4f43' id='5abc14e28a82507decdd4f43'>
+<a href='#5abc14e28a82507decdd4f43'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1522275554000' class='quanto-date posted-at response-posted-at' href='#5abc14e28a82507decdd4f43'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, @James: I think we had a bit of a miscommunication internally. Technically, the <code>TargetWeights</code> objective is behaving as originally intended. However, there is a particular case that James ran into where <code>TargetWeights</code> should probably behave differently. There are some tweaks to the objective that we&#39;ve identified could be made to improve <code>TargetWeights</code> and fix the unexpected behavior that James encountered. Unfortunately, this is not something that we are working on right now. It&#39;s currently on our to-do list, but it is not at the top of that list. In the meantime, I recommend using the <code>MaximizeAlpha</code> objective, or the <code>FrozenConstraint</code> workaround.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abcab9155a7ef327b5485f5' id='5abcab9155a7ef327b5485f5'>
+<a href='#5abcab9155a7ef327b5485f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522314129000' class='quanto-date posted-at response-posted-at' href='#5abcab9155a7ef327b5485f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jamie -</p>
+
+<p>Thanks for the update.  I had been tinkering around with 
+<code>TargetWeights</code> and then came across this thread, and started to wonder if some wonky behavior I was seeing was due to my not implementing it correctly, or a &quot;bug&quot; (call it what you will).</p>
+
+<p>Do you have a concise description of the issue, and why the workaround is required?</p>
+
+<p>By the way, if you were to just open-source the optimize API (not necessarily making it compatible with zipline, at this point), you could refer me to the associated issue--easy-peasy.  I was told that you would eventually open-source the optimize API.  Why not just put it out now?  Maybe it has to be scrubbed for proprietary stuff?  Or it becomes another support issue, with folks asking questions?  I guess there must be a logical reason it has not been shared.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abdfea3f3e4580018ea5d34' id='5abdfea3f3e4580018ea5d34'>
+<a href='#5abdfea3f3e4580018ea5d34'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522400931000' class='quanto-date posted-at response-posted-at' href='#5abdfea3f3e4580018ea5d34'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ James -</p>
+
+<p>Can you articulate the &quot;bug&quot; in the implementation of 
+<code>TargetWeights</code>?  I&#39;ve gone several rounds now with Q support both here and offline, and have yet to get a description of the problem, and the recommended work-around.  Maybe I&#39;m being impatient, but I&#39;d think if there is an internal report, the findings could simply be copied and pasted here.  Not sure why this is so hard...guess they are busy with other things.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abe12cb779ddb0014773914' id='5abe12cb779ddb0014773914'>
+<a href='#5abe12cb779ddb0014773914'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50842732cb5e1a02000000d1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/f86535a7fafab6b7d903fc1461362f0a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50842732cb5e1a02000000d1'>James Villa</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1522406091000' class='quanto-date posted-at response-posted-at' href='#5abe12cb779ddb0014773914'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant,</p>
+
+<p>The issue with the implementation of TargetWeights is, in some cases, it does not close positions of recently dropped stocks in the QTU universe as it is suppose to under the order_optimal_portfolio routine. Since these positions remain open and are now considered non QTU, it causes the algo to fail the &gt;= 95% QTU test. </p>
+
+<p>In my post to you dated Feb 14, 2018 above, I attached both the backtest and notebook to illustrate the problem. At the bottom of the attached notebook is a graph that tracks daily %QTU composition and it shows that it goes below the &gt;=95% threshold as a result of newly dropped stocks in QTU not being closed under the TargetWeights construct.</p>
+
+<p>I did come up with a workaround inspired by @BlueSeahawk in modifying-individual-positions-using-order-optimal-portfolio-frozen and posted it above. It forces the algo to close the open positions of these newly dropped stocks out of the QTU before calling TargetWeights and order-optimal-portfolio routines.<br>
+Hope this helps.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abe15d80e7bd0001811b60c' id='5abe15d80e7bd0001811b60c'>
+<a href='#5abe15d80e7bd0001811b60c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522406872000' class='quanto-date posted-at response-posted-at' href='#5abe15d80e7bd0001811b60c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ James -</p>
+
+<p>Thanks.  I&#39;ll take a look.  Just curious, if 
+<code>TargetWeights</code> is used without constraints, is there still a problem?  In theory, if I understand correctly, it should behave effectively like <code>order_target_percent</code> and attempt to close all positions with 0% weights, but maybe not?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5abf64119b7f7b0015ef6ac6' id='5abf64119b7f7b0015ef6ac6'>
+<a href='#5abf64119b7f7b0015ef6ac6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1522492433000' class='quanto-date posted-at response-posted-at' href='#5abf64119b7f7b0015ef6ac6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here&#39;s a first cut at troubleshooting.  Probably unrelated, but I got an odd nan error, too.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/stat-arb-11-year-backtest-notebook'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/stat-arb-11-year-backtest-notebook'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#99fffcfcfdfbf8faf2d9e8ecf8f7edf6e9f0f8f7b7faf6f4">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

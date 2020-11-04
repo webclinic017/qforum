@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Shorting VXX based on VIX Future&#39;s contango
+</title>
+<meta content='The code and idea is quite simple, the algorithm pulls daily settlement prices for VIX front month and second month futures and calculates the ratio of the Front Month/Second Month. If this ratio is below a certain threshold, in my case I chose 0.90, short VXX, otherwise close out all positions and move to cash. I&#39;m testing this strategy and the results look really nice, but I&#39;m hoping for input to help reduce the drawdown. Also, if anyone has spotted errors in my code or any biases, please...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="VaQvSPICvwUev03qqpiWxKXBptibWGGsB/jyaNVxYyYpwlkFUPRt5qeiFNvldz6wnU+FseGUdLeF9ykCfzQBnQ==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/shorting-vxx-based-on-vix-futures-contango' property='og:url'>
+<meta content='Shorting VXX based on VIX Future&#39;s contango' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/shorting-vxx-based-on-vix-futures-contango' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Shorting VXX based on VIX Future&#39;s contango' property='og:title'>
+<meta content='The code and idea is quite simple, the algorithm pulls daily settlement prices for VIX front month and second month futures and calculates the ratio of the Front Month/Second Month. If this ratio is below a certain threshold, in my case I chose 0.90, short VXX, otherwise close out all positions and move to cash. I&#39;m testing this strategy and the results look really nice, but I&#39;m hoping for input to help reduce the drawdown. Also, if anyone has spotted errors in my code or any biases, please...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/shorting-vxx-based-on-vix-futures-contango">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='572436a28532a73db5000555'>
+<div class='post-container' data-post-id='572436a28532a73db5000555' id='572436a28532a73db5000555'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Shorting VXX based on VIX Future&#39;s contango</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<span class='posted-at'>posted </span>
+<span UTCms='1461991074000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Shorting VXX based on VIX Future&#39;s contango&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fshorting-vxx-based-on-vix-futures-contango%3Futm_source%3Dwebsite_share%26utm_campaign%3Dshorting-vxx-based-on-vix-futures-contango%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fshorting-vxx-based-on-vix-futures-contango%3Futm_source%3Dwebsite_share%26utm_campaign%3Dshorting-vxx-based-on-vix-futures-contango%26utm_medium%3Dlinkedin&amp;title=Shorting+VXX+based+on+VIX+Future%27s+contango+%28Fang+Zhou%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Research' data-tag-id='55c50e7d8d4710ec6e000018' href='/posts/tag/Research/newest'>Research</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='ETFs' data-tag-id='55d33f633f6ba10065000001' href='/posts/tag/ETFs/newest'>ETFs</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/shorting-vxx-based-on-vix-futures-contango?utm_source=website_share&amp;utm_campaign=shorting-vxx-based-on-vix-futures-contango&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Fang Zhou" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>The code and idea is quite simple, the algorithm pulls daily settlement prices for VIX front month and second month futures and calculates the ratio of the Front Month/Second Month. If this ratio is below a certain threshold, in my case I chose 0.90, short VXX, otherwise close out all positions and move to cash. I&#39;m testing this strategy and the results look really nice, but I&#39;m hoping for input to help reduce the drawdown. Also, if anyone has spotted errors in my code or any biases, please let me know!  </p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>75 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5725a0580282e9c1a8000632' id='5725a0580282e9c1a8000632'>
+<a href='#5725a0580282e9c1a8000632'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/538a21779789ff8635000248'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7d5672faa66a0b5cb6d3d20d979a8a96?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/538a21779789ff8635000248'>Macro Investor</a>
+</div>
+<a UTCms='1462083678000' class='quanto-date posted-at response-posted-at' href='#5725a0580282e9c1a8000632'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>If instead of going to cash you invest in SPY then the total return doubles and the max drawdown drops to 20%. However, I am no programmer and I may have made a mistake. If you can double check that and confirm, and if it indeed checks out, then you can simply hold half the portfolio in cash and invest the rest in the modified strategy (which now goes to SPY instead of cash), get the same 10x return over 7 years, and get a drawdown of 10%.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5726541402dd621c53000197' id='5726541402dd621c53000197'>
+<a href='#5726541402dd621c53000197'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/538a21779789ff8635000248'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7d5672faa66a0b5cb6d3d20d979a8a96?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/538a21779789ff8635000248'>Macro Investor</a>
+</div>
+<a UTCms='1462129691000' class='quanto-date posted-at response-posted-at' href='#5726541402dd621c53000197'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>However, just buying and holding XIV will easily outperform this algorithm.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57265c64d187631cc10001c0' id='57265c64d187631cc10001c0'>
+<a href='#57265c64d187631cc10001c0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1462131826000' class='quanto-date posted-at response-posted-at' href='#57265c64d187631cc10001c0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Macro Investor, thanks for your input! </p>
+
+<p>To reply to your first suggestion, the reason I&#39;m using the VIX term structure as a signal is also because in normal market conditions, VIX futures are in contango. When the VIX term structure begins to backwardate, it is normally correlated with bearish market movements, in which case, I do not believe moving to SPY to be safe when the F1/F2 &gt; 0.90 or 0.95.</p>
+
+<p>As well, I don&#39;t think a simple buy and hold strategy for XIV performs too well given how volatile the instrument is. I&#39;ve ran a backtest using XIV as the benchmark to compare against the short VXX strategy proposed and included it here; it does significantly outperform XIV. In addition, I&#39;ve tested rather than shorting VXX to just long XIV using the same signal, however, I believe that because of the structure difference between VXX and XIV (they are not direct inverses of each other or correlation != -1), shorting VXX performs better and allows for more robust signals.</p>
+
+<p>One thing I&#39;m looking for is to perhaps reduce the whipsaw that occurs when the VIX Futures term structure hovers around the .90 - .95 mark by possibly an indicator based on a different instrument.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57265c818536acdb1100031c' id='57265c818536acdb1100031c'>
+<a href='#57265c818536acdb1100031c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1462131851000' class='quanto-date posted-at response-posted-at' href='#57265c818536acdb1100031c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Macro Investor, thanks for your input! </p>
+
+<p>To reply to your first suggestion, the reason I&#39;m using the VIX term structure as a signal is also because in normal market conditions, VIX futures are in contango. When the VIX term structure begins to backwardate, it is normally correlated with bearish market movements, in which case, I do not believe moving to SPY to be safe when the F1/F2 &gt; 0.90 or 0.95.</p>
+
+<p>As well, I don&#39;t think a simple buy and hold strategy for XIV performs too well given how volatile the instrument is. I&#39;ve ran a backtest using XIV as the benchmark to compare against the short VXX strategy proposed and included it here; it does significantly outperform XIV. In addition, I&#39;ve tested rather than shorting VXX to just long XIV using the same signal, however, I believe that because of the structure difference between VXX and XIV (they are not direct inverses of each other or correlation != -1), shorting VXX performs better and allows for more robust signals.</p>
+
+<p>One thing I&#39;m looking for is to perhaps reduce the whipsaw that occurs when the VIX Futures term structure hovers around the .90 - .95 mark by possibly an indicator based on a different instrument.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57266a1702dd621c53000288' id='57266a1702dd621c53000288'>
+<a href='#57266a1702dd621c53000288'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/538a21779789ff8635000248'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7d5672faa66a0b5cb6d3d20d979a8a96?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/538a21779789ff8635000248'>Macro Investor</a>
+</div>
+<a UTCms='1462135326000' class='quanto-date posted-at response-posted-at' href='#57266a1702dd621c53000288'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>If you run the backtest using the same time frame that you used in the original you would see that XIV buy and hold outperforms. I will clone your algorithm and post how switching to SPY instead of cash improves results.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5726727602dd621c530002db' id='5726727602dd621c530002db'>
+<a href='#5726727602dd621c530002db'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/538a21779789ff8635000248'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7d5672faa66a0b5cb6d3d20d979a8a96?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/538a21779789ff8635000248'>Macro Investor</a>
+</div>
+<a UTCms='1462137467000' class='quanto-date posted-at response-posted-at' href='#5726727602dd621c530002db'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I attached the results of the backtest. Instead of putting to cash I put it in UPRO which is triple leveraged SPY. The return triple and the max drawdown goes to 50%. So you can now increase cash percentage to lower the drawdown while still beating the original.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57357568310f511dc6000521' id='57357568310f511dc6000521'>
+<a href='#57357568310f511dc6000521'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5725981caa6696ec440004c6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6f42eb9d70d5cde0c7133fec45d4adcd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5725981caa6696ec440004c6'>HP Peng</a>
+</div>
+<a UTCms='1463121261000' class='quanto-date posted-at response-posted-at' href='#57357568310f511dc6000521'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In line 41 where you have:</p>
+
+<pre><code>last_ratio = data.current(&#39;v1&#39;,&#39;Settle&#39;)/data.current(&#39;v2&#39;,&#39;Settle&#39;)  
+</code></pre>
+
+<p>Do you have look-ahead bias here? Today&#39;s data won&#39;t be available until trading ends. Or I get it wrong in how this thing works?</p>
+
+<p>Thanks.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='573b7bc7180ee472cd00029d' id='573b7bc7180ee472cd00029d'>
+<a href='#573b7bc7180ee472cd00029d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b8d1a5ce5ef802000000b8'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b44e6fe673dbec5529cd52595b9b7f6c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b8d1a5ce5ef802000000b8'>Ben Shyong</a>
+</div>
+<a UTCms='1463516110000' class='quanto-date posted-at response-posted-at' href='#573b7bc7180ee472cd00029d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>HP Peng,</p>
+
+<p>Does line 14-15 affect this?</p>
+
+<pre><code>    # Shifting data by one day to avoid forward-looking bias  
+    return df.shift(1)  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='573e1fcfd5216add08000479' id='573e1fcfd5216add08000479'>
+<a href='#573e1fcfd5216add08000479'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b8d1a5ce5ef802000000b8'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b44e6fe673dbec5529cd52595b9b7f6c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b8d1a5ce5ef802000000b8'>Ben Shyong</a>
+</div>
+<a UTCms='1463689174000' class='quanto-date posted-at response-posted-at' href='#573e1fcfd5216add08000479'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi all,</p>
+
+<p>I tried testing this algo in live trading, but the logs show NaN for the calculated contango ratio. Algo works as expected and logs show real values during backtesting. Any idea what is going on?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='573f29c8af920a19a50000f5' id='573f29c8af920a19a50000f5'>
+<a href='#573f29c8af920a19a50000f5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1463757262000' class='quanto-date posted-at response-posted-at' href='#573f29c8af920a19a50000f5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Ben Shyong/HP Peng,</p>
+
+<p>The look-ahead bias is correct from line 14-15 with the shift downwards; the rebalancing function will always be looking at t-1 contango ratios.</p>
+
+<p>The NaN may be from the Quandl data because futures data is delayed by one day, e.g., the latest settlement prices would be for 05/18/2016 (today being 05/20/2016). I would double check your live-trading outputs to make sure data is available. vixcentral has better data for live trading.</p>
+
+<p>Hope this helps and thanks for the interests!</p>
+
+<p>Cheers  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='573f8d82460808636b000136' id='573f8d82460808636b000136'>
+<a href='#573f8d82460808636b000136'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/538a21779789ff8635000248'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/7d5672faa66a0b5cb6d3d20d979a8a96?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/538a21779789ff8635000248'>Macro Investor</a>
+</div>
+<a UTCms='1463782798000' class='quanto-date posted-at response-posted-at' href='#573f8d82460808636b000136'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I had the same problem and there&#39;s really no fix as far as I can see. We have to wait for live futures data in Quantopian, which will hopefully come second half of the year.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5744d9259871f3c557000576' id='5744d9259871f3c557000576'>
+<a href='#5744d9259871f3c557000576'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1464129834000' class='quanto-date posted-at response-posted-at' href='#5744d9259871f3c557000576'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>You need to shift data to prevent look-ahead bias in backtesting, and ALSO forward fill the latest value to the next expected valid trading date, to have a value during live trading.  There is code to do this here: <a href="https://www.quantopian.com/posts/function-like-history-but-for-fetch-csv-data">https://www.quantopian.com/posts/function-like-history-but-for-fetch-csv-data</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5744d9359871f3395e00046d' id='5744d9359871f3395e00046d'>
+<a href='#5744d9359871f3395e00046d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5033e9d73fb2eb0002000231'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/4a9a839742731aad6e110e1d3586e020?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5033e9d73fb2eb0002000231'>Simon Thornington</a>
+</div>
+<a UTCms='1464129850000' class='quanto-date posted-at response-posted-at' href='#5744d9359871f3395e00046d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Note that that is Q1 code, so it&#39;ll probably need to be updated to Q2.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5744f15e022f262a6200062c' id='5744f15e022f262a6200062c'>
+<a href='#5744f15e022f262a6200062c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/50b8d1a5ce5ef802000000b8'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/b44e6fe673dbec5529cd52595b9b7f6c?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/50b8d1a5ce5ef802000000b8'>Ben Shyong</a>
+</div>
+<a UTCms='1464136034000' class='quanto-date posted-at response-posted-at' href='#5744f15e022f262a6200062c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Simon! I&#39;ll take a look and see if I can get it to work.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='579e1903860d473154000b42' id='579e1903860d473154000b42'>
+<a href='#579e1903860d473154000b42'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55f74e6ccfa55c8398000234'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e0dfc0fe6899f088dd5bca37cf65497e?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55f74e6ccfa55c8398000234'>Cameron Collins</a>
+</div>
+<a UTCms='1469978890000' class='quanto-date posted-at response-posted-at' href='#579e1903860d473154000b42'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>instead of futures set values, have you considered looking at the previous close of vix/vxv to calculate the ratio?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='57a2008b103b893fea0005f4' id='57a2008b103b893fea0005f4'>
+<a href='#57a2008b103b893fea0005f4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1470234769000' class='quanto-date posted-at response-posted-at' href='#57a2008b103b893fea0005f4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Cameron, I have actually tested VIX/VXV to calculate the ratio, but it is more volatile and the DD is higher as well. I set the threshold with 0.95 as above, but I haven&#39;t played around with optimizing the ratio. Here&#39;s the results for the same time period as my initial entry.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586bd8d7f8d548001500012b' id='586bd8d7f8d548001500012b'>
+<a href='#586bd8d7f8d548001500012b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483462883000' class='quanto-date posted-at response-posted-at' href='#586bd8d7f8d548001500012b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This performs very well, anyone have any ideas how it would of done in 08? clearly we can&#39;t backtest 08, but given that it did very well in 2015 with the Vix spikes, how would have the overall strategy handle down periods like 08 in your opinion Fang?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586be22fab32f800150001c4' id='586be22fab32f800150001c4'>
+<a href='#586be22fab32f800150001c4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483465276000' class='quanto-date posted-at response-posted-at' href='#586be22fab32f800150001c4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Why would you want to short VXX when you can simply go long XIV?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586be27b8ff08c0fd1000109' id='586be27b8ff08c0fd1000109'>
+<a href='#586be27b8ff08c0fd1000109'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483465349000' class='quanto-date posted-at response-posted-at' href='#586be27b8ff08c0fd1000109'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>The strategy works fine between 2004 and the commencement of trading of XIV in late 2010 - at least if you substitute futures for XIV/VXX.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586be2ae76efda118b0000f3' id='586be2ae76efda118b0000f3'>
+<a href='#586be2ae76efda118b0000f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483465400000' class='quanto-date posted-at response-posted-at' href='#586be2ae76efda118b0000f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>However you could well face an even bigger Black Swan than 08 - in which case you could be wiped out.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586be6c1bc11d60012000009' id='586be6c1bc11d60012000009'>
+<a href='#586be6c1bc11d60012000009'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1483466439000' class='quanto-date posted-at response-posted-at' href='#586be6c1bc11d60012000009'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi guys, I&#39;m glad people are still checking out this thread.</p>
+
+<p>@Elsid<br>
+I did do some quick and dirty math to just see what the worst case scenario would&#39;ve been prior to 2009&#39;s inception of VXX. Actually, the VIX term would&#39;ve backwardated well before the major market collapse in September 2008 (The term backwardated on September 8th, 2008) so you actually would&#39;ve been sitting out.</p>
+
+<p>Given how VXX is constructed (weighted time to expiry of the Front and Second month futures), the worst day I calculated pre 2009 would&#39;ve been 02/27/2007 when VIX spiked 64.22% (from 11.15 to 18.31). I&#39;m not entirely sure what that event was, but I would imagine it to be something similar to Brexxit. My estimated one day loss given that spike would&#39;ve been around -23% should you have been holding VXX short.</p>
+
+<p>@Anthony FJ Garner<br>
+The reason why you want to short VXX directly is because of the way inverse ETFs are constructed. XIV actually has a problem with path dependency, which would exacerbate the volatility drag of inverse ETFs - a good explanation to what this means can be found at this link here:<br>
+<a href="https://sixfigureinvesting.com/2012/03/under-the-hood-of-a-leveraged-etf/">https://sixfigureinvesting.com/2012/03/under-the-hood-of-a-leveraged-etf/</a></p>
+
+<p>A good real world case is just to look at XIV and VXX during August 2015. You can see that XIV still hasn&#39;t really recovered from the drop whereas VXX has decayed well past the spike.</p>
+
+<p>Overall, I think Brexxit is actually the better proxy for a Black Swan event since 2008 had a build up.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586bea36ab60a30012000038' id='586bea36ab60a30012000038'>
+<a href='#586bea36ab60a30012000038'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483467328000' class='quanto-date posted-at response-posted-at' href='#586bea36ab60a30012000038'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Fang,</p>
+
+<p>Also, saw there were some issues running this live with Data, is this still an issue? </p>
+
+<p>22% isn&#39;t too bad, and we can always apply some sort of stop loss, unless it would of blew past your SL. It will be interesting to see how the new VMIN/VMAX will perform. </p>
+
+<p>Brexit wasn&#39;t too bad either, you could just went flat ahead of the referendum, and even when it did happen VIX only spiked to like 25%ish, Black swans in my mind recently would be complete intraday unknown events, like the flash crash in 2010, but it seems this system has held up fairly well. </p>
+
+<p>Also for 08, yes I saw some information on when it started backwardation in September, but from the late 07, and early 08 Highs it was still a long way down to September 08, I believe around 20%+ I guess we would of been short VXX at this time? but even here I&#39;m assuming drawdowns of maybe 50% max?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586bf1f1870daa00150000d1' id='586bf1f1870daa00150000d1'>
+<a href='#586bf1f1870daa00150000d1'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483469306000' class='quanto-date posted-at response-posted-at' href='#586bf1f1870daa00150000d1'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Looks like 08&#39; might of been the highest volatility period, including many other crises. </p>
+
+<p><a href="http://vixandmore.blogspot.com/2012/12/volatility-during-crises.html">http://vixandmore.blogspot.com/2012/12/volatility-during-crises.html</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586bf322793cff00150000f9' id='586bf322793cff00150000f9'>
+<a href='#586bf322793cff00150000f9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483469613000' class='quanto-date posted-at response-posted-at' href='#586bf322793cff00150000f9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What is &quot;path dependency&quot; in this context? </p>
+
+<p>Yes, not much performance in XIV since end 2015 but that is or can be made up 1) by exit rules to avoid the worst of the drop and 2) by going long VXX at the time of the drop.</p>
+
+<p>Nothing is perfect of course but certainly this strategy looks good in back testing.  I am anxious to avoid shorting for all the obvious reasons. Also, you can&#39;t simulate shorting accurately in Q I believe?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586bf449793cff0012000104' id='586bf449793cff0012000104'>
+<a href='#586bf449793cff0012000104'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483469905000' class='quanto-date posted-at response-posted-at' href='#586bf449793cff0012000104'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I guess you would have to factor in your margin % rate when shorting, and I guess shares might not be available to short.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586c30c6ab9f6d39f30002a4' id='586c30c6ab9f6d39f30002a4'>
+<a href='#586c30c6ab9f6d39f30002a4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1483485388000' class='quanto-date posted-at response-posted-at' href='#586c30c6ab9f6d39f30002a4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>&quot;Path dependency&quot; in this context relates to when inverse ETFs must maintain a constant C X leverage, e.g., for XIV, it&#39;s -1X the futures in notional exposure. This would be why during a large VIX spike, XIV has difficulty recovering: the short futures could easily jump to -2X leverage, in which case, the fund must close out a lot of contracts to reduce the exposure and thereby immediately realizing losses.</p>
+
+<p>There are a whole bunch of ways to reduce the drawdown in this case, and I personally trade XIV in one of my accounts that has a long-only restriction. However, if possible, shorting VXX is much less &quot;noisier&quot; than longing XIV. But like you guys mentioned, shorting VXX also carries its own risk such as margin requirements and a very real likelihood of not being able to borrow shares.</p>
+
+<p>Also for me personally, I&#39;m not a fan of going long VXX or UVXY even when in a very volatile environment; good timing becomes more crucial since volatility crushes are just as sporadic as spikes and I&#39;ve yet to determine a decent algorithm to long these instruments.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586c41a821a704663c000172' id='586c41a821a704663c000172'>
+<a href='#586c41a821a704663c000172'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483489714000' class='quanto-date posted-at response-posted-at' href='#586c41a821a704663c000172'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well just checked on IB VXX had multiple blocks of 3,000,000 shares to short, so I don&#39;t foresee it being an issue, might happen rarely I guess. Also, lowered the exposure to 70% and used TVIX instead you can get higher returns and a lower drawdown, if you add treasuries, instead of cash helps with returns and drawdowns, but with rising interest rates cash might be good the next couple of years.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ead64a62b19001200017c' id='586ead64a62b19001200017c'>
+<a href='#586ead64a62b19001200017c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483648362000' class='quanto-date posted-at response-posted-at' href='#586ead64a62b19001200017c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Reworked the figures again using futures. No, sorry I can&#39;t see it. Very little difference over the long term shorting futures, vxx or going long XIV. Guess which one is safest.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586eb021a62b190015000189' id='586eb021a62b190015000189'>
+<a href='#586eb021a62b190015000189'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483649065000' class='quanto-date posted-at response-posted-at' href='#586eb021a62b190015000189'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Going Long XIV I&#39;m assuming is &quot;Safest&quot;,  but depends on what your definition of safe is. Nothing is really safe as these are all derivatives CME can go go bust any day especially with their completely bogus paper gold/silver contracts, where they would never be able to satisfy contracts if people demanded physical. </p>
+
+<p>But without taking that into account, futures are safer as you can get out 24hrs a day. So shorting futures/vxx provides the same returns? When I change to go long XIV the returns are drastically in favor of shorting VXX.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ebb3473a056000aa893bf' id='586ebb3473a056000aa893bf'>
+<a href='#586ebb3473a056000aa893bf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483651892000' class='quanto-date posted-at response-posted-at' href='#586ebb3473a056000aa893bf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Safest I merely not going short one of the wildest contracts in the financial markets. Safest is limiting your loss to 100% when the upside is exactly the same for an alternative strategy with exactly the same upside but unlimited downside. Safest is understanding that the trading plan outlined in this thread is about as dumb as it gets unless you have the pockets of Midas and suicidal tendencies.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ebd777fed82000ab61135' id='586ebd777fed82000ab61135'>
+<a href='#586ebd777fed82000ab61135'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483652471000' class='quanto-date posted-at response-posted-at' href='#586ebd777fed82000ab61135'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What??? Going long XIV does not give the same performance so what alternative strategy are you speaking of? shorting vix futures? If the OP&#39;s code is correct I don&#39;t think 25% DD is suicidal, or 50% DD in markets like 08&#39; </p>
+
+<p>Again please point me to what alternative strategy you are talking about that has the same performance as shorting VXX.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ec1227fed82000db6119d' id='586ec1227fed82000db6119d'>
+<a href='#586ec1227fed82000db6119d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483653410000' class='quanto-date posted-at response-posted-at' href='#586ec1227fed82000db6119d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I use a different definition of contango - front month vs spot. Works much better in backtesting. Can&#39;t help you on your backtest I&#39;m afraid. All I can say is that in my own backtesting with my own definition of contango the results of short vxx or long XIV are pretty well identical. </p>
+
+<p>In which case the rational individual chooses the instrument with limited as opposed to unlimited risk.</p>
+
+<p>Again my trigger/ contango definition makes for a good reversal system long XIV or long VXX.</p>
+
+<p>If I have time I will rework it in Q.  Re getting out in order to avoid a major spike up or down you can rely 100% on the fact that it will sometimes fail.</p>
+
+<p>Given the vast volatility, gaps, fast markets and jihadists you are guaranteed to lose the lot on this strategy at some point on the future. So better limit the risk and not go naked short.</p>
+
+<p>Personally  I would use long XIV, long VXX and operate as weekly or monthly rebalancing algo : perhaps 50/50 or perhaps more conservative. 50% vix system, 50% cash.</p>
+
+<p>That certainly lessens but does not eradicate your risk of ruin.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ec3f3c4e8fe000ad02258' id='586ec3f3c4e8fe000ad02258'>
+<a href='#586ec3f3c4e8fe000ad02258'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483654131000' class='quanto-date posted-at response-posted-at' href='#586ec3f3c4e8fe000ad02258'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Suggest you download all the futures data since 2004. Be careful, very careful how you deal with the roll. Work out what a 1x short equity curve looks like. This will bear a strong resemblance to XIV. Now revers it and see what going long looks like. This will closely resemble vxx.</p>
+
+<p>Use Excel not Quantopian then you can see exactly what is going on under the hood. </p>
+
+<p>Devise a few simple formulae to calculate contango from the futures contracts and spot Vix.</p>
+
+<p>A few more formulae to put entry and exit rules into practice.</p>
+
+<p>I think you will see what I mean.</p>
+
+<p>I have not looked at this coding in this thread so I can&#39;t comment on it. What I can say is that I always feel utterly blind using Q since you can&#39;t download data or results or output for further analysis.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ec5c6fc5cbc000dc98221' id='586ec5c6fc5cbc000dc98221'>
+<a href='#586ec5c6fc5cbc000dc98221'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483654598000' class='quanto-date posted-at response-posted-at' href='#586ec5c6fc5cbc000dc98221'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Try shorting the fake VXX equity curve. See if it produces greater profit than short the futures contracts.</p>
+
+<p>Somewhat mathematically improbable methinks.</p>
+
+<p>Don&#39;t rely on Q - the software is too complex. You need to get back to basics to see what is really going on and then by all means return to Q and redraft, experiment.</p>
+
+<p>Anyway, do as you wish. Perhaps I am wrong. A sad deranged fool.</p>
+
+<p>Perhaps I am deliberately trying to mislead you.</p>
+
+<p>Perhaps I am just one of those endless random arseholes one tends to meet on trading forums.</p>
+
+<p>Perhaps I&#39;m just plain wrong!<br>
+🌋🌋🌋💣💣💣</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ec68c4f97ff000a95ac92' id='586ec68c4f97ff000a95ac92'>
+<a href='#586ec68c4f97ff000a95ac92'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1483654796000' class='quanto-date posted-at response-posted-at' href='#586ec68c4f97ff000a95ac92'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Possibly all the above lol  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ec78f4f97ff000d95aca6' id='586ec78f4f97ff000d95aca6'>
+<a href='#586ec78f4f97ff000d95aca6'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1483655055000' class='quanto-date posted-at response-posted-at' href='#586ec78f4f97ff000d95aca6'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>And then do the same exercise in Excel with the ETN data. Same results. Well, very similar anyway.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='586ecc7a2c2c81000a7ebd6e' id='586ecc7a2c2c81000a7ebd6e'>
+<a href='#586ecc7a2c2c81000a7ebd6e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1483656314000' class='quanto-date posted-at response-posted-at' href='#586ecc7a2c2c81000a7ebd6e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Wow, I&#39;m glad this thread&#39;s become so popular. Anyway, like you mentioned Anthony, I&#39;ve actually been following the contango definition of VIX Spot Close/VIX Front Month Settlement. The threshold that I optimized (careful of model overfitting bias) was 1.005, i.e., when VIX/F1 &lt; 1.005, take on short VXX exposure.</p>
+
+<p>As to the risks mentioned, I agree, this strategy is incredibly risky, but only if you fail to understand what you&#39;re being paid for and also the amount you size your portfolio - 100% of your portfolio in this is indeed suicide. However, diversifying ~5% of my portfolio into this security that is very reasonably known to converge to 0 doesn&#39;t seem like a terrible decision. Just taking a look at the inception-to-date price chart on Yahoo for VXX and UVXY gives you a pretty clear idea that this thing has a very clear downward trend. Here&#39;s some more reading material on just how VXX works:<br>
+<a href="https://sixfigureinvesting.com/2013/04/how-does-vxx-work/">https://sixfigureinvesting.com/2013/04/how-does-vxx-work/</a>.</p>
+
+<p>Risk management, like any other trading strategy, is the crucial part for an algo like this. There&#39;s numerous ways to hedge yourself such as:<br>
+ - Longing VXX puts instead of shorting the actual underlying (though you&#39;d be fighting Theta decay).<br>
+ - Short VXX and buy an OTM call to cover any serious spikes and roll the calls.<br>
+ - Short VXX and Long VXV (this is a different mechanism because it&#39;s taking advantage of the less sensitive longer-dated futures versus the very sensitive shorter dated futures).<br>
+ - Or again, just longing XIV.<br>
+All these hedges has pros and cons and we all know that there&#39;s no perfect strategy (except for putting your money in the Medallion Fund at Ren Tech).</p>
+
+<p>Finally, I&#39;ll add that I did some more number crunching in Python using Quandl&#39;s continuous VIX futures data to build estimates of VXX returns before 2009: <a href="http://fchen.info/2017/01/03/worst-case-scenario-for-shorting-vxx/">http://fchen.info/2017/01/03/worst-case-scenario-for-shorting-vxx/</a>.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5876e1a3301cd6313b7fc565' id='5876e1a3301cd6313b7fc565'>
+<a href='#5876e1a3301cd6313b7fc565'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5180832e27c64c02a4000033'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/60e3384fc53ea54a6e554979b9c4c931?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5180832e27c64c02a4000033'>Daniel Henry</a>
+</div>
+<a UTCms='1484186019000' class='quanto-date posted-at response-posted-at' href='#5876e1a3301cd6313b7fc565'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Fang,</p>
+
+<p>Great algorithm! After fiddling with it a bit and doing some backtests, I am nearing confidence levels to give this a shot with a small portion of my portfolio.</p>
+
+<p>Here&#39;s a version that picks up XIV instead of shorting VXX. :)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58770d085216c0000a485cc3' id='58770d085216c0000a485cc3'>
+<a href='#58770d085216c0000a485cc3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1484197128000' class='quanto-date posted-at response-posted-at' href='#58770d085216c0000a485cc3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Daniel </p>
+
+<p>I don&#39;t think this can be traded live when you try you get nan for volatility calculations, unless you changed the code. Also, if you go back further to like 2011 you have 60% drawdowns I really don&#39;t understand what the point of posting backtests with cherry picked dates.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58770df75216c0000a485cce' id='58770df75216c0000a485cce'>
+<a href='#58770df75216c0000a485cce'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55f9ea41c51f6fe282000166'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/09d3ca2aba7e225443d1f3eab69d67ae?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55f9ea41c51f6fe282000166'>Maxim Girbu</a>
+</div>
+<a UTCms='1484197367000' class='quanto-date posted-at response-posted-at' href='#58770df75216c0000a485cce'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I tried Fang Zhou&#39;s version of the algo in my IB paper account but it didnt generate any trades due to NAN values 
+<code>
+2017-01-10 08:45 before_trading_start:55 INFO VIX/F1 Ratio: nan  
+</code> 
+It looks like some problem with the fetcher.<br>
+The algo works fine in the backtest...  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58776bb95216c0223a485391' id='58776bb95216c0223a485391'>
+<a href='#58776bb95216c0223a485391'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484221369000' class='quanto-date posted-at response-posted-at' href='#58776bb95216c0223a485391'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>What a lot of nonsence and fuss. The strategy is so simple you can read the signal of the IB screen every day and it will take 5 minutes to trade manually.</p>
+
+<p>As for cherry picking, totally correct. But again what&#39;s the big deal? Roll your own futures contracts back to 2004 and you have a full 12 year back test.</p>
+
+<p>Again the strategy is so ultra simple it will take about half an hour to back test in Excel.</p>
+
+<p>You don&#39;t need to use Q either for back testing this strategy or trading it.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587793b73f9fbf64f79c199f' id='587793b73f9fbf64f79c199f'>
+<a href='#587793b73f9fbf64f79c199f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484231607000' class='quanto-date posted-at response-posted-at' href='#587793b73f9fbf64f79c199f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think my post above sounds very rude! Not really meant to be. Its just that people seem to get stuck or hung up on such simple stuff. And in many ways Quantopian is not an ideal first stop for investigating something this simple. Firstly because you can&#39;t download what you need to inspect the signals, the trades etcc etc. Second because so many have reported problems getting IB or Robin Hood to work automatically it does not seem like its worth the bother for something which takes one order a day.</p>
+
+<p>Fine, the estimation of slippage is useful....but I think one can probably make an intelligent guess at it with daily data.</p>
+
+<p>Also after so many years at this infuriating game you come to realise that the apparent accuracy of back testing is an utter nonsense. And has as big a chance as Mystic Meg of accurately forecasting the future. </p>
+
+<p>In this particular trading scheme it is really all very simple. You are selling volatility in return for a premium. It is the proverbial picking of dimes off the railway track. Mostly very profitable then you get hit by the freight train. </p>
+
+<p>So the big essential here is controlling risk. And in a market with such huge volatility that seems to me to be very difficult with shorting the futures or VXX unless you trade very small size in relation to your total pot.  Hence the logical investor takes advantage of XIV.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5878c25bd03c0d3bd5774cd3' id='5878c25bd03c0d3bd5774cd3'>
+<a href='#5878c25bd03c0d3bd5774cd3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ceb65f3675398fd9000980'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/98ce896a00682c0fcb172336f957bdcb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ceb65f3675398fd9000980'>Javier Guillen Cruz</a>
+</div>
+<a UTCms='1484309083000' class='quanto-date posted-at response-posted-at' href='#5878c25bd03c0d3bd5774cd3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Fang,</p>
+
+<p>Very interesting, learned a lot. Thanks<br>
+I suggest if you want to use vix/vx1 as a signal you&#39;d do much better finding a way to normalize it depending on how many days are left until the front month future expires. Obviously just before it expires the signal will alway be 1 and is not indicative of anything.</p>
+
+<p>Of course I don&#39;t know how to program that into Q...</p>
+
+<p>I&#39;d appreciate your thoughts.</p>
+
+<p>Best  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f15f74d1389589213b885' id='587f15f74d1389589213b885'>
+<a href='#587f15f74d1389589213b885'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55805da3505216ad65000623'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/160bff38f9c9d8d122747a914ece01ce?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55805da3505216ad65000623'>Ryan Wilday</a>
+</div>
+<a UTCms='1484723703000' class='quanto-date posted-at response-posted-at' href='#587f15f74d1389589213b885'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I trade vol using options for part of my living. (amongst other trading) I am not a coder but trying to learn.  Shorting vol is one of the easiest trades to make if you know what you are doing. I trade vol with options (usually VXX options but also VIX) so also have to track &#39;vol of vol&#39; or the implied volatility of vix options. Anyway, contango is one of the key indicators I use in my manual trades. So, you are right on there. I suggest backtesting in 2008-09 when we saw historic vol characteristics with long duration of Vix futures in backwardardation and VIX levels unheard of before. Rare period in history since the VIX was created. . If you&#39;re algo works, it should have kept you out of the trade for most of that period. If it has you in the trade and going underwater, then you need a filter for understanding vol characteristics more secular. Also per above, XIV is mathematically the same trade as short VXX, albeit some level of variation via structure, but not the margin required with being short.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f6dca439d45584764bce5' id='587f6dca439d45584764bce5'>
+<a href='#587f6dca439d45584764bce5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484746186000' class='quanto-date posted-at response-posted-at' href='#587f6dca439d45584764bce5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I tested back to 2004 using VXX and XIV back-filled with futures data. Long XIV when contango, exit and long VXX when backwardation. 98% CAGR with a whopping 70% DD and vol of 63%. This compares well with by and hold XIV from 2004: CAGR 41%, max DD 93%, vol 65%. One simple parameter.</p>
+
+<p>I am trading it live. There will be horrendous moments but who cares if you trade it with a small amount of capital and periodically take money out rather than continuously compound the whole amount.</p>
+
+<p>I has been very interesting to note some of the comments on this and other similar threads relating to this trade.  It is also interesting to see some of the blogs and websites on this trade - particularly ones offering &quot;signals&quot;.</p>
+
+<p>Back in 2003 I bought a trend following system from a guy who clearly knew nothing about trading, coding or much else. Except for web marketing. This only became evident after I had parted with $600.  The arsehole has gone on to write books and presumably make some decent money out of his ignorance. certainly more than he would make trading his ridiculous systems.  He gives absurd seminars all over the world and interviews people who should know better than to talk to him - presumably they assume their hedge funds will benefit from any sort of publicity.</p>
+
+<p>The point is this: Quantopian is an excellent opportunity for people to learn and not get conned like I did back in the day. However people should be equally and acutely aware that people may still (on occasion)  talk absolute crap - even here.</p>
+
+<p>Happily, this is usually through lack of experience and knowledge of the markets and not through an attempt to sell crap to the unwary. </p>
+
+<p>Good for Quantopian - an excellent tool. But all that glitters is not gold and people need to do a great deal of research and thinking outside of this environment. Or they will assuredly regret it!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f6e1c31d4fb2a797d508b' id='587f6e1c31d4fb2a797d508b'>
+<a href='#587f6e1c31d4fb2a797d508b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484746268000' class='quanto-date posted-at response-posted-at' href='#587f6e1c31d4fb2a797d508b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Incidentally, for those with less experience:</p>
+
+<p>I will NOT be expecting such returns in my own trading! They will be a great deal less favourable.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f708d4d13892be813b896' id='587f708d4d13892be813b896'>
+<a href='#587f708d4d13892be813b896'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1484746893000' class='quanto-date posted-at response-posted-at' href='#587f708d4d13892be813b896'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think a way to trade these VIX strategies would be to take the average DD, which from the backtests I ran modifying some settings, from 09 until now was about 22%. Therefore if it&#39;s above this number you know something is &quot;occurring&quot;, and can just stop the system, for example a hard stop of 30-35%DD.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f7aa731d4fb2ece7d510e' id='587f7aa731d4fb2ece7d510e'>
+<a href='#587f7aa731d4fb2ece7d510e'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484749479000' class='quanto-date posted-at response-posted-at' href='#587f7aa731d4fb2ece7d510e'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In my own ignorant, prejudiced and jaded view simple is best and fewest parameters is best and that&#39;s the way I trade. Stops are one area in which you can add complexity and parameters. I choose not to.</p>
+
+<p>A few things have had me wondering recently:<br>
+How many people have taken the trouble to concatenate a time series<br>
+ of futures contracts themselves? </p>
+
+<p>If they have not done this they will<br>
+very probably have a very hazy idea of what contango is and how it<br>
+applies to different markets across the spectrum of asset classes<br>
+available in futures. </p>
+
+<p>Are people aware of the difference in back<br>
+adjusting methods? </p>
+
+<p>Do they realize the need to account for rolls<br>
+proportionately if their time series is to make any sense when<br>
+calculating daily percentage returns? </p>
+
+<p>Have people downloaded historic<br>
+futures contracts back to 2004? </p>
+
+<p>Have people read the prospectus for<br>
+VXX and XIV? </p>
+
+<p>Have people downloaded the methodology document freely<br>
+available on the S&amp;P website for the S&amp;P 500 Vix Short Term Futures<br>
+Inverse Daily Index? </p>
+
+<p>Have people downloaded and read the methodology<br>
+for the S&amp;P 500 Vix Short Term Futures Daily Index? </p>
+
+<p>Have people properly compounded a back tested short trade on VXX by rebalancing<br>
+daily as is necessary? IE adding and subtracting short sales as their<br>
+account value varies? </p>
+
+<p>Have people put the various possible contango measures into a spreadsheet and charted them?  Are they aware of the range? </p>
+
+<p>Have people looked at the number of trades produced and the many other outputs ?</p>
+
+<p>etc etc etc</p>
+
+<p>In short there is a great deal which can and should be done outside of Quantopian.  My suspicion would be that perhaps some of people on this forum have taken someone else&#39;s generously provided coding, fiddled a bit and come to some (perhaps sub optimal) conclusions.<br>
+But there you go. No malice intended but after so many years of compounded errors I take all this stuff with large doses of salts. Sometimes Epsom.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='587f82456358a66e3cc61221' id='587f82456358a66e3cc61221'>
+<a href='#587f82456358a66e3cc61221'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1484751429000' class='quanto-date posted-at response-posted-at' href='#587f82456358a66e3cc61221'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I am assuming that Q correctly handles the amount of shares on a short - it must do since it operates (or can be made to operate) on a daily rebalance basis. they also account therefore for slippage and commission. Q does not account for the cost of borrowing, margin interest etc. </p>
+
+<p>I have never borrowed stock and have thus no idea of the costs involved (I have only ever shorted futures).</p>
+
+<p>But I think I am right in saying these extras are not taken into account in Q?  If taken into account how much would they reduce the profits from shorting VXX? No idea but there would definitely be an impact.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5880ce962a7c2716b84cae36' id='5880ce962a7c2716b84cae36'>
+<a href='#5880ce962a7c2716b84cae36'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55805da3505216ad65000623'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/160bff38f9c9d8d122747a914ece01ce?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55805da3505216ad65000623'>Ryan Wilday</a>
+</div>
+<a UTCms='1484836502000' class='quanto-date posted-at response-posted-at' href='#5880ce962a7c2716b84cae36'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I assume Fang you understand this based on how you wrote this, but for the trading novices here these instruments do a futures roll each day from front month to near month, from 0% at VIX expiration to 99.99% or (something like that) at next expiration. So, VXX, while VIX futures are in contango is selling cheap front month futures and buying expensive near month futures and thereby decaying as near becomes front month and loses value. This is structural to the instrument and experienced vol traders know this and game it. XIV is in reverse so goes up in contango (shorts both dates and rolls). When in a protracted bull market in the S+P since all this is based on S+P options implied volatility, VXX bleeds like nothing on the market (except UXVY). If you understand this it is a money machine. I am not joking. But you must know when you are in a bull market and you must understand the cycles of fear and greed which drive the VIX trade. Short VXX will get killed in vol events and very fast. I personally use several levels of VIX signals, some based on Elliot Wave Theory, others pedestrian technicals, and contango/backward considered that guide how large my short vol position, or when I go long vol. (latter is rare last 3 years). But I&#39;m talking manual trades. I&#39;m trying hard to learn how to code and so far from success. My friend and I have one running right now that has great returns, but the drawdowns are too heavy to deploy. But returns after Financial crisis are craziness.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58812d617034c352faa70bc7' id='58812d617034c352faa70bc7'>
+<a href='#58812d617034c352faa70bc7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1484860769000' class='quanto-date posted-at response-posted-at' href='#58812d617034c352faa70bc7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Javier Guillen Cruz - It&#39;s true, I should use a normalized VIX/F1 ratio to avoid the biased ratio of 1 at maturity. I&#39;m using pretty much the same methodology as VXX to construct the normalized ratio: a day-weighted average of the VIX/F1 and F1/F2 ratios. Essentially,</p>
+
+<p>Front Weight = Days to Maturity / Current Futures Term<br>
+Back Weight = 1 - Front Weight<br>
+--&gt; Normalized Ratio = Front Weight * VIX/F1 + Back Weight * F1/F2</p>
+
+<p>This way, the Spot VIX and F1 Settlement is continuously adjusted for expiration. I&#39;ve included the backtest here with the code; just a side note, I&#39;m aware that you can&#39;t trade these algorithms live and its because you need to adjust the date index as well as find a consistent source of data for VIX, F1, and F2. I&#39;ve attempted Quandl&#39;s plugin for Q, except the data has been delayed some days which causes your algo to do nothing (not good if it needs to close). Personally, I just use this as a guide and manually enter trades.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5881c99e179ca0666a91e573' id='5881c99e179ca0666a91e573'>
+<a href='#5881c99e179ca0666a91e573'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/57ceb65f3675398fd9000980'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/98ce896a00682c0fcb172336f957bdcb?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/57ceb65f3675398fd9000980'>Javier Guillen Cruz</a>
+</div>
+<a UTCms='1484900766000' class='quanto-date posted-at response-posted-at' href='#5881c99e179ca0666a91e573'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Awesome work, Fang. Thank you very much. </p>
+
+<p>This code is so far ahead of my undertanding, I will need some time to understand it, but looks great.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5881ccaa995b4d000d25d6b3' id='5881ccaa995b4d000d25d6b3'>
+<a href='#5881ccaa995b4d000d25d6b3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5725981caa6696ec440004c6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6f42eb9d70d5cde0c7133fec45d4adcd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5725981caa6696ec440004c6'>HP Peng</a>
+</div>
+<a UTCms='1484901546000' class='quanto-date posted-at response-posted-at' href='#5881ccaa995b4d000d25d6b3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Great work. THANK YOU.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588f0c6c39f35f345f3f562d' id='588f0c6c39f35f345f3f562d'>
+<a href='#588f0c6c39f35f345f3f562d'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54ebcec279b1070ca7000173'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/95081b56e5597b0536c8c11a36d8ba73?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54ebcec279b1070ca7000173'>Kimble Young</a>
+</div>
+<a UTCms='1485769836000' class='quanto-date posted-at response-posted-at' href='#588f0c6c39f35f345f3f562d'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Fang Zhou: I thought I smelt a whiff of too good to be true with this one so put it through its paces with Pyalgotrade tonight.</p>
+
+<p>It&#39;s still a decent strategy but over the same period I only registered the following on $10,000 initial capital.</p>
+
+<p>2017-01-27 00:00:00 strategy [INFO] Final portfolio value: $304684.52<br>
+2017-01-27 00:00:00 strategy [INFO] Cumulative returns: 2946.85 %<br>
+2017-01-27 00:00:00 strategy [INFO] CAGR 46.17 %<br>
+2017-01-27 00:00:00 strategy [INFO] Sharpe ratio: 1.41<br>
+2017-01-27 00:00:00 strategy [INFO] Max. drawdown: 36.17 %</p>
+
+<p>I wouldn&#39;t say don&#39;t trade it but with XIV/VXX you can do better. I am not sure why you got such good results in Quantopian but as many others have mentioned it&#39;s a giant black box so at least I know my results are good vs quantopian.</p>
+
+<p>It&#39;s good as far as blended futures compared to spot strategies go as a lot of them manage to walk straight into the chasm of 80% drawdowns in the midst of the GFC and any vol spikes, which this one neatly manages to avoid.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588f1d0cd64b4e456afecb57' id='588f1d0cd64b4e456afecb57'>
+<a href='#588f1d0cd64b4e456afecb57'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/525bc0ee7ace0dc6db000113'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/73ff156e6f6dad3b1b0e34c03bcf473a?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/525bc0ee7ace0dc6db000113'>Anthony FJ Garner</a>
+</div>
+<a UTCms='1485774092000' class='quanto-date posted-at response-posted-at' href='#588f1d0cd64b4e456afecb57'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Keep meaning to look at Pyalgotrade.  I have it loaded.  I&#39;m not sure &quot;black box&quot; is totally fair but it certainly feels like it. I feel blind without being able to download anything and everything to excel - can&#39;t handle it. Zipline of course is open source and XIV/VXX are easily downloadable from Yahoo and elsewhere if you are prepared to rely on daily data.  But Zipline is a nightmare unless you have enormous energy - haven&#39;t tried t for months now but it was a herculean task to get it even partially working.</p>
+
+<p>GFC?</p>
+
+<p>Re 80% DD difficult to avoid IMHO....without a plethora of unwanted rules.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588f8ca16ae9e0000d161acb' id='588f8ca16ae9e0000d161acb'>
+<a href='#588f8ca16ae9e0000d161acb'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1485802657000' class='quanto-date posted-at response-posted-at' href='#588f8ca16ae9e0000d161acb'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Kimble Young</p>
+
+<p>Thanks for the input, I&#39;ve never actually looked at Pyalgotrade before so I&#39;ll probably check it out when I get a chance. Also, when you mention: </p>
+
+<blockquote>
+<p>&quot;I wouldn&#39;t say don&#39;t trade it but with XIV/VXX you can do better. I<br>
+am not sure why you got such good results in Quantopian but as many<br>
+others have mentioned it&#39;s a giant black box so at least I know my<br>
+results are good vs quantopian.&quot;</p>
+</blockquote>
+
+<p>Could you elaborate on how XIV/VXX could do better? I&#39;d be interested to see what your logic is if you wouldn&#39;t mind sharing. </p>
+
+<p>Cheers!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588fa9d46ae9e04cde161982' id='588fa9d46ae9e04cde161982'>
+<a href='#588fa9d46ae9e04cde161982'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54ebcec279b1070ca7000173'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/95081b56e5597b0536c8c11a36d8ba73?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54ebcec279b1070ca7000173'>Kimble Young</a>
+</div>
+<a UTCms='1485810132000' class='quanto-date posted-at response-posted-at' href='#588fa9d46ae9e04cde161982'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Go long XIV when in contango - 5% trailing stop. Boom. Very easily manually traded as well. Just consult <a href="http://vixcentral.com">http://vixcentral.com</a> at the end of each day.</p>
+
+<p>This one will also do marginally better although again nothing like what they claim:</p>
+
+<p><a href="http://volatilitymadesimple.com/trading-the-odds-optimized-vrp-strategy/">http://volatilitymadesimple.com/trading-the-odds-optimized-vrp-strategy/</a>  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='588fad1d58dfcd000a44f6d7' id='588fad1d58dfcd000a44f6d7'>
+<a href='#588fad1d58dfcd000a44f6d7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54ebcec279b1070ca7000173'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/95081b56e5597b0536c8c11a36d8ba73?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54ebcec279b1070ca7000173'>Kimble Young</a>
+</div>
+<a UTCms='1485810973000' class='quanto-date posted-at response-posted-at' href='#588fad1d58dfcd000a44f6d7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>On taking a second look but without access to the data to make sure you really aren&#39;t getting a look ahead bias here I think your spectacular results have to do with completely unrealistic short leverage. I think I remember reading this was an issue with Quantopian?</p>
+
+<p>I&#39;m not too familiar with it but I&#39;ll try shorting only what we have cash for which would help meet a 50% drawdown. Long XIV with no leverage also helps ground yourself.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58900975e2d882035f661993' id='58900975e2d882035f661993'>
+<a href='#58900975e2d882035f661993'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/585dc0a5f9b96624c600009e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2b8722cdd2bc90f48b6a52e4f45f019d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/585dc0a5f9b96624c600009e'>Ian Newman</a>
+</div>
+<a UTCms='1485834613000' class='quanto-date posted-at response-posted-at' href='#58900975e2d882035f661993'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Let&#39;s try a different approach...<br>
+Instead of looking at the futures market to predict the performance of a proxy, let&#39;s look at another proxy designed to function in the inverse: UVXY.<br>
+<strong>The Algorithm</strong><br>
+Algorithm orders XIV with 70% percent of equity capital on 3:1 leverage; the algorithm holds the other 30% in cash until a buy signal is generated for UVXY.<br>
+The buy signal: if UVXY opens positive, then take that 30% and open a position in UVXY; that position is held until 5 minutes before the end of trading.<br>
+If UVXY is bought, then XIV is sold and the algorithm goes to cash until UVXY opens down and XIV opens up; at that point, the algorithm reenters XIV with the same 3:1 leverage.<br>
+When XIV is bought, generate a sell limit order at 1% below the purchase price.</p>
+
+<p>Unfortunately, I lack the coding skills to implement this and perform a back test, but on paper, it should address both drawdown and the potential black swan. If someone happens to have a better sell signal on UVXY, by all means please implement that; I just tossed that out there for simplicity&#39;s sake. Not only that, it actually performs fairly well. True, it doesn&#39;t capture UVXY at the crest, but it should offer a respectable rate of return to counteract any loses incurred on XIV. The other possibility I considered, and I would love to hear some feedback on this, was is it possible to make this market neutral? In other words, is there some ratio for XIV and UVXY where it essentially becomes a breakeven trade and all you have to do is scale the leverage on XIV to profit? If there is, then that makes the problem quite a bit easier because now all you have to do is determine the leverage on XIV.</p>
+
+<p>I kept thinking about it and the other problem I thought of (and I see another trader even mentioned it too) is the fact that the futures market is open even when the ARCA is closed. That means that both UVXY and XIV could either appreciate or depreciate while the algorithm can not buy and sell them. In an ideal world, this is hedged by taking an opposing position in the futures market opposite of your overnight holdings. For example, say the algorithm is long XIV (read: short the VIX), then when the market closes, it would enter the futures market and go long the VIX (likely using the VIX Weekly&#39;s, or maybe options are better here?) overnight using the remaining equity, that 30%, and sell in the morning. That hedge would definitely be a drag on the returns and so to compensate, there are really three options. Firstly, modify the ratio to, say, 60% in XIV and 40% in cash/UVXY/VIX futures or apply leverage to the UVXY trades. The third option, which would be even more complicated, would be for the algorithm to hedge only in certain situations (i.e. if XIV falls a certain percentage, then hedge). </p>
+
+<p>The other issue I would just like to mention is the expense ratio on both UVXY and XIV. I don’t know if that math is done automatically in the backtest, but I would certainly hope so because otherwise will cool down substantially.</p>
+
+<p>The other thing I’ve noticed about UVXY is that it almost never has two consecutive days in positive territory. Unfortunately, when it does, that usually means that we’re in the midst of a potential black swan. </p>
+
+<p>Theoretically, the returns of UVXY and XIV levered 3X should be the exact opposite of each other, no? Yesterday for example though, they weren’t; XIV finished down 3.11%, which multiplied by the leverage factor is a loss of 9.33%, whereas UVXY ended up 5.75%, although at one point in the day it was up almost 11% so perhaps it&#39;s just a matter of finding a better sell signal? </p>
+
+<p>If we assume though that a 3X levered XIV will always outpace UVXY (and by the way, the above math assumes a 50/50 equity capital split, which is not true in our case), then the algorithm will suffer from drawdown, although they won’t be as large. For the algorithm to earn a profit independent of market condition would require some kind of highly leveraged hedged and that can only really be found in the futures market. I’m reluctant to apply leverage to UVXY because that’s already insanely volatile at 3X leverage and I wonder what the broker would say if the algorithm tried to leverage an inherently leveraged investment. </p>
+
+<p>Today for example, or should I say yesterday as I will post this in the morning, the algorithm would have suffered a 4.6% loss and that’s with the stop loss order set at 3% and the algorithm only capturing a 5.75% gain on UVXY...</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58a65963d960592b0ae61f64' id='58a65963d960592b0ae61f64'>
+<a href='#58a65963d960592b0ae61f64'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5725981caa6696ec440004c6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6f42eb9d70d5cde0c7133fec45d4adcd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5725981caa6696ec440004c6'>HP Peng</a>
+</div>
+<a UTCms='1487296867000' class='quanto-date posted-at response-posted-at' href='#58a65963d960592b0ae61f64'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Fang,</p>
+
+<p>I have a question on the maturity. What do you do on the expiration day when today == curr_third_wed?</p>
+
+<p>In your code, you do not have this. If today is the third Wed, you will have front_weight = 1.0, which I think it should be 0. Am I missing something?</p>
+
+<p>for example, if today is 2/15/17, your next_third_wed is 3/15/17, and your curr_third_wed = 2/17/17. This makes front_weight = 1. Is it correct? </p>
+
+<pre><code>    if today &lt; curr_third_wed:  
+        dte = curr_third_wed - today  
+        term = curr_third_wed - last_third_wed  
+    else:  
+        dte = next_third_wed - today  
+        term = next_third_wed - curr_third_wed  
+    front_weight = float(dte.days)/term.days  
+    return front_weight  
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58a659f305e2a92fbe5ef970' id='58a659f305e2a92fbe5ef970'>
+<a href='#58a659f305e2a92fbe5ef970'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5725981caa6696ec440004c6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/6f42eb9d70d5cde0c7133fec45d4adcd?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5725981caa6696ec440004c6'>HP Peng</a>
+</div>
+<a UTCms='1487297011000' class='quanto-date posted-at response-posted-at' href='#58a659f305e2a92fbe5ef970'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think you should add the following:</p>
+
+<pre><code>...
+elif today == curr_third_wed:  
+    dte = curr_third_wed - today # This makes dte = 0, causing front_weight = 0  
+    term = curr_third_wed - last_third_wed
+
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58a725450ee39f6b8c043eab' id='58a725450ee39f6b8c043eab'>
+<a href='#58a725450ee39f6b8c043eab'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55799f350962b6ebde0003e9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/aaa6ea37905f6e28021b5bd52b5f6778?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55799f350962b6ebde0003e9'>Fang Zhou</a>
+</div>
+<a UTCms='1487349061000' class='quanto-date posted-at response-posted-at' href='#58a725450ee39f6b8c043eab'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Good catch! I thought I accounted for that, but noticed I missed an &quot;=&quot; sign lol. If you just change line 89 to be &lt;=, it&#39;ll give you the same thing as you mentioned:</p>
+
+<blockquote>
+<pre><code>        if today &lt; curr_third_wed:  
+</code></pre>
+
+<p>Change to:  </p>
+
+<blockquote>
+<pre><code>     if today &lt;= curr_third_wed:
+</code></pre>
+</blockquote>
+</blockquote>
+
+<p>You should get the front_weight to equal 0.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58a72625c2403567232f5a70' id='58a72625c2403567232f5a70'>
+<a href='#58a72625c2403567232f5a70'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56a003d3eb9a502cc40000d7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d1e920b94af6976544310a8f9432e34?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56a003d3eb9a502cc40000d7'>Tyler Wilson</a>
+</div>
+<a UTCms='1487349285000' class='quanto-date posted-at response-posted-at' href='#58a72625c2403567232f5a70'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;ve found that the below do not always match day for day.  IE. Today VX1 only has 2/15/17 data and VX2 has 2/16/17 data.  So would the calculation be 0 - or would it be based on the last date that matches?  Excuse my ignorance as I am new to futures.</p>
+
+<pre><code># Pulling first month VIX futures data  
+fetch_csv(&#39;http://www.quandl.com/api/v1/datasets/CHRIS/CBOE_VX1.csv&#39;,  
+# Pulling second month VIX futures data  
+fetch_csv(&#39;http://www.quandl.com/api/v1/datasets/CHRIS/CBOE_VX2.csv&#39;, 
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58ab1e477741ce19ff669fb3' id='58ab1e477741ce19ff669fb3'>
+<a href='#58ab1e477741ce19ff669fb3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/560ec853f035e97d17000981'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0e2fbea90a042dac12b7de9e9c4b6d9f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/560ec853f035e97d17000981'>Dave Andrews</a>
+</div>
+<a UTCms='1487609415000' class='quanto-date posted-at response-posted-at' href='#58ab1e477741ce19ff669fb3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Tyler, it uses the last available value in the calculation. The ratio on 2/16 would use VX1&#39;s 2/15 value.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58ab2135d05a270609685aed' id='58ab2135d05a270609685aed'>
+<a href='#58ab2135d05a270609685aed'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/569dc4ddddbbf24f8100046c'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/fa1102e44a43272ed3894c2c389bf009?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/569dc4ddddbbf24f8100046c'>Sean Reilly</a>
+</div>
+<a UTCms='1487610165000' class='quanto-date posted-at response-posted-at' href='#58ab2135d05a270609685aed'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Greetings, all! </p>
+
+<p>This has been my first real exploration into backtesting with Quantopian. I find the VXX fascinating and observing its relationships with volatility is certainly worthwhile. To keep this brief, I&#39;ll quickly explain the backtest I&#39;ve been experimenting with and how I tried to add to Fang Zhou&#39;s original strategy. Perhaps different threshold values would lead to a higher sharpe; I have yet to explore any optimization analysis on those parameters.</p>
+
+<p>I&#39;m also quite new to futures, so some of my thoughts below may not be completely accurate. Does anyone have ideas about potential strategies for when the market is in backwardation (aside from holding cash)?</p>
+
+<p>Thesis: This algorithm is based on the assumption that when contango of the VIX futures is above a certain threshold percentage, the VXX (that tracks the ratio of the front and back month VIX futures contract price) will decrease. </p>
+
+<p>THREE SCENARIOS FOR PORTFOLIO:</p>
+
+<ol>
+<li><p>If the VIX is ever in NORMAL BACKWARDATION, or if it is in CONTANGO but not a high enough percentage of contago to justify a VXX short (see threshold value), or it is not low (negative) enough to justify a short SPY position, then the portfolio is all cash until one of the thresholds is triggered.</p></li>
+<li><p>If the VIX is in CONTANGO, and has a percent contango higher than our threshold, we short the VXX. You might ask yourself: In contango, back month contracts are higher than front month. This means volatility is expected to increase, why would we short an instrument that tracks volatility? Well, it is actually the case that the futures prices will decrease over time back to the spot price as volatility does NOT increase to the back month price. Inversely, when the VIX is in normal backwardation, the market is expecting volatility to go DOWN (front month price &gt; back month), but this is actually associated with BEAR markets as the back month increase to match the high spot price of volatility. </p></li>
+<li><p>If this VIX is in a significant BACKWARDATION, which is typically associated with BEAR MARKETS, then we short the SPY (other assets also listed). This short is halted when the backwardation no longer fulfills our minimum thresholds, explained more in the code below.  </p></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58ab366f30086e3772a85424' id='58ab366f30086e3772a85424'>
+<a href='#58ab366f30086e3772a85424'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/550ed26e55cf0f991c0002fc'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/2225df58d00cadc46d2809e6cdc8ec14?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/550ed26e55cf0f991c0002fc'>Rafael Delasierra</a>
+</div>
+<a UTCms='1487615599000' class='quanto-date posted-at response-posted-at' href='#58ab366f30086e3772a85424'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Sean - </p>
+
+<p>Seems like a good strategy but when you trade SPY it seems like you are using a lot of leverage according to the positions held.  I am not sure if that is intentional.  Maybe you should track leverage.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58aefbca1483800db9084be9' id='58aefbca1483800db9084be9'>
+<a href='#58aefbca1483800db9084be9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56a003d3eb9a502cc40000d7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d1e920b94af6976544310a8f9432e34?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56a003d3eb9a502cc40000d7'>Tyler Wilson</a>
+</div>
+<a UTCms='1487862730000' class='quanto-date posted-at response-posted-at' href='#58aefbca1483800db9084be9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Kimble are you live trading contango + 5% trailing stop?  What do you do for re-entry after the 5% trailing stop is triggered, do you wait to see if the contango is present at the end of the next day and re-enter?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58af813c53051e000a41a208' id='58af813c53051e000a41a208'>
+<a href='#58af813c53051e000a41a208'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54ebcec279b1070ca7000173'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/95081b56e5597b0536c8c11a36d8ba73?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54ebcec279b1070ca7000173'>Kimble Young</a>
+</div>
+<a UTCms='1487896892000' class='quanto-date posted-at response-posted-at' href='#58af813c53051e000a41a208'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>That&#39;s right Tyler. You can optimise the Contango threshold based on history. Somewhere around 5% is the sweet spot. </p>
+
+<p>Sometimes the 5% stop is a false alarm but it&#39;s also a quick way out when the VIX spikes and the term structure changes rapidly.</p>
+
+<p>I do live trade this and especially over the last 12 months it has been a great little money earner. Just not on quantopian though.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58afa3644fbac3565101f961' id='58afa3644fbac3565101f961'>
+<a href='#58afa3644fbac3565101f961'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/56a003d3eb9a502cc40000d7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d1e920b94af6976544310a8f9432e34?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/56a003d3eb9a502cc40000d7'>Tyler Wilson</a>
+</div>
+<a UTCms='1487905636000' class='quanto-date posted-at response-posted-at' href='#58afa3644fbac3565101f961'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Kimble do you use spot/front month or front month/second month for contango?</p>
+
+<p>Also do you trade Vxx in backwardation?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58afa5a16435e6000aeef671' id='58afa5a16435e6000aeef671'>
+<a href='#58afa5a16435e6000aeef671'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1487906209000' class='quanto-date posted-at response-posted-at' href='#58afa5a16435e6000aeef671'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey Kimble, what kind of returns do you get and DD with the 5% stop?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58afeb119c410a23fbd39ddd' id='58afeb119c410a23fbd39ddd'>
+<a href='#58afeb119c410a23fbd39ddd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54ebcec279b1070ca7000173'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/95081b56e5597b0536c8c11a36d8ba73?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54ebcec279b1070ca7000173'>Kimble Young</a>
+</div>
+<a UTCms='1487923985000' class='quanto-date posted-at response-posted-at' href='#58afeb119c410a23fbd39ddd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Front and second month Tyler. What&#39;s the pointing choosing another metric if VIX/VXx is base on futures? It&#39;s a play on terms structures.</p>
+
+<p>Elsid why not try backtest it in quantopian yourself? Just don&#39;t apply leverage. In real life trading with such volatile strategies a 30% drawdown means realistically you can&#39;t relay on 2/3 times leverage without a margin call at some point.</p>
+
+<p>That&#39;s why you will never achieve the imaginary returns on these quantopian backtest in the real world.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58b074ef03c3d873631eaf59' id='58b074ef03c3d873631eaf59'>
+<a href='#58b074ef03c3d873631eaf59'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/571cecf6a5c5baa9f500002e'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/46041da1752043608f246f126bedb245?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/571cecf6a5c5baa9f500002e'>Elsid Aliaj</a>
+</div>
+<a UTCms='1487959278000' class='quanto-date posted-at response-posted-at' href='#58b074ef03c3d873631eaf59'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Kimble</p>
+
+<p>Yeah I&#39;ll try it, have to look up how to do stop losses in quantopian.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58b7508741898f29f53275a9' id='58b7508741898f29f53275a9'>
+<a href='#58b7508741898f29f53275a9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/560ec853f035e97d17000981'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0e2fbea90a042dac12b7de9e9c4b6d9f?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/560ec853f035e97d17000981'>Dave Andrews</a>
+</div>
+<a UTCms='1488408711000' class='quanto-date posted-at response-posted-at' href='#58b7508741898f29f53275a9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Looking at the <a href="http://www.optionsclearing.com/components/docs/about/publications/xcal2017.pdf">Options Expiration Calendar</a>, VIX expires on March 22nd. The weighted version shows 15 days from March 1st. Every three months it is five weeks instead of four weeks between expiry. Doesn&#39;t look like the weight takes that into account. </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='58d4038c77db2f5715b4fd97' id='58d4038c77db2f5715b4fd97'>
+<a href='#58d4038c77db2f5715b4fd97'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/58bcaf248fb7d3000a68b098'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/873ec8b1e1e13b3e25ea70e30d9e6f83?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/58bcaf248fb7d3000a68b098'>Giovanni Arimondi</a>
+</div>
+<a UTCms='1490289548000' class='quanto-date posted-at response-posted-at' href='#58d4038c77db2f5715b4fd97'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hello! I really liked Fang algo. However I think it could improve a lot by going long VXX when there is backwardation. This could allow us to capture the volatility premium in backwardation scenarios. Also in 08 type scenarios with a sustained price of the spot we wil be very profitable. We can calculate the backwardation with the same process SPOTVIX/VIXFRONT and keeping the same 1,005 thresold, o maybe getting it a little bit higher. </p>
+
+<p>Also, regarding the methods of calculation backwardation or contango, Tony Cooper in his paper of easy volatility investing tested many differents approaches to calculate them and concludes that short term is the better. He proposes this one:</p>
+
+<p>if the 5 day moving average of (VIX - 10 day historical volatility) &gt; 0 go long XIV else go long VXX</p>
+
+<p>We can add a thresold, instead of 0 just to improve the results a little bit. But we will have some overfit risks. </p>
+
+<p>Another idea can be to move to value companies when there is not backwardation/contango or SP500 instead of cash.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5aab1b29310a572231d18285' id='5aab1b29310a572231d18285'>
+<a href='#5aab1b29310a572231d18285'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5880a850cd851d000a3ddda7'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/0e47d91c5ed0fb8b61cd81f4e1e3178d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5880a850cd851d000a3ddda7'>Axel Borasino Marqués</a>
+</div>
+<a UTCms='1521163049000' class='quanto-date posted-at response-posted-at' href='#5aab1b29310a572231d18285'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi all,</p>
+
+<p>I have compared the fetched data with Q futures one (now that we have it) and it seems that current VIX futures (V1) and next moths futures (V2) from the fetched parts are settled prices. Meanwhile, it seems that Q futures data is tradable price, and theferore I assume its the closing price. Can anybody confirm? Appr!  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/shorting-vxx-based-on-vix-futures-contango'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/shorting-vxx-based-on-vix-futures-contango'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#5c3a3939383e3d3f371c2d293d3228332c353d32723f3331">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>

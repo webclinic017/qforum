@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='i1.wp.com' rel='dns-prefetch'>
+<link href='i2.wp.com' rel='dns-prefetch'>
+<link href='i3.wp.com' rel='dns-prefetch'>
+<meta content='2HgX9mcLHaPOX6sfaaAkhWtblhEB9yUNw4l6l46e1k4' name='google-site-verification'>
+<link rel="shortcut icon" type="image/x-icon" href="external/favicon-q-ac1a76f2c200e9026b5b1147519bb4fab6256910588b831e2411bc6c7c1218c3.png" />
+<title>
+Daily &amp; Weekly rebalancing of separate alpha factors using Optimize API
+</title>
+<meta content='Hi, I&#39;m curious if it&#39;s possible to rebalance daily AND weekly in the same strategy, using Optimize API with different alpha factors? The reason I&#39;m asking is because one may have some factors that are predictive with high IC during a 1 day holding period, and other factors that are only predictive (with alpha) on a longer holding period (e.g. 5 days, or weekly)? I&#39;ve tried something like the below, but I believe it still rebalances everything daily (and the weekly positions gets thrown out...' name='description'>
+<link rel="stylesheet" media="all" href="external/quanto-base-bundle-e8eb6050172aa0d24124d5c24bac90b2cccd88b5b9c7742026c0e9efab038c6e.css" />
+<link rel="stylesheet" media="all" href="external/quanto-posts-bundle-aab01368d3f82d8dafc94ee9eabb82e77dc8c9fbbffa952fdcdc744dfa523cf3.css" />
+<script src="external/quanto_global-057218867db29d5768131af5d6fb3476cef098e7d9e655108befb903c7ee985e.js"></script>
+<script src="external/posts_bundle-3dfd82fa469c393d752e461d837aec9e4e364ae39f49198e34a6626f2180fdf7.js"></script>
+<link href='external/logo-q-180x180-0f5a6a439c99203ed4aea6f656e7604c543d287be43d8b17c7591c1131f09a59.png' rel='apple-touch-icon'>
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="0J4Lx9G9j+y2crW2Hlbo/AT1QmvS16MVcB9EzG4lldCs+H2Kc0tdDw9v7IdRuUCIPHthAqgbtg7yEJ+mxGD3aw==" />
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<script>
+//<![CDATA[
+window.quanto_data={};quanto_data.bounce_back_params={"show_modal":null,"feedback_text":null};quanto_data.namespace="public";quanto_data.talib_info={"ADOSC":["Chaikin A/D Oscillator (Volume Indicators)",["fastperiod","3"],["slowperiod","10"]],"ADX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"ADXR":["Average Directional Movement Index Rating (Momentum Indicators)",["timeperiod","14"]],"APO":["Absolute Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"AROON":["Aroon (Momentum Indicators)",["timeperiod","14"]],"AROONOSC":["Aroon Oscillator (Momentum Indicators)",["timeperiod","14"]],"ATR":["Average True Range (Volatility Indicators)",["timeperiod","14"]],"BBANDS":["Bollinger Bands (Overlap Studies)",["timeperiod","5"],["nbdevup","2"],["nbdevdn","2"],["matype","0"]],"BETA":["Beta (Statistic Functions)",["timeperiod","5"]],"CCI":["Commodity Channel Index (Momentum Indicators)",["timeperiod","14"]],"CMO":["Chande Momentum Oscillator (Momentum Indicators)",["timeperiod","14"]],"CORREL":["Pearson's Correlation Coefficient (r) (Statistic Functions)",["timeperiod","30"]],"DEMA":["Double Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"DX":["Average Directional Movement Index (Momentum Indicators)",["timeperiod","14"]],"EMA":["Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"KAMA":["Kaufman Adaptive Moving Average (Overlap Studies)",["timeperiod","30"]],"LINEARREG":["Linear Regression (Statistic Functions)",["timeperiod","14"]],"LINEARREG_ANGLE":["Linear Regression Angle (Statistic Functions)",["timeperiod","14"]],"LINEARREG_INTERCEPT":["Linear Regression Intercept (Statistic Functions)",["timeperiod","14"]],"LINEARREG_SLOPE":["Linear Regression Slope (Statistic Functions)",["timeperiod","14"]],"MA":["Moving average (Overlap Studies)",["timeperiod","30"],["matype","0"]],"MACD":["Moving Average Convergence/Divergence (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["signalperiod","9"]],"MACDEXT":["MACD with controllable MA type (Momentum Indicators)",["fastperiod","12"],["fastmatype","0"],["slowperiod","26"],["slowmatype","0"],["signalperiod","9"],["signalmatype","0"]],"MACDFIX":["Moving Average Convergence/Divergence Fix 12/26 (Momentum Indicators)",["signalperiod","9"]],"MAX":["Highest values over a specified period (Math Operators)",["timeperiod","30"]],"MAXINDEX":["Index of highest value over a specified period (Math Operators)",["timeperiod","30"]],"MFI":["Money Flow Index (Momentum Indicators)",["timeperiod","14"]],"MIDPOINT":["Midpoint over period (Overlap Studies)",["timeperiod","14"]],"MIDPRICE":["Midpoint Price over period (Overlap Studies)",["timeperiod","14"]],"MIN":["Lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MININDEX":["Index of lowest value over a specified period (Math Operators)",["timeperiod","30"]],"MINMAX":["Lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINMAXINDEX":["Indexes of lowest and highest values over a specified period (Math Operators)",["timeperiod","30"]],"MINUS_DI":["Minus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"MINUS_DM":["Minus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"MOM":["Momentum (Momentum Indicators)",["timeperiod","10"]],"NATR":["Normalized Average True Range (Volatility Indicators)",["timeperiod","14"]],"PLUS_DI":["Plus Directional Indicator (Momentum Indicators)",["timeperiod","14"]],"PLUS_DM":["Plus Directional Movement (Momentum Indicators)",["timeperiod","14"]],"PPO":["Percentage Price Oscillator (Momentum Indicators)",["fastperiod","12"],["slowperiod","26"],["matype","0"]],"ROC":["Rate of change: ((price/prevPrice)-1)*100 (Momentum Indicators)",["timeperiod","10"]],"ROCP":["Rate of change Percentage: (price-prevPrice)/prevPrice (Momentum Indicators)",["timeperiod","10"]],"ROCR":["Rate of change ratio: (price/prevPrice) (Momentum Indicators)",["timeperiod","10"]],"ROCR100":["Rate of change ratio 100 scale: (price/prevPrice)*100 (Momentum Indicators)",["timeperiod","10"]],"RSI":["Relative Strength Index (Momentum Indicators)",["timeperiod","14"]],"SMA":["Simple Moving Average (Overlap Studies)",["timeperiod","30"]],"STDDEV":["Standard Deviation (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"STOCH":["Stochastic (Momentum Indicators)",["fastk_period","5"],["slowk_period","3"],["slowk_matype","0"],["slowd_period","3"],["slowd_matype","0"]],"STOCHF":["Stochastic Fast (Momentum Indicators)",["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"STOCHRSI":["Stochastic Relative Strength Index (Momentum Indicators)",["timeperiod","14"],["fastk_period","5"],["fastd_period","3"],["fastd_matype","0"]],"T3":["Triple Exponential Moving Average (T3) (Overlap Studies)",["timeperiod","5"],["vfactor","0.7"]],"TEMA":["Triple Exponential Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIMA":["Triangular Moving Average (Overlap Studies)",["timeperiod","30"]],"TRIX":["1-day Rate-Of-Change (ROC) of a Triple Smooth EMA (Momentum Indicators)",["timeperiod","30"]],"TSF":["Time Series Forecast (Statistic Functions)",["timeperiod","14"]],"ULTOSC":["Ultimate Oscillator (Momentum Indicators)",["timeperiod1","7"],["timeperiod2","14"],["timeperiod3","28"]],"VAR":["Variance (Statistic Functions)",["timeperiod","5"],["nbdev","1"]],"WILLR":["Williams' %R (Momentum Indicators)",["timeperiod","14"]],"WMA":["Weighted Moving Average (Overlap Studies)",["timeperiod","30"]]};quanto_data.nb_preview_url="https://notebooks-preview.prd.pub.quantopian.com";quanto_data.delay_nb_preview_load=false;
+//]]>
+</script>
+<meta content='https://www.quantopian.com/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api' property='og:url'>
+<meta content='Daily &amp; Weekly rebalancing of separate alpha factors using Optimize API' property='og:title'>
+
+<input type="hidden" name="env" id="quanto-env" value="production" />
+<meta content='550580758292093' property='fb:app_id'>
+<meta content='https://www.quantopian.com/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api' property='og:url'>
+<meta content='https://media.quantopian.com/public/og-image-default.png' property='og:image'>
+<meta content='Daily &amp; Weekly rebalancing of separate alpha factors using Optimize API' property='og:title'>
+<meta content='Hi, I&#39;m curious if it&#39;s possible to rebalance daily AND weekly in the same strategy, using Optimize API with different alpha factors? The reason I&#39;m asking is because one may have some factors that are predictive with high IC during a 1 day holding period, and other factors that are only predictive (with alpha) on a longer holding period (e.g. 5 days, or weekly)? I&#39;ve tried something like the below, but I believe it still rebalances everything daily (and the weekly positions gets thrown out...' property='og:description'>
+</head>
+<script type='application/ld+json'>
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://www.quantopian.com",
+    "logo": "https://media.quantopian.com/logos/logo-q-press-red.png"
+  }
+</script>
+<body class='' ontouchstart=''>
+<div id='fb-root'></div>
+<div class='wrapper'>
+<div class='alert-v2 error'>
+<div class='message'>
+Quantopian's community platform is shutting down. Please read <a href="/posts/quantopians-community-services-are-closing">this post</a> for more information and <a href='/account#account'>download your code</a>.
+</div>
+</div>
+<div class='navbar navbar-default navbar-static-top' id='app-navbar'>
+<div class='container-fluid'>
+<div class='navbar-header'>
+<button class='navbar-toggle collapsed' data-target='#app-navbar-collapse' data-toggle='collapse'>
+<span class='icon hamburger-menu'></span>
+</button>
+<a class='navbar-brand' href='/home'>
+<img class='logo-image async-image' data-src='external/logo-q-white-b141ea6018546e5a4ecc3d10d8440ec076fc4385764e948b322828cc70950a76.svg'>
+</a>
+</div>
+<div class='collapse navbar-collapse' id='app-navbar-collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li class='dropdown quanto-dropdown-new'>
+<li>
+<a class='header' href='/docs'>
+Documentation
+</a>
+</li>
+<li class='dropdown quanto-dropdown-new'>
+<a class='header' data-toggle='dropdown' href='#'>
+Learn
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a class='mixpanel-button' data-event='main nav getting started clicked' href='/tutorials/getting-started'>Getting Started</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav tutorials clicked' href='/tutorials'>Tutorials</a>
+</li>
+<li>
+<a class='mixpanel-button' data-event='main nav lectures clicked' href='/lectures'>Lectures</a>
+</li>
+</ul>
+</li>
+<li>
+<a class='header' href='/posts' id='forum-link'>
+Forum
+</a>
+</li>
+<li>
+<a class="header" href="/signin?return_to=/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api">Log In</a>
+</li>
+</li>
+
+</ul>
+</div>
+</div>
+</div>
+<script>
+  $(document).ready(function () {
+    quanto.instances.fm = new quanto.FeedbackManager();
+    quanto.instances.hm = new quanto.headerManager();
+  })
+</script>
+
+
+<div class='content content-area new-style'>
+<input type="hidden" name="page-id" id="page-id" value="postatomic" />
+<script src="external/MathJax.js?config=TeX-AMS_HTML-full.js,Safe" async="async"></script>
+<div class='container page-container post-atomic'>
+<input id='parent-post-id-val' type='hidden' value='5b18b7cbdc12123fbcbfd64c'>
+<div class='post-container' data-post-id='5b18b7cbdc12123fbcbfd64c' id='5b18b7cbdc12123fbcbfd64c'>
+<div class='back-button back-to-community'>Back to Community</div>
+<div class='post-title'>Daily &amp; Weekly rebalancing of separate alpha factors using Optimize API</div>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<span class='posted-at'>edited </span>
+<span UTCms='1528350284000' class='quanto-date posted-at'></span>
+<div class='pull-right other-actions'>
+<div class='dropup inline-block'>
+<div class='dropdown share-control other-action-link'>
+<div data-toggle='dropdown'>
+<div class='share-image'></div>
+Share
+</div>
+<ul class='dropdown-menu share-options-menu'>
+<li>
+<a class='share-row' href='https://twitter.com/intent/tweet?text=Daily &amp; Weekly rebalancing of separate alpha factors using Optimize API&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fdaily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api%3Futm_source%3Dwebsite_share%26utm_campaign%3Ddaily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api%26utm_medium%3Dtwitter&amp;via=quantopian'>
+<i class='icon icon-twitter'></i>
+Share on Twitter
+</a>
+</li>
+<li>
+<div class='share-row facebook-button'>
+<i class='icon icon-facebook'></i>
+Share on Facebook
+</div>
+</li>
+<li>
+<div class='share-row linkedin-button' data-share-url='https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.quantopian.com%2Fposts%2Fdaily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api%3Futm_source%3Dwebsite_share%26utm_campaign%3Ddaily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api%26utm_medium%3Dlinkedin&amp;title=Daily+%26+Weekly+rebalancing+of+separate+alpha+factors+using+Optimize+API+%28Joakim+Arvidsson+%28Cream+Mongoose%29%29&amp;source=Quantopian'>
+<i class='icon icon-linkedin'></i>
+Share on LinkedIn
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='tags tag-row'>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='API' data-tag-id='55c50e7d8d4710ec6e000001' href='/posts/tag/API/newest'>API</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Seeking Help' data-tag-id='55c50e7d8d4710ec6e000003' href='/posts/tag/Seeking-Help/newest'>Seeking Help</a>
+<a class='tag mixpanel-button' data-event='tag click' data-mixpanel='Portfolio Optimization' data-tag-id='55d33f293f6ba10061000000' href='/posts/tag/Portfolio-Optimization/newest'>Portfolio Optimization</a>
+</div>
+<input type="hidden" name="social_fb_post_link" id="social_fb_post_link" value="https://www.quantopian.com/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api?utm_source=website_share&amp;utm_campaign=daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api&amp;utm_medium=facebook" />
+<input type="hidden" name="social_post_image" id="social_post_image" value="external/logo-q-red-outline.png" />
+<input type="hidden" name="social_post_author" id="social_post_author" value="Joakim Arvidsson (Cream Mongoose)" />
+<div class='body-text'>
+<div class='body-text-container post-body'><p>Hi,</p>
+
+<p>I&#39;m curious if it&#39;s possible to rebalance daily AND weekly in the same strategy, using Optimize API with different alpha factors? The reason I&#39;m asking is because one may have some factors that are predictive with high IC during a 1 day holding period, and other factors that are only predictive (with alpha) on a longer holding period (e.g. 5 days, or weekly)?</p>
+
+<p>I&#39;ve tried something like the below, but I believe it still rebalances everything daily (and the weekly positions gets thrown out the next day essentially). Is there any way to have the daily_rebalance ignore the weekly_positions? How would one go about doing this in the same strategy? Appreciate any help or advise I can get on this.</p>
+
+<pre><code>def initialize(context):
+
+    schedule_function(  
+        weekly_rebalance,  
+        date_rules.week_start(),  
+        time_rules.market_open(),  
+    )  
+    schedule_function(  
+        daily_rebalance,  
+        date_rules.every_day(),  
+        time_rules.market_open(),  
+    )
+
+    attach_pipeline(  
+        make_pipeline(),  
+        &#39;data_pipe&#39;  
+    )  
+    attach_pipeline(  
+        risk_loading_pipeline(),  
+        &#39;risk_pipe&#39;  
+    )
+
+def weekly_rebalance(context, data):  
+    objective = opt.MaximizeAlpha(  
+      context.output.weekly_alpha  
+    )  
+    constrain_pos_size = opt.PositionConcentration.with_equal_bounds(  
+        -context.short_pos_size,  
+        context.long_pos_size  
+    )
+
+    dollar_neutral = opt.DollarNeutral()  
+    leverage = opt.MaxGrossExposure(1.0)
+
+    factor_risk_constraints = opt.experimental.RiskModelExposure(  
+        context.risk_factor_betas,  
+        version=opt.Newest,  
+    )  
+    order_optimal_portfolio(  
+        objective=objective,  
+        constraints=[  
+            leverage,  
+            dollar_neutral,  
+            constrain_pos_size,  
+            factor_risk_constraints,  
+        ]  
+    )  
+
+
+def daily_rebalance(context, data):  
+    objective = opt.MaximizeAlpha(  
+      context.output.daily_alpha  
+    )
+
+    constrain_pos_size = opt.PositionConcentration.with_equal_bounds(  
+        -context.short_pos_size,  
+        context.long_pos_size  
+    )
+
+    dollar_neutral = opt.DollarNeutral()  
+    leverage = opt.MaxGrossExposure(1.0)  
+    max_turnover = opt.MaxTurnover(0.20)
+
+    factor_risk_constraints = opt.experimental.RiskModelExposure(  
+        context.risk_factor_betas,  
+        version=opt.Newest,  
+    )
+
+    order_optimal_portfolio(  
+        objective=objective,  
+        constraints=[  
+            leverage,  
+            dollar_neutral,  
+            constrain_pos_size,  
+            max_turnover,  
+            factor_risk_constraints,  
+        ]  
+    )
+
+</code></pre>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class='container page-container post-atomic'>
+<div class='section-header reply-header'>
+<div class='reply-title'>48 responses</div>
+</div>
+<div class='replies'>
+<div class='post-container response-container' data-post-id='5b18ecb8dc121225b6bfdbd9' id='5b18ecb8dc121225b6bfdbd9'>
+<a href='#5b18ecb8dc121225b6bfdbd9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1528360120000' class='quanto-date posted-at response-posted-at' href='#5b18ecb8dc121225b6bfdbd9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>This is my main concern on using the Optimize API as requirement for the contest. The Optimize API are too limitating at the moment. Until they start supporting multiple portfolios in the same algorithm they are just a pain in the neck.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b18f551dc121276c8bfdd73' id='5b18f551dc121276c8bfdd73'>
+<a href='#5b18f551dc121276c8bfdd73'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528362321000' class='quanto-date posted-at response-posted-at' href='#5b18f551dc121276c8bfdd73'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Good point.  I&#39;ll have to think a bit more about this, but it is not clear that one wants multiple portfolios trading on different time scales within a given algo.  It should be possible to update the entire portfolio at a frequency commensurate with the highest frequency factor.  It may mean that lower frequency factors need to be smoothed (low-pass filtered), so that one isn&#39;t trading on noise.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b18f8ee1e70ae0acd3c06b7' id='5b18f8ee1e70ae0acd3c06b7'>
+<a href='#5b18f8ee1e70ae0acd3c06b7'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1528363246000' class='quanto-date posted-at response-posted-at' href='#5b18f8ee1e70ae0acd3c06b7'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Each factor has a rebalancing period at which it maximizes its alpha. If you trade the same factor over a different time scale you&#39;ll end up losing alpha.  So you want to trade each factor at its best frequency. </p>
+
+<p>Also, even if you have only one factor that you trade every five days, you still do better splitting your capital in 5 interleaved sub-portfolios: trade each sub-portfolio in subsequent days and rebalance each one every 5 days.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b190468c38b4c42d0bad799' id='5b190468c38b4c42d0bad799'>
+<a href='#5b190468c38b4c42d0bad799'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528366185000' class='quanto-date posted-at response-posted-at' href='#5b190468c38b4c42d0bad799'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Not sure I follow.  Say a 60/40 stock/bond mix provides the SR I need.  And I only need to rebalance quarterly to achieve the SR.  Well, I could rebalance every day, and in the limit of negligible trading expenses, I should do potentially better, not worse, I would think.</p>
+
+<p>I&#39;m just wondering if the concept of a &quot;holding period&quot; on a per symbol basis is fundamentally flawed.  It just seems like the factors and the factor combination method should be constructed in such a way that almost continuous portfolio adjustment would be supported (up to the frequency of the highest frequency factor).</p>
+
+<p>This is not addressed on <a href="https://blog.quantopian.com/a-professional-quant-equity-workflow/">https://blog.quantopian.com/a-professional-quant-equity-workflow/</a>.  Perhaps a Q braniac could comment?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b190bffc38b4c6a14badc1a' id='5b190bffc38b4c6a14badc1a'>
+<a href='#5b190bffc38b4c6a14badc1a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1528368127000' class='quanto-date posted-at response-posted-at' href='#5b190bffc38b4c6a14badc1a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Uhmmm, the  60/40 stock/bond mix is not a factor. We are probably talking about different things.</p>
+
+<p>I&#39;ll try to give more context to my arguments. A factor is the model used to explain the asset returns and it is used to predict the future assets price or return. The factor assigns a value, the score, to each asset in the trading universe that represents the prediction for the asset future returns. Classical examples of factors are: momentum, mean reversion, value, quality etc. etc.</p>
+
+<p>Assumptions:<br>
+- we have a factor computed daily.<br>
+- the factor has the maximum alpha after 3 days (the spread between the mean return of lower and upper quantiles reaches its most after 3 days. This makes much more sense thinking at Alphalens report)</p>
+
+<p>How can I trade this factor? First option is to trade it every 3 days, in this case I&#39;d maximize the alpha but I wouldn&#39;t use one third of the factor computations. Second option I&#39;d create 3 sub-portfolios, each one traded in a subsequent day, so that each one would use the factor computation that the others don&#39;t use and each sub-portfolio is rebalanced every 3 days. This method increases the IR , has lower volatility, the returns are independent from the starting day and, very important, the algorithm capacity is increased by 3 times since the capital is split between 3 sub-portfolios and the slippage impact is decreased by 3.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1a55769c894d25d1cc5002' id='5b1a55769c894d25d1cc5002'>
+<a href='#5b1a55769c894d25d1cc5002'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528452470000' class='quanto-date posted-at response-posted-at' href='#5b1a55769c894d25d1cc5002'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks Luca -</p>
+
+<p>I&#39;ll continue to think about this one, as it is an important point.  I pinged Q support with a request for feedback on this thread.  We&#39;ll see if they respond.</p>
+
+<p>I was working under the assumption that daily rebalancing might be the way to go, and the framework natively supports it, but it doesn&#39;t really fit with Alphalens, for one thing, which provides guidance on what time scale a given factor should be applied.  Using Alphalens, one could end up with factors on daily, weekly, bi-monthly, etc. time scales.  So the question is, how to implement the factors in a single algo?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1a58a8b9774f338b0a0451' id='5b1a58a8b9774f338b0a0451'>
+<a href='#5b1a58a8b9774f338b0a0451'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1528453288000' class='quanto-date posted-at response-posted-at' href='#5b1a58a8b9774f338b0a0451'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Eventually Quantopian will ask for factors only and they&#39;ll implement their algorithm combining them as they like ;)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1a62fa9c894d25d1cc508f' id='5b1a62fa9c894d25d1cc508f'>
+<a href='#5b1a62fa9c894d25d1cc508f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/598a1a0d40da7032bc27e6f6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d7776b021cbcd0f62b56acb7de7a354?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/598a1a0d40da7032bc27e6f6'>Ivory Ant</a>
+</div>
+<a UTCms='1528455930000' class='quanto-date posted-at response-posted-at' href='#5b1a62fa9c894d25d1cc508f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Let&#39;s say we have a factor that we think works best with a holding period of 5 days. Could we let the optimizer compute optimal weights every day for 1/5th of our capital, and trade 5 separate &#39;portfolios&#39; this way with some clever bookkeeping? Or would this disqualify us from the contest because we didn&#39;t actually use the optimizer&#39;s order() function? (Even though we <em>did</em> use its calculated weights)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1a67a501139a190f4ea8c2' id='5b1a67a501139a190f4ea8c2'>
+<a href='#5b1a67a501139a190f4ea8c2'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/598a1a0d40da7032bc27e6f6'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3d7776b021cbcd0f62b56acb7de7a354?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/598a1a0d40da7032bc27e6f6'>Ivory Ant</a>
+</div>
+<a UTCms='1528457125000' class='quanto-date posted-at response-posted-at' href='#5b1a67a501139a190f4ea8c2'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I think I can answer my own question by reading this: <a href="https://www.quantopian.com/posts/optimize-api-required-for-allocations">https://www.quantopian.com/posts/optimize-api-required-for-allocations</a><br>
+It seems all orders have to go through <code>order_optimal_portfolio()</code> because there are some external/global restrictions that need to be applied to the order.</p>
+
+<p>In that thread James Villa mentions these extra unknown restrictions can impact performance quite a bit, but we can&#39;t test these restrictions in the backtester. Thread died after that.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1b2abee8e59400415cbb65' id='5b1b2abee8e59400415cbb65'>
+<a href='#5b1b2abee8e59400415cbb65'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1528507070000' class='quanto-date posted-at response-posted-at' href='#5b1b2abee8e59400415cbb65'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks everyone for your input on this. Much appreciated! </p>
+
+<p>It would be nice to hear from someone at Q regarding this rather than being kept in the dark. Perhaps there&#39;s a good reason for why rebalancing of multiple portfolios in the same strategy is not supported in Optimize API. One reason might be because it may be quite tricky to design and implement such a solution within Optimize API. Another reason might be that even if there is a reasonable solution available, it may not currently be an immediate priority. </p>
+
+<p>Both are quite fair and understandable reasons in my book, but it would be nice to know why we&#39;re effectively &#39;forced&#39; to rebalance daily with daily factors only (or create multiple strategies that rebalance on different days) unless one&#39;s happy leaving significant alpha on the table.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1b37c14260a200483f9146' id='5b1b37c14260a200483f9146'>
+<a href='#5b1b37c14260a200483f9146'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1528510401000' class='quanto-date posted-at response-posted-at' href='#5b1b37c14260a200483f9146'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Maybe there&#39;s some creative way of doing this? Perhaps by creating &#39;blacklists&#39; for each portfolio rebalancing, or by reducing opt.MaxGrossExposure so in aggregate they all add up to 1 (e.g. 0.2 max leverage for each portfolio in a 5 portfolio strategy), or a combination of this? </p>
+
+<p>I might give this a try but if any of you more experienced players think this approach is flawed, please give me a shout so I don&#39;t waste too much time on this (won&#39;t be completely wasted as I&#39;m sure I&#39;ll learn something from it).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1bf4734260a200453f98d0' id='5b1bf4734260a200453f98d0'>
+<a href='#5b1bf4734260a200453f98d0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528558707000' class='quanto-date posted-at response-posted-at' href='#5b1bf4734260a200453f98d0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Joakim -</p>
+
+<p>I&#39;m wondering if this constraint might be a piece of the puzzle:</p>
+
+<p><code>class Frozen(asset_or_assets, max_error_display=10)</code></p>
+
+<blockquote>
+<pre><code>Constraint for assets whose positions cannot change.  
+Parameters:   asset_or_assets (Asset or sequence[Asset]) – Asset(s) whose weight(s) cannot change.
+</code></pre>
+</blockquote>
+
+<p>It is not quite clear from the help page description what it does, however.  Presumably, it captures the current number of shares (and long or short) of any asset in the list, and applies a constraint in the Optimize API to keep the number of shares fixed.  The <code>max_error_display</code> parameter is not documented, as far as I can tell.  I&#39;ve never seen <code>Frozen</code> used in any posted examples.</p>
+
+<p>The reason I used the stock/bond asset allocation example above is that I&#39;d been thinking of the Quantopian framework in a similar fashion (perhaps wrongly).  For example, if one takes the risk model style factors:</p>
+
+<p><code>factors = [Momentum, ShortTermReversal, Size, Value, Volatility]</code></p>
+
+<p>At any point in time, one can run each factor across the entire <code>QTradableStocksUS</code> and then combine the 5 styles into one.  For example, the time scales for the Momentum and ShortTermReversal factors are quite different.  The former is based on an 11-month trailing period, whereas the latter is based on a 14-day trailing time frame.  So, say I rebalance every day, with these two factors:</p>
+
+<p><code>factors = [Momentum, ShortTermReversal]</code></p>
+
+<p>On a continuous basis, the portfolio is weighted based on the the forecast tendency for a given stock to be momentum-ish and for that same stock to undergo a short-term reversal.  There&#39;s no harm in running the Momentum factor daily, since it shouldn&#39;t change the allocation much, and superimposing the ShortTermReversal factor, which would be expected to change the allocation more frequently (but at any given time, could be negligible, in which case, Momentum could dominate).</p>
+
+<p>Maybe this thinking is flawed, but it had been my interpretation that the idea is to quasi-continuously evaluate all factors and adjust the portfolio vector per the highest frequency factor (assuming that the high-frequency factor actually generates enough profit to overcome trading cost).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1e3875b666eb003db520a0' id='5b1e3875b666eb003db520a0'>
+<a href='#5b1e3875b666eb003db520a0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1528707189000' class='quanto-date posted-at response-posted-at' href='#5b1e3875b666eb003db520a0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hey @Grant,</p>
+
+<p>Great find on the Frozen constraint. I didn&#39;t know it existed either. Could indeed be part of the puzzle, I just wish it wouldn&#39;t have to be this difficult (if it&#39;s possible at all). I&#39;m happy to be wrong, but to me it seems like a reasonable question/request to be able to rebalance multiple portfolios at different holding periods in the same strategy, but again, maybe I&#39;m missing something?</p>
+
+<p>Regarding the Risk factors, I don&#39;t quite follow your reasoning. If you&#39;re able to find a way to consistently generate alpha from the Risk factors, that&#39;s great and would be well deserved. Personally however, I think that&#39;s quite difficult (they are way too common) and I&#39;m happy to just rely on the Q Risk model API to limit any unintentional over/under exposure to any of these investing/trading styles. The factors may not be perfect and they have their limitations, but I&#39;d rather have them than not as they add another dimension in how to measure risk exposure. (They also give Q and investors a bit of insight as to what type of factors are in the strategy without actually looking at the code).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b1ef3ad3916103169613a2c' id='5b1ef3ad3916103169613a2c'>
+<a href='#5b1ef3ad3916103169613a2c'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528755117000' class='quanto-date posted-at response-posted-at' href='#5b1ef3ad3916103169613a2c'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Joakim -</p>
+
+<p>I just picked the risk factors as a handy example.</p>
+
+<p>I haven&#39;t had much time to put into Quantopian lately, however, when I get back to it, I&#39;ll recall your point.  Thanks for bringing this up!  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b20d677a8d93f0040544281' id='5b20d677a8d93f0040544281'>
+<a href='#5b20d677a8d93f0040544281'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1528878711000' class='quanto-date posted-at response-posted-at' href='#5b20d677a8d93f0040544281'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Joakim -</p>
+
+<p>I&#39;ll ping Q support again to see if they can comment on this thread.  This would seem to be a fundamental question on their entire workflow.  Once one identifies multiple factors using Alphalens, operating on different time scales, how are they best combined into one algo?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b21ab502ae8e0003d3d6fdf' id='5b21ab502ae8e0003d3d6fdf'>
+<a href='#5b21ab502ae8e0003d3d6fdf'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1528933200000' class='quanto-date posted-at response-posted-at' href='#5b21ab502ae8e0003d3d6fdf'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi Grant,</p>
+
+<p>Thanks, much appreciated! Seems like a fair question to me, but maybe I’m missing something. Not holding my breath we’ll get a response.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b3e82b44edd96004409698b' id='5b3e82b44edd96004409698b'>
+<a href='#5b3e82b44edd96004409698b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1530823348000' class='quanto-date posted-at response-posted-at' href='#5b3e82b44edd96004409698b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Have you thought about how you would expect/want the factors of different frequencies to interact? For example, if you have signal A (weekly) and signal B (daily) operating on the same set of stocks, would you want to combine the signals on the one day a week on which they align, and then have signal B move the equivalent of half the portfolio on every other day of the week? If so, I&#39;m wondering if you can simply combine your two signals on the one day a week where they align by using an average or weighted average. And then for the rest of the week, run a similar average or weighted average combination technique, but use the most recently updated <code>context.output.daily_alpha</code> with the <code>context.output.weekly_alpha</code> from the last weekly rebalance?</p>
+
+<p>I think it&#39;s fair to say that it&#39;s not necessarily straightforward to handle multiple signals in <code>order_optimal_portfolio</code>, but I&#39;m wondering what the ideal solution would look like. The problem of enforcing portfolio-level constraints becomes harder if you allow the optimizer to manage multiple sub-portfolios. Following the example above, if you have a weekly and daily signal, would you expect the positions held from the weekly signal to remain untouched on days where you only use the daily signal? I&#39;d be curious if you might be able to get into a more efficient portfolio if you were able to combine your signal into a netted score on a daily basis. My first instinct would probably be to figure out how to turn my multiple signals into one number each day, but I&#39;m sure there are other ways to do it.</p>
+
+<p>I&#39;m curious what the rest of you think.  </p>
+</div>
+<div class='disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b3f43f14edd966eeb096bb5' id='5b3f43f14edd966eeb096bb5'>
+<a href='#5b3f43f14edd966eeb096bb5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1530872817000' class='quanto-date posted-at response-posted-at' href='#5b3f43f14edd966eeb096bb5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Jamie -</p>
+
+<blockquote>
+<p>Have you thought about how you would expect/want the factors of<br>
+different frequencies to interact? For example, if you have signal A<br>
+(weekly) and signal B (daily) operating on the same set of stocks,<br>
+would you want to combine the signals on the one day a week on which<br>
+they align, and then have signal B move the equivalent of half the<br>
+portfolio on every other day of the week? </p>
+</blockquote>
+
+<p>Yes, that would be like having two separate portfolios.</p>
+
+<blockquote>
+<p>If so, I&#39;m wondering if you<br>
+can simply combine your two signals on the one day a week where they<br>
+align by using an average or weighted average. And then for the rest<br>
+of the week, run a similar average or weighted average combination<br>
+technique, but use the most recently updated<br>
+context.output.daily_alpha with the context.output.weekly_alpha from<br>
+the last weekly rebalance?</p>
+</blockquote>
+
+<p>We could do that but what is the effect of this weighting scheme on the weekly_alpha? Would that change the performance of weekly_alpha?</p>
+
+<blockquote>
+<p>I think it&#39;s fair to say that it&#39;s not necessarily straightforward to<br>
+handle multiple signals in order_optimal_portfolio, but I&#39;m wondering<br>
+what the ideal solution would look like.</p>
+</blockquote>
+
+<p>Allow 
+<code>order_optimal_portfolio</code> to accept a  portfolio on which it has to operate (by default it is <code>context.portfolio</code> but it can be a subset of it) so that we can call <code>order_optimal_portfolio</code> on different subsets of the total portfolios. This means we have to manually keep track of the sub-portfolios  (what stock belongs to what sub-portfolio) but at least we have a solution.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b3f7cae4edd9673c00969a5' id='5b3f7cae4edd9673c00969a5'>
+<a href='#5b3f7cae4edd9673c00969a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/55eefc2af269c592d80008a9'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/8985b490c95e135c2bbcd7d1a0dce16b?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/55eefc2af269c592d80008a9'>Jamie McCorriston</a>
+<img class='quantopian-badge async-image' data-src='https://qf.quantopian.com/assets/logos/staff-q-red-stroke-095008cf53acafb1da63369cad14e3083d49d13eea83f592dd3dd0d5f0474fcc.svg'>
+</div>
+<a UTCms='1530887342000' class='quanto-date posted-at response-posted-at' href='#5b3f7cae4edd9673c00969a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>We could do that but what is the effect of this weighting scheme on the weekly_alpha? Would that change the performance of weekly_alpha?<br>
+I&#39;m not sure that I follow. <code>weekly_alpha</code> is an input signal. If you want to build a portfolio on just that signal, wouldn&#39;t it make sense to run it as its own algorithm? It seems that the problem you&#39;re describing is one of attribution (i.e. if you run multiple signals in a single algorithm, how can you attribute the returns to each of them), which I think is distinct from the problem of actually moving your portfolio.</p>
+</blockquote>
+
+<p>I <em>think</em> it would make most sense to aggregate your signals before moving your portfolio if you are actually interested in the interaction between those two signals. If you want them to stay completely independent of each other, it&#39;s best to put them in separate algorithms. Remember that the contest criteria are applied to the whole portfolio. If you were running two portfolios in the same algorithm, it&#39;s not clear to me how the optimizer would be able to reliably apply algo-level constraints since it would be operating on the two sub-portfolios independently.  </p>
+</div>
+<div class='collapsed disclaimer-minimized-wrapper'>
+<div class='title'>Disclaimer</div>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian. In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b40dbfd2d5a326d373dd032' id='5b40dbfd2d5a326d373dd032'>
+<a href='#5b40dbfd2d5a326d373dd032'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1530977277000' class='quanto-date posted-at response-posted-at' href='#5b40dbfd2d5a326d373dd032'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>If you were running two portfolios in the same algorithm, it&#39;s not clear to me how the optimizer would be able to reliably apply algo-level constraints since it would be operating on the two sub-portfolios independently.</p>
+</blockquote>
+
+<p>@ Jamie - It may be true that in its current form, the optimizer would not work so well.  However, imagine that each sub-portfolio were like an ETF.  You would have information about it (e.g. sector exposure, Q risk factor exposure, fundamentals, etc.), but could not change the allocation within the ETF.  The only option would be to decide long or short and by how much for each ETF.  So, the problem becomes supporting N sub-portfolios, S_1, S_2, ..., S_N, and their respective weights, w_1, w_2, ..., w_N.  When it comes time to update S_1 (say weekly), the algo only makes large changes to individual stock allocations within S_1, and minor adjustments to w_1, w_2, ..., w_N, for portfolio-level risk management (the adjustments to w_1, w_2, ..., w_N could even be asynchronous with changes to the stock allocations within S_1, S2, ..., S_N).</p>
+
+<blockquote>
+<p>If you want them to stay completely independent of each other, it&#39;s best to put them in separate algorithms.</p>
+</blockquote>
+
+<p>The thing is, you don&#39;t judge portfolios of algos (and users have no way to adjust weights, e.g. by adjusting gross leverage, even if you did).  So, this would seem to be a dead end, unless you are talking about figuring out how to support users combining algos for the contest/fund.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b4107632d5a3275d83dd1a5' id='5b4107632d5a3275d83dd1a5'>
+<a href='#5b4107632d5a3275d83dd1a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/54460194d718f327fd000380'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e511e4eeb9334ef82f1caa7bd66c36dc?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/54460194d718f327fd000380'>Luca</a>
+</div>
+<a UTCms='1530988387000' class='quanto-date posted-at response-posted-at' href='#5b4107632d5a3275d83dd1a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I agree with your points @Grant  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b421193b360d7004232ce5b' id='5b421193b360d7004232ce5b'>
+<a href='#5b421193b360d7004232ce5b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1531056531000' class='quanto-date posted-at response-posted-at' href='#5b421193b360d7004232ce5b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jamie -</p>
+
+<p>If you are thinking of supporting judging of baskets of algorithms, one step in that direction would be to provide an example of how to run a tear sheet on N algos.  I&#39;m guessing that you&#39;d need to provide an API that would accept a list of backtests, and for starters, a list of fixed algo weights.  This way, you could iterate through the backtests and apply the weights, flushing memory after each add of the backtest results.</p>
+
+<p>The problem, of course, is that fixed algo weights is not ideal.  At a minimum, one would want to adjust the weights according to a schedule (e.g. quarterly, as one might do for a portfolio of ETFs).  This would seem to require more of an effort--an algo of algos API, that would allow one to adjust the relative capital applied to each algo dynamically.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b42a1444bbacc0042df86bd' id='5b42a1444bbacc0042df86bd'>
+<a href='#5b42a1444bbacc0042df86bd'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/51318528831378d42a0001ad'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/af8a2fdb6b6e1c83933d4f7b647b235d?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/51318528831378d42a0001ad'>Guy Fleury</a>
+</div>
+<a UTCms='1531093316000' class='quanto-date posted-at response-posted-at' href='#5b42a1444bbacc0042df86bd'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant, you could add an enabling vector of ones and zeros to control portfolio sections according to strategy design. The payoff matrix could be divided in say 3 sections of 30 stocks each with their own strategies. Σ(H∙ΔP) = Σ(H(a)∙ΔP) + Σ(H(b)∙ΔP) + Σ(H(c)∙ΔP), where H has row length: len(H) = len(H(a)) + len(H(b))+ len(H(c)).</p>
+
+<p>But this will still make it an allocation problem. You cannot finance each section as if it was the whole portfolio. However, you could have 3 or more strategies co-exist or be enabled at various degree, including selection of only one at a time. Giving you the ability to switch, emphasize or enhance any of the sets.</p>
+
+<p>The concatenated vector: a_1, b_1, c_1 could have its enabler ea_1, …, ea_n = 0 while eb_1, …, eb_m = 1. By passing the optimize_weight to the API, making sure your weights sum to 1 would give you the ability to instantly switch from one portfolio to the next based on whatever criteria you want.</p>
+
+<p>This would require that your system remembers in which column it placed everything. But that is the whole purpose of the payoff matrix. This way you could switch regime, switch stocks on or off and even switch portfolio stance to whatever you want to govern the ball.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b45c6c3edbd78004c81715a' id='5b45c6c3edbd78004c81715a'>
+<a href='#5b45c6c3edbd78004c81715a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1531299524000' class='quanto-date posted-at response-posted-at' href='#5b45c6c3edbd78004c81715a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Jamie -</p>
+
+<p>I&#39;ve had limited time lately to work on Quantopian, but this basic architectural topic is of interest.  I can see how having the ability to isolate various baskets/sub-portfolios of stocks and trade them on different time scales would be beneficial.  The <a href="https://www.quantopian.com/help#optimize-api">Optimize API</a> is pretty fancy-dancy, and at first-glance, it should support this sort of thing with some cajoling.</p>
+
+<p>Some questions:</p>
+
+<ol>
+<li>What does <code>max_error_display</code> control?<br></li>
+<li>What does <code>Frozen</code> do?  It says &quot;Constraint for assets whose positions cannot change&quot; but then it says &quot;Asset(s) whose weight(s) cannot change.&quot;  So, does it constrain positions (i.e. number of shares held) or relative portfolio weights (i.e. percent of total portfolio value)?<br></li>
+<li>Does <code>FixedWeight</code> take only a single asset?  If so, how does one apply fixed weights to multiple assets?<br></li>
+<li>When running <code>calculate_optimal_portfolio</code> with a specified <code>current_portfolio</code> will it ignore stocks outside of the defined current portfolio?  How does it account for cash?<br></li>
+<li>It would seem that if one uses <code>calculate_optimal_portfolio</code> with a specified <code>current_portfolio</code> and <code>MaximizeAlpha(alphas)</code> with <code>alphas</code> containing only the stocks in <code>current_portfolio</code> that other positions would be ignored.  Is this correct?</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b465b62edbd786183816f84' id='5b465b62edbd786183816f84'>
+<a href='#5b465b62edbd786183816f84'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1531337570000' class='quanto-date posted-at response-posted-at' href='#5b465b62edbd786183816f84'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>(2) frozen_test() for understanding Frozen() &amp; verifying whether it is working properly. In the first output for example, CRI is not clear to me.</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b472542a9a256004a8b46f3' id='5b472542a9a256004a8b46f3'>
+<a href='#5b472542a9a256004a8b46f3'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1531389250000' class='quanto-date posted-at response-posted-at' href='#5b472542a9a256004a8b46f3'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Blue Seahawk -</p>
+
+<p>So what is your conclusion?  Is <code>Frozen</code> working correctly?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b47e5c4b7a97d00401066b9' id='5b47e5c4b7a97d00401066b9'>
+<a href='#5b47e5c4b7a97d00401066b9'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1531438532000' class='quanto-date posted-at response-posted-at' href='#5b47e5c4b7a97d00401066b9'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Grant - It doesn&#39;t look like it.  The position sizes are changing, aren&#39;t they?  I don&#39;t know. Everything with the optimizer is over my head.</p>
+
+<p>It&#39;s not exactly clear to me what freezing one factor for a week via <code>frozen</code> while another factor rebalances daily would even look like, unless you segregate your factors such that each factor operates on a unique universe of stocks. If there&#39;s any overlap in the stocks identified by each factor, there&#39;s no getting by combining them.</p>
+
+<p>Even if you keep your weekly-factor static for the week, rebalancing it daily instead of weekly will have an effect.  As Grant pointed out, this effect would typically be advantageous, and I think this is because of the volatility inherent in the market. If the stocks favored by the factor exhibit a lot of day-to-day volatility/reversion characteristics then daily rebalancing will augment the returns (as you&#39;ll be repeatedly selling high and buying low).  If stocks favored by the factor exhibit momentum characteristics on the weekly scale, rebalancing daily will dampen the returns (because you&#39;ll keep selling off some of the best performing stocks to buy more of the poorly performing stocks).</p>
+
+<p>So if you have identified that your weekly-factor is hurt by daily rebalancing...  while it&#39;s unavoidable that you&#39;d need to combine your weekly- and daily- factors every day, I think this is as simple as adjusting your weekly-factor&#39;s weights every day to take into account the changes in each stock&#39;s price (psuedocode):</p>
+
+<pre><code>for stock in context.weekly_factor_weights.keys():  
+      context.weekly_factor_weights[stock] *= todays_price[stock] / yesterdays_price[stock]  
+</code></pre>
+
+<p>Talk about a simple solution to a complex problem -- two lines of code! (I hope I&#39;m right on this.)  And actually, if you find that the stocks selected by your factor benefit from this due to their momentum characteristics, then there&#39;s no reason why you couldn&#39;t push it further / exponential instead of linear.</p>
+
+<p>@Joakim there most definitely is alpha in the common &quot;risk&quot; factors. Fairly consistent.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b47f6e34828a8004964182f' id='5b47f6e34828a8004964182f'>
+<a href='#5b47f6e34828a8004964182f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1531442915000' class='quanto-date posted-at response-posted-at' href='#5b47f6e34828a8004964182f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>In the previous backtest, CRI and others that were being closed without having been instructed to close remain mysteries.<br>
+This time the output appears to be exactly as expected closing only those specified in Frozen(). One difference is that the previous backtest had open orders when frozen_test was run. Here, any open orders are canceled and initial capital also reduced for better fill. See source for output at the top.<br>
+With any luck, someone might find an answer to the previous mystery.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b488973b7a97d07d21068e0' id='5b488973b7a97d07d21068e0'>
+<a href='#5b488973b7a97d07d21068e0'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1531480435000' class='quanto-date posted-at response-posted-at' href='#5b488973b7a97d07d21068e0'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>It&#39;s not exactly clear to me what freezing one factor for a week via frozen while another factor rebalances daily would even look like, unless you segregate your factors such that each factor operates on a unique universe of stocks. If there&#39;s any overlap in the stocks identified by each factor, there&#39;s no getting by combining them.</p>
+</blockquote>
+
+<p>Not sure I follow.  For example, one could have a portfolio of ETFs, with some stocks common to two or more ETFs.  Each ETF is treated as a synthetic investment, with its own set of aggregate characteristics, without delving into the underlying investments.  Each ETF is managed internally, without consideration to other ETFs.  And the internal management could be on varying time scales.  The question is how would would accomplish such a thing, within the Quantopian framework, and specifically the contest/fund rules and the requirement to use the Optimize API?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b48b9b4b7a97d58b7106615' id='5b48b9b4b7a97d58b7106615'>
+<a href='#5b48b9b4b7a97d58b7106615'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1531492788000' class='quanto-date posted-at response-posted-at' href='#5b48b9b4b7a97d58b7106615'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>The question is how would would accomplish such a thing, within the<br>
+Quantopian framework, and specifically the contest/fund rules and the<br>
+requirement to use the Optimize API?</p>
+</blockquote>
+
+<p>I think my solution solves that.  Say factor A  (which we can think of as an analog of an ETF) adjusts its weights once a week.  At the start of the week it gives OSTK a weight of 0.05.  The next day OSTK&#39;s stock price has increased by 10%, so what you do is adjust factor A&#39;s weights by the stock price change, now OSTK has a weight of 0.055. Then normalize it so all the weights add up to 1.0 again. Now you can rebalance and no buying or selling will occur.  You do the same process to any factor that does not provide new values every day. But lets say you have a factor B that--like in the original question--returns new weights every day. When you combine factor A and factor B, the only buying and selling will be because of the changes in factor B.</p>
+
+<p>Obviously this only works with TargetWeights, not MaximizeAlpha, which has a totally different behavior.  Also, obviously in practice some buying and selling may occur due to the optimizer meeting constraints, but that&#39;s just the trade-off for keeping things risk-neutral. This seems like the desired behavior. If you really want to avoid this, then don&#39;t use constraints with the optimizer.  (But why would you not want that?)</p>
+
+<p>I think you guys are making this out to be a much more complex problem than it is.  It&#39;s like four lines of code to solve this.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b49ddd66b9a720044056fc8' id='5b49ddd66b9a720044056fc8'>
+<a href='#5b49ddd66b9a720044056fc8'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1531567574000' class='quanto-date posted-at response-posted-at' href='#5b49ddd66b9a720044056fc8'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@ Viridian Hawk -</p>
+
+<p>Yes, I think if one is attempting to use <code>TargetWeights</code> like <code>order_target_percent</code> it should be straightforward to do what was requested in the original question.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b551d67ddb6e600463b2902' id='5b551d67ddb6e600463b2902'>
+<a href='#5b551d67ddb6e600463b2902'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532304743000' class='quanto-date posted-at response-posted-at' href='#5b551d67ddb6e600463b2902'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><blockquote>
+<p>Yes, I think if one is attempting to use TargetWeights like order_target_percent it should be straightforward to do what was requested in the original question</p>
+</blockquote>
+
+<p>Or use <code>calculate_optimal_portfolio</code> to calculate the optimized portfolio for each strategy (at the desired frequency).  You can feed it either <code>TargetWeights</code> and/or <code>MaximizeAlpha</code> and get the optimized weights as output.  Then on a daily basis run the applicable adjustments and combine the portfolios before feeding it back into <code>order_optimal_portfolio</code>.. Should behave like the ETF-style use-case you suggested, no?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5520c9ddb6e6003d3b2948' id='5b5520c9ddb6e6003d3b2948'>
+<a href='#5b5520c9ddb6e6003d3b2948'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532305609000' class='quanto-date posted-at response-posted-at' href='#5b5520c9ddb6e6003d3b2948'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Anyone up for collaborating on a simple &#39;dummy&#39; algo (with little to no alpha) to try to figure this out? Perhaps using PsychSignal&#39;s stocktwits sentiments as a weekly factor, rebalancing each weekday (with 10% of total capital for each weekday) each portfolio holding for a week, and fcf_yield as the daily rebalancing factor using the other 50% of the capital?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b55b8796f1fd3004855dc21' id='5b55b8796f1fd3004855dc21'>
+<a href='#5b55b8796f1fd3004855dc21'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532344441000' class='quanto-date posted-at response-posted-at' href='#5b55b8796f1fd3004855dc21'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Yeah. Post the two factors and I&#39;ll take a stab at combining them.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b56df3084a24e7ab5302018' id='5b56df3084a24e7ab5302018'>
+<a href='#5b56df3084a24e7ab5302018'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532419888000' class='quanto-date posted-at response-posted-at' href='#5b56df3084a24e7ab5302018'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thanks @Viridian! Will post the algo tomorrow (I’ve started one already which I’ll attach).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b58143e84dcf123516d7def' id='5b58143e84dcf123516d7def'>
+<a href='#5b58143e84dcf123516d7def'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532499006000' class='quanto-date posted-at response-posted-at' href='#5b58143e84dcf123516d7def'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Here it is. A smooth short play if you ask me, haha. :)</p>
+
+<p>I don&#39;t really know how to analyze this properly, but my guess would be that the &#39;weekly_factor&#39; is effectively rebalancing daily rather than weekly, and the strategy gets effectively killed by trading costs (mostly). </p>
+
+<p>Anyone care to help to see if the weekly factor can rebalance (and hold positions) weekly, independently of the daily factor as well as independently of the other weekly factors rebalancing on different days of the week?</p>
+
+<p>Any other constructive critical feedback also welcome (other than perhaps just stating the obvious... :))</p>
+
+<p>PS: I was going to attach AlphaLens analysis notebooks for both the daily and weekly factors, but ran into a number of (mostly user related) issues, so this will have to wait unfortunately.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5829e3f51a25004461dc3f' id='5b5829e3f51a25004461dc3f'>
+<a href='#5b5829e3f51a25004461dc3f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/52b0e0e0271a27fc88000049'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/e5451406e743420c700eb2b054b2fc57?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/52b0e0e0271a27fc88000049'>Blue Seahawk</a>
+</div>
+<a UTCms='1532504547000' class='quanto-date posted-at response-posted-at' href='#5b5829e3f51a25004461dc3f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Well, this resolves the overlap. And 8 of 9, with only turnover constraint beyond limit here.<br>
+Frozen() might be useful in keeping daily and weekly operations from tromping on each other.<br>
+<em>Weekly is sentiment. In adding it back in, maybe try bull_scored_messages instead of bull_minus_bear.</em></p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b596777aee0d7004d43a16b' id='5b596777aee0d7004d43a16b'>
+<a href='#5b596777aee0d7004d43a16b'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532585847000' class='quanto-date posted-at response-posted-at' href='#5b596777aee0d7004d43a16b'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Viridian &amp; @Blue,</p>
+
+<p>Great, that&#39;s awesome! How would one go about confirming that it&#39;s actually doing what it&#39;s intended to do? (too far over my head)</p>
+
+<p>@Viridian,</p>
+
+<p>Looking at the &#39;Distribution of daily turnover rates&#39; to me it looks like it&#39;s indeed working as intended, but maybe I&#39;m interpreting this chart incorrectly?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b59a8e4347f19003f97e526' id='5b59a8e4347f19003f97e526'>
+<a href='#5b59a8e4347f19003f97e526'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532602596000' class='quanto-date posted-at response-posted-at' href='#5b59a8e4347f19003f97e526'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I guess you could check whether it&#39;s working properly by removing the daily factor (from whether they&#39;re combined) and checking the transaction log for the other days of the week.</p>
+
+<p>I&#39;m realizing that a simpler, more accurate approach would be to take the weights from the weekly factor and convert that to number of shares.  Then on the other week days convert that back to weights based on the current prices. That should be foolproof.  I&#39;ll go ahead and code that up when I have a free moment.   Downside with that approach though is if there is a split/reverse split that would throw it off.</p>
+
+<p>Quantopian rounds to the nearest share when ordering by weight, correct? (As oppose to rounding down.)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5a6c1fe1c5ae003b830b2a' id='5b5a6c1fe1c5ae003b830b2a'>
+<a href='#5b5a6c1fe1c5ae003b830b2a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532652575000' class='quanto-date posted-at response-posted-at' href='#5b5a6c1fe1c5ae003b830b2a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>@Viridian,</p>
+
+<p>Man, you da MAN, man! Thank you for doing this! Personally I think I prefer the first one, as it&#39;s less exposed to corporate events risks (and I&#39;m happy to exclude half-days).</p>
+
+<p>Thanks also for providing so many helpful comments in your code, really appreciated! Very helpful for a python beginner like myself to more easily understand what&#39;s actually going on under the hood.</p>
+
+<p>Do you have any idea why leverage is still hovering around 60% though, and the strategy never seems to be fully invested (100%)? Do you think it&#39;s possible that the Weekly Portfolio only gets rebalanced once per week (on Mondays?) using 10% of the capital, instead of using 10% of the capital for each weekday. I.e. 10% on Mondays, rebalancing the following Monday; 10% on Tuesdays, rebalancing the following Tuesday (independently from the Monday portfolio as well as the Daily portfolio), etc.?</p>
+
+<p>So capital usage is 50% from the Daily portfolio + 10% from the Weekly Portfolio = 60% total capital usage, instead of the <em>intended</em> (my intention anyway) 50% from Daily + 10% * 5 Weekly portfolios = 100% total capital usage? Effectively, I was thinking of having 6 independent portfolios, 1 daily (using 50% capital) and 5 weekly (each using 10% of the capital). Perhaps it&#39;s already doing this, but as a python novice I&#39;m still not able to tell completely from the code, even with the very helpful commentary.</p>
+
+<p>Apologies if I don&#39;t explain this very well. Please also shout if you (or anyone else) think this approach is flawed in any way.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5a8673988bc629fcb1c5c5' id='5b5a8673988bc629fcb1c5c5'>
+<a href='#5b5a8673988bc629fcb1c5c5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532659315000' class='quanto-date posted-at response-posted-at' href='#5b5a8673988bc629fcb1c5c5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Aha, I get what you&#39;re saying. I like it -- diversify day-of-the-week risk.  Currently it&#39;s only doing the Monday rebalance.   I&#39;ll do the rolling weekly portfolio change... (backtesting now........)  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5a95ac988bc60047b1c8a4' id='5b5a95ac988bc60047b1c8a4'>
+<a href='#5b5a95ac988bc60047b1c8a4'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532663212000' class='quanto-date posted-at response-posted-at' href='#5b5a95ac988bc60047b1c8a4'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Awesome! Eagerly awaiting what you can come up with.</p>
+
+<p>It&#39;s not only diversification of week-day risk, but unless you do this you&#39;re actually leaving 4/5ths of the alpha from the weekly factor on the table (see Luca&#39;s earlier comments from June 7th close to the beginning of the thread).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5b0e6b988bc6689fb1cca5' id='5b5b0e6b988bc6689fb1cca5'>
+<a href='#5b5b0e6b988bc6689fb1cca5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532694123000' class='quanto-date posted-at response-posted-at' href='#5b5b0e6b988bc6689fb1cca5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>I&#39;m curious whether this confirms your hypothesis. Do you see better performance by having 5 rolling weekly factors as opposed to one?  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5b3b448c204f004145219f' id='5b5b3b448c204f004145219f'>
+<a href='#5b5b3b448c204f004145219f'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532705604000' class='quanto-date posted-at response-posted-at' href='#5b5b3b448c204f004145219f'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Thank you @Viridian,</p>
+
+<p>I will try test it over the weekend and hopefully get back to you on Monday. </p>
+
+<p>If you don’t see any improvement it could be that there’s not much alpha in the ‘sentiment’ factor as is, so I may try to find something else. Perhaps use Fundamentals.earning_yield.latest instead for the weekly factor. There should be plenty of alpha in that during this test period. </p>
+
+<p>Thanks again.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5fa0a7158349004c86e690' id='5b5fa0a7158349004c86e690'>
+<a href='#5b5fa0a7158349004c86e690'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532993703000' class='quanto-date posted-at response-posted-at' href='#5b5fa0a7158349004c86e690'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Hi @VH,</p>
+
+<p>Sorry for the delay. I usually don&#39;t have much time on the weekends to spend on Q unfortunately.</p>
+
+<p>I&#39;ve replaced the &#39;sentiment&#39; weekly factor with the Fundamentals.earning_yield.latest factor instead (earning_yield_winsorized) in both your first algo (1 weekly portfolio rebalancing only on Mondays) and the last one (5 weekly portfolios, each rebalancing on different days of the week). The performance definitely looks better in the latter one, but I suppose this could be because it&#39;s using close to 100% of the capital, instead of just around 60% that the former one uses.</p>
+
+<p>Here&#39;s the first one (1 daily and 1 weekly portfolio, weekly rebalancing only on Mondays).  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b5fa2e9158349004c86e6a5' id='5b5fa2e9158349004c86e6a5'>
+<a href='#5b5fa2e9158349004c86e6a5'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/5971e2308bc634000d022f24'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/3fff8e67995978b6170deb9d9001a7b6?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/5971e2308bc634000d022f24'>Joakim Arvidsson (Cream Mongoose)</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1532994281000' class='quanto-date posted-at response-posted-at' href='#5b5fa2e9158349004c86e6a5'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>And here&#39;s the second one (1 daily portfolio, and 5 weekly portfolios rebalancing on different days of the week), using the same weekly factor (earning_yield_winsorized).</p>
+
+<p>The second one has higher total returns, but this could be because it&#39;s using more capital (though they both appear to be using &gt;90% of the capital most of the time). They both have about the same specific returns, but the first one has a slightly higher average rolling sharpe ratio.</p>
+
+<p>Honestly I don&#39;t really know what&#39;s going on here - sorry. Someone smarter than me (@Luca, @Grant, @Blue, yourself) might be able to help? I&#39;m moving on to focus most of my time on my <a href="https://www.quantopian.com/posts/garp-party-new-strategy-development-thread">new GARP PARTY strategy</a>. :)</p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b685740372f590044cb307a' id='5b685740372f590044cb307a'>
+<a href='#5b685740372f590044cb307a'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/59065fbb5afa7d0010371ea1'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/08e3b9ac969cdd40340b6094e6ce2bd7?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/59065fbb5afa7d0010371ea1'>Viridian Hawk</a>
+<span class='badge medal'></span>
+</div>
+<a UTCms='1533564736000' class='quanto-date posted-at response-posted-at' href='#5b685740372f590044cb307a'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>Do fields that update once a quarter exhibit a strong weekly alpha?</p>
+
+<p>I think a reason why it might be underleveraging is the weekly factor might give a stock positive weight while the daily factor might weight it negative, and when combined they cancel each other out.</p>
+
+<p>I&#39;m surprised that the version that diversifies across days of the week exhibits higher volatility.  </p>
+</div>
+</div>
+</div>
+
+<div class='post-container response-container' data-post-id='5b93c60531fb0d293ea5b783' id='5b93c60531fb0d293ea5b783'>
+<a href='#5b93c60531fb0d293ea5b783'></a>
+<div class='post-metadata'>
+<div class='row'>
+<div class='col-xs-14'>
+<div class='inline-block'>
+<div class='avatar-container'>
+<a href='/users/4f005d1b5e32ee000b000001'><img class='avatar async-image' data-src='https://secure.gravatar.com/avatar/03ce2b05f15809a7239dc5910a54abf5?d=https%3A%2F%2Fs3.amazonaws.com%2Fquantopian-website-assets%2Fdefault-avatar.png' height='30' width='30'></a>
+</div>
+<a class='author-name' href='/users/4f005d1b5e32ee000b000001'>Grant Kiehne</a>
+</div>
+<a UTCms='1536411141000' class='quanto-date posted-at response-posted-at' href='#5b93c60531fb0d293ea5b783'></a>
+</div>
+</div>
+</div>
+
+<div class='response-text'>
+<div class='response-text-container post-body'><p>One approach would be to low-pass filter factors on different time scales prior to combination.  I posted an example of how to do this recursively (based on Tony Morland&#39;s question) here:</p>
+
+<p><a href="https://www.quantopian.com/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please" rel="nofollow">https://www.quantopian.com/posts/recursive-function-calls-for-price-data-series-dot-dot-dot-python-help-please</a></p>
+
+<p>The low-pass filtering should allow one to do daily portfolio updates with multiple factors on different time scales (it should also help smooth out returns, and reduce unprofitable turnover).  By building the filter into the factor, one can adjust the time scale to an optimum via Alphalens.  </p>
+</div>
+</div>
+</div>
+
+</div>
+<div class='sign-in-please'>
+Please <a href='/signin?return_to=/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api'>sign in</a> or
+<a href='/users/sign_up?redirect_to=/posts/daily-and-weekly-rebalancing-of-separate-alpha-factors-using-optimize-api'>join Quantopian</a> to
+post a reply.
+</div>
+</div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "550580758292093",
+      status: false,
+      cookie: true,
+      xfbml: true
+    });
+  };
+  
+  (function(d, debug){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+    ref.parentNode.insertBefore(js, ref);
+  }(document, /*debug*/ false));
+  
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<script>
+  $(document).ready(function () {
+    quanto.instances.pm = new quanto.PostManager(false)
+  });
+</script>
+
+<div class='login-footer'>
+<div class='container'>
+<div class='login-footer-text'>
+Become an expert in quant finance through Quantopian's hands-on education.
+</div>
+<div class='login-footer-button'>
+<button class='btn btn-v2 stroke join-modal-link mixpanel-button' data-event='anon join footer click posts' data-mixpanel='click'>
+Join Now
+</button>
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='error-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'>Error</span>
+</div>
+<div class='modal-body body-content'>
+<p>Sorry, something went wrong.  Try again or contact us by <a class='feedback-link'>sending feedback</a>.</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' href='#'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='confirmation-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<div class='pull-right'>
+<button class='btn btn-v2 border' data-dismiss='modal'>Cancel</button>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal'></button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='message-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title modal-title'></span>
+</div>
+<div class='modal-body body-content'></div>
+<div class='modal-footer'>
+<button class='btn btn-v2 blue action-button' data-dismiss='modal' id='message-modal-close'>Close</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='always-bootstrap3-modals'>
+<div class='fade modal quanto-modal-v2' id='join-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header visible-small'>
+<span class='title'>
+Join Quantopian.  It's Free!
+</span>
+<div class='modal-x-out visible-xs'></div>
+</div>
+<div class='modal-body'>
+<div class='flex-wrap'>
+<div class='join-left-pane hidden-small'>
+<div class='margin_30l'>
+<div class='join-hero-text'>
+Join Quantopian.  It's Free!
+</div>
+<div class='join-benefits'>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image code'></div>
+</div>
+<div class='join-text'>
+Use our research platform, backtester, and dozens of clean data sets.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image learn'></div>
+</div>
+<div class='join-text'>
+Learn with our hands-on education and community forums.
+</div>
+</div>
+<div class='join-benefit'>
+<div class='join-image-container'>
+<div class='join-image win'></div>
+</div>
+<div class='join-text'>
+Enter to win cash prizes in our contest.
+</div>
+</div>
+</div>
+<div class='hidden saved-reminder'>
+Don't worry, all your work is already saved.
+</div>
+</div>
+</div>
+<div class='join-right-pane'>
+<div class='hidden-small'>
+<div class='button-pane'>
+<a class="button btn-v2 user-form-btn" href="/signin">Already a Quantopian member?</a>
+</div>
+</div>
+<div class='visible-small'>
+<div class='already-member'>
+<a href='/signin'>Already a Quantopian member?</a>
+</div>
+</div>
+<form class="quanto-form-v2" id="new-user-modal-form" action="/users" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='error-message hidden'>
+<div class='message'></div>
+</div>
+<div class='name-group'>
+<div class='form-group inline-block'>
+<label for="user_firstname">First Name</label>
+<input class="form-control firstname" pattern=".*" required="required" autocomplete="off" autofocus="autofocus" type="text" name="user[firstname]" id="user_firstname" />
+</div>
+<div class='form-group inline-block'>
+<label for="user_lastname">Last Name</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="text" name="user[lastname]" id="user_lastname" />
+</div>
+</div>
+<div class='form-group'>
+<label for="user_email">Email</label>
+<input class="form-control" value="" pattern=".*" required="required" autocomplete="off" type="email" name="user[email]" id="user_email" />
+</div>
+<div class='form-group'>
+<label for="user_password">Password</label>
+<input autocomplete="off" class="form-control" pattern=".*" required="required" type="password" name="user[password]" id="user_password" />
+</div>
+<div class='checkbox eula'>
+<input id='eula-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='eula-checkbox' id='checkbox-label'>I accept the <a href='/policies/terms' target='_blank'>Terms Of Use</a> and <a href='/policies/privacy' target='_blank'>Privacy Policy</a>.</label>
+</div>
+<div class='checkbox mailchimp-box'>
+<input name="user[allow_marketing_emails]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[allow_marketing_emails]" id="user_allow_marketing_emails" />
+<div class='quanto-checkbox'></div>
+<label for='user_allow_marketing_emails'>
+Send me email updates with the latest news from the Quantopian community. We send these emails about once a month.
+</label>
+</div>
+<div class='button-row'>
+<button class='btn-v2 blue full' data-redirect-to='/tutorials/getting-started' id='sign-up-button' type='Submit'>Join Quantopian</button>
+</div>
+</form></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='fade modal quanto-modal-v2' id='feedback-modal' role='dialog' tabindex='-1'>
+<div class='modal-dialog' role='document'>
+<div class='modal-content'>
+<div class='modal-header'>
+<span class='title'>Contact Support</span>
+</div>
+<div class='modal-body'>
+<form class='anon-user controls quanto-form-v2' id='feedback-form'>
+<div class='feedback-inputs'>
+<div class='form-group'>
+<input autofocus class='form-control' id='feedback-email-box' name='email' placeholder='Email Address' type='email'>
+</div>
+<div class='form-group'>
+<input class='form-control' id='feedback-name-box' placeholder='Name' type='name'>
+</div>
+<div class='form-group'>
+<textarea class='form-control' id='feedback-box' name='feedback' placeholder='What may we help you with?' rows='10'></textarea>
+</div>
+</div>
+</form>
+<form class='hidden quanto-form-v2 select-resource-area'>
+<div class='select-step select-type-step'>
+<div class='form-group'>
+<select class='form-control select-resource-dropdown' title='Select the item you need help with'>
+<option value='algorithm'>Algorithm</option>
+<option value='backtest'>Backtest</option>
+<option value='notebook'>Notebook</option>
+</select>
+</div>
+</div>
+<div class='select-step loading-area hidden'>
+<div class='loading-text'>
+Loading...
+</div>
+</div>
+<div class='select-step empty-list-area hidden'>
+<div class='back-button'>Go Back</div>
+<div class='empty-text'>
+No <span class='empty-list-resource-text'>algorithms</span> found
+</div>
+</div>
+<div class='select-algo-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-algo-table select-item-table'>
+<thead>
+<tr>
+<th>
+Algorithm
+<span class='sort-icon'></span>
+</th>
+<th>
+Last Modified
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-backtest-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<table class='select-backtest-table select-item-table'>
+<thead>
+<tr>
+<th>
+Backtest
+<span class='sort-icon'></span>
+</th>
+<th>
+Started At
+<span class='sort-icon'></span>
+</th>
+<th>
+Overall Return
+<span class='sort-icon'></span>
+</th>
+<th>
+Status
+<span class='sort-icon'></span>
+</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class='select-notebook-area select-step hidden'>
+<div class='back-button'>Go Back</div>
+<div class='subtitle select-cell-step'>
+Choose a cell to use as the preview for this notebook:
+</div>
+<div class='iframe-wrapper'>
+<iframe class='notebook-list-iframe slow-fade' src=''></iframe>
+</div>
+<div class='progress-area slow-fade in'>
+<div class='progress-container'>
+<div class='progress-title'>
+<div class='quanto-loader gray'></div>
+</div>
+</div>
+</div>
+<div class='maintenance-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, research is currently undergoing maintenance.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please check back shortly. If the maintenance period lasts longer than expected,
+you can find updates on <a href='https://status.quantopian.com/'>status.quantopian.com</a>.
+</div>
+</div>
+
+</div>
+</div>
+<div class='error-area'>
+<div class='error-container'>
+<div class='row'>
+<div class='col-md-14 msg-title h1'>
+Sorry, something went wrong on our end.
+</div>
+</div>
+<div class='row'>
+<div class='col-md-14 msg-subtitle'>
+Please try again or contact <a class='open-feedback-link'>Quantopian support</a>.
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='selected-item-area select-step hidden'>
+<div class='selected-item-group form-group'>
+<div class='selected-item-control'>
+<input class='disabled form-control selected-item-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change change-primary-item-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+<div class='selected-backtest-control'>
+<input class='disabled form-control selected-backtest-box' type='text'>
+<span class='secure-icon icon'></span>
+<button class='btn change-backtest-button change-selection-button new-btn transparent' type='button'>
+<span class='refresh-icon icon'></span>
+</button>
+</div>
+</div>
+<div class='checkbox-group form-group'>
+<div class='checkbox give-permission'>
+<input class='give-permission-checkbox' id='feedback-give-permission-checkbox' type='checkbox'>
+<div class='quanto-checkbox'></div>
+<label for='feedback-give-permission-checkbox'>
+I permit Quantopian to view <span class='item-type-text'>this algorithm,
+backtest or notebook and their imported datasets</span> for the purpose of providing support.
+</label>
+</div>
+</div>
+</div>
+</form>
+
+<div class='loading-step hidden'>
+<div class='loading-text'>
+Submitting your support ticket...
+</div>
+</div>
+<div class='success-step invisible'>
+<h2 class='title center'>
+You've successfully submitted a support ticket.
+</h2>
+<p>
+Our support team will be in touch soon.
+</p>
+<div class='confirmation-image'></div>
+</div>
+</div>
+<div class='modal-footer'>
+<button class='btn-v2 blue' id='send-feedback-button'>Send</button>
+<div class='error-message hidden'>
+Error submitting support request.
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class='footer' id='quanto-footer-container'>
+<div class='container'>
+<div class='row header-row'>
+<div class='col-sm-fourth span3'>
+<img class='async-image logotype-image' data-src='https://qf.quantopian.com/assets/logos/logo-q-full-b23bda5ac757691b9259d396d0dfef91567165868b8c955a836649686e6d2248.svg'>
+</div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'></div>
+<div class='col-sm-fourth span3'>
+<div class='feedback-email'>
+Need help?
+<a href="/cdn-cgi/l/email-protection#6f090a0a0b0d0e0c042f1e1a0e011b001f060e01410c0002">Contact support.</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-fourth span3'>
+<div class='header'>Company</div>
+<div class='footer-row'>
+<a href='/about'>About</a>
+</div>
+<div class='footer-row'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='footer-row'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='footer-row'>
+<a href='/posts'>Community</a>
+</div>
+<div class='footer-row'>
+<a href='/events'>Events</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Learn &amp; Support</div>
+<div class='footer-row'>
+<a href='/faq'>FAQ</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials/getting-started'>Getting Started</a>
+</div>
+<div class='footer-row'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='footer-row'>
+<a href='/tutorials'>Tutorials</a>
+</div>
+<div class='footer-row'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='footer-row'>
+<a href='/opensource'>Open Source</a>
+</div>
+<div class='footer-row'>
+<a href='https://status.quantopian.com/'>Site Status</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Notices</div>
+<div class='footer-row'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+<div class='footer-row'>
+<a href='/security'>Security</a>
+</div>
+<div class='footer-row'>
+<a href='/policies/code-of-conduct'>Code of Conduct</a>
+</div>
+</div>
+<div class='col-sm-fourth span3'>
+<div class='header'>Follow Us</div>
+<div class='footer-row'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='footer-row'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-xs-14 span12'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='mobile-footer'>
+<div class='mobile-nav-category main-links'>
+<div class='mobile-nav-row-footer'>
+<a href='/about'>About Quantopian</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/jobs'>Careers</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/posts'>Community</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/events'>Events</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/docs'>Documentation</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/academia'>Academia</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/lectures'>Lectures</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://status.quantopian.com/'>Status</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.facebook.com/quantopian'>Facebook</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.twitter.com/quantopian'>Twitter</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.linkedin.com/company/quantopian'>LinkedIn</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='https://www.youtube.com/channel/UC606MUq45P3zFLa4VGKbxsg'>YouTube</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/terms'>Terms of Use</a>
+</div>
+<div class='mobile-nav-row-footer'>
+<a href='/policies/privacy'>Privacy Policy</a>
+</div>
+</div>
+<div class='mobile-nav-category'>
+<div class='disclaimer'>
+<p>
+The material on this website is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory services by Quantopian.
+</p>
+<p>
+In addition, the material offers no opinion with respect to the suitability of any security or specific investment. No information contained herein should be regarded as a suggestion to engage in or refrain from any investment-related course of action as none of Quantopian nor any of its affiliates is undertaking to provide investment advice, act as an adviser to any plan or entity subject to the Employee Retirement Income Security Act of 1974, as amended, individual retirement account or individual retirement annuity, or give advice in a fiduciary capacity with respect to the materials presented herein.  If you are an individual retirement or other investor, contact your financial advisor or other fiduciary unrelated to Quantopian about whether any given investment idea, strategy, product or service described herein may be appropriate for your circumstances.  All investments involve risk, including loss of principal.  Quantopian makes no guarantees as to the accuracy or completeness of the views expressed in the website. The views are subject to change, and may have become unreliable for various reasons, including changes in market conditions or economic circumstances.
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', "UA-8519877-1", {
+    cookieDomain: "quantopian.com"
+  });
+  ga('set', 'dimension1', 'session_5f9dc7425d387f00077e48e4');
+  
+  ga('send', 'pageview');
+</script>
+
+<input type="hidden" name="is_mac" id="is_mac" value="false" />
+<input type="hidden" name="mp" id="mp" value="75873953cd404bcc1da88a55ff51e3b4" />
+<script>
+  (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("75873953cd404bcc1da88a55ff51e3b4");
+</script>
+<script>
+  mixpanel.track("view page", {"page": window.location.pathname});
+</script>
+</html>
